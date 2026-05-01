@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <title>Shioya Football</title>
+    <!-- 将棋アプリと同じフォントを読み込む（パスはご自身の環境に合わせて調整してください） -->
+    <link rel="preload" href="script/font/setofont.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* しおやソフト共通フォント設定 */
+        @font-face {
+            font-family: 'SetoFont';
+            src: url('script/font/setofont.ttf') format('truetype');
+            font-display: block;
+        }
+
+        * {
+            font-family: 'SetoFont', "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            /* 将棋と同じダークな背景色 */
+            background-color: #2c3e50; 
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* 画面上部のタイトルバー（将棋のユーザー情報バーと同じデザイン） */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding-top: calc(10px + env(safe-area-inset-top));
+            padding-left: calc(20px + env(safe-area-inset-left));
+            padding-right: calc(20px + env(safe-area-inset-right));
+            padding-bottom: 10px;
+            background: rgba(67, 37, 23, 0.9);
+            color: #ECDBBF;
+            text-align: center;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        /* 操作パネル（将棋のモーダル風の枠） */
+        .control-panel {
+            background: #fff8dc;
+            border: 3px solid #8b4513;
+            border-radius: 12px;
+            margin: 15px auto;
+            padding: 15px;
+            width: 95%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .control-select {
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #8b4513;
+            font-size: 1rem;
+            width: 100%;
+            background-color: #ECDBBF;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* ▼▼ 日付切り替え用 3タブのスタイル ▼▼ */
+        .tab-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background: #ECDBBF;
+            border-radius: 10px;
+            border: 2px solid #8b4513;
+            overflow: hidden;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            color: #8b4513;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tab-btn:not(:last-child) {
+            border-right: 2px solid #8b4513;
+        }
+
+        /* 選択されているタブの見た目 */
+        .tab-btn.active {
+            background: linear-gradient(to bottom, #ff9800, #f57c00);
+            color: #fff;
+            text-shadow: 1px 1px 2px #432517;
+        }
+        /* ▲▲ タブスタイルここまで ▲▲ */
+
+        .toggle-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: #ECDBBF;
+            border: 2px solid #8b4513;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #432517;
+            width: 100%;
+        }
+
+        /* メインエリア（下部メニューに被らないよう余白を確保） */
+        main {
+            padding-bottom: 90px;
+        }
+
+        /* ★★★ 下部メニュー ★★★ */
+        .bottom-menu {
+            position: fixed;
+            bottom: max(10px, env(safe-area-inset-bottom));
+            left: calc(2% + env(safe-area-inset-left));
+            right: calc(2% + env(safe-area-inset-right));
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            gap: 5px;
+            z-index: 100;
+        }
+
+        .menu-btn {
+            flex: 1;
+            height: 60px;
+            border: 2px solid #432517;
+            border-radius: 10px;
+            color: #ECDBBF;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px #432517;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu-btn:active { transform: scale(0.95); }
+
+        /* 将棋アプリの色使いを踏襲した各ボタンのカラー */
+        .btn-schedule { background: linear-gradient(to bottom, #7B9C4B 0%, #ECDBBF 100%); } /* 緑系 */
+        .btn-results  { background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); border-color: #ECDBBF; } /* 青系 */
+        .btn-calendar { background: linear-gradient(to bottom, #6C4B9C 0%, #ECDBBF 100%); } /* 紫系 */
+        .btn-transfer { background: linear-gradient(to bottom, #9C4B52 0%, #ECDBBF 100%); } /* 赤系 */
+        .btn-notes    { background: linear-gradient(to bottom, #9C804B 0%, #ECDBBF 100%); } /* 黄土色系 */
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Shioya Football</h1>
+    </header>
+
+    <div class="control-panel">
+        <select id="league-filter" class="control-select">
+            <option value="all">すべての注目試合</option>
+            <optgroup label="5大リーグ 1部">
+                <option value="premier_league">プレミアリーグ (英)</option>
+                <option value="laliga">ラ・リーガ (西)</option>
+                <option value="bundesliga">ブンデスリーガ (独)</option>
+                <option value="serie_a">セリエA (伊)</option>
+                <option value="ligue_1">リーグ・アン (仏)</option>
+            </optgroup>
+            <optgroup label="2部リーグ">
+                <option value="championship">チャンピオンシップ (英2部)</option>
+            </optgroup>
+            <optgroup label="欧州その他 & アジア">
+                <option value="belgium">ベルギー・リーグ</option>
+                <option value="portugal">プリメイラ・リーガ (葡)</option>
+                <option value="netherlands">エールディヴィジ (蘭)</option>
+                <option value="j_league">J1リーグ</option>
+            </optgroup>
+        </select>
+
+        <!-- ▼▼ 日付ナビゲーションを3タブに変更 ▼▼ -->
+        <div class="tab-container">
+            <button id="tab-yesterday" class="tab-btn" onclick="selectTab(-1, 'tab-yesterday')">昨日</button>
+            <button id="tab-today" class="tab-btn" onclick="selectTab(0, 'tab-today')">今日</button>
+            <button id="tab-tomorrow" class="tab-btn" onclick="selectTab(1, 'tab-tomorrow')">明日</button>
+        </div>
+        <!-- ▲▲ タブ変更ここまで ▲▲ -->
+
+        <label class="toggle-label">
+            <input type="checkbox" id="japanese-filter" checked style="margin-right: 8px; transform: scale(1.2);">
+            🇯🇵 日本人所属チームのみ
+        </label>
+    </div>
+
+    <main id="match-list">
+        <p style="text-align: center; color: #ECDBBF; margin-top: 20px;">試合情報を読み込み中...</p>
+    </main>
+
+    <!-- 下部メニュー -->
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule">予定</button>
+        <button class="menu-btn btn-results">結果</button>
+        <button class="menu-btn btn-calendar">カレンダー</button>
+        <button class="menu-btn btn-transfer">移籍</button>
+        <button class="menu-btn btn-notes">ノート</button>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
