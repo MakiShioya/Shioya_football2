@@ -420,7 +420,7 @@ async function loadMatches() {
     
     try {
         const dateStr = getFormattedDateForAPI();
-        const response = await fetch(`/api/matches?date=${dateStr}`);
+        const response = await fetch(`data/matches_${dateStr}.json`);
         const data = await response.json();
         
         if (!data.status || !data.response.matches) {
