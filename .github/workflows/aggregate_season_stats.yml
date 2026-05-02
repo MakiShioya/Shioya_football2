@@ -1,0 +1,37 @@
+name: Daily Season Stats Aggregation
+
+on:
+  schedule:
+    # 毎日 日本時間 04:15 に実行（日々の試合データ取得の直後に動かす設定）
+    - cron: '15 19 * * *'
+  workflow_dispatch: # 手動実行ボタン
+
+jobs:
+  aggregate-season-stats:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Aggregate Season Stats
+        # APIを使わず、保存済みの matches/*.json から計算するスクリプトを実行
+        run: node aggregate_season_stats.js
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/season/
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Update Season Stats by Aggregation"
+            git pull --rebase origin main
+            git push
+          )
