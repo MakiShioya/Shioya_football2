@@ -1,19 +1,20 @@
 async function loadPerformance() {
     const container = document.getElementById('performance-list');
     
-    // 1. 「昨日」の日付文字列を作成 (YYYYMMDD)
-    const yesterday = new Date();
-    yesterday.setUTCHours(yesterday.getUTCHours() + 9); // JST
-    yesterday.setDate(yesterday.getDate() - 1);
+    // ★ 修正1：日付の基準を app.js と統一する（午前6時切り替え）
+    const targetDate = new Date();
+    targetDate.setHours(targetDate.getHours() - 6); // 現在時刻から6時間引く
+    targetDate.setDate(targetDate.getDate() - 1);   // その基準から見て「昨日」にする
     
-    const y = yesterday.getFullYear();
-    const m = String(yesterday.getMonth() + 1).padStart(2, '0');
-    const d = String(yesterday.getDate()).padStart(2, '0');
+    const y = targetDate.getFullYear();
+    const m = String(targetDate.getMonth() + 1).padStart(2, '0');
+    const d = String(targetDate.getDate()).padStart(2, '0');
     const dateStr = `${y}${m}${d}`;
 
     try {
-        // ★ 修正箇所：パスを `data/` から `data/matches/` に変更
-        const response = await fetch(`data/matches/matches_${dateStr}.json`);
+        // ★ 修正2：キャッシュバスターを追加して常に最新データを強制取得
+        const cacheBuster = new Date().getTime();
+        const response = await fetch(`data/matches/matches_${dateStr}.json?t=${cacheBuster}`);
         
         if (!response.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日の詳細データはまだ生成されていません。</p>';
@@ -21,7 +22,6 @@ async function loadPerformance() {
         }
 
         const data = await response.json();
-        // 2. 日本人スタッツがある試合だけをフィルタリング
         const matchesWithStats = data.response.matches.filter(m => m.japaneseStats && m.japaneseStats.length > 0);
 
         if (matchesWithStats.length === 0) {
@@ -29,7 +29,6 @@ async function loadPerformance() {
             return;
         }
 
-        // 3. HTMLの生成
         container.innerHTML = matchesWithStats.map(match => {
             const statsContent = match.japaneseStats.map(s => {
                 const events = [];
