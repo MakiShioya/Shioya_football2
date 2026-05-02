@@ -19,7 +19,7 @@ const JP_TEAM_PLAYERS = {
     "Real Sociedad": { "Kubo": "久保建英" },
     "Mallorca": { "Asano": "浅野拓磨" },
     "Las Palmas": { "Miyashiro": "宮代大聖" },
-    "Bayern München": { "Ito": "伊藤洋輝" },
+    "Bayern München": { "Itō": "伊藤洋輝" },
     "SC Freiburg": { "Suzuki": "鈴木唯人" },
     "Werder Bremen": { "Sugawara": "菅原由勢" },
     "Eintracht Frankfurt": { "Kosugi": "小杉啓太", "Doan": "堂安律" },
