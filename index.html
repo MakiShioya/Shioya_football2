@@ -162,6 +162,36 @@
         }
         .menu-btn:active { transform: scale(0.95); }
 
+        /* ▼▼ ネタバレ防止用ボタンスタイル ▼▼ */
+        .spoiler-btn {
+            cursor: pointer;
+            background: linear-gradient(to bottom, #8b4513, #432517);
+            color: #ECDBBF;
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 1px solid #2c160c;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            text-align: center;
+            line-height: 1.3;
+            width: 100%;
+        }
+        .spoiler-btn:active {
+            transform: scale(0.95);
+        }
+        .spoiler-btn span {
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+        .actual-score {
+            display: none; /* 初期状態では非表示 */
+            font-size: 1.3em;
+            font-weight: 900;
+            color: #432517;
+        }
+        /* ▲▲ ネタバレ防止ここまで ▲▲ */
+
         /* 将棋アプリの色使いを踏襲した各ボタンのカラー */
         .btn-schedule { background: linear-gradient(to bottom, #7B9C4B 0%, #ECDBBF 100%); } /* 緑系 */
         .btn-results  { background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); border-color: #ECDBBF; } /* 青系 */
