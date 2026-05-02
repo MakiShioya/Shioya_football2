@@ -160,6 +160,7 @@ const TEAM_DISPLAYS = {
     "Saint Etienne": "サンテティエンヌ",
     "Strasbourg": "ストラスブール",
     "Toulouse": "トゥールーズ",
+    "Metz": "メス",
 
     // ポルトガル
     "SL Benfica": "ベンフィカ",
