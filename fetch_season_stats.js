@@ -47,8 +47,8 @@ const TEAM_CONFIG = {
 
 async function fetchSeasonStats() {
     const allJapaneseStats = [];
-    const dir = path.join(__dirname, 'data');
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    const dir = path.join(__dirname, 'data', 'season');
+if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
     for (const [teamName, config] of Object.entries(TEAM_CONFIG)) {
         console.log(`[Season] ${teamName} の通算データを取得中...`);
@@ -98,10 +98,10 @@ async function fetchSeasonStats() {
 
     // まとめたデータを保存
     fs.writeFileSync(
-        path.join(dir, 'season_stats.json'),
-        JSON.stringify({ updated: new Date().toISOString(), players: allJapaneseStats }),
-        'utf8'
-    );
+    path.join(dir, 'season_stats.json'),
+    JSON.stringify({ updated: new Date().toISOString(), players: allJapaneseStats }),
+    'utf8'
+);
     console.log('通算スタッツデータの更新が完了しました。');
 }
 
