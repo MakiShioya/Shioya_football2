@@ -45,64 +45,89 @@ const TEAM_CONFIG = {
     "Celtic": { id: 252, players: { "Hatate": "旗手怜央", "Maeda": "前田大然" } }
 };
 
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 async function fetchSeasonStats() {
     const allJapaneseStats = [];
     const dir = path.join(__dirname, 'data', 'season');
-if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
     for (const [teamName, config] of Object.entries(TEAM_CONFIG)) {
-        console.log(`[Season] ${teamName} の通算データを取得中...`);
+        console.log(`\n[Season] ${teamName} のデータ取得を開始します...`);
 
-        const url = `https://v3.football.api-sports.io/players?team=${config.id}&season=${SEASON}`;
-        
-        try {
-            const res = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
-            const data = await res.json();
+        let page = 1;
+        let totalPages = 1;
 
-            if (data.response) {
-                data.response.forEach(item => {
-                    const p = item.player;
-                    const s = item.statistics[0]; // リーグ戦のメインデータ
+        while (page <= totalPages) {
+            const url = `https://v3.football.api-sports.io/players?team=${config.id}&season=${SEASON}&page=${page}`;
+            
+            try {
+                const res = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
+                const data = await res.json();
 
-                    // 英語名が含まれているかチェックし、日本語名を取得
-                    for (const [engKey, jpName] of Object.entries(config.players)) {
-                        if (p.name.includes(engKey)) {
-                            // 評価点がnullの場合は0にするなど、データ欠損に対する処理
-                            const ratingRaw = s.games.rating;
-                            const finalRating = ratingRaw ? parseFloat(ratingRaw).toFixed(2) : "0.00";
+                // 制限エラーなどが出た場合はログに出して中断
+                if (data.errors && Object.keys(data.errors).length > 0) {
+                    console.error(`[Error] ${teamName} (Page ${page}): APIエラー`, data.errors);
+                    break; 
+                }
 
-                            allJapaneseStats.push({
-                                id: p.id,
-                                name: jpName, // 日本語名をセットしてJSONに保存
-                                photo: p.photo,
-                                team: teamName,
-                                league: s.league.name,
-                                leagueCode: s.league.country === 'Japan' ? 'J1' : 'EUR',
-                                goals: s.goals.total || 0,
-                                assists: s.goals.assists || 0,
-                                rating: finalRating,
-                                minutes: s.games.minutes || 0,
-                                appearences: s.games.appearences || 0
-                            });
+                if (data.response) {
+                    // 総ページ数を更新
+                    totalPages = data.paging.total || 1;
+
+                    data.response.forEach(item => {
+                        const p = item.player;
+                        const statsArray = item.statistics;
+
+                        if (!statsArray || statsArray.length === 0) return;
+
+                        // 国内リーグ戦（League）のデータを優先して探す
+                        const s = statsArray.find(st => st.league && st.league.type === "League") || statsArray[0];
+                        if (!s || !s.games) return;
+
+                        // 大文字・小文字のブレを吸収して名前をマッチング
+                        for (const [engKey, jpName] of Object.entries(config.players)) {
+                            if (p.name.toLowerCase().includes(engKey.toLowerCase())) {
+                                console.log(`  => 日本人選手発見: ${jpName}`);
+                                
+                                const ratingRaw = s.games.rating;
+                                const finalRating = ratingRaw ? parseFloat(ratingRaw).toFixed(2) : "0.00";
+
+                                allJapaneseStats.push({
+                                    id: p.id,
+                                    name: jpName,
+                                    photo: p.photo,
+                                    team: teamName,
+                                    league: s.league.name,
+                                    leagueCode: s.league.country === 'Japan' ? 'J1' : 'EUR',
+                                    goals: s.goals.total || 0,
+                                    assists: s.goals.assists || 0,
+                                    rating: finalRating,
+                                    minutes: s.games.minutes || 0,
+                                    appearences: s.games.appearences || 0
+                                });
+                            }
                         }
-                    }
-                });
+                    });
+                }
+            } catch (error) {
+                console.error(`[Fatal] ${teamName} (Page ${page}) の通信に失敗しました:`, error);
             }
-        } catch (error) {
-            console.error(`[Error] ${teamName} のデータ取得に失敗しました:`, error);
+            
+            page++;
+            
+            // 次のページ、または次のチームへ行く前に必ず6.5秒待つ
+            await sleep(6500);
         }
-        
-        // APIのレートリミット（連続リクエスト制限）を避けるための待機処理
-        await new Promise(resolve => setTimeout(resolve, 500));
     }
 
     // まとめたデータを保存
     fs.writeFileSync(
-    path.join(dir, 'season_stats.json'),
-    JSON.stringify({ updated: new Date().toISOString(), players: allJapaneseStats }),
-    'utf8'
-);
-    console.log('通算スタッツデータの更新が完了しました。');
+        path.join(dir, 'season_stats.json'),
+        JSON.stringify({ updated: new Date().toISOString(), players: allJapaneseStats }, null, 2),
+        'utf8'
+    );
+    console.log(`\n通算スタッツデータの更新が完了しました。合計 ${allJapaneseStats.length} 名のデータを保存しました。`);
 }
 
 fetchSeasonStats();
