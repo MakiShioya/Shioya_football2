@@ -49,11 +49,8 @@ const TEAM_DISPLAYS = {
 // 日本人選手データ
 const JAPANESE_PLAYERS = {
     "Crystal Palace FC": ["鎌田大地"],
-    "Crystal Palace": ["鎌田大地"],
     "Liverpool FC": ["遠藤航"],
-    "Liverpool": ["遠藤航"],
     "Brighton & Hove Albion FC": ["三笘薫"],
-    "Brighton": ["三笘薫"],
     "Southampton FC": ["松木玖生"],
     "Southampton": ["松木玖生"],
     "Leeds United FC": ["田中碧"],
