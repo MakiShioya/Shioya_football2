@@ -32,5 +32,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/matches/
-          # 変更がある場合のみコミットしてプッシュ
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update matches data" && git push)
+          
+          # 変更がある場合のみ、最新状態を取り込んでからプッシュ
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Auto-update matches data"
+            git pull --rebase origin main
+            git push
+          )
