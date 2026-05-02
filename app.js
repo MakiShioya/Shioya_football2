@@ -255,6 +255,9 @@ function renderMatches() {
     const container = document.getElementById('match-list');
     const selectedLeague = document.getElementById('league-filter').value;
     const isJapaneseOnly = document.getElementById('japanese-filter').checked;
+    const isMajorLeagueOnly = document.getElementById('major-league-filter').checked;
+    const majorLeagues = ["premier_league", "laliga", "bundesliga", "serie_a", "ligue_1"];
+    const majorTeams = majorLeagues.reduce((acc, league) => acc.concat(LEAGUE_MASTERS[league]), []);
     
     let targetTeams = [];
     if (selectedLeague === "all") {
@@ -269,9 +272,17 @@ function renderMatches() {
         const homeName = match.homeTeam.name;
         const awayName = match.awayTeam.name;
 
-        const inTargetLeague = targetTeams.includes(homeName) || targetTeams.includes(awayName);
-        if (!inTargetLeague) return false;
+        // 1. 選択されたリーグに含まれるか
+        let inTarget = targetTeams.includes(homeName) || targetTeams.includes(awayName);
+        if (!inTarget) return false;
 
+        // 2. 追加：5大リーグフィルタがONの場合
+        if (isMajorLeagueOnly) {
+            const isMajor = majorTeams.includes(homeName) || majorTeams.includes(awayName);
+            if (!isMajor) return false;
+        }
+
+        // 3. 日本人フィルタ
         if (isJapaneseOnly) {
             const hasJapaneseHome = JAPANESE_PLAYERS[homeName] !== undefined;
             const hasJapaneseAway = JAPANESE_PLAYERS[awayName] !== undefined;
@@ -333,10 +344,10 @@ function renderMatches() {
 
 // 初期化処理
 window.addEventListener('DOMContentLoaded', () => {
-    // フィルターの変更イベントを1回だけ登録
     document.getElementById('league-filter').addEventListener('change', renderMatches);
     document.getElementById('japanese-filter').addEventListener('change', renderMatches);
+    // 追加：新しいフィルタの変更を監視
+    document.getElementById('major-league-filter').addEventListener('change', renderMatches);
 
-    // 「今日」を選択して開始
     selectTab(0, 'tab-today');
 });
