@@ -12,7 +12,9 @@ async function loadPerformance() {
     const dateStr = `${y}${m}${d}`;
 
     try {
-        const response = await fetch(`data/matches_${dateStr}.json`);
+        // ★ 修正箇所：パスを `data/` から `data/matches/` に変更
+        const response = await fetch(`data/matches/matches_${dateStr}.json`);
+        
         if (!response.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日の詳細データはまだ生成されていません。</p>';
             return;
