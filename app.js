@@ -394,8 +394,6 @@ function renderMatches() {
 
         const dateObj = new Date(match.utcDate);
         
-        // ★修正3：「26時表記」への変換処理
-        // 試合の実際の「日」が、対象としている「日（targetDate）」より未来の場合に時間を+24する
         let displayHour = dateObj.getHours();
         const displayMinute = String(dateObj.getMinutes()).padStart(2, '0');
         
@@ -418,22 +416,53 @@ function renderMatches() {
         const homeBadge = homePlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">🇯🇵 ${homePlayers}</div>` : '';
         const awayBadge = awayPlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">🇯🇵 ${awayPlayers}</div>` : '';
 
+        // ★ ネタバレ防止・スコア表示ロジック
         const hScore = match.score?.fullTime?.home;
         const aScore = match.score?.fullTime?.away;
-        const scoreDisplay = (hScore !== null && hScore !== undefined) ? `${hScore} - ${aScore}` : 'VS';
+        const status = match.status;
+
+        // APIのステータスコード分類
+        const inPlay = ["1H", "2H", "HT", "ET", "BT", "P", "SUSP", "INT", "LIVE"];
+        const finished = ["FT", "AET", "PEN"];
+        const postponed = ["PST", "CANC", "ABD", "AWD", "WO"];
+
+        let scoreDisplay = "";
+
+        if (status === "NS" || status === "TBD" || (hScore === null && !finished.includes(status) && !inPlay.includes(status))) {
+            // まだ始まっていない場合
+            scoreDisplay = `<div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>`;
+        } else {
+            // 試合中、終了、または延期の場合
+            let statusJp = "試合中";
+            if (finished.includes(status)) statusJp = "終了";
+            else if (postponed.includes(status)) statusJp = "延期・中止";
+
+            // onclickで自分自身(spoiler-btn)を非表示にし、次の要素(actual-score)を表示する
+            scoreDisplay = `
+                <div class="spoiler-btn" onclick="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    ${statusJp}<br><span>結果を見る</span>
+                </div>
+                <div class="actual-score">
+                    ${hScore ?? 0} - ${aScore ?? 0}
+                </div>
+            `;
+        }
 
         return `
             <div style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
                 <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeDisplayStr} (日本時間)</div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                    <div style="width: 40%; text-align: center;">
+                    <div style="width: 38%; text-align: center;">
                         <div style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayHomeName}</div>
                         ${homeBadge}
                     </div>
-                    <div style="width: 20%; text-align: center; font-size: 1.3em; font-weight: 900; margin-top: 5px; color: #432517;">
+                    
+                    <!-- 中央のスコア・結果ボタンエリア -->
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
                         ${scoreDisplay}
                     </div>
-                    <div style="width: 40%; text-align: center;">
+                    
+                    <div style="width: 38%; text-align: center;">
                         <div style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayAwayName}</div>
                         ${awayBadge}
                     </div>
