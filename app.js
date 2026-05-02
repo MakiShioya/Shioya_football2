@@ -323,7 +323,7 @@ async function loadMatches() {
     
     try {
         const dateStr = getFormattedDateForAPI();
-        const response = await fetch(`data/matches_${dateStr}.json`);
+        const response = await fetch(`data/matches/matches_${dateStr}.json`);
         
         if (!response.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px; color: #888;">試合データがありません。</p>';
