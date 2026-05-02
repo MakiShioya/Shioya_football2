@@ -1,0 +1,75 @@
+{
+  "updated": "2026-05-02T18:58:23.825Z",
+  "players": [
+    {
+      "name": "三好康児",
+      "team": "VfL Bochum",
+      "leagueCode": "OTHER",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.30",
+      "minutes": 67,
+      "appearances": 1
+    },
+    {
+      "name": "森下龍矢",
+      "team": "Leicester",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 0,
+      "rating": "7.20",
+      "minutes": 93,
+      "appearances": 1
+    },
+    {
+      "name": "大橋祐紀",
+      "team": "Leicester",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 0,
+      "rating": "5.60",
+      "minutes": 93,
+      "appearances": 1
+    },
+    {
+      "name": "平河悠",
+      "team": "Norwich",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "斉藤光毅",
+      "team": "QPR",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.50",
+      "minutes": 33,
+      "appearances": 1
+    },
+    {
+      "name": "瀬古樹",
+      "team": "Stoke City",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.90",
+      "minutes": 51,
+      "appearances": 1
+    },
+    {
+      "name": "岩田智輝",
+      "team": "Birmingham",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.20",
+      "minutes": 94,
+      "appearances": 1
+    }
+  ]
+}
