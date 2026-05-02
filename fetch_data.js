@@ -70,6 +70,13 @@ async function fetchMatches() {
         const response = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
         const data = await response.json();
 
+        // API制限やエラーの確認用ログ
+        if (data.errors && Object.keys(data.errors).length > 0) {
+            console.error(`[Error] APIエラー発生:`, data.errors);
+            await sleep(6500);
+            continue;
+        }
+
         const dailyMatches = [];
 
         if (data.response) {
@@ -77,29 +84,29 @@ async function fetchMatches() {
                 const homeName = item.teams.home.name;
                 const awayName = item.teams.away.name;
 
-                // ★修正1：まずは全試合の基本データ（予定）を作成する
                 const matchData = {
                     fixtureId: item.fixture.id,
                     utcDate: item.fixture.date,
                     competition: { 
                         code: mapLeagueIdToCode(item.league.id),
-                        name: item.league.name // リーグ名も追加しておく
+                        name: item.league.name
                     },
                     homeTeam: { name: homeName, id: item.teams.home.id },
                     awayTeam: { name: awayName, id: item.teams.away.id },
                     score: { fullTime: { home: item.goals.home, away: item.goals.away } },
-                    status: item.fixture.status.short, // 試合状況 (NS, FT など)
+                    status: item.fixture.status.short,
                     japaneseStats: []
                 };
 
                 const isJapaneseMatch = JP_TEAM_PLAYERS[homeName] || JP_TEAM_PLAYERS[awayName];
                 const isFinished = ["FT", "AET", "PEN"].includes(item.fixture.status.short);
 
-                // ★修正2：昨日の試合(-1) かつ 終了済み かつ 日本人所属チームの場合のみ、詳細スタッツを取りに行く
                 if (offset === -1 && isFinished && isJapaneseMatch) {
                     console.log(`  >> 注目試合のスタッツ取得: ${homeName} vs ${awayName}`);
                     
-                    await sleep(500); // 連続リクエスト回避
+                    // ★修正：1分間10回の制限を避けるため、確実に6.5秒待つ
+                    await sleep(6500); 
+                    
                     const statsUrl = `https://v3.football.api-sports.io/fixtures/players?fixture=${item.fixture.id}`;
                     const statsRes = await fetch(statsUrl, { headers: { 'x-apisports-key': API_KEY } });
                     const statsData = await statsRes.json();
@@ -130,7 +137,6 @@ async function fetchMatches() {
                     }
                 }
 
-                // ★修正3：作成した試合データ（スタッツあり・なし両方）を配列に追加する
                 dailyMatches.push(matchData);
             }
         }
@@ -138,6 +144,9 @@ async function fetchMatches() {
         const fileName = `matches_${date.replace(/-/g, '')}.json`;
         fs.writeFileSync(path.join(dir, fileName), JSON.stringify({ status: true, response: { matches: dailyMatches } }), 'utf8');
         console.log(`[Success] ${fileName} 保存完了。全 ${dailyMatches.length} 試合を記録しました。`);
+        
+        // ★修正：次の日の全試合一覧を取得しにいく前にも6.5秒待つ
+        await sleep(6500);
     }
 }
 
