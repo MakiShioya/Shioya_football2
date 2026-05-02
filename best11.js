@@ -1,23 +1,34 @@
-async function loadBest11() {
+async function loadBest11(targetFile = null) {
     const container = document.getElementById('best11-list');
+    const select = document.getElementById('edition-select');
 
     try {
-        // バックエンドで確定させたファイルを読み込む
-        const response = await fetch('data/best11.json');
-        if (!response.ok) throw new Error('Not found');
+        // 目次ファイルを読み込む
+        const indexRes = await fetch('data/best11_index.json');
+        const indexData = await indexRes.json();
+        const reversedIndex = indexData.reverse(); // 新しい順に並び替え
+
+        // プルダウンの更新（初回のみ）
+        if (select.options[0].value === "") {
+            select.innerHTML = reversedIndex.map(i => `<option value="${i.file}">${i.label}</option>`).join('');
+            select.onchange = (e) => loadBest11(e.target.value);
+        }
+
+        // 表示するファイルを決定（引数がない場合は最新のファイル）
+        const fileToLoad = targetFile || reversedIndex[0].file;
+
+        const response = await fetch(`data/${fileToLoad}`);
         const data = await response.json();
 
         container.innerHTML = data.list.map((p, index) => {
             let events = [];
             if (p.goals > 0) events.push(`⚽${p.goals}`);
             if (p.assists > 0) events.push(`🅰️${p.assists}`);
-            const eventStr = events.length > 0 ? `<span style="color: #d35400; font-weight: bold; margin-left: 5px;">${events.join(' ')}</span>` : '';
-
             return `
                 <div class="player-card">
                     <div class="rank-badge">${index + 1}</div>
                     <div class="player-info">
-                        <div class="player-name">${p.name} ${eventStr}</div>
+                        <div class="player-name">${p.name} ${events.join(' ')}</div>
                         <div class="match-context">${p.compCode}リーグ / ${p.minutes}分出場</div>
                     </div>
                     <div class="score-box">
@@ -28,8 +39,8 @@ async function loadBest11() {
             `;
         }).join('');
     } catch (error) {
-        container.innerHTML = '<p style="text-align:center; padding: 40px;">毎週火曜日3:00に更新されます。<br>初回更新までお待ちください。</p>';
+        container.innerHTML = '<p style="text-align:center; padding: 40px;">データがまだありません。火曜日の更新をお待ちください。</p>';
     }
 }
 
-window.addEventListener('DOMContentLoaded', loadBest11);
+window.addEventListener('DOMContentLoaded', () => loadBest11());
