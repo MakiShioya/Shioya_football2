@@ -65,8 +65,17 @@ async function fetchMatches() {
 // リーグIDを以前のコードに変換する補助関数
 function mapLeagueIdToCode(id) {
     const mapping = {
-        39: "PL",  140: "PD", 78: "BL1", 
-        135: "SA1", 61: "FL1", 98: "J1"
+        39: "PL",   // プレミアリーグ
+        40: "ELC",  // チャンピオンシップ (英2部)
+        140: "PD",  // ラ・リーガ
+        78: "BL1",  // ブンデスリーガ
+        135: "SA1", // セリエA
+        61: "FL1",  // リーグアン
+        94: "PPL",  // ポルトガル
+        88: "DED",  // オランダ
+        144: "BSA", // ベルギー
+        98: "J1",   // J1リーグ
+        179: "SPL"  // スコットランド
     };
     return mapping[id] || "OTHER";
 }
