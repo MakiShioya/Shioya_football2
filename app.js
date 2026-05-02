@@ -7,7 +7,7 @@ const LEAGUE_INFO = {
     "BL1": { flag: "🇩🇪", short: "GER", jp: "ブンデス" },
     "SA1": { flag: "🇮🇹", short: "ITA", jp: "セリエA" },
     "FL1": { flag: "🇫🇷", short: "FRA", jp: "リーグアン" },
-    "ELC": { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", short: "ENG2", jp: "英2部" },
+    "ELC": { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿❷", short: "ENG2", jp: "英2部" },
     "PPL": { flag: "🇵🇹", short: "POR", jp: "ポルトガル" },
     "DED": { flag: "🇳🇱", short: "NED", jp: "オランダ" },
     "J1":  { flag: "🇯🇵", short: "JPN", jp: "Jリーグ" }
