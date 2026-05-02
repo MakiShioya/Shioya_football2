@@ -25,4 +25,5 @@ jobs:
           # ★ 修正：特定のファイルパターンではなく、best11 フォルダごと追加する
           git add data/best11/
           git commit -m "Archive Weekly Best 11" || exit 0
+          git pull --rebase origin main
           git push
