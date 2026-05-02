@@ -23,8 +23,8 @@ jobs:
 
       - name: Fetch API Data
         env:
-          # ここを新しいシークレット名「FOOTBALL_DATA_API_KEY」に変更します
-          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+          # 左側がプログラム内での名前、右側がGitHubに保存した名前です
+          API_SPORTS_KEY: ${{ secrets.API_SPORTS_KEY }} 
         run: node fetch_data.js
 
       - name: Commit and Push changes
