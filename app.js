@@ -2,84 +2,19 @@
  * LEAGUE_MASTERS: 指定されたリーグのチーム名を格納
  * ※Football-Data.orgのAPIが吐き出すチーム名に後で微調整が必要になる場合があります。
  */
-const LEAGUE_MASTERS = {
-    // 1. イングランド1部
-    "premier_league": [
-        "Arsenal FC", "Aston Villa FC", "AFC Bournemouth", "Brentford FC", "Brighton & Hove Albion FC", 
-        "Chelsea FC", "Crystal Palace FC", "Everton FC", "Fulham FC", "Ipswich Town FC", 
-        "Leicester City FC", "Liverpool FC", "Manchester City FC", "Manchester United FC", 
-        "Newcastle United FC", "Nottingham Forest FC", "Tottenham Hotspur FC", 
-        "West Ham United FC", "Wolverhampton Wanderers FC"
-    ],
-    // 2. スペイン1部
-    "laliga": [
-        "Deportivo Alavés", "Athletic Club", "Club Atlético de Madrid", "FC Barcelona", "RC Celta de Vigo", 
-        "RCD Espanyol de Barcelona", "Getafe CF", "Girona FC", "UD Las Palmas", "CD Leganés", 
-        "RCD Mallorca", "CA Osasuna", "Rayo Vallecano de Madrid", "Real Betis Balompié", "Real Madrid CF", 
-        "Real Sociedad de Fútbol", "Sevilla FC", "Valencia CF", "Real Valladolid CF", "Villarreal CF"
-    ],
-    // 3. ドイツ1部（確定版）
-    "bundesliga": [
-        "FC Bayern München", "Borussia Dortmund", "RB Leipzig", "VfB Stuttgart", "TSG 1899 Hoffenheim", 
-        "Bayer 04 Leverkusen", "Eintracht Frankfurt", "SC Freiburg", "FC Augsburg", "1. FSV Mainz 05", 
-        "Borussia Mönchengladbach", "SV Werder Bremen", "1. FC Union Berlin", "1. FC Köln", 
-        "Hamburger SV", "FC St. Pauli 1910", "VfL Wolfsburg", "1. FC Heidenheim 1846"
-    ],
-    // 4. イタリア1部
-    "serie_a": [
-        "Atalanta BC", "Bologna FC 1909", "Cagliari Calcio", "Como 1907", "Empoli FC", 
-        "ACF Fiorentina", "Genoa CFC", "FC Internazionale Milano", "Juventus FC", "SS Lazio", 
-        "US Lecce", "AC Milan", "AC Monza", "SSC Napoli", "Parma Calcio 1913", 
-        "AS Roma", "Torino FC", "Udinese Calcio", "Venezia FC", "Hellas Verona FC"
-    ],
-    // 5. フランス1部
-    "ligue_1": [
-        "Angers SCO", "AJ Auxerre", "Stade Brestois 29", "Le Havre AC", "RC Lens", 
-        "Lille OSC", "Olympique Lyonnais", "Olympique de Marseille", "AS Monaco FC", "Montpellier HSC", 
-        "FC Nantes", "OGC Nice", "Paris Saint-Germain FC", "Stade de Reims", "Stade Rennais FC 1901", 
-        "AS Saint-Étienne", "RC Strasbourg Alsace", "Toulouse FC"
-    ],
-    // 6. イングランド2部
-    "championship": [
-        "Blackburn Rovers FC", "Burnley FC", "Coventry City FC", "Derby County FC", "Leeds United FC", 
-        "Luton Town FC", "Middlesbrough FC", "Millwall FC", "Norwich City FC", "Oxford United FC", 
-        "Plymouth Argyle FC", "Portsmouth FC", "Preston North End FC", "Queens Park Rangers FC", "Sheffield United FC", 
-        "Sheffield Wednesday FC", "Stoke City FC", "Sunderland AFC", "Swansea City AFC", "Watford FC", 
-        "West Bromwich Albion FC", "Bristol City FC", "Hull City AFC", "Southampton FC", "Cardiff City FC", "Birmingham City FC"
-    ],
-    // 7. ベルギー1部
-    "belgium": [
-        "RSC Anderlecht", "Royal Antwerp FC", "Cercle Brugge KSV", "Sporting du Pays de Charleroi", "Club Brugge KV", 
-        "FCV Dender EH", "KRC Genk", "KAA Gent", "KV Kortrijk", "KV Mechelen", 
-        "Oud-Heverlee Leuven", "K. Sint-Truidense VV", "Standard de Liège", "Royale Union Saint-Gilloise", "KVC Westerlo", "SV Zulte Waregem"
-    ],
-    // 8. ポルトガル1部
-    "portugal": [
-        "SL Benfica", "Boavista FC", "SC Braga", "Casa Pia AC", "GD Estoril Praia", 
-        "CF Estrela da Amadora", "FC Famalicão", "SC Farense", "FC Porto", "Gil Vicente FC", 
-        "Moreirense FC", "CD Nacional", "Rio Ave FC", "CD Santa Clara", "Sporting Clube de Portugal", 
-        "Vitória SC", "AVS Futebol SAD", "FC Arouca"
-    ],
-    // 9. オランダ1部
-    "netherlands": [
-        "AFC Ajax", "Almere City FC", "AZ", "Feyenoord Rotterdam", "Fortuna Sittard", 
-        "Go Ahead Eagles", "FC Groningen", "SC Heerenveen", "Heracles Almelo", "NAC Breda", 
-        "NEC", "PEC Zwolle", "PSV", "RKC Waalwijk", "Sparta Rotterdam", 
-        "FC Twente '65", "FC Utrecht", "Willem II Tilburg"
-    ],
-    // 10. 日本 J1リーグ (Football-Data.orgには無い可能性がありますがそのまま残します)
-    "j_league": [
-        "Albirex Niigata", "Avispa Fukuoka", "Cerezo Osaka", "Consadole Sapporo", "FC Tokyo", 
-        "Gamba Osaka", "Jubilo Iwata", "Kashima Antlers", "Kashiwa Reysol", "Kawasaki Frontale", 
-        "Kyoto Sanga", "Machida Zelvia", "Nagoya Grampus", "Sagan Tosu", "Sanfrecce Hiroshima", 
-        "Shonan Bellmare", "Tokyo Verdy", "Urawa Red Diamonds", "Vissel Kobe", "Yokohama F. Marinos"
-    ],
-    "ex": [
-        "VfL Bochum 1848", "Fortuna Düsseldorf", "SV Darmstadt 98", "Hannover 96", "Karlsruher SC", 
-        "SC Preußen Münster", "Real Sociedad B", "Celtic FC"
-    ]
+const COMPETITION_CODES = {
+    "premier_league": "PL",   // イングランド1部
+    "laliga": "PD",           // スペイン1部
+    "bundesliga": "BL1",      // ドイツ1部
+    "serie_a": "SA1",         // イタリア1部
+    "ligue_1": "FL1",         // フランス1部
+    "championship": "ELC",    // イングランド2部
+    "belgium": "DED",         // ベルギー（※APIプランにより取得可否あり）
+    "portugal": "PPL",        // ポルトガル
+    "netherlands": "DED",     // オランダ
+    "j_league": "J1"          // Jリーグ（※無料プランでは通常取得不可）
 };
-
+const MAJOR_LEAGUE_CODES = ["PL", "PD", "BL1", "SA1", "FL1"];
 // ▼▼ チーム名表示変換辞書 ▼▼
 // ※APIが吐き出す正式名称に合わせて少し調整が必要です。適宜追加・修正してください。
 const TEAM_DISPLAYS = {
@@ -253,33 +188,25 @@ async function loadMatches() {
 
 function renderMatches() {
     const container = document.getElementById('match-list');
-    const selectedLeague = document.getElementById('league-filter').value;
+    const selectedLeague = document.getElementById('league-filter').value; // 例: "premier_league"
     const isJapaneseOnly = document.getElementById('japanese-filter').checked;
     const isMajorLeagueOnly = document.getElementById('major-league-filter').checked;
-    const majorLeagues = ["premier_league", "laliga", "bundesliga", "serie_a", "ligue_1"];
-    const majorTeams = majorLeagues.reduce((acc, league) => acc.concat(LEAGUE_MASTERS[league]), []);
     
-    let targetTeams = [];
-    if (selectedLeague === "all") {
-        Object.values(LEAGUE_MASTERS).forEach(teams => {
-            targetTeams = targetTeams.concat(teams);
-        });
-    } else {
-        targetTeams = LEAGUE_MASTERS[selectedLeague] || [];
-    }
-
     const filtered = allMatches.filter(match => {
         const homeName = match.homeTeam.name;
         const awayName = match.awayTeam.name;
+        // APIから送られてくるリーグコードを取得
+        const matchCompCode = match.competition.code; 
 
-        // 1. 選択されたリーグに含まれるか
-        let inTarget = targetTeams.includes(homeName) || targetTeams.includes(awayName);
-        if (!inTarget) return false;
+        // 1. リーグ選択フィルタ
+        if (selectedLeague !== "all") {
+            const targetCode = COMPETITION_CODES[selectedLeague];
+            if (matchCompCode !== targetCode) return false;
+        }
 
-        // 2. 追加：5大リーグフィルタがONの場合
+        // 2. 5大リーグフィルタ
         if (isMajorLeagueOnly) {
-            const isMajor = majorTeams.includes(homeName) || majorTeams.includes(awayName);
-            if (!isMajor) return false;
+            if (!MAJOR_LEAGUE_CODES.includes(matchCompCode)) return false;
         }
 
         // 3. 日本人フィルタ
