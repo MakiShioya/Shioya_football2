@@ -3,10 +3,10 @@ async function loadBest11(targetFile = null) {
     const select = document.getElementById('edition-select');
 
     try {
-        // 目次ファイルを読み込む
-        const indexRes = await fetch('data/best11_index.json');
+        // ★ 1. 目次ファイルの読み込みパスを修正
+        const indexRes = await fetch('data/best11/best11_index.json');
         const indexData = await indexRes.json();
-        const reversedIndex = indexData.reverse(); // 新しい順に並び替え
+        const reversedIndex = [...indexData].reverse(); // 元の配列を壊さないようコピーして反転
 
         // プルダウンの更新（初回のみ）
         if (select.options[0].value === "") {
@@ -17,7 +17,8 @@ async function loadBest11(targetFile = null) {
         // 表示するファイルを決定（引数がない場合は最新のファイル）
         const fileToLoad = targetFile || reversedIndex[0].file;
 
-        const response = await fetch(`data/${fileToLoad}`);
+        // ★ 2. 個別データファイルの読み込みパスを修正
+        const response = await fetch(`data/best11/${fileToLoad}`);
         const data = await response.json();
 
         container.innerHTML = data.list.map((p, index) => {
@@ -39,6 +40,7 @@ async function loadBest11(targetFile = null) {
             `;
         }).join('');
     } catch (error) {
+        console.error(error);
         container.innerHTML = '<p style="text-align:center; padding: 40px;">データがまだありません。火曜日の更新をお待ちください。</p>';
     }
 }
