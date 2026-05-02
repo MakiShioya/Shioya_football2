@@ -64,8 +64,8 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function fetchMatches() {
     const offsets = [-1, 0, 1, 2];
-    const dir = path.join(__dirname, 'data');
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    const dir = path.join(__dirname, 'data', 'matches');
+if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
     for (const offset of offsets) {
         const date = getJSTDateString(offset);
@@ -137,7 +137,7 @@ async function fetchMatches() {
         }
 
         const fileName = `matches_${date.replace(/-/g, '')}.json`;
-        fs.writeFileSync(path.join(dir, fileName), JSON.stringify({ status: true, response: { matches: dailyMatches } }), 'utf8');
+fs.writeFileSync(path.join(dir, fileName), JSON.stringify({ status: true, response: { matches: dailyMatches } }), 'utf8');
         console.log(`[Success] ${fileName} 保存完了。`);
     }
 }
