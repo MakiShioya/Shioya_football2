@@ -3,19 +3,46 @@ const path = require('path');
 
 const API_KEY = process.env.API_SPORTS_KEY;
 
-// ★ 新追加：スタッツを取得したい日本人選手の英語名（姓だけなど特徴的な部分）と日本語名の辞書
-// ※APIがどんな表記で返してくるか分からないため、最初は代表的な選手だけでテストします。
-const TARGET_PLAYERS = {
-    "Mitoma": "三笘薫",
-    "Endo": "遠藤航",
-    "Kubo": "久保建英",
-    "Minamino": "南野拓実",
-    "Kamada": "鎌田大地",
-    "Doan": "堂安律",
-    "Morita": "守田英正",
-    "Sugawara": "菅原由勢",
-    "Ito": "伊藤洋輝",
-    "Tomiyasu": "冨安健洋"
+// ★改良：チームごとに「APIから返る英語の苗字」と「日本語のフルネーム」を紐付ける辞書
+// これにより、鈴木（パルマ／フライブルク）や伊藤（バイエルン／シントトロイデン）などの同姓問題も防げます。
+const JP_TEAM_PLAYERS = {
+    "Crystal Palace": { "Kamada": "鎌田大地" },
+    "Liverpool": { "Endo": "遠藤航" },
+    "Brighton": { "Mitoma": "三笘薫" },
+    "Southampton": { "Matsuki": "松木玖生" },
+    "Leeds": { "Tanaka": "田中碧" },
+    "Blackburn": { "Ohashi": "大橋祐紀", "Morishita": "森下龍矢" },
+    "Coventry": { "Sakamoto": "坂元達裕" },
+    "Hull City": { "Hirakawa": "平河悠" },
+    "QPR": { "Saito": "斉藤光毅" },
+    "Stoke City": { "Seko": "瀬古樹" },
+    "Birmingham": { "Iwata": "岩田智輝", "Fujimoto": "藤本寛也", "Furuhashi": "古橋亨梧" },
+
+    "Real Sociedad": { "Kubo": "久保建英" },
+    "Mallorca": { "Asano": "浅野拓磨" },
+    "Las Palmas": { "Miyashiro": "宮代大聖" },
+
+    "Bayern München": { "Ito": "伊藤洋輝" },
+    "SC Freiburg": { "Suzuki": "鈴木唯人" },
+    "Werder Bremen": { "Sugawara": "菅原由勢" },
+    "Eintracht Frankfurt": { "Kosugi": "小杉啓太", "Doan": "堂安律" },
+    "1899 Hoffenheim": { "Machida": "町田浩樹" },
+    "Mainz 05": { "Kawasaki": "川崎颯太", "Sano": "佐野海舟" },
+    "Borussia Monchengladbach": { "Takai": "高井幸大", "Machino": "町野修斗" },
+    "St. Pauli": { "Schmidt": "ニック・シュミット", "Ando": "安藤智哉", "Hara": "原大智", "Fujita": "藤田譲瑠チマ" },
+    "VfL Wolfsburg": { "Shiogai": "塩貝健人" },
+    "VfL Bochum": { "Miyoshi": "三好康児" },
+    "Fortuna Dusseldorf": { "Appelkamp": "アペルカンプ真大", "Tanaka": "田中聡" },
+
+    "Parma": { "Suzuki": "鈴木彩艶" },
+    "Monaco": { "Minamino": "南野拓実" },
+    "Le Havre": { "Seko": "瀬古歩夢" },
+
+    "Sint-Truiden": { "Ito": "伊藤涼太郎", "Kokubo": "小久保玲央ブライアン", "Taniguchi": "谷口彰悟", "Yamamoto": "山本理仁" },
+    "Ajax": { "Itakura": "板倉滉", "Tomiyasu": "冨安健洋" },
+    "Feyenoord": { "Ueda": "上田綺世", "Watanabe": "渡辺剛" },
+    "Sporting CP": { "Morita": "守田英正" },
+    "Celtic": { "Hatate": "旗手怜央", "Maeda": "前田大然" }
 };
 
 function getJSTDateString(offset) {
@@ -33,7 +60,6 @@ function mapLeagueIdToCode(id) {
     return mapping[id] || "OTHER";
 }
 
-// 少し待機するための関数（APIの連続リクエスト制限対策）
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function fetchMatches() {
@@ -47,61 +73,60 @@ async function fetchMatches() {
 
         const url = `https://v3.football.api-sports.io/fixtures?date=${date}`;
         const response = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
-        if (!response.ok) throw new Error(`APIエラー: ${response.status}`);
         const data = await response.json();
 
         const dailyMatches = [];
 
-        // 1試合ずつ処理
         for (const item of data.response) {
+            const homeName = item.teams.home.name;
+            const awayName = item.teams.away.name;
+
             const matchData = {
-                fixtureId: item.fixture.id, // ★スタッツ取得用にIDを保存
+                fixtureId: item.fixture.id,
                 utcDate: item.fixture.date,
                 competition: { code: mapLeagueIdToCode(item.league.id) },
-                homeTeam: { name: item.teams.home.name },
-                awayTeam: { name: item.teams.away.name },
+                homeTeam: { name: homeName },
+                awayTeam: { name: awayName },
                 score: { fullTime: { home: item.goals.home, away: item.goals.away } },
-                japaneseStats: [] // ★スタッツを入れる空の配列を用意
+                japaneseStats: []
             };
 
-            // ★ ここから新機能：昨日の試合（offset === -1）なら詳細スタッツを取りに行く
-            if (offset === -1) {
-                // ※全試合叩くと制限を超えるので、とりあえず無条件ではなく
-                // 今回は「昨日の試合」かつ「試合が終了している(Match Finished)」ものだけを対象にするなど工夫もできますが、
-                // まずは対象選手がいるかチーム名でざっくり判定せずに、テストとしていくつか取得してみます。
-                
-                // --- 【重要】APIのチーム名リストがバックエンドに無いため、
-                // 本来は対象チームの時だけリクエストしますが、今回は安全のため、
-                // 「5大リーグの昨日の試合」に絞ってスタッツを取得します。
-                const majorIds = [39, 140, 78, 135, 61];
-                if (majorIds.includes(item.league.id) && ["FT", "AET", "PEN"].includes(item.fixture.status.short)) {
-                    
-                    await sleep(300); // 1秒間に何十回もリクエストしないよう0.3秒待機
-                    console.log(`  └ 試合ID: ${item.fixture.id} のスタッツを取得中...`);
-                    
-                    const statsUrl = `https://v3.football.api-sports.io/fixtures/players?fixture=${item.fixture.id}`;
-                    const statsRes = await fetch(statsUrl, { headers: { 'x-apisports-key': API_KEY } });
-                    const statsData = await statsRes.json();
+            // 1. 昨日の試合である (-1)
+            // 2. 試合が終了している
+            // 3. ホームまたはアウェイチームが「日本人所属チームリスト」に存在する
+            const isJapaneseMatch = JP_TEAM_PLAYERS[homeName] || JP_TEAM_PLAYERS[awayName];
+            const isFinished = ["FT", "AET", "PEN"].includes(item.fixture.status.short);
 
-                    if (statsData.response && statsData.response.length > 0) {
-                        // homeとawayの両チームの選手リストを見る
-                        for (const teamStats of statsData.response) {
-                            for (const p of teamStats.players) {
-                                const apiName = p.player.name;
-                                
-                                // TARGET_PLAYERSの辞書に引っかかる名前があるか探す
-                                for (const [engKey, jpName] of Object.entries(TARGET_PLAYERS)) {
-                                    if (apiName.includes(engKey)) {
-                                        const stats = p.statistics[0]; // 0番目にその試合のデータが入る
-                                        matchData.japaneseStats.push({
-                                            name: jpName,
-                                            minutes: stats.games.minutes || 0,
-                                            rating: stats.games.rating || "-",
-                                            starter: stats.games.substitute === false,
-                                            goals: stats.goals.total || 0,
-                                            assists: stats.goals.assists || 0
-                                        });
-                                    }
+            if (offset === -1 && isFinished && isJapaneseMatch) {
+                console.log(`  >> 注目試合発見: ${homeName} vs ${awayName} (ID: ${item.fixture.id})`);
+                
+                await sleep(500); // 連続リクエストを避ける
+                const statsUrl = `https://v3.football.api-sports.io/fixtures/players?fixture=${item.fixture.id}`;
+                const statsRes = await fetch(statsUrl, { headers: { 'x-apisports-key': API_KEY } });
+                const statsData = await statsRes.json();
+
+                if (statsData.response) {
+                    for (const teamStats of statsData.response) {
+                        const teamName = teamStats.team.name;
+                        // そのチームに所属している日本人選手の辞書を取得
+                        const targetPlayers = JP_TEAM_PLAYERS[teamName];
+                        if (!targetPlayers) continue; // 日本人がいないチーム側はスキップ
+
+                        for (const p of teamStats.players) {
+                            const apiName = p.player.name;
+                            
+                            // 辞書と照らし合わせる
+                            for (const [engKey, jpName] of Object.entries(targetPlayers)) {
+                                if (apiName.includes(engKey)) {
+                                    const s = p.statistics[0];
+                                    matchData.japaneseStats.push({
+                                        name: jpName,
+                                        minutes: s.games.minutes || 0,
+                                        rating: s.games.rating || "-",
+                                        starter: s.games.substitute === false,
+                                        goals: s.goals.total || 0,
+                                        assists: s.goals.assists || 0
+                                    });
                                 }
                             }
                         }
@@ -112,13 +137,9 @@ async function fetchMatches() {
         }
 
         const fileName = `matches_${date.replace(/-/g, '')}.json`;
-        const output = { status: true, response: { matches: dailyMatches } };
-        fs.writeFileSync(path.join(dir, fileName), JSON.stringify(output), 'utf8');
-        console.log(`[Success] ${fileName} を保存しました。`);
+        fs.writeFileSync(path.join(dir, fileName), JSON.stringify({ status: true, response: { matches: dailyMatches } }), 'utf8');
+        console.log(`[Success] ${fileName} 保存完了。`);
     }
 }
 
-fetchMatches().catch(err => {
-    console.error(err);
-    process.exit(1);
-});
+fetchMatches().catch(err => { console.error(err); process.exit(1); });
