@@ -289,7 +289,11 @@ const JAPANESE_PLAYERS = {
 
 let allMatches = [];
 let targetDate = new Date();
-const TODAY = new Date(); // 基準となる「今日」を固定
+
+// ★修正1：「1日の切り替わり」を午前6時にする
+// 現在時刻から6時間引いた日付を、アプリ内の「今日」の基準とする
+const TODAY = new Date();
+TODAY.setHours(TODAY.getHours() - 6); 
 
 function updateDateUI() {
     const y = targetDate.getFullYear();
@@ -311,8 +315,11 @@ function getFormattedDateForAPI() {
 function selectTab(offset, tabId) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
+    
+    // ベースとなる「今日（マイナス6時間済み）」からoffsetを計算する
     targetDate = new Date(TODAY);
     targetDate.setDate(TODAY.getDate() + offset);
+    
     updateDateUI();
     loadMatches();
 }
@@ -323,7 +330,10 @@ async function loadMatches() {
     
     try {
         const dateStr = getFormattedDateForAPI();
-        const response = await fetch(`data/matches/matches_${dateStr}.json`);
+        // ★修正2：キャッシュバスターの追加
+        // URLの末尾に現在のタイムスタンプ（?t=...）を付けて強制的に最新を取得させる
+        const cacheBuster = new Date().getTime();
+        const response = await fetch(`data/matches/matches_${dateStr}.json?t=${cacheBuster}`);
         
         if (!response.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px; color: #888;">試合データがありません。</p>';
@@ -383,18 +393,23 @@ function renderMatches() {
         const info = LEAGUE_INFO[compCode] || { flag: "🏳️" };
 
         const dateObj = new Date(match.utcDate);
-        const jstTimeStr = new Intl.DateTimeFormat('ja-JP', {
-            timeZone: 'Asia/Tokyo',
-            month: 'numeric', day: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-        }).format(dateObj);
+        
+        // ★修正3：「26時表記」への変換処理
+        // 試合の実際の「日」が、対象としている「日（targetDate）」より未来の場合に時間を+24する
+        let displayHour = dateObj.getHours();
+        const displayMinute = String(dateObj.getMinutes()).padStart(2, '0');
+        
+        if (dateObj.getDate() !== targetDate.getDate() && dateObj.getTime() > targetDate.getTime()) {
+            displayHour += 24;
+        }
+        
+        const timeDisplayStr = `${displayHour}:${displayMinute}`;
 
         const homeNameRaw = match.homeTeam.name;
         const awayNameRaw = match.awayTeam.name;
         const homeJP = TEAM_DISPLAYS[homeNameRaw] || homeNameRaw;
         const awayJP = TEAM_DISPLAYS[awayNameRaw] || awayNameRaw;
 
-        // 【変更箇所】略称を外し、国旗と日本語名（または元の名前）のみにフォーマット変更
         const displayHomeName = `${info.flag} ${homeJP}`;
         const displayAwayName = `${info.flag} ${awayJP}`;
 
@@ -409,7 +424,7 @@ function renderMatches() {
 
         return `
             <div style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
-                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${jstTimeStr} (日本時間)</div>
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeDisplayStr} (日本時間)</div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div style="width: 40%; text-align: center;">
                         <div style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayHomeName}</div>
