@@ -2,8 +2,8 @@ name: Daily Season Stats Aggregation
 
 on:
   schedule:
-    # 毎日 日本時間 04:15 に実行（日々の試合データ取得の直後に動かす設定）
-    - cron: '15 19 * * *'
+    # 毎日 日本時間 09:20（UTC 00:20）に実行
+    - cron: '20 0 * * *'
   workflow_dispatch: # 手動実行ボタン
 
 jobs:
