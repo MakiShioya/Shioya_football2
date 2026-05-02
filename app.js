@@ -47,14 +47,85 @@ const TEAM_DISPLAYS = {
 
 // 日本人選手データ
 const JAPANESE_PLAYERS = {
-    "Arsenal FC": ["富安健洋"],
-    "Liverpool FC": ["遠藤航"],
-    "Brighton & Hove Albion FC": ["三笘薫"],
     "Crystal Palace FC": ["鎌田大地"],
+    "Crystal Palace": ["鎌田大地"],
+    "Liverpool FC": ["遠藤航"],
+    "Liverpool": ["遠藤航"],
+    "Brighton & Hove Albion FC": ["三笘薫"],
+    "Brighton": ["三笘薫"],
+    "Southampton FC": ["松木玖生"],
+    "Southampton": ["松木玖生"],
+    "Leeds United FC": ["田中碧"],
+    "Leeds": ["田中碧"],
+    "Blackburn Rovers FC": ["大橋祐紀", "森下龍矢"],
+    "Blackburn": ["大橋祐紀", "森下龍矢"],
+    "Coventry City FC": ["坂元達裕"],
+    "Coventry": ["坂元達裕"],
+    "Hull City AFC": ["平河悠"],
+    "Hull City": ["平河悠"],
+    "Queens Park Rangers FC": ["斉藤光毅"],
+    "QPR": ["斉藤光毅"],
+    "Stoke City FC": ["瀬古樹"],
+    "Stoke": ["瀬古樹"],
+    "Birmingham City FC": ["岩田智輝", "藤本寛也", "古橋亨梧"],
+    "Birmingham": ["岩田智輝", "藤本寛也", "古橋亨梧"],
+
     "Real Sociedad de Fútbol": ["久保建英"],
+    "Real Sociedad": ["久保建英"],
+    "RCD Mallorca": ["浅野拓磨"],
+    "Mallorca": ["浅野拓磨"],
+    "UD Las Palmas": ["宮代大聖"],
+    "Las Palmas": ["宮代大聖"],
+
+    "FC Bayern München": ["伊藤洋輝"],
+    "Bayern München": ["伊藤洋輝"],
+    "SC Freiburg": ["鈴木唯人"],
+    "Freiburg": ["鈴木唯人"],
+    "SV Werder Bremen": ["菅原由勢"],
+    "Werder Bremen": ["菅原由勢"],
+    "Eintracht Frankfurt": ["小杉啓太", "堂安律"],
+    "TSG 1899 Hoffenheim": ["町田浩樹"],
+    "Hoffenheim": ["町田浩樹"],
+    "1. FSV Mainz 05": ["川崎颯太", "佐野海舟"],
+    "Mainz 05": ["川崎颯太", "佐野海舟"],
+    "Borussia Mönchengladbach": ["高井幸大", "町野修斗"],
+    "FC St. Pauli 1910": ["ニック・シュミット", "安藤智哉", "原大智", "藤田譲瑠チマ"],
+    "St. Pauli": ["ニック・シュミット", "安藤智哉", "原大智", "藤田譲瑠チマ"],
+    "VfL Wolfsburg": ["塩貝健人"],
+    "Wolfsburg": ["塩貝健人"],
+    "VfL Bochum 1848": ["三好康児"],
+    "Bochum": ["三好康児"],
+    "Fortuna Düsseldorf": ["アペルカンプ真大", "田中聡"],
+    "SV Darmstadt 98": ["秋山裕紀", "古川陽介"],
+    "Darmstadt": ["秋山裕紀", "古川陽介"],
+
+    "Parma Calcio 1913": ["鈴木彩艶"],
+    "Parma": ["鈴木彩艶"],
+
     "AS Monaco FC": ["南野拓実"],
-    "FC Bayern München": ["伊藤洋輝"]
-    // ...必要に応じて追加
+    "Monaco": ["南野拓実"],
+    "Le Havre AC": ["瀬古歩夢"],
+    "Le Havre": ["瀬古歩夢"],
+
+    "Oud-Heverlee Leuven": ["明本考浩", "大南拓磨"],
+    "OH Leuven": ["明本考浩", "大南拓磨"],
+    "KVC Westerlo": ["木村誠二", "齋藤俊輔", "坂本一彩"],
+    "Westerlo": ["木村誠二", "齋藤俊輔", "坂本一彩"],
+    "KRC Genk": ["伊東純也", "横山歩夢", "吉永夢希"],
+    "Genk": ["伊東純也", "横山歩夢", "吉永夢希"],
+    "K. Sint-Truidense VV": ["伊藤涼太郎", "小久保玲央ブライアン", "後藤啓介", "新川志音", "谷口彰悟", "畑大雅", "松澤海斗", "山本理仁"],
+    "Sint-Truiden": ["伊藤涼太郎", "小久保玲央ブライアン", "後藤啓介", "新川志音", "谷口彰悟", "畑大雅", "松澤海斗", "山本理仁"],
+
+    "AFC Ajax": ["板倉滉", "冨安健洋"],
+    "Ajax": ["板倉滉", "冨安健洋"],
+    "Feyenoord Rotterdam": ["上田綺世", "渡辺剛"],
+    "Feyenoord": ["上田綺世", "渡辺剛"],
+
+    "Sporting Clube de Portugal": ["守田英正"],
+    "Sporting CP": ["守田英正"],
+    
+    "Celtic FC": ["旗手怜央", "前田大然"],
+    "Celtic": ["旗手怜央", "前田大然"]
 };
 
 let allMatches = [];
