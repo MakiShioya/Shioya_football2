@@ -23,7 +23,6 @@ async function debugBayernPlayers() {
             if (teamName === "Bayern München") {
                 console.log(`\n=== ${teamName} の登録選手一覧 ===`);
                 for (const p of teamStats.players) {
-                    // APIが持っている選手名と、プレイ時間を出力（出場していない選手を弾いていないか確認するため）
                     const minutes = p.statistics[0]?.games?.minutes || 0;
                     console.log(`- 名前: ${p.player.name} (出場: ${minutes}分)`);
                 }
