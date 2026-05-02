@@ -266,7 +266,6 @@ function renderMatches() {
     }
 
     const filtered = allMatches.filter(match => {
-        // ▼変更箇所：home.name ではなく homeTeam.name
         const homeName = match.homeTeam.name;
         const awayName = match.awayTeam.name;
 
@@ -287,7 +286,6 @@ function renderMatches() {
     }
 
     container.innerHTML = filtered.map(match => {
-        // ▼変更箇所：timeTS ではなく utcDate を解析
         const dateObj = new Date(match.utcDate);
         const jstTimeStr = new Intl.DateTimeFormat('ja-JP', {
             timeZone: 'Asia/Tokyo',
@@ -307,11 +305,7 @@ function renderMatches() {
         const homeBadge = homePlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">🇯🇵 ${homePlayers}</div>` : '';
         const awayBadge = awayPlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">🇯🇵 ${awayPlayers}</div>` : '';
 
-        // ▼新規追加：エンブレム画像の表示
-        const homeCrest = match.homeTeam.crest ? `<img src="${match.homeTeam.crest}" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 5px;">` : '';
-        const awayCrest = match.awayTeam.crest ? `<img src="${match.awayTeam.crest}" style="width: 24px; height: 24px; vertical-align: middle; margin-left: 5px;">` : '';
-
-        // ▼新規追加：スコアがnullなら「VS」、数字が入っていれば「2 - 1」のように表示
+        // スコアがnullなら「VS」、数字が入っていれば「2 - 1」のように表示
         const hScore = match.score?.fullTime?.home;
         const aScore = match.score?.fullTime?.away;
         const scoreDisplay = (hScore !== null && hScore !== undefined) ? `${hScore} - ${aScore}` : 'VS';
@@ -321,14 +315,14 @@ function renderMatches() {
                 <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${jstTimeStr} (日本時間)</div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div style="width: 40%; text-align: center;">
-                        <div style="font-weight: bold; font-size: 1rem;">${homeCrest}<br>${displayHomeName}</div>
+                        <div style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayHomeName}</div>
                         ${homeBadge}
                     </div>
                     <div style="width: 20%; text-align: center; font-size: 1.3em; font-weight: 900; margin-top: 5px; color: #432517;">
                         ${scoreDisplay}
                     </div>
                     <div style="width: 40%; text-align: center;">
-                        <div style="font-weight: bold; font-size: 1rem;">${awayCrest}<br>${displayAwayName}</div>
+                        <div style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayAwayName}</div>
                         ${awayBadge}
                     </div>
                 </div>
