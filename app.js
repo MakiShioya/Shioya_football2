@@ -1,16 +1,17 @@
 /**
- * リーグごとの基本情報（国旗、略称、日本語名）
+ * リーグごとの基本情報（国旗、日本語名）
+ * ※略称(short)の設定は削除しました。
  */
 const LEAGUE_INFO = {
-    "PL":  { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", short: "ARS", jp: "プレミア" },
-    "PD":  { flag: "🇪🇸", short: "ESP", jp: "ラ・リーガ" },
-    "BL1": { flag: "🇩🇪", short: "GER", jp: "ブンデス" },
-    "SA1": { flag: "🇮🇹", short: "ITA", jp: "セリエA" },
-    "FL1": { flag: "🇫🇷", short: "FRA", jp: "リーグアン" },
-    "ELC": { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿❷", short: "ENG2", jp: "英2部" },
-    "PPL": { flag: "🇵🇹", short: "POR", jp: "ポルトガル" },
-    "DED": { flag: "🇳🇱", short: "NED", jp: "オランダ" },
-    "J1":  { flag: "🇯🇵", short: "JPN", jp: "Jリーグ" }
+    "PL":  { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", jp: "プレミア" },
+    "PD":  { flag: "🇪🇸", jp: "ラ・リーガ" },
+    "BL1": { flag: "🇩🇪", jp: "ブンデス" },
+    "SA1": { flag: "🇮🇹", jp: "セリエA" },
+    "FL1": { flag: "🇫🇷", jp: "リーグアン" },
+    "ELC": { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿❷", jp: "英2部" },
+    "PPL": { flag: "🇵🇹", jp: "ポルトガル" },
+    "DED": { flag: "🇳🇱", jp: "オランダ" },
+    "J1":  { flag: "🇯🇵", jp: "Jリーグ" }
 };
 
 const COMPETITION_CODES = {
@@ -130,7 +131,7 @@ const JAPANESE_PLAYERS = {
 
 let allMatches = [];
 let targetDate = new Date();
-const TODAY = new Date();
+const TODAY = new Date(); // 基準となる「今日」を固定
 
 function updateDateUI() {
     const y = targetDate.getFullYear();
@@ -221,10 +222,8 @@ function renderMatches() {
 
     container.innerHTML = filtered.map(match => {
         const compCode = match.competition.code;
-        const info = LEAGUE_INFO[compCode] || { flag: "🏳️", short: "---" };
+        const info = LEAGUE_INFO[compCode] || { flag: "🏳️" };
 
-        // --- 定義漏れを防ぐための追加ロジック ---
-        // 1. 時間のフォーマット
         const dateObj = new Date(match.utcDate);
         const jstTimeStr = new Intl.DateTimeFormat('ja-JP', {
             timeZone: 'Asia/Tokyo',
@@ -232,22 +231,20 @@ function renderMatches() {
             hour: '2-digit', minute: '2-digit'
         }).format(dateObj);
 
-        // 2. 日本語名の取得
         const homeNameRaw = match.homeTeam.name;
         const awayNameRaw = match.awayTeam.name;
         const homeJP = (TEAM_DISPLAYS[compCode] && TEAM_DISPLAYS[compCode][homeNameRaw]) || homeNameRaw;
         const awayJP = (TEAM_DISPLAYS[compCode] && TEAM_DISPLAYS[compCode][awayNameRaw]) || awayNameRaw;
 
-        const displayHomeName = `${info.flag}${info.short} ${homeJP}`;
-        const displayAwayName = `${info.flag}${info.short} ${awayJP}`;
+        // 【変更箇所】略称を外し、国旗と日本語名（または元の名前）のみにフォーマット変更
+        const displayHomeName = `${info.flag} ${homeJP}`;
+        const displayAwayName = `${info.flag} ${awayJP}`;
 
-        // 3. 日本人バッジの生成
         const homePlayers = JAPANESE_PLAYERS[homeNameRaw] ? JAPANESE_PLAYERS[homeNameRaw].join(', ') : '';
         const awayPlayers = JAPANESE_PLAYERS[awayNameRaw] ? JAPANESE_PLAYERS[awayNameRaw].join(', ') : '';
         const homeBadge = homePlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">🇯🇵 ${homePlayers}</div>` : '';
         const awayBadge = awayPlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">🇯🇵 ${awayPlayers}</div>` : '';
 
-        // 4. スコアの表示
         const hScore = match.score?.fullTime?.home;
         const aScore = match.score?.fullTime?.away;
         const scoreDisplay = (hScore !== null && hScore !== undefined) ? `${hScore} - ${aScore}` : 'VS';
