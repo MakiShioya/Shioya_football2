@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>今週の日本代表 - Shioya Football</title>
+    <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'SetoFont';
+            src: url('font/setofont.ttf') format('truetype');
+            font-display: block;
+        }
+        * { font-family: 'SetoFont', sans-serif; box-sizing: border-box; }
+        body { margin: 0; padding: 0; background-color: #2c3e50; color: #ECDBBF; }
+        .top-bar {
+            position: sticky; top: 0;
+            padding: calc(15px + env(safe-area-inset-top)) 20px 15px;
+            background: rgba(67, 37, 23, 0.9); text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5); z-index: 100;
+        }
+        .top-bar h1 { margin: 0; font-size: 1.4rem; text-shadow: 1px 1px 2px #000; }
+        .container { padding: 15px; padding-bottom: 100px; }
+        
+        .player-card {
+            background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px;
+            margin-bottom: 15px; padding: 15px; color: #333;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .rank-badge {
+            background: linear-gradient(to bottom, #ff9800, #f57c00);
+            color: white; font-size: 1.5rem; font-weight: 900;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #432517; margin-right: 15px; flex-shrink: 0;
+        }
+        .player-info { flex-grow: 1; }
+        .player-name { font-size: 1.2rem; font-weight: bold; color: #432517; margin-bottom: 4px; }
+        .match-context { font-size: 0.8rem; color: #666; }
+        .score-box { text-align: right; }
+        .final-score { font-size: 1.4rem; font-weight: 900; color: #d35400; }
+        .original-rating { font-size: 0.75rem; color: #888; }
+        
+        .bottom-menu { position: fixed; bottom: max(10px, env(safe-area-inset-bottom)); left: 2%; right: 2%; z-index: 100; }
+        .back-btn {
+            width: 100%; height: 55px; background: linear-gradient(to bottom, #9c804b 0%, #ecdbbf 100%);
+            border: 2px solid #432517; border-radius: 10px; color: #432517; font-weight: bold;
+            font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center;
+            text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <h1>今週の日本代表 (Best 11)</h1>
+    </header>
+    <div id="best11-list" class="container">
+        <p style="text-align: center;">過去1週間のデータを集計中...</p>
+    </div>
+    <div class="bottom-menu">
+        <a href="index.html" class="back-btn">予定表に戻る</a>
+    </div>
+    <script src="best11.js"></script>
+</body>
+</html>
