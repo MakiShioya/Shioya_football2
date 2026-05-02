@@ -58,7 +58,7 @@ function mapLeagueIdToCode(id) {
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function fetchMatches() {
-    const offsets = [-1, 0, 1, 2];
+    const offsets = [-1, 0, 1];
     const dir = path.join(__dirname, 'data', 'matches');
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
