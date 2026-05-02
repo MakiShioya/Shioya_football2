@@ -436,8 +436,8 @@ function renderMatches() {
 
         const homeNameRaw = match.homeTeam.name;
         const awayNameRaw = match.awayTeam.name;
-        const homeJP = (TEAM_DISPLAYS[compCode] && TEAM_DISPLAYS[compCode][homeNameRaw]) || homeNameRaw;
-        const awayJP = (TEAM_DISPLAYS[compCode] && TEAM_DISPLAYS[compCode][awayNameRaw]) || awayNameRaw;
+        const homeJP = TEAM_DISPLAYS[homeNameRaw] || homeNameRaw;
+        const awayJP = TEAM_DISPLAYS[awayNameRaw] || awayNameRaw;
 
         // 【変更箇所】略称を外し、国旗と日本語名（または元の名前）のみにフォーマット変更
         const displayHomeName = `${info.flag} ${homeJP}`;
