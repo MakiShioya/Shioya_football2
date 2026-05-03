@@ -44,6 +44,7 @@ async function loadBest11(targetFile = null) {
                 </div>
             `;
         }).join('');
+        document.getElementById('best11-list').innerHTML = '';
 
     } catch (error) {
         console.error(error);
