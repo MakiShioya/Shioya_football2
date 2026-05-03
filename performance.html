@@ -8,14 +8,13 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
     <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
     
-    <!-- ▼ 新しく作った common.css を読み込む ▼ -->
+    <!-- 共通設定 -->
     <link rel="stylesheet" href="common.css">
 
     <style>
-        /* performance.html 固有のスタイル（試合結果カードのデザインなど） */
+        /* performance.html 固有のスタイル（試合結果カードのデザイン）のみ残します */
         .container { 
             padding: 15px; 
-            /* common.css の <main> の余白設定を使うため padding-bottom: 100px は削除しました */
         }
         
         .report-card {
@@ -59,7 +58,7 @@
         .stat-details { font-size: 0.9rem; }
         .event-badge { color: #d35400; font-weight: bold; }
 
-        /* 現在のページのメニューボタンの枠線を強調 */
+        /* アクティブボタンの強調 */
         .btn-results { border-color: white !important; }
     </style>
 </head>
@@ -72,12 +71,11 @@
     </header>
 
     <!-- ② ページごとの固有コンテンツ -->
-    <!-- <div> から <main> に変更し、共通の余白（メニューに被らない設定）を効かせています -->
     <main id="performance-list" class="container">
         <p style="text-align: center;">データを読み込み中...</p>
     </main>
 
-    <!-- ③ 下部メニュー（全ページ共通：5ボタンに変更） -->
+    <!-- ③ 下部メニュー（全ページ共通：5ボタン） -->
     <div class="bottom-menu">
         <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
         <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
