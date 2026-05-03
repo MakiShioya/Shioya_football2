@@ -244,7 +244,7 @@ const TEAM_DISPLAYS = {
     "Yokohama F. Marinos": "横浜FM",
 
     // その他
-    "Celtic FC": "セルティック"
+    "Celtic": "セルティック"
 };
 
 // 日本人選手データ
