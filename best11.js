@@ -1,7 +1,8 @@
 const container = document.getElementById('formation-nodes');
 const select = document.getElementById('edition-select');
-let currentWeeklyData = []; // 詳細表示用にデータを保持
+let currentWeeklyData = []; // ポップアップ表示用にスタメンデータを保持
 
+// 評点に応じたCSSクラスを返す
 function getRankClass(score, isDummy) {
     if (isDummy) return 'rank-grey';
     if (score >= 10) return 'rank-rainbow';
@@ -12,14 +13,15 @@ function getRankClass(score, isDummy) {
     return 'rank-grey';
 }
 
-// loadBest11 関数内をアップデート
 async function loadBest11(targetFile = null) {
     const listContainer = document.getElementById('best11-list');
     try {
+        // 1. インデックスの取得
         const indexRes = await fetch('data/best11/best11_index.json');
         const indexData = await indexRes.json();
         const reversedIndex = [...indexData].reverse();
 
+        // プルダウンの初期化
         if (select.options[0].value === "") {
             select.innerHTML = reversedIndex.map(i => `<option value="${i.file}">${i.label}</option>`).join('');
             select.onchange = (e) => loadBest11(e.target.value);
@@ -27,18 +29,20 @@ async function loadBest11(targetFile = null) {
 
         const baseFile = targetFile || reversedIndex[0].file;
         
-        // 1. 確定版と生データの両方をフェッチ
+        // 2. 確定版（スタメン）と生データ（全員）を同時にフェッチ
         const [confirmedRes, rawRes] = await Promise.all([
             fetch(`data/best11/Confirmed_${baseFile}`),
             fetch(`data/best11/${baseFile}`)
         ]);
 
-        const data = await confirmedRes.json();
-        const rawPlayers = await rawRes.json();
-        
-        currentWeeklyData = data.list;
+        if (!confirmedRes.ok || !rawRes.ok) throw new Error("データが見つかりません");
 
-        // ピッチの描画
+        const data = await confirmedRes.json();
+        const rawPlayersObj = await rawRes.json();
+        
+        currentWeeklyData = data.list; // スタメン情報を保持
+
+        // 3. ピッチ（スタメン11人）の描画
         document.querySelector('.top-bar h1').innerText = `今週の日本代表 (${data.formation})`;
         container.innerHTML = data.list.map((p, index) => {
             const ratingDisplay = p.isDummy ? "-" : p.finalScore.toFixed(1);
@@ -51,45 +55,49 @@ async function loadBest11(targetFile = null) {
             `;
         }).join('');
 
-        // 2. サブメンバー（選外の高得点者）を特定
+        // 4. サブメンバー（選外の高得点者）の特定
         const starterNames = data.list.map(s => s.name);
-        const subMembers = rawPlayers
-            .filter(p => !starterNames.includes(p.name)) // スタメンにいない
-            .sort((a, b) => b.finalScore - a.finalScore) // スコア順
-            .slice(0, 7); // 上位7人（ベンチ枠）
+        const subMembers = (rawPlayersObj.list || [])
+            .filter(p => !starterNames.includes(p.name) && !p.isDummy)
+            .sort((a, b) => b.finalScore - a.finalScore)
+            .slice(0, 7);
 
-        // 3. リストにサブメンバーを描画
-        listContainer.innerHTML = `
-            <div class="sub-members-section">
-                <div class="sub-members-title">控え選手 (サブメンバー)</div>
-                <div class="sub-list">
-                    ${subMembers.map(m => `
-                        <div class="sub-item">
-                            ${m.name} <span class="sub-rating">${m.finalScore.toFixed(1)}</span>
-                        </div>
-                    `).join('')}
+        // 5. リストエリアの更新（ここで「集計中」を上書き消去）
+        if (subMembers.length > 0) {
+            listContainer.innerHTML = `
+                <div class="sub-members-section">
+                    <div class="sub-members-title">控え選手 (ベンチ入り)</div>
+                    <div class="sub-list">
+                        ${subMembers.map(m => `
+                            <div class="sub-item">
+                                ${m.name} <span class="sub-rating">${m.finalScore.toFixed(1)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        } else {
+            // 控えがいない場合は、エリア自体をクリア
+            listContainer.innerHTML = '';
+        }
 
     } catch (error) {
-        console.error(error);
-        container.innerHTML = '<p style="text-align:center; padding: 40px; color:#fff;">データ集計中です。</p>';
-        listContainer.innerHTML = '';
+        console.error("表示エラー:", error);
+        container.innerHTML = '<p style="text-align:center; padding: 40px; color:#fff;">データ集計中です。火曜日の更新をお待ちください。</p>';
+        listContainer.innerHTML = ''; 
     }
 }
 
-// 選手詳細ポップアップを表示する
+// 選手詳細ポップアップを表示する (スタメン専用)
 function showPlayerDetail(index) {
     const p = currentWeeklyData[index];
-    if (p.isDummy) return;
+    if (!p || p.isDummy) return;
 
     const modal = document.getElementById('playerDetailModal');
     const content = document.getElementById('player-detail-body');
 
-    // リーグ係数を逆算 (finalScore = originalRating * leagueMultiplier)
+    // 係数の計算
     const leagueMult = (p.finalScore / p.originalRating).toFixed(2);
-    // 総合評価点 (finalScore * suit)
     const totalEval = (p.finalScore * p.suit).toFixed(2);
 
     content.innerHTML = `
@@ -108,7 +116,6 @@ function showPlayerDetail(index) {
             ※ポジション係数は各ポジションへの適性を示します。
         </p>
     `;
-
     modal.style.display = 'flex';
 }
 
@@ -116,4 +123,5 @@ function closePlayerDetailModal() {
     document.getElementById('playerDetailModal').style.display = 'none';
 }
 
+// DOM読み込み完了時に実行
 window.addEventListener('DOMContentLoaded', () => loadBest11());
