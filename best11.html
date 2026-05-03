@@ -8,36 +8,73 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
     <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
     
-    <!-- 共通設定 -->
     <link rel="stylesheet" href="common.css">
 
     <style>
-        /* best11.html 固有のスタイルのみ残します */
         .container { 
             padding: 15px; 
         }
-        
-        .player-card {
-            background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px;
-            margin-bottom: 15px; padding: 15px; color: #333;
+
+        /* ▼ ピッチ描画用のスタイル ▼ */
+        .pitch-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 2 / 3; /* コートの縦横比 */
+            background: #4A7A3C; /* 芝生の色 */
+            border: 3px solid #ECDBBF;
+            margin: 0 auto 20px;
+            overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            display: flex; align-items: center; justify-content: space-between;
         }
-        .rank-badge {
+
+        /* ピッチの白線 */
+        .pitch-line { position: absolute; border: 2px solid rgba(236, 219, 191, 0.5); }
+        .center-line { top: 50%; width: 100%; height: 0; }
+        .center-circle { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; }
+        .penalty-top { top: 0; left: 20%; width: 60%; height: 15%; border-top: none; }
+        .penalty-bottom { bottom: 0; left: 20%; width: 60%; height: 15%; border-bottom: none; }
+
+        /* 選手アイコンコンテナ */
+        .player-node {
+            position: absolute;
+            transform: translate(-50%, -50%); /* 座標の基準をアイコンの中央にする */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+            z-index: 10;
+        }
+
+        /* 評点アイコン */
+        .rating-icon {
+            width: 36px;
+            height: 36px;
             background: linear-gradient(to bottom, #ff9800, #f57c00);
-            color: white; font-size: 1.5rem; font-weight: 900;
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            border: 2px solid #432517; margin-right: 15px; flex-shrink: 0;
+            border: 2px solid #432517;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: 900;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 1px #432517;
         }
-        .player-info { flex-grow: 1; }
-        .player-name { font-size: 1.2rem; font-weight: bold; color: #432517; margin-bottom: 4px; }
-        .match-context { font-size: 0.8rem; color: #666; }
-        .score-box { text-align: right; }
-        .final-score { font-size: 1.4rem; font-weight: 900; color: #d35400; }
-        .original-rating { font-size: 0.75rem; color: #888; }
-        
-        /* アクティブボタンの強調 */
+
+        /* 選手名ラベル */
+        .player-name-label {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #ECDBBF;
+            background: rgba(67, 37, 23, 0.9);
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+            text-shadow: 1px 1px 1px #000;
+        }
+
         .btn-calendar { border-color: white !important; }
     </style>
 </head>
@@ -51,27 +88,28 @@
     <main class="container">
         <!-- アーカイブ選択用プルダウン -->
         <div style="margin-bottom: 20px; text-align: center;">
-            <select id="edition-select" style="
-                padding: 12px;
-                border-radius: 10px;
-                border: 2px solid #8b4513;
-                background-color: #ECDBBF;
-                color: #432517;
-                font-family: 'SetoFont', sans-serif;
-                font-weight: bold;
-                font-size: 1rem;
-                width: 90%;
-                max-width: 400px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            ">
+            <select id="edition-select" style="padding: 12px; border-radius: 10px; border: 2px solid #8b4513; background-color: #ECDBBF; color: #432517; font-family: 'SetoFont', sans-serif; font-weight: bold; font-size: 1rem; width: 90%; max-width: 400px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
                 <option value="">読み込み中...</option>
             </select>
         </div>
 
+        <!-- ▼ ピッチエリア ▼ -->
+        <div id="pitch" class="pitch-container">
+            <div class="pitch-line center-line"></div>
+            <div class="pitch-line center-circle"></div>
+            <div class="pitch-line penalty-top"></div>
+            <div class="pitch-line penalty-bottom"></div>
+            
+            <!-- ここにJSで選手アイコンが追加されます -->
+            <div id="formation-nodes"></div>
+        </div>
+
+        <!-- ▼ リスト表示（必要であれば併用、不要なら後で削除） ▼ -->
         <div id="best11-list">
             <p style="text-align: center;">データを集計中...</p>
         </div>
     </main>
+
     <div style="height: 150px; width: 100%; clear: both;"></div>
 
     <div class="bottom-menu">
@@ -82,6 +120,7 @@
         <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
     </div>
 
+    <!-- 広告やモーダルなどの共通部分は省略せずにそのまま残してください -->
     <div id="ad-banner">
         <div style="background: #ccc; color: #666; font-size: 10px; line-height: 50px; text-align: center;">
             AD: バナー広告エリア (320×50)
