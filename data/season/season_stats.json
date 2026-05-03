@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-03T04:14:01.588Z",
+  "updated": "2026-05-03T22:31:35.955Z",
   "players": [
     {
       "name": "三好康児",
@@ -131,6 +131,193 @@
       "assists": 0,
       "rating": "0.00",
       "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "前田大然",
+      "team": "Hibernian",
+      "league": "Premiership",
+      "leagueCode": "SPL",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.70",
+      "minutes": 95,
+      "appearances": 1
+    },
+    {
+      "name": "旗手怜央",
+      "team": "Hibernian",
+      "league": "Premiership",
+      "leagueCode": "SPL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "渡辺剛",
+      "team": "Fortuna Sittard",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 1,
+      "assists": 0,
+      "rating": "7.30",
+      "minutes": 98,
+      "appearances": 1
+    },
+    {
+      "name": "上田綺世",
+      "team": "Fortuna Sittard",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.20",
+      "minutes": 98,
+      "appearances": 1
+    },
+    {
+      "name": "鎌田大地",
+      "team": "Bournemouth",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.50",
+      "minutes": 45,
+      "appearances": 1
+    },
+    {
+      "name": "瀬古歩夢",
+      "team": "Lille",
+      "league": "Ligue 1",
+      "leagueCode": "FL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.00",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "安藤智哉",
+      "team": "FC St. Pauli",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "7.20",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "藤田譲瑠チマ",
+      "team": "FC St. Pauli",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "7.00",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "原大智",
+      "team": "FC St. Pauli",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "佐野海舟",
+      "team": "FC St. Pauli",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "7.20",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "川崎颯太",
+      "team": "FC St. Pauli",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "町野修斗",
+      "team": "Borussia Mönchengladbach",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 1,
+      "appearances": 1
+    },
+    {
+      "name": "高井幸大",
+      "team": "Borussia Mönchengladbach",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "鈴木唯人",
+      "team": "SC Freiburg",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.60",
+      "minutes": 81,
+      "appearances": 1
+    },
+    {
+      "name": "塩貝健人",
+      "team": "SC Freiburg",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "鈴木彩艶",
+      "team": "Inter",
+      "league": "Serie A",
+      "leagueCode": "SA1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.90",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "宮代大聖",
+      "team": "Las Palmas",
+      "league": "Segunda División",
+      "leagueCode": "OTHER",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.30",
+      "minutes": 24,
       "appearances": 1
     }
   ]
