@@ -34,7 +34,8 @@ function confirmBest11(fileName) {
         updated: new Date().toISOString(),
         dateLabel: data.dateLabel,
         formation: bestFormationResult.name,
-        totalScore: parseFloat(bestFormationResult.score.toFixed(2)),
+        // ▼ 修正: bestFormationResult.score -> bestFormationResult.totalScore
+        totalScore: parseFloat(bestFormationResult.totalScore.toFixed(2)),
         list: bestFormationResult.assignment.map(item => {
             const p = item.player;
             const pos = item.posInfo;
@@ -108,9 +109,26 @@ function solveOptimalAssignment(players, positions) {
     return { score: dp[(1 << M) - 1], totalScore: dp[(1 << M) - 1], assignment };
 }
 
-// 実行（generate_best11.js から呼び出すか、単独で動かす用）
+// ▼ 変更：GitHub Actions 等から `node confirm_best11.js` と単独で呼ばれた時の処理 ▼
 if (require.main === module) {
-    // 最新のファイルを特定して処理するロジックをここに追加可能
+    const indexFilePath = path.join(__dirname, 'data', 'best11', 'best11_index.json');
+    
+    if (fs.existsSync(indexFilePath)) {
+        const indexData = JSON.parse(fs.readFileSync(indexFilePath, 'utf8'));
+        
+        if (indexData.length > 0) {
+            // generate_best11.js が目次の最後に追加したファイル名を取得
+            const latestFile = indexData[indexData.length - 1].file;
+            console.log(`最新の候補ファイル [${latestFile}] を検出しました。確定処理を開始します...`);
+            
+            const confirmedFileName = confirmBest11(latestFile);
+            console.log(`✅ 確定完了: ${confirmedFileName} を保存しました。`);
+        } else {
+            console.log("best11_index.json に記録がありません。");
+        }
+    } else {
+        console.log("best11_index.json が見つかりません。");
+    }
 }
 
 module.exports = { confirmBest11 };
