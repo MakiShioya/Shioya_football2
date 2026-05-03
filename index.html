@@ -44,7 +44,9 @@
             padding-bottom: 10px;
             background: rgba(67, 37, 23, 0.9);
             color: #ECDBBF;
-            text-align: center;
+            display: flex; /* flexboxに変更してボタンとタイトルを並べる */
+            align-items: center;
+            justify-content: center; /* タイトルを中央に */
             z-index: 100;
             box-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
@@ -53,6 +55,73 @@
             margin: 0;
             font-size: 1.5rem;
             text-shadow: 1px 1px 2px #000;
+        }
+
+        /* 左端のメニューボタン */
+        .menu-icon-btn {
+            position: absolute; /* タイトルの中央配置を崩さないため絶対配置 */
+            left: calc(15px + env(safe-area-inset-left));
+            background: transparent;
+            border: none;
+            color: #ECDBBF;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        /* ▼▼ モーダル（ポップアップ）のスタイル ▼▼ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #ECDBBF;
+            border: 4px solid #432517;
+            border-radius: 15px;
+            padding: 20px;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: #432517;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .modal-link {
+            display: block;
+            margin: 15px 0;
+            padding: 10px;
+            background: #432517;
+            color: #ECDBBF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
         }
 
         /* 操作パネル（将棋のモーダル風の枠） */
@@ -258,6 +327,7 @@
 <body>
 
     <header class="top-bar">
+        <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
         <h1>Shioya Football</h1>
     </header>
 
@@ -319,7 +389,6 @@
         <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
     </div>
 
-
     <!-- 広告用コンテナ -->
     <div id="ad-banner">
         <!-- ここに広告コード（Google AdSenseなど）を貼り付けます -->
@@ -327,6 +396,28 @@
             AD: バナー広告エリア (320×50)
         </div>
     </div>
+
+    <!-- ▼▼ 追加するナビゲーションモーダル ▼▼ -->
+    <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeNavModal()">×</button>
+            <h2 style="color:#432517; font-size: 1.2rem; margin-bottom: 20px; border-bottom: 2px dashed #432517; padding-bottom:10px;">メニュー</h2>
+            
+            <a href="https://shioya-soft.com/" target="_blank" rel="noopener noreferrer" class="modal-link" style="background: #ff9800;">公式サイトへ</a>
+            <a href="https://shioya-soft.com/terms.html" target="_blank" rel="noopener noreferrer" class="modal-link">利用規約</a>
+            <a href="https://shioya-soft.com/privacy.html" target="_blank" rel="noopener noreferrer" class="modal-link">プライバシーポリシー</a>
+        </div>
+    </div>
+
+    <!-- モーダル開閉用のスクリプト -->
+    <script>
+        function openNavModal() {
+            document.getElementById('navModal').style.display = 'flex';
+        }
+        function closeNavModal() {
+            document.getElementById('navModal').style.display = 'none';
+        }
+    </script>
 
     <script src="app.js"></script>
 </body>
