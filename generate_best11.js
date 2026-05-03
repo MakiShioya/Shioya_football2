@@ -3,7 +3,7 @@ const path = require('path');
 
 const LEAGUE_MULTIPLIER = {
     "PL": 1.10, "PD": 1.09, "BL1": 1.08, "SA1": 1.07, "FL1": 1.06, "ELC": 1.04, "BSA": 1.03,
-    "PPL": 1.02, "DED": 1.01, "DED": 1.00
+    "PPL": 1.02, "DED": 1.01, "SPL": 1.00
 };
 
 async function generateBest11() {
