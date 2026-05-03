@@ -8,11 +8,11 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
     <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
     
-    <!-- ▼ 新しく作った common.css を読み込む ▼ -->
+    <!-- 共通設定 -->
     <link rel="stylesheet" href="common.css">
 
     <style>
-        /* best11.html 固有のスタイル（ランキングカードのデザインなど） */
+        /* best11.html 固有のスタイルのみ残します */
         .container { 
             padding: 15px; 
         }
@@ -37,19 +37,17 @@
         .final-score { font-size: 1.4rem; font-weight: 900; color: #d35400; }
         .original-rating { font-size: 0.75rem; color: #888; }
         
-        /* 現在のページのメニューボタンの枠線を強調 */
+        /* アクティブボタンの強調 */
         .btn-calendar { border-color: white !important; }
     </style>
 </head>
 <body>
 
-    <!-- ① 上部メニュー -->
     <header class="top-bar">
         <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
         <h1>今週の日本代表 (Best 11)</h1>
     </header>
 
-    <!-- ② ページごとの固有コンテンツ -->
     <main class="container">
         <!-- アーカイブ選択用プルダウン -->
         <div style="margin-bottom: 20px; text-align: center;">
@@ -75,7 +73,6 @@
         </div>
     </main>
 
-    <!-- ③ 下部メニュー（全ページ共通：5ボタンに変更） -->
     <div class="bottom-menu">
         <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
         <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
@@ -84,14 +81,12 @@
         <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
     </div>
 
-    <!-- ④ 広告エリア（全ページ共通） -->
     <div id="ad-banner">
         <div style="background: #ccc; color: #666; font-size: 10px; line-height: 50px; text-align: center;">
             AD: バナー広告エリア (320×50)
         </div>
     </div>
 
-    <!-- ⑤ モーダル（全ページ共通） -->
     <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeNavModal()">×</button>
