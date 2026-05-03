@@ -54,8 +54,8 @@ async function generateBest11() {
         });
     });
 
-    const best11 = Object.values(playersData).sort((a, b) => b.finalScore - a.finalScore).slice(0, 11);
-    const result = { updated: new Date().toISOString(), dateLabel: `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日号`, list: best11 };
+    const weeklyPlayers = Object.values(playersData).sort((a, b) => b.finalScore - a.finalScore);
+    const result = { updated: new Date().toISOString(), dateLabel: `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日号`, list: weeklyPlayers };
 
     // ★ 5. 個別の週刊ファイルを best11Dir に保存
     fs.writeFileSync(path.join(best11Dir, fileName), JSON.stringify(result), 'utf8');
