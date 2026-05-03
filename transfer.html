@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
     <title>日本人選手 移籍情報 | Shioya Football</title>
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adscontainers.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
     <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
     
-    <!-- ▼ 新しく作った common.css を読み込む ▼ -->
     <link rel="stylesheet" href="common.css">
 
     <style>
@@ -31,9 +30,9 @@
             color: #333; position: relative;
         }
 
-        /* ステータスによる背景色の出し分け（JSでクラスを付与） */
-        .status-rumor { background-color: #fdf5e6; } /* 薄い黄色系（噂） */
-        .status-confirmed { background-color: #e6fdf5; } /* 薄い青緑系（確定） */
+        /* ステータスによる背景色の出し分け */
+        .status-rumor { background-color: #fdf5e6; } 
+        .status-confirmed { background-color: #e6fdf5; } 
 
         .card-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -47,27 +46,25 @@
             font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; font-weight: bold;
             color: white; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
         }
-        .badge-rumor { background-color: #d35400; } /* オレンジ */
-        .badge-confirmed { background-color: #27ae60; } /* グリーン */
+        .badge-rumor { background-color: #d35400; } 
+        .badge-confirmed { background-color: #27ae60; } 
 
         .update-time { font-size: 0.75rem; color: #666; text-align: right; margin-bottom: 8px; }
 
         .club-list { list-style: none; padding: 0; margin: 0; }
         .club-item { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
 
-        /* 現在のページのメニューボタンの枠線を強調 */
+        /* アクティブボタンの強調 */
         .btn-transfer { border-color: white !important; }
     </style>
 </head>
 <body>
 
-    <!-- ① 上部メニュー -->
     <header class="top-bar">
         <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
         <h1>Shioya Football</h1>
     </header>
 
-    <!-- ② ページごとの固有コンテンツ -->
     <div class="control-panel">
         <select id="status-filter" class="control-select">
             <option value="all">すべての状況</option>
@@ -90,7 +87,6 @@
         <p style="text-align: center; color: #ECDBBF; margin-top: 20px;">情報を読み込み中...</p>
     </main>
 
-    <!-- ③ 下部メニュー（全ページ共通：5ボタンに変更） -->
     <div class="bottom-menu">
         <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
         <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
@@ -99,14 +95,12 @@
         <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
     </div>
 
-    <!-- ④ 広告エリア（全ページ共通） -->
     <div id="ad-banner">
         <div style="background: #ccc; color: #666; font-size: 10px; line-height: 50px; text-align: center;">
             AD: バナー広告エリア (320×50)
         </div>
     </div>
 
-    <!-- ⑤ モーダル（全ページ共通） -->
     <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeNavModal()">×</button>
@@ -122,7 +116,6 @@
         function closeNavModal() { document.getElementById('navModal').style.display = 'none'; }
     </script>
 
-    <!-- 提供いただいたテストデータを含むJSファイルを読み込み -->
     <script src="transfer.js"></script>
 </body>
 </html>
