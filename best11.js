@@ -1,6 +1,6 @@
 const container = document.getElementById('formation-nodes');
 const select = document.getElementById('edition-select');
-let currentWeeklyData = []; // ここにスタメン + 控えの全データを保持する
+let currentWeeklyData = []; 
 
 function getRankClass(score, isDummy) {
     if (isDummy) return 'rank-grey';
@@ -34,22 +34,22 @@ async function loadBest11(targetFile = null) {
         const data = await confirmedRes.json();
         const rawPlayersObj = await rawRes.json();
         
-        // 1. サブメンバー（選外の高得点者）を特定
         const starterNames = data.list.map(s => s.name);
         const subMembers = (rawPlayersObj.list || [])
             .filter(p => !starterNames.includes(p.name) && !p.isDummy)
             .sort((a, b) => b.finalScore - a.finalScore)
             .slice(0, 7);
 
-        // ★ 重要：スタメンと控えを一つの配列に合体させる
-        // インデックス 0-10 がスタメン、11-17 が控えになります
         currentWeeklyData = [...data.list, ...subMembers];
 
-        // 2. ピッチ（スタメン11人）の描画
+        // 1. ピッチ（スタメン）の描画
         document.querySelector('.top-bar h1').innerText = `今週の日本代表 (${data.formation})`;
         container.innerHTML = data.list.map((p, index) => {
-            const ratingDisplay = p.isDummy ? "-" : p.finalScore.toFixed(1);
-            const rankClass = getRankClass(p.finalScore, p.isDummy);
+            // ★ ポジション係数を反映した最終スコアを計算
+            const displayScore = p.isDummy ? 0 : p.finalScore * (p.suit || 1.0);
+            const ratingDisplay = p.isDummy ? "-" : displayScore.toFixed(1);
+            const rankClass = getRankClass(displayScore, p.isDummy); // 色判定も補正後で行う
+
             return `
                 <div class="player-node" style="top: ${p.top}%; left: ${p.left}%;" onclick="showPlayerDetail(${index})">
                     <div class="rating-icon ${rankClass}">${ratingDisplay}</div>
@@ -58,22 +58,21 @@ async function loadBest11(targetFile = null) {
             `;
         }).join('');
 
-        // 3. リスト（控え選手）の描画
+        // 2. 控え選手リストの描画
         if (subMembers.length > 0) {
             listContainer.innerHTML = `
                 <div class="sub-members-section">
                     <div class="sub-members-title">控え選手 (ベンチ入り)</div>
                     <div class="sub-list">
                         ${subMembers.map((m, i) => {
-                            const rankClass = getRankClass(m.finalScore, false);
-                            // 控えリストでは星型（rank-rainbow）の形を避け、色だけ使うための処理
-                            const colorClass = (rankClass === 'rank-rainbow') ? 'rank-orange' : rankClass;
-                            // 控えのインデックスは「スタメンの数（data.list.length） + i」
+                            // 控えも同様に計算（控えは基本的にsuit=1.0）
+                            const displayScore = m.finalScore * (m.suit || 1.0);
+                            const rankClass = getRankClass(displayScore, false);
                             const globalIndex = data.list.length + i;
                             
                             return `
                                 <div class="sub-item" onclick="showPlayerDetail(${globalIndex})">
-                                    ${m.name} <span class="sub-rating ${colorClass}">${m.finalScore.toFixed(1)}</span>
+                                    ${m.name} <span class="sub-rating ${rankClass}">${displayScore.toFixed(1)}</span>
                                 </div>
                             `;
                         }).join('')}
@@ -91,7 +90,6 @@ async function loadBest11(targetFile = null) {
     }
 }
 
-// 選手詳細ポップアップを表示する
 function showPlayerDetail(index) {
     const p = currentWeeklyData[index];
     if (!p || p.isDummy) return;
@@ -99,10 +97,10 @@ function showPlayerDetail(index) {
     const modal = document.getElementById('playerDetailModal');
     const content = document.getElementById('player-detail-body');
 
-    // 控え選手の場合、suit（ポジション係数）がない場合があるため 1.0 で保護
     const suitVal = p.suit || 1.0;
     const leagueMult = (p.finalScore / p.originalRating).toFixed(2);
-    const totalEval = (p.finalScore * suitVal).toFixed(2);
+    // 表示用スコアと一致させるため1.0桁で計算
+    const totalEval = (p.finalScore * suitVal).toFixed(1);
 
     content.innerHTML = `
         <div class="detail-header">
