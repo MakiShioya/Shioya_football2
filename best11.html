@@ -168,6 +168,16 @@
         </div>
     </div>
 
+    <!-- 選手詳細ポップアップ -->
+    <div id="playerDetailModal" class="modal-overlay" onclick="closePlayerDetailModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closePlayerDetailModal()">×</button>
+            <div id="player-detail-body">
+                <!-- ここにJSで内訳が注入されます -->
+            </div>
+        </div>
+    </div>
+
     <script>
         function openNavModal() { document.getElementById('navModal').style.display = 'flex'; }
         function closeNavModal() { document.getElementById('navModal').style.display = 'none'; }
