@@ -65,18 +65,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
-        .control-select {
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid #8b4513;
-            font-size: 1rem;
-            width: 100%;
-            background-color: #ECDBBF;
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
         /* ▼▼ 日付切り替え用 3タブのスタイル ▼▼ */
         .tab-container {
             display: flex;
@@ -112,20 +100,47 @@
         }
         /* ▲▲ タブスタイルここまで ▲▲ */
 
-        .toggle-label {
+        /* ▼▼ フィルター横並びスタイル ▼▼ */
+        .filter-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-select {
+            flex: 1.2;
+            padding: 8px 2px;
+            border-radius: 8px;
+            border: 2px solid #8b4513;
+            font-size: 0.85rem;
+            background-color: #ECDBBF;
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .filter-toggle {
+            flex: 1;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             background: #ECDBBF;
             border: 2px solid #8b4513;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 8px 2px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #432517;
-            width: 100%;
+            white-space: nowrap;
         }
+
+        .filter-toggle input[type="checkbox"] {
+            margin-right: 4px;
+            transform: scale(1.1);
+        }
+        /* ▲▲ フィルター横並びスタイルここまで ▲▲ */
 
         /* メインエリア（下部メニューに被らないよう余白を確保） */
         main {
@@ -185,7 +200,7 @@
             opacity: 0.9;
         }
         .actual-score {
-            display: none; /* 初期状態では非表示 */
+            display: none;
             font-size: 1.3em;
             font-weight: 900;
             color: #432517;
@@ -207,43 +222,48 @@
     </header>
 
     <div class="control-panel">
-        <select id="league-filter" class="control-select">
-            <option value="all">すべての注目試合</option>
-            <optgroup label="5大リーグ 1部">
-                <option value="premier_league">プレミアリーグ (英)</option>
-                <option value="laliga">ラ・リーガ (西)</option>
-                <option value="bundesliga">ブンデスリーガ (独)</option>
-                <option value="serie_a">セリエA (伊)</option>
-                <option value="ligue_1">リーグ・アン (仏)</option>
-            </optgroup>
-            <optgroup label="2部リーグ">
-                <option value="championship">チャンピオンシップ (英2部)</option>
-            </optgroup>
-            <optgroup label="欧州その他 & アジア">
-                <option value="belgium">ベルギー・リーグ</option>
-                <option value="portugal">プリメイラ・リーガ (葡)</option>
-                <option value="netherlands">エールディヴィジ (蘭)</option>
-                <option value="j_league">J1リーグ</option>
-            </optgroup>
-        </select>
-
-        <!-- ▼▼ 日付ナビゲーションを3タブに変更 ▼▼ -->
-        <div class="tab-container">
+        <!-- 日付ナビゲーション -->
+        <div class="tab-container" style="margin-bottom: 12px;">
             <button id="tab-yesterday" class="tab-btn" onclick="selectTab(-1, 'tab-yesterday')">昨日</button>
             <button id="tab-today" class="tab-btn" onclick="selectTab(0, 'tab-today')">今日</button>
             <button id="tab-tomorrow" class="tab-btn" onclick="selectTab(1, 'tab-tomorrow')">明日</button>
         </div>
-        <!-- ▲▲ タブ変更ここまで ▲▲ -->
 
-        <label class="toggle-label">
-            <input type="checkbox" id="japanese-filter" checked style="margin-right: 8px; transform: scale(1.2);">
-            日本人所属チームのみ
-        </label>
+        <!-- 1列にまとめたフィルター群 -->
+        <div class="filter-row">
+            <!-- 1. リーグ選択 -->
+            <select id="league-filter" class="filter-select">
+                <option value="all">全リーグ</option>
+                <optgroup label="5大リーグ 1部">
+                    <option value="premier_league">プレミア</option>
+                    <option value="laliga">ラ・リーガ</option>
+                    <option value="bundesliga">ブンデス</option>
+                    <option value="serie_a">セリエA</option>
+                    <option value="ligue_1">リーグアン</option>
+                </optgroup>
+                <optgroup label="2部リーグ">
+                    <option value="championship">英2部</option>
+                </optgroup>
+                <optgroup label="その他">
+                    <option value="belgium">ベルギー</option>
+                    <option value="portugal">ポルトガル</option>
+                    <option value="netherlands">オランダ</option>
+                    <option value="j_league">J1</option>
+                </optgroup>
+            </select>
 
-        <label class="toggle-label" style="margin-top: 10px;">
-            <input type="checkbox" id="major-league-filter" checked style="margin-right: 8px; transform: scale(1.2);">
-            5大リーグのみ
-        </label>
+            <!-- 2. 日本人フィルター -->
+            <label class="filter-toggle">
+                <input type="checkbox" id="japanese-filter" checked>
+                日本人
+            </label>
+
+            <!-- 3. 五大リーグフィルター -->
+            <label class="filter-toggle">
+                <input type="checkbox" id="major-league-filter" checked>
+                五大
+            </label>
+        </div>
     </div>
 
     <main id="match-list">
@@ -252,12 +272,12 @@
 
     <!-- 下部メニュー -->
     <div class="bottom-menu">
-    <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
-    <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
-    <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
-    <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
-    <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
-</div>
+        <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+    </div>
 
     <script src="app.js"></script>
 </body>
