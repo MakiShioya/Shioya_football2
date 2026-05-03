@@ -75,6 +75,37 @@
             text-shadow: 1px 1px 1px #000;
         }
 
+        /* --- 評点アイコンのカラーバリエーション --- */
+.rank-rainbow {
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+    background-size: 200% 200%;
+    animation: rainbow-bg 3s ease infinite, glow-star 1.5s ease-in-out infinite alternate;
+    /* 星形にするための設定 */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    width: 44px !important; /* 星形は少し大きく見せる */
+    height: 44px !important;
+    border: none !important;
+}
+
+.rank-orange { background: linear-gradient(to bottom, #ff9800, #f57c00); border-color: #432517; }
+.rank-purple { background: linear-gradient(to bottom, #9c27b0, #7b1fa2); border-color: #432517; }
+.rank-blue   { background: linear-gradient(to bottom, #2196f3, #1976d2); border-color: #432517; }
+.rank-green  { background: linear-gradient(to bottom, #4caf50, #388e3c); border-color: #432517; }
+.rank-grey   { background: linear-gradient(to bottom, #9e9e9e, #616161); border-color: #432517; }
+
+/* 虹色アニメーション */
+@keyframes rainbow-bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 10点以上の時の発光エフェクト */
+@keyframes glow-star {
+    from { filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #ff00ff); }
+    to { filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 20px #00ffff); }
+}
+
         .btn-calendar { border-color: white !important; }
     </style>
 </head>
