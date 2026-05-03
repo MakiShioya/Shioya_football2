@@ -2,9 +2,9 @@ name: Weekly Best 11 Generator
 
 on:
   schedule:
-    # 毎週月曜 18:00 UTC (＝火曜 03:00 JST)
+    # 毎週火曜 03:00 JST (月曜 18:00 UTC) に実行
     - cron: '0 18 * * 1'
-  workflow_dispatch: # 手動でも実行できるようにする
+  workflow_dispatch: # 手動実行ボタンを有効化
 
 jobs:
   generate:
@@ -16,16 +16,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Generate Best 11
+
+      - name: Generate and Optimize Best 11
+        # 先ほどの「数学的最適化版」のスクリプトを実行
+        # これ1つで Confirmed_*.json まで作成されます
         run: node generate_best11.js
-      # ▼ 追加：候補者リストが出来上がった直後に、確定版を作成する ▼
-      - name: Confirm Optimal Best 11
-        run: node confirm_best11.js
+
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/best11/
-          git commit -m "Archive Weekly Best 11" || exit 0
+          git commit -m "Archive Weekly Optimized Best 11" || exit 0
           git pull --rebase origin main
           git push
