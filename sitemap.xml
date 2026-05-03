@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- 1. トップページ（毎日更新・最重要） -->
+  <url>
+    <loc>https://football.shioya-soft.com/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- トップページの別名（念のため） -->
+  <url>
+    <loc>https://football.shioya-soft.com/index.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 2. ダッシュボード（毎日更新） -->
+  <url>
+    <loc>https://football.shioya-soft.com/dashboard.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 3. 昨日の日本人（毎日更新） -->
+  <url>
+    <loc>https://football.shioya-soft.com/performance.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 4. 今週の日本代表（毎週火曜更新） -->
+  <url>
+    <loc>https://football.shioya-soft.com/best11.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 5. 移籍情報（不定期更新） -->
+  <url>
+    <loc>https://football.shioya-soft.com/transfer.html</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
