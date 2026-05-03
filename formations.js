@@ -66,3 +66,6 @@ const FORMATIONS = {
         { id: "CF", reqPos: "CF", top: 15, left: 50 }
     ]
 };
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { FORMATIONS };
+}
