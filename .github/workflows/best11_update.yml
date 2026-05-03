@@ -18,11 +18,13 @@ jobs:
           node-version: '24'
       - name: Generate Best 11
         run: node generate_best11.js
+      # ▼ 追加：候補者リストが出来上がった直後に、確定版を作成する ▼
+      - name: Confirm Optimal Best 11
+        run: node confirm_best11.js
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # ★ 修正：特定のファイルパターンではなく、best11 フォルダごと追加する
           git add data/best11/
           git commit -m "Archive Weekly Best 11" || exit 0
           git pull --rebase origin main
