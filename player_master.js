@@ -50,3 +50,6 @@ const PLAYER_MASTER = {
     "旗手怜央": { "GK": 0.1, "CB": 0.4, "LSB": 0.9, "RSB": 0.7, "DMF": 0.8, "CMF": 1.0, "OMF": 0.9, "LSH": 0.8, "RSH": 0.7, "LWG": 0.8, "RWG": 0.7, "CF": 0.6 },
     "前田大然": { "GK": 0.1, "CB": 0.3, "LSB": 0.7, "RSB": 0.6, "DMF": 0.4, "CMF": 0.5, "OMF": 0.7, "LSH": 1.0, "RSH": 0.9, "LWG": 1.0, "RWG": 0.9, "CF": 0.9 }
 };
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { PLAYER_MASTER };
+}
