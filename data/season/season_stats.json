@@ -1,9 +1,10 @@
 {
-  "updated": "2026-05-02T18:58:23.825Z",
+  "updated": "2026-05-03T04:14:01.588Z",
   "players": [
     {
       "name": "三好康児",
-      "team": "VfL Bochum",
+      "team": "Arminia Bielefeld",
+      "league": "2. Bundesliga",
       "leagueCode": "OTHER",
       "goals": 0,
       "assists": 0,
@@ -13,7 +14,8 @@
     },
     {
       "name": "森下龍矢",
-      "team": "Leicester",
+      "team": "Blackburn",
+      "league": "Championship",
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
@@ -23,7 +25,8 @@
     },
     {
       "name": "大橋祐紀",
-      "team": "Leicester",
+      "team": "Blackburn",
+      "league": "Championship",
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
@@ -33,7 +36,8 @@
     },
     {
       "name": "平河悠",
-      "team": "Norwich",
+      "team": "Hull City",
+      "league": "Championship",
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
@@ -43,7 +47,8 @@
     },
     {
       "name": "斉藤光毅",
-      "team": "QPR",
+      "team": "Ipswich",
+      "league": "Championship",
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
@@ -53,7 +58,8 @@
     },
     {
       "name": "瀬古樹",
-      "team": "Stoke City",
+      "team": "Bristol City",
+      "league": "Championship",
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
@@ -63,12 +69,68 @@
     },
     {
       "name": "岩田智輝",
-      "team": "Birmingham",
+      "team": "Portsmouth",
+      "league": "Championship",
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
       "rating": "6.20",
       "minutes": 94,
+      "appearances": 1
+    },
+    {
+      "name": "伊藤洋輝",
+      "team": "Bayern München",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.70",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "菅原由勢",
+      "team": "Werder Bremen",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "7.20",
+      "minutes": 79,
+      "appearances": 1
+    },
+    {
+      "name": "三笘薫",
+      "team": "Newcastle",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "5.90",
+      "minutes": 97,
+      "appearances": 1
+    },
+    {
+      "name": "板倉滉",
+      "team": "Ajax",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.20",
+      "minutes": 82,
+      "appearances": 1
+    },
+    {
+      "name": "冨安健洋",
+      "team": "Ajax",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
       "appearances": 1
     }
   ]
