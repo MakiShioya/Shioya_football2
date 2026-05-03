@@ -206,6 +206,44 @@
             color: #432517;
         }
         /* ▲▲ ネタバレ防止ここまで ▲▲ */
+        
+                /* ▼▼ 広告バナーの固定設定 ▼▼ */
+        #ad-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px; /* 一般的なモバイルバナーの高さ */
+            background-color: #000;
+            z-index: 110; /* メニューより前面に */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* iPhoneのホームバー（セーフエリア）対策 */
+            padding-bottom: env(safe-area-inset-bottom);
+            box-sizing: content-box;
+        }
+
+        /* ▼▼ 下部メニューの位置を広告の上に調整 ▼▼ */
+        .bottom-menu {
+            /* 修正：bottomを 0 ではなく 広告の高さ+α に設定 */
+            bottom: calc(55px + env(safe-area-inset-bottom));
+            position: fixed;
+            left: calc(2% + env(safe-area-inset-left));
+            right: calc(2% + env(safe-area-inset-right));
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            gap: 5px;
+            z-index: 100;
+        }
+
+        /* ▼▼ メインエリアの余白をさらに確保 ▼▼ */
+        main {
+            /* 修正：メニュー(60px) + 広告(50px) + 余裕分 */
+            padding-bottom: 140px;
+        }
+
 
         /* 将棋アプリの色使いを踏襲した各ボタンのカラー */
         .btn-schedule { background: linear-gradient(to bottom, #7B9C4B 0%, #ECDBBF 100%); } /* 緑系 */
