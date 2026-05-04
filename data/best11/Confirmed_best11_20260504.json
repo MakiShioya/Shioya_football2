@@ -1,8 +1,8 @@
 {
-  "updated": "2026-05-04T00:20:13.747Z",
+  "updated": "2026-05-04T06:57:52.505Z",
   "dateLabel": "2026年5月4日号",
-  "formation": "4-2-3-1",
-  "totalScore": 80.24,
+  "formation": "3-4-2-1",
+  "totalScore": 75.66,
   "list": [
     {
       "name": "鈴木彩艶",
@@ -15,41 +15,51 @@
       "isDummy": false
     },
     {
-      "name": "菅原由勢",
-      "posId": "RSB",
-      "top": 65,
-      "left": 85,
-      "finalScore": 7.78,
-      "originalRating": 7.2,
-      "suit": 1,
-      "isDummy": false
-    },
-    {
       "name": "安藤智哉",
       "posId": "RCB",
       "top": 70,
-      "left": 65,
+      "left": 75,
       "finalScore": 7.78,
       "originalRating": 7.2,
       "suit": 1,
       "isDummy": false
     },
     {
-      "name": "谷口彰悟",
-      "posId": "LCB",
+      "name": "渡辺剛",
+      "posId": "CB",
       "top": 70,
-      "left": 35,
-      "finalScore": 7.83,
-      "originalRating": 7.6,
+      "left": 50,
+      "finalScore": 7.37,
+      "originalRating": 7.3,
       "suit": 1,
       "isDummy": false
     },
     {
-      "name": "伊藤洋輝",
-      "posId": "LSB",
-      "top": 65,
+      "name": "瀬古歩夢",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 6.36,
+      "originalRating": 6,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "宮代大聖",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 5.98,
+      "originalRating": 6.3,
+      "suit": 0.7,
+      "isDummy": false
+    },
+    {
+      "name": "前田大然",
+      "posId": "LSH",
+      "top": 45,
       "left": 15,
-      "finalScore": 7.24,
+      "finalScore": 6.7,
       "originalRating": 6.7,
       "suit": 1,
       "isDummy": false
@@ -75,42 +85,32 @@
       "isDummy": false
     },
     {
-      "name": "伊東純也",
-      "posId": "RSH",
-      "top": 35,
-      "left": 85,
-      "finalScore": 7.42,
-      "originalRating": 7.2,
+      "name": "鈴木唯人",
+      "posId": "ROMF",
+      "top": 30,
+      "left": 65,
+      "finalScore": 7.13,
+      "originalRating": 6.6,
       "suit": 1,
       "isDummy": false
     },
     {
-      "name": "伊藤涼太郎",
-      "posId": "OMF",
-      "top": 35,
-      "left": 50,
-      "finalScore": 7.73,
-      "originalRating": 7.5,
-      "suit": 1,
-      "isDummy": false
-    },
-    {
-      "name": "斉藤光毅",
-      "posId": "LSH",
-      "top": 35,
-      "left": 15,
-      "finalScore": 6.76,
+      "name": "鎌田大地",
+      "posId": "LOMF",
+      "top": 30,
+      "left": 35,
+      "finalScore": 7.15,
       "originalRating": 6.5,
       "suit": 1,
       "isDummy": false
     },
     {
-      "name": "前田大然",
+      "name": "上田綺世",
       "posId": "CF",
       "top": 15,
       "left": 50,
-      "finalScore": 6.7,
-      "originalRating": 6.7,
+      "finalScore": 6.26,
+      "originalRating": 6.2,
       "suit": 1,
       "isDummy": false
     }
