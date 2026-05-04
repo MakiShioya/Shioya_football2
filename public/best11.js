@@ -15,7 +15,7 @@ function getRankClass(score, isDummy) {
 async function loadBest11(targetFile = null) {
     const listContainer = document.getElementById('best11-list');
     try {
-        const indexRes = await fetch('data/best11/best11_index.json');
+        const indexRes = await fetch('https://football.shioya-soft.com/data/best11/best11_index.json');
         const indexData = await indexRes.json();
         const reversedIndex = [...indexData].reverse();
 
@@ -27,8 +27,8 @@ async function loadBest11(targetFile = null) {
         const baseFile = targetFile || reversedIndex[0].file;
         
         const [confirmedRes, rawRes] = await Promise.all([
-            fetch(`data/best11/Confirmed_${baseFile}`),
-            fetch(`data/best11/${baseFile}`)
+            fetch(`https://football.shioya-soft.com/data/best11/Confirmed_${baseFile}`),
+            fetch(`https://football.shioya-soft.com/data/best11/${baseFile}`)
         ]);
 
         const data = await confirmedRes.json();
