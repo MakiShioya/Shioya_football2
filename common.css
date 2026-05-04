@@ -44,7 +44,14 @@ html, body {
 /* 広告と下部メニューの余白確保 */
 main { padding-bottom: 140px; }
 
-
+/* 広告エリア */
+#ad-banner {
+    position: fixed; bottom: 0; left: 0; width: 100%; height: 50px;
+    background-color: #000; z-index: 110;
+    display: flex; justify-content: center; align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-sizing: content-box;
+}
 
 /* 下部メニュー */
 .bottom-menu {
