@@ -14,8 +14,8 @@ for (const [team, playersObj] of Object.entries(JP_TEAM_PLAYERS)) {
 }
 
 async function aggregateSeasonStats() {
-    const matchesDir = path.join(__dirname, 'data', 'matches');
-    const seasonDir = path.join(__dirname, 'data', 'season');
+    const matchesDir = path.join(__dirname, 'public', 'data', 'matches');
+    const seasonDir = path.join(__dirname, 'public', 'data', 'season');
     if (!fs.existsSync(seasonDir)) fs.mkdirSync(seasonDir, { recursive: true });
 
     const statsFiles = fs.readdirSync(matchesDir).filter(f => f.startsWith('stats_') && f.endsWith('.json'));
