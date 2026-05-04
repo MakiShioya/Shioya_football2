@@ -1,6 +1,6 @@
 // player_master.js
 const PLAYER_MASTER = {
-    "森下龍矢": { "GK": 0.1, "CB": 0.3, "LSB": 0.4, "RSB": 1.0, "DMF": 0.4, "CMF": 0.5, "OMF": 0.6, "LSH": 0.9, "RSH": 0.9, "LWG": 0.7, "RWG": 0.7, "CF": 0.7 },
+    "森下龍矢": { "GK": 0.1, "CB": 0.3, "LSB": 0.8, "RSB": 1.0, "DMF": 0.9, "CMF": 0.9, "OMF": 0.9, "LSH": 0.9, "RSH": 0.9, "LWG": 0.8, "RWG": 0.8, "CF": 0.8 },
     "瀬古樹":   { "GK": 0.1, "CB": 0.5, "LSB": 0.6, "RSB": 0.6, "DMF": 0.9, "CMF": 1.0, "OMF": 0.7, "LSH": 0.5, "RSH": 0.5, "LWG": 0.3, "RWG": 0.3, "CF": 0.3 },
     "斉藤光毅": { "GK": 0.1, "CB": 0.2, "LSB": 0.4, "RSB": 0.3, "DMF": 0.3, "CMF": 0.5, "OMF": 0.8, "LSH": 1.0, "RSH": 0.8, "LWG": 1.0, "RWG": 0.8, "CF": 0.7 },
     "岩田智輝": { "GK": 0.1, "CB": 0.9, "LSB": 0.6, "RSB": 0.8, "DMF": 1.0, "CMF": 0.8, "OMF": 0.4, "LSH": 0.3, "RSH": 0.4, "LWG": 0.2, "RWG": 0.2, "CF": 0.2 },
@@ -48,7 +48,7 @@ const PLAYER_MASTER = {
     "渡辺剛":   { "GK": 0.1, "CB": 1.0, "LSB": 0.5, "RSB": 0.5, "DMF": 0.4, "CMF": 0.3, "OMF": 0.2, "LSH": 0.2, "RSH": 0.2, "LWG": 0.1, "RWG": 0.1, "CF": 0.3 },
     "守田英正": { "GK": 0.1, "CB": 0.7, "LSB": 0.6, "RSB": 0.6, "DMF": 1.0, "CMF": 1.0, "OMF": 0.8, "LSH": 0.5, "RSH": 0.5, "LWG": 0.4, "RWG": 0.4, "CF": 0.4 },
     "旗手怜央": { "GK": 0.1, "CB": 0.4, "LSB": 0.9, "RSB": 0.7, "DMF": 0.8, "CMF": 1.0, "OMF": 0.9, "LSH": 0.8, "RSH": 0.7, "LWG": 0.8, "RWG": 0.7, "CF": 0.6 },
-    "前田大然": { "GK": 0.1, "CB": 0.3, "LSB": 0.7, "RSB": 0.6, "DMF": 0.4, "CMF": 0.5, "OMF": 0.7, "LSH": 1.0, "RSH": 0.9, "LWG": 1.0, "RWG": 0.9, "CF": 0.9 }
+    "前田大然": { "GK": 0.1, "CB": 0.3, "LSB": 0.7, "RSB": 0.6, "DMF": 0.4, "CMF": 0.5, "OMF": 0.7, "LSH": 1.0, "RSH": 0.9, "LWG": 1.0, "RWG": 0.9, "CF": 1.0 }
 };
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { PLAYER_MASTER };
