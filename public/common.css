@@ -96,3 +96,30 @@ main { padding-bottom: 140px; }
     display: block; margin: 15px 0; padding: 10px; background: #432517; color: #ECDBBF;
     text-decoration: none; border-radius: 8px; font-weight: bold;
 }
+
+/* --- アカウントアイコン用スタイル --- */
+.account-icon-btn {
+    position: absolute;
+    right: calc(15px + env(safe-area-inset-right));
+    background: #ECDBBF;
+    color: #432517;
+    border: 2px solid #432517;
+    border-radius: 50%; /* 丸くする */
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-weight: bold;
+    padding: 0;
+}
+
+/* ログイン状態（goldなどポイントを持っている状態）を視覚的にアピール */
+.account-icon-btn.logged-in {
+    background: #FFB347; /* オレンジ色にしてログイン済みをアピール */
+    border-color: #fff;
+    color: #fff;
+}
