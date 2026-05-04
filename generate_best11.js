@@ -83,31 +83,31 @@ async function generateBest11() {
 
     const playersData = {};
 
-    // 1. 各選手のベーススコア（評点×リーグ係数）を抽出
-    const files = fs.readdirSync(matchesDir).filter(f => f.startsWith('matches_') && f.endsWith('.json'));
+    // ★ 変更: stats_ から始まるファイルを対象にする
+    const files = fs.readdirSync(matchesDir).filter(f => f.startsWith('stats_') && f.endsWith('.json'));
     const targets = files.sort().reverse().slice(0, 7);
 
     targets.forEach(file => {
         const content = JSON.parse(fs.readFileSync(path.join(matchesDir, file), 'utf8'));
-        content.response.matches.forEach(match => {
-            if (!match.japaneseStats) return;
-            const multiplier = LEAGUE_MULTIPLIER[match.competition.code] || 0.95;
-            match.japaneseStats.forEach(stat => {
-                const rating = parseFloat(stat.rating);
-                if (isNaN(rating)) return;
-                const baseScore = rating * multiplier;
+        
+        // ★ 変更: 試合ごとのループが不要になり、直接 stats 配列を回せる
+        (content.stats || []).forEach(stat => {
+            const rating = parseFloat(stat.rating);
+            if (isNaN(rating)) return;
+            const multiplier = LEAGUE_MULTIPLIER[stat.compCode] || 0.95;
+            const baseScore = rating * multiplier;
 
-                if (!playersData[stat.name] || playersData[stat.name].baseScore < baseScore) {
-                    playersData[stat.name] = {
-                        name: stat.name,
-                        baseScore: parseFloat(baseScore.toFixed(2)),
-                        originalRating: rating,
-                        compCode: match.competition.code
-                    };
-                }
-            });
+            if (!playersData[stat.name] || playersData[stat.name].baseScore < baseScore) {
+                playersData[stat.name] = {
+                    name: stat.name,
+                    baseScore: parseFloat(baseScore.toFixed(2)),
+                    originalRating: rating,
+                    compCode: stat.compCode
+                };
+            }
         });
     });
+
 
     const allPlayers = Object.values(playersData);
 
