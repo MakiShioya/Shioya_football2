@@ -1,10 +1,10 @@
 async function loadPerformance() {
     const container = document.getElementById('performance-list');
     
-    // ★ 修正1：日付の基準を app.js と統一する（午前6時切り替え）
+    // 日付の基準を app.js と統一する
     const targetDate = new Date();
-    targetDate.setHours(targetDate.getHours() - 6); // 現在時刻から6時間引く
-    targetDate.setDate(targetDate.getDate() - 1);   // その基準から見て「昨日」にする
+    targetDate.setHours(targetDate.getHours() - 6); 
+    targetDate.setDate(targetDate.getDate() - 1);   
     
     const y = targetDate.getFullYear();
     const m = String(targetDate.getMonth() + 1).padStart(2, '0');
@@ -12,25 +12,54 @@ async function loadPerformance() {
     const dateStr = `${y}${m}${d}`;
 
     try {
-        // ★ 修正2：キャッシュバスターを追加して常に最新データを強制取得
         const cacheBuster = new Date().getTime();
-        const response = await fetch(`data/matches/matches_${dateStr}.json?t=${cacheBuster}`);
         
-        if (!response.ok) {
+        // ★ 修正：matches と stats の両方のファイルを同時に取得する
+        const [matchesRes, statsRes] = await Promise.all([
+            fetch(`data/matches/matches_${dateStr}.json?t=${cacheBuster}`),
+            fetch(`data/matches/stats_${dateStr}.json?t=${cacheBuster}`)
+        ]);
+        
+        // 試合データ自体がない場合
+        if (!matchesRes.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日の詳細データはまだ生成されていません。</p>';
             return;
         }
 
-        const data = await response.json();
-        const matchesWithStats = data.response.matches.filter(m => m.japaneseStats && m.japaneseStats.length > 0);
-
-        if (matchesWithStats.length === 0) {
+        // 日本人スタッツのファイルがない（誰も出場しなかった）場合
+        if (!statsRes.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
             return;
         }
 
+        const matchesData = await matchesRes.json();
+        const statsData = await statsRes.json();
+
+        const matchesList = matchesData.response.matches || [];
+        const statsList = statsData.stats || [];
+
+        if (statsList.length === 0) {
+            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
+            return;
+        }
+
+        // ★ 修正：取得した stats を fixtureId ごとにグループ化する
+        const statsByFixture = {};
+        statsList.forEach(s => {
+            if (!statsByFixture[s.fixtureId]) {
+                statsByFixture[s.fixtureId] = [];
+            }
+            statsByFixture[s.fixtureId].push(s);
+        });
+
+        // スタッツが存在する試合だけを抽出
+        const matchesWithStats = matchesList.filter(m => statsByFixture[m.fixtureId]);
+
         container.innerHTML = matchesWithStats.map(match => {
-            const statsContent = match.japaneseStats.map(s => {
+            // その試合に紐づく日本人スタッツを取得
+            const matchStats = statsByFixture[match.fixtureId];
+            
+            const statsContent = matchStats.map(s => {
                 const events = [];
                 if (s.goals > 0) events.push(`<span class="event-badge">⚽${s.goals}G</span>`);
                 if (s.assists > 0) events.push(`<span class="event-badge">🅰️${s.assists}A</span>`);
