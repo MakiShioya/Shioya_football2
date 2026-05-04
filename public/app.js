@@ -136,7 +136,7 @@ async function loadMatches() {
     try {
         const dateStr = getFormattedDateForAPI();
         const cacheBuster = new Date().getTime();
-        const response = await fetch(`data/matches/matches_${dateStr}.json?t=${cacheBuster}`);
+        const response = await fetch(`https://football.shioya-soft.com/data/matches/matches_${dateStr}.json?t=${cacheBuster}`);
         
         if (!response.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px; color: #888;">試合データがありません。</p>';
@@ -272,7 +272,7 @@ function renderMatches() {
 window.addEventListener('DOMContentLoaded', async () => {
     try {
         const cacheBuster = new Date().getTime();
-        const res = await fetch(`japanese_players.json?t=${cacheBuster}`);
+        const res = await fetch(`https://football.shioya-soft.com/japanese_players.json?t=${cacheBuster}`);
         if (res.ok) {
             const rawData = await res.json();
             for (const [team, playersObj] of Object.entries(rawData)) {
