@@ -77,25 +77,26 @@ async function fetchMatches() {
             continue;
         }
 
+           // ... (API叩く前までは同じ) ...
+
         const dailyMatches = [];
+        const dailyStats = []; // ★ 新設：個人スタッツだけを貯める配列
 
         if (data.response) {
             for (const item of data.response) {
                 const homeName = item.teams.home.name;
                 const awayName = item.teams.away.name;
+                const compCode = mapLeagueIdToCode(item.league.id); // 変数に出しておく
 
                 const matchData = {
                     fixtureId: item.fixture.id,
                     utcDate: item.fixture.date,
-                    competition: { 
-                        code: mapLeagueIdToCode(item.league.id),
-                        name: item.league.name
-                    },
+                    competition: { code: compCode, name: item.league.name },
                     homeTeam: { name: homeName, id: item.teams.home.id },
                     awayTeam: { name: awayName, id: item.teams.away.id },
                     score: { fullTime: { home: item.goals.home, away: item.goals.away } },
-                    status: item.fixture.status.short,
-                    japaneseStats: []
+                    status: item.fixture.status.short
+                    // ★ 削除: japaneseStats: [] はもう持たせない
                 };
 
                 const isJapaneseMatch = JP_TEAM_PLAYERS[homeName] || JP_TEAM_PLAYERS[awayName];
@@ -103,8 +104,6 @@ async function fetchMatches() {
 
                 if (offset === -1 && isFinished && isJapaneseMatch) {
                     console.log(`  >> 注目試合のスタッツ取得: ${homeName} vs ${awayName}`);
-                    
-                    // ★修正：1分間10回の制限を避けるため、確実に6.5秒待つ
                     await sleep(6500); 
                     
                     const statsUrl = `https://v3.football.api-sports.io/fixtures/players?fixture=${item.fixture.id}`;
@@ -122,7 +121,10 @@ async function fetchMatches() {
                                 for (const [engKey, jpName] of Object.entries(targetPlayers)) {
                                     if (apiName.includes(engKey)) {
                                         const s = p.statistics[0];
-                                        matchData.japaneseStats.push({
+                                        // ★ 変更：matchDataの中ではなく、独立した dailyStats に入れる
+                                        dailyStats.push({
+                                            fixtureId: item.fixture.id,
+                                            compCode: compCode, // 選考時にリーグ係数を掛けるために必要
                                             name: jpName,
                                             minutes: s.games.minutes || 0,
                                             rating: s.games.rating || "-",
@@ -141,12 +143,18 @@ async function fetchMatches() {
             }
         }
 
-        const fileName = `matches_${date.replace(/-/g, '')}.json`;
-        fs.writeFileSync(path.join(dir, fileName), JSON.stringify({ status: true, response: { matches: dailyMatches } }), 'utf8');
-        console.log(`[Success] ${fileName} 保存完了。全 ${dailyMatches.length} 試合を記録しました。`);
+        const dateStr = date.replace(/-/g, '');
+        // ★ 変更：2つのファイルに分けて保存する
+        fs.writeFileSync(path.join(dir, `matches_${dateStr}.json`), JSON.stringify({ status: true, response: { matches: dailyMatches } }), 'utf8');
         
-        // ★修正：次の日の全試合一覧を取得しにいく前にも6.5秒待つ
+        // 個人スタッツが1件以上あれば stats_YYYYMMDD.json を作成
+        if (dailyStats.length > 0) {
+            fs.writeFileSync(path.join(dir, `stats_${dateStr}.json`), JSON.stringify({ stats: dailyStats }), 'utf8');
+        }
+
+        console.log(`[Success] ${dateStr} 保存完了。試合:${dailyMatches.length}件, スタッツ:${dailyStats.length}件`);
         await sleep(6500);
+
     }
 }
 
