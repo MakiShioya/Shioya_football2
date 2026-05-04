@@ -7,11 +7,11 @@ on:
   # ② 以下のHTMLファイルが変更されてプッシュされた時にも自動実行
   push:
     paths:
-      - 'index.html'
-      - 'performance.html'
-      - 'dashboard.html'
-      - 'best11.html'
-      - 'transfer.html'
+      - 'public/index.html'
+      - 'public/performance.html'
+      - 'public/dashboard.html'
+      - 'public/best11.html'
+      - 'public/transfer.html'
   # ③ 手動で実行できるボタンを表示
   workflow_dispatch:
 
