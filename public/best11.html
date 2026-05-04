@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>今週の日本代表 - Shioya Football</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
+    <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <link rel="stylesheet" href="common.css">
+
+    <style>
+        .container { 
+            padding: 15px; 
+        }
+
+        /* ▼ ピッチ描画用のスタイル ▼ */
+        .pitch-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 2 / 3; /* コートの縦横比 */
+            background: #4A7A3C; /* 芝生の色 */
+            border: 3px solid #ECDBBF;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        /* ピッチの白線 */
+        .pitch-line { position: absolute; border: 2px solid rgba(236, 219, 191, 0.5); }
+        .center-line { top: 50%; width: 100%; height: 0; }
+        .center-circle { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; }
+        .penalty-top { top: 0; left: 20%; width: 60%; height: 15%; border-top: none; }
+        .penalty-bottom { bottom: 0; left: 20%; width: 60%; height: 15%; border-bottom: none; }
+
+        /* 選手アイコンコンテナ */
+        .player-node {
+            position: absolute;
+            transform: translate(-50%, -50%); /* 座標の基準をアイコンの中央にする */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+            z-index: 10;
+        }
+
+        /* 評点アイコン */
+        .rating-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(to bottom, #ff9800, #f57c00);
+            border: 2px solid #432517;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: 900;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 1px #432517;
+        }
+
+        /* 選手名ラベル */
+        .player-name-label {
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #ECDBBF;
+            background: rgba(67, 37, 23, 0.9);
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        /* --- 評点アイコンのカラーバリエーション --- */
+.rank-rainbow {
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+    background-size: 200% 200%;
+    animation: rainbow-bg 3s ease infinite, glow-star 1.5s ease-in-out infinite alternate;
+    /* 星形にするための設定 */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    width: 44px !important; /* 星形は少し大きく見せる */
+    height: 44px !important;
+    border: none !important;
+}
+
+.rank-orange { background: linear-gradient(to bottom, #ff9800, #f57c00); border-color: #432517; }
+.rank-purple { background: linear-gradient(to bottom, #9c27b0, #7b1fa2); border-color: #432517; }
+.rank-blue   { background: linear-gradient(to bottom, #2196f3, #1976d2); border-color: #432517; }
+.rank-green  { background: linear-gradient(to bottom, #4caf50, #388e3c); border-color: #432517; }
+.rank-grey   { background: linear-gradient(to bottom, #9e9e9e, #616161); border-color: #432517; }
+
+/* 虹色アニメーション */
+@keyframes rainbow-bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 10点以上の時の発光エフェクト */
+@keyframes glow-star {
+    from { filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #ff00ff); }
+    to { filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 20px #00ffff); }
+}
+
+        .btn-calendar { border-color: white !important; }
+
+        /* 選手詳細の内訳スタイル */
+.detail-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.detail-name {
+    font-size: 1.4rem;
+    color: #432517;
+    margin-bottom: 5px;
+}
+.total-score-box {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff9800;
+    text-shadow: 2px 2px 0px #432517;
+    margin: 10px 0;
+}
+.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.score-table th, .score-table td {
+    padding: 10px;
+    border-bottom: 1px dashed #8b4513;
+    text-align: left;
+    color: #432517;
+}
+.score-table th { font-weight: bold; width: 60%; }
+.score-table td { text-align: right; font-family: monospace; font-size: 1.1rem; }
+
+        /* サブメンバー用スタイル */
+.sub-members-section {
+    margin-top: 30px;
+    background: rgba(67, 37, 23, 0.8);
+    border-radius: 15px;
+    padding: 15px;
+    border: 2px solid #ECDBBF;
+}
+.sub-members-title {
+    color: #ECDBBF;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ECDBBF;
+    padding-bottom: 5px;
+}
+.sub-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.sub-item {
+    display: flex;
+    align-items: center;
+    background: #ECDBBF;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #432517;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.sub-rating {
+    margin-left: 5px;
+    font-size: 0.75rem;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+        
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
+        <h1>今週の日本代表 (Best 11)</h1>
+    </header>
+
+    <main class="container">
+        <!-- アーカイブ選択用プルダウン -->
+        <div style="margin-bottom: 20px; text-align: center;">
+            <select id="edition-select" style="padding: 12px; border-radius: 10px; border: 2px solid #8b4513; background-color: #ECDBBF; color: #432517; font-family: 'SetoFont', sans-serif; font-weight: bold; font-size: 1rem; width: 90%; max-width: 400px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                <option value="">読み込み中...</option>
+            </select>
+        </div>
+
+        <!-- ▼ ピッチエリア ▼ -->
+        <div id="pitch" class="pitch-container">
+            <div class="pitch-line center-line"></div>
+            <div class="pitch-line center-circle"></div>
+            <div class="pitch-line penalty-top"></div>
+            <div class="pitch-line penalty-bottom"></div>
+            
+            <!-- ここにJSで選手アイコンが追加されます -->
+            <div id="formation-nodes"></div>
+        </div>
+
+        <!-- ▼ リスト表示（必要であれば併用、不要なら後で削除） ▼ -->
+        <div id="best11-list">
+            <p style="text-align: center;">データを集計中...</p>
+        </div>
+    </main>
+
+    <div style="height: 150px; width: 100%; clear: both;"></div>
+
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+    </div>
+
+    <<div id="ad-banner">
+        <div style="background: #ccc; color: #666; font-size: 10px; line-height: 50px; text-align: center;">
+            AD: バナー広告エリア (320×50)
+        </div>
+    </div>
+
+    <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeNavModal()">×</button>
+            <h2 style="color:#432517; font-size: 1.2rem; margin-bottom: 20px; border-bottom: 2px dashed #432517; padding-bottom:10px;">メニュー</h2>
+            <a href="https://shioya-soft.com/" target="_blank" rel="noopener noreferrer" class="modal-link" style="background: #ff9800;">しおやソフト公式</a>
+            <a href="https://shioya-soft.com/terms.html" target="_blank" rel="noopener noreferrer" class="modal-link">利用規約</a>
+            <a href="https://shioya-soft.com/privacy.html" target="_blank" rel="noopener noreferrer" class="modal-link">プライバシーポリシー</a>
+        </div>
+    </div>
+
+    <!-- 選手詳細ポップアップ -->
+    <div id="playerDetailModal" class="modal-overlay" onclick="closePlayerDetailModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closePlayerDetailModal()">×</button>
+            <div id="player-detail-body">
+                <!-- ここにJSで内訳が注入されます -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNavModal() { document.getElementById('navModal').style.display = 'flex'; }
+        function closeNavModal() { document.getElementById('navModal').style.display = 'none'; }
+    </script>
+
+    <script src="player_master.js"></script> <!-- 選手データ -->
+    <script src="formations.js"></script>    <!-- フォーメーションデータ -->
+    <script src="best11.js"></script>        <!-- メインプログラム -->
+</body>
+</html>

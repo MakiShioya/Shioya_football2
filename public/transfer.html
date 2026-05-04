@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <title>日本人選手 移籍情報 | Shioya Football</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adscontainers.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
+    <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <link rel="stylesheet" href="common.css">
+
+    <style>
+        /* transfer.html 固有のスタイル（フィルター、移籍カード） */
+        .control-panel {
+            background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px;
+            margin: 15px auto; padding: 15px; width: 95%; max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 10px;
+        }
+
+        .control-select {
+            padding: 10px; border-radius: 8px; border: 2px solid #8b4513; font-size: 1rem;
+            width: 100%; background-color: #ECDBBF; color: #333; font-weight: bold;
+        }
+
+        /* 移籍カードのスタイル */
+        .transfer-card {
+            border: 3px solid #8b4513; padding: 15px; margin: 15px auto;
+            width: 95%; max-width: 500px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            color: #333; position: relative;
+        }
+
+        /* ステータスによる背景色の出し分け */
+        .status-rumor { background-color: #fdf5e6; } 
+        .status-confirmed { background-color: #e6fdf5; } 
+
+        .card-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px dashed rgba(139, 69, 19, 0.3); padding-bottom: 8px; margin-bottom: 12px;
+        }
+
+        .player-name { font-size: 1.3rem; font-weight: bold; color: #432517; }
+
+        /* 噂・確定のバッジ */
+        .status-badge {
+            font-size: 0.8rem; padding: 4px 10px; border-radius: 12px; font-weight: bold;
+            color: white; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+        .badge-rumor { background-color: #d35400; } 
+        .badge-confirmed { background-color: #27ae60; } 
+
+        .update-time { font-size: 0.75rem; color: #666; text-align: right; margin-bottom: 8px; }
+
+        .club-list { list-style: none; padding: 0; margin: 0; }
+        .club-item { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+
+        /* アクティブボタンの強調 */
+        .btn-transfer { border-color: white !important; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
+        <h1>Shioya Football</h1>
+    </header>
+
+    <div class="control-panel">
+        <select id="status-filter" class="control-select">
+            <option value="all">すべての状況</option>
+            <option value="確定">確定のみ</option>
+            <option value="噂">噂のみ</option>
+        </select>
+
+        <select id="league-filter" class="control-select">
+            <option value="all">すべてのリーグ</option>
+            <option value="プレミア">プレミアリーグ</option>
+            <option value="ラ・リーガ">ラ・リーガ</option>
+            <option value="ブンデス">ブンデスリーガ</option>
+            <option value="セリエA">セリエA</option>
+            <option value="リーグアン">リーグ・アン</option>
+            <option value="その他">その他</option>
+        </select>
+    </div>
+
+    <main id="transfer-list">
+        <p style="text-align: center; color: #ECDBBF; margin-top: 20px;">情報を読み込み中...</p>
+    </main>
+    <div style="height: 150px; width: 100%; clear: both;"></div>
+
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+    </div>
+
+    <div id="ad-banner">
+        <div style="background: #ccc; color: #666; font-size: 10px; line-height: 50px; text-align: center;">
+            AD: バナー広告エリア (320×50)
+        </div>
+    </div>
+
+    <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeNavModal()">×</button>
+            <h2 style="color:#432517; font-size: 1.2rem; margin-bottom: 20px; border-bottom: 2px dashed #432517; padding-bottom:10px;">メニュー</h2>
+            <a href="https://shioya-soft.com/" target="_blank" rel="noopener noreferrer" class="modal-link" style="background: #ff9800;">しおやソフト公式</a>
+            <a href="https://shioya-soft.com/terms.html" target="_blank" rel="noopener noreferrer" class="modal-link">利用規約</a>
+            <a href="https://shioya-soft.com/privacy.html" target="_blank" rel="noopener noreferrer" class="modal-link">プライバシーポリシー</a>
+        </div>
+    </div>
+
+    <script>
+        function openNavModal() { document.getElementById('navModal').style.display = 'flex'; }
+        function closeNavModal() { document.getElementById('navModal').style.display = 'none'; }
+    </script>
+
+    <script src="transfer.js"></script>
+</body>
+</html>

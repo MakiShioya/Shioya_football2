@@ -1,0 +1,118 @@
+{
+  "updated": "2026-05-04T08:49:16.138Z",
+  "dateLabel": "2026年5月4日号",
+  "formation": "3-4-2-1",
+  "totalScore": 79.53,
+  "list": [
+    {
+      "name": "野澤大志ブランドン",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "安藤智哉",
+      "posId": "RCB",
+      "top": 70,
+      "left": 75,
+      "finalScore": 7.78,
+      "originalRating": 7.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "渡辺剛",
+      "posId": "CB",
+      "top": 70,
+      "left": 50,
+      "finalScore": 7.37,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "瀬古歩夢",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 6.36,
+      "originalRating": 6,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "前田大然",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 6.7,
+      "originalRating": 6.7,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "三戸舜介",
+      "posId": "LSH",
+      "top": 45,
+      "left": 15,
+      "finalScore": 8.59,
+      "originalRating": 8.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "佐野海舟",
+      "posId": "RDMF",
+      "top": 50,
+      "left": 65,
+      "finalScore": 7.78,
+      "originalRating": 7.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "藤田譲瑠チマ",
+      "posId": "LDMF",
+      "top": 50,
+      "left": 35,
+      "finalScore": 7.56,
+      "originalRating": 7,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "鎌田大地",
+      "posId": "ROMF",
+      "top": 30,
+      "left": 65,
+      "finalScore": 7.15,
+      "originalRating": 6.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "鈴木唯人",
+      "posId": "LOMF",
+      "top": 30,
+      "left": 35,
+      "finalScore": 7.13,
+      "originalRating": 6.6,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "上田綺世",
+      "posId": "CF",
+      "top": 15,
+      "left": 50,
+      "finalScore": 6.26,
+      "originalRating": 6.2,
+      "suit": 1,
+      "isDummy": false
+    }
+  ]
+}
