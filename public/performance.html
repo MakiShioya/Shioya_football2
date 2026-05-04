@@ -2,9 +2,15 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
     <title>昨日の日本人スタッツ - Shioya Football</title>
     
+    <!-- ▼ Firebaseの読み込みを追加 ▼ -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- （不要になったAdSenseのタグはコメントアウト/削除推奨ですが、とりあえず残しています） -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
     <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
     
@@ -12,7 +18,7 @@
     <link rel="stylesheet" href="common.css">
 
     <style>
-        /* performance.html 固有のスタイル（試合結果カードのデザイン）のみ残します */
+        /* performance.html 固有のスタイル */
         .container { 
             padding: 15px; 
         }
@@ -68,13 +74,16 @@
     <header class="top-bar">
         <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
         <h1>昨日の日本人レポート</h1>
+        <!-- ▼ アカウントアイコンを追加 ▼ -->
+        <button id="accountIconBtn" class="account-icon-btn" onclick="showAuthModal()">👤</button>
     </header>
 
     <!-- ② ページごとの固有コンテンツ -->
     <main id="performance-list" class="container">
         <p style="text-align: center;">データを読み込み中...</p>
     </main>
-    <div style="height: 150px; width: 100%; clear: both;"></div>
+    
+    <!-- 150pxの余白は common.css の main { padding-bottom: 150px; } で担保されるため削除 -->
 
     <!-- ③ 下部メニュー（全ページ共通：5ボタン） -->
     <div class="bottom-menu">
@@ -85,14 +94,9 @@
         <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
     </div>
 
-    <!-- ④ 広告エリア（全ページ共通） -->
-    <div id="ad-banner">
-        <div style="background: #ccc; color: #666; font-size: 10px; line-height: 50px; text-align: center;">
-            AD: バナー広告エリア (320×50)
-        </div>
-    </div>
+    <!-- ④ 広告エリア（ネイティブバナー用になったため不要・削除） -->
 
-    <!-- ⑤ モーダル（全ページ共通） -->
+    <!-- ⑤ ナビゲーションモーダル -->
     <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeNavModal()">×</button>
@@ -103,11 +107,84 @@
         </div>
     </div>
 
+    <!-- ▼ ⑥ アカウント関連モーダル（index.htmlから移植） ▼ -->
+    <div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center;">
+        <div style="background: #fff8dc; padding: 20px; border: 4px solid #8b4513; border-radius: 10px; text-align: center; width: 320px; max-height: 90vh; overflow-y: auto; box-sizing: border-box;">
+          <h2 id="authTitle" style="margin-top: 0; color: #8b4513; font-size: 1.2rem;">アカウント</h2>
+          
+          <div id="pointsArea" style="display: none; background: #FFB347; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; text-shadow: 1px 1px 2px #432517;">
+              所持ポイント: <span id="userGoldDisplay">0</span> G
+          </div>
+
+          <div id="authButtons" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+            <button id="btnEmailLogin" onclick="showEmailInputs()" style="background: #8b4513; color: #ECDBBF; width: 100%; height: 40px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
+              しおやアカウントでサインイン
+            </button>
+            <button id="btnAppleLogin" onclick="loginWithApple()" style="background: #000; color: #fff; width: 100%; height: 40px; border: none; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+              <span style="font-size: 18px; margin-right: 8px;"></span> Appleでサインイン
+            </button>
+            <button id="btnGoogleLogin" onclick="loginWithGoogle()" style="background: #fff; color: #757575; width: 100%; height: 40px; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18" style="margin-right: 8px;"> Googleでサインイン
+            </button>
+          </div>
+      
+          <div id="emailInputArea" style="display: none; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 15px;">
+            <input type="email" id="authEmail" placeholder="メールアドレス" style="width: 100%; padding: 8px; font-size: 16px; margin-bottom: 10px; box-sizing: border-box;">
+            <input type="password" id="authPass" placeholder="パスワード" style="width: 100%; padding: 8px; font-size: 16px; margin-bottom: 10px; box-sizing: border-box;">
+            <div style="display: flex; justify-content: space-between; gap: 5px;">
+              <button onclick="loginUser()" style="background: #007bff; color: #fff; flex: 1; height: 35px; border: none; border-radius: 5px; font-size: 14px;">ログイン</button>
+              <button onclick="registerUser()" style="background: #28a745; color: #fff; flex: 1; height: 35px; border: none; border-radius: 5px; font-size: 14px;">新規登録</button>
+            </div>
+            <button onclick="hideEmailInputs()" style="margin-top: 10px; background: none; border: none; color: #8b4513; text-decoration: underline; font-size: 12px; cursor: pointer;">戻る</button>
+          </div>
+      
+          <div id="loggedInStatusArea" style="display: none; margin: 15px 0 10px 0; font-size: 1rem; color: #333; font-weight: bold; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 5px; text-align: center;">
+            ✅ <span id="loginProviderText"></span> でログイン中
+          </div>
+      
+          <div id="tosPrivacyText" style="margin-top: 15px; font-size: 0.75rem; color: #555; line-height: 1.4; text-align: left;">
+           サインイン（または新規登録）をすることで、<br>
+           <a href="https://shioya-soft.com/terms.html" target="_blank" style="color: #007bff;">利用規約</a> および <a href="https://shioya-soft.com/privacy.html" target="_blank" style="color: #007bff;">プライバシーポリシー</a><br>
+           に同意したものとみなされます。
+          </div>
+      
+          <div style="margin-top:15px; border-top:1px solid #ccc; padding-top:10px;">
+             <button id="logoutBtnInModal" onclick="logoutUser()" style="display:none; background: #6c757d; border:none; border-radius:5px; color: #ECDBBF; width: 100%; height: 40px; font-size: 14px; cursor:pointer; margin-bottom: 10px;">ログアウト</button>
+             <button id="deleteAccountBtnInModal" onclick="deleteUserAccount()" style="display:none; background: transparent; border: 1px solid #dc3545; border-radius:5px; color: #dc3545; width: 100%; height: 35px; font-size: 13px; font-weight:bold; margin-bottom: 10px; cursor:pointer;">退会（アカウントを削除する）</button>
+             <button onclick="closeAuthModal()" style="margin-top: 10px; background: #ccc; border: none; color: black; width: 100%; height: 35px; font-size: 14px; border-radius: 5px; cursor:pointer;">閉じる</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- 名前入力用モーダル（初回登録時） -->
+    <div id="initialNameModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
+        <div style="background: #fff8dc; padding: 25px; border: 4px solid #8b4513; border-radius: 10px; text-align: center; width: 300px;">
+          <h3 style="margin-top: 0; color: #8b4513;">登録ありがとうございます！</h3>
+          <p style="font-size: 0.9rem; color: #333; line-height: 1.5; text-align: left;">
+            まずはあなたのお名前を入力してください。<br>
+            <span style="font-size: 0.8rem; color: #666;">（8文字以内）</span>
+          </p>
+          <input type="text" id="initialNameInput" maxlength="8" placeholder="なまえ" style="width: 100%; padding: 10px; font-size: 1.2rem; border: 2px solid #8b4513; border-radius: 5px; text-align: center; box-sizing: border-box; margin-bottom: 20px;">
+          <button onclick="saveNewName()" style="background: #28a745; color: #ECDBBF; width: 100%; height: 45px; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer;">決定</button>
+        </div>
+    </div>
+
+    <!-- ▼ ⑦ スクリプトの読み込み ▼ -->
     <script>
+        function showEmailInputs() {
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('emailInputArea').style.display = 'block';
+        }
+        function hideEmailInputs() {
+            document.getElementById('authButtons').style.display = 'flex';
+            document.getElementById('emailInputArea').style.display = 'none';
+        }
         function openNavModal() { document.getElementById('navModal').style.display = 'flex'; }
         function closeNavModal() { document.getElementById('navModal').style.display = 'none'; }
     </script>
-
+    
     <script src="performance.js"></script>
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
