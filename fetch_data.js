@@ -3,11 +3,10 @@ const path = require('path');
 
 const API_KEY = process.env.API_SPORTS_KEY;
 
-// ★ 外部のJSONファイルから共通辞書を読み込む
+// 外部のJSONファイルから共通辞書を読み込む
 const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'japanese_players.json'), 'utf8'));
 
 function getJSTDateString(offset) {
-
     const d = new Date();
     d.setUTCHours(d.getUTCHours() + 9);
     d.setDate(d.getDate() + offset);
@@ -37,23 +36,20 @@ async function fetchMatches() {
         const response = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
         const data = await response.json();
 
-        // API制限やエラーの確認用ログ
         if (data.errors && Object.keys(data.errors).length > 0) {
             console.error(`[Error] APIエラー発生:`, data.errors);
             await sleep(6500);
             continue;
         }
 
-           // ... (API叩く前までは同じ) ...
-
         const dailyMatches = [];
-        const dailyStats = []; // ★ 新設：個人スタッツだけを貯める配列
+        const dailyStats = [];
 
         if (data.response) {
             for (const item of data.response) {
                 const homeName = item.teams.home.name;
                 const awayName = item.teams.away.name;
-                const compCode = mapLeagueIdToCode(item.league.id); // 変数に出しておく
+                const compCode = mapLeagueIdToCode(item.league.id);
 
                 const matchData = {
                     fixtureId: item.fixture.id,
@@ -63,7 +59,6 @@ async function fetchMatches() {
                     awayTeam: { name: awayName, id: item.teams.away.id },
                     score: { fullTime: { home: item.goals.home, away: item.goals.away } },
                     status: item.fixture.status.short
-                    // ★ 削除: japaneseStats: [] はもう持たせない
                 };
 
                 const isJapaneseMatch = JP_TEAM_PLAYERS[homeName] || JP_TEAM_PLAYERS[awayName];
@@ -85,14 +80,14 @@ async function fetchMatches() {
 
                             for (const p of teamStats.players) {
                                 const apiName = p.player.name;
-                                for (const [engKey, jpName] of Object.entries(targetPlayers)) {
+                                for (const [engKey, playerObj] of Object.entries(targetPlayers)) {
+                                    // ★ 修正：playerObj.full でマッチング
                                     if (apiName.includes(engKey)) {
                                         const s = p.statistics[0];
-                                        // ★ 変更：matchDataの中ではなく、独立した dailyStats に入れる
                                         dailyStats.push({
                                             fixtureId: item.fixture.id,
-                                            compCode: compCode, // 選考時にリーグ係数を掛けるために必要
-                                            name: jpName,
+                                            compCode: compCode,
+                                            name: playerObj.full, // ここはフルネームを維持
                                             minutes: s.games.minutes || 0,
                                             rating: s.games.rating || "-",
                                             starter: s.games.substitute === false,
@@ -111,17 +106,13 @@ async function fetchMatches() {
         }
 
         const dateStr = date.replace(/-/g, '');
-        // ★ 変更：2つのファイルに分けて保存する
         fs.writeFileSync(path.join(dir, `matches_${dateStr}.json`), JSON.stringify({ status: true, response: { matches: dailyMatches } }), 'utf8');
-        
-        // 個人スタッツが1件以上あれば stats_YYYYMMDD.json を作成
         if (dailyStats.length > 0) {
             fs.writeFileSync(path.join(dir, `stats_${dateStr}.json`), JSON.stringify({ stats: dailyStats }), 'utf8');
         }
 
         console.log(`[Success] ${dateStr} 保存完了。試合:${dailyMatches.length}件, スタッツ:${dailyStats.length}件`);
         await sleep(6500);
-
     }
 }
 
