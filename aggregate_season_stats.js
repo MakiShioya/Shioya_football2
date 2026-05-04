@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // 外部のJSONファイルから共通辞書を読み込む
-const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'japanese_players.json'), 'utf8'));
+const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'japanese_players.json'), 'utf8'));
 
 // 選手名からチーム名を高速に逆引きするための辞書を作成
 const PLAYER_TO_TEAM = {};
