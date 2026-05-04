@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 // 外部データの読み込み
-const { PLAYER_MASTER } = require('./player_master.js');
-const { FORMATIONS } = require('./formations.js');
+const { PLAYER_MASTER } = require('./public/player_master.js');
+const { FORMATIONS } = require('./public/formations.js');
 
 const LEAGUE_MULTIPLIER = {
     "PL": 1.10, "PD": 1.09, "BL1": 1.08, "SA1": 1.07, "FL1": 1.06, 
@@ -74,10 +74,9 @@ function solveAssignment(players, positions) {
     backtrack(0, 0);
     return { score: bestScore, assignment: bestAssignment };
 }
-
 async function generateBest11() {
-    const matchesDir = path.join(__dirname, 'data', 'matches');
-    const best11Dir = path.join(__dirname, 'data', 'best11');
+    const matchesDir = path.join(__dirname, 'public', 'data', 'matches');
+    const best11Dir = path.join(__dirname, 'public', 'data', 'best11');
     
     if (!fs.existsSync(best11Dir)) fs.mkdirSync(best11Dir, { recursive: true });
 
