@@ -1,16 +1,16 @@
 {
-  "updated": "2026-05-04T08:14:03.797Z",
+  "updated": "2026-05-04T08:49:16.138Z",
   "dateLabel": "2026年5月4日号",
   "formation": "3-4-2-1",
-  "totalScore": 75.66,
+  "totalScore": 79.53,
   "list": [
     {
-      "name": "鈴木彩艶",
+      "name": "野澤大志ブランドン",
       "posId": "GK",
       "top": 85,
       "left": 50,
-      "finalScore": 7.38,
-      "originalRating": 6.9,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
       "suit": 1,
       "isDummy": false
     },
@@ -45,22 +45,22 @@
       "isDummy": false
     },
     {
-      "name": "宮代大聖",
+      "name": "前田大然",
       "posId": "RSH",
       "top": 45,
       "left": 85,
-      "finalScore": 5.98,
-      "originalRating": 6.3,
-      "suit": 0.7,
+      "finalScore": 6.7,
+      "originalRating": 6.7,
+      "suit": 0.9,
       "isDummy": false
     },
     {
-      "name": "前田大然",
+      "name": "三戸舜介",
       "posId": "LSH",
       "top": 45,
       "left": 15,
-      "finalScore": 6.7,
-      "originalRating": 6.7,
+      "finalScore": 8.59,
+      "originalRating": 8.5,
       "suit": 1,
       "isDummy": false
     },
@@ -85,22 +85,22 @@
       "isDummy": false
     },
     {
-      "name": "鈴木唯人",
+      "name": "鎌田大地",
       "posId": "ROMF",
       "top": 30,
       "left": 65,
-      "finalScore": 7.13,
-      "originalRating": 6.6,
+      "finalScore": 7.15,
+      "originalRating": 6.5,
       "suit": 1,
       "isDummy": false
     },
     {
-      "name": "鎌田大地",
+      "name": "鈴木唯人",
       "posId": "LOMF",
       "top": 30,
       "left": 35,
-      "finalScore": 7.15,
-      "originalRating": 6.5,
+      "finalScore": 7.13,
+      "originalRating": 6.6,
       "suit": 1,
       "isDummy": false
     },
