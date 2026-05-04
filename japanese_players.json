@@ -11,17 +11,17 @@
     "Coventry": { "Sakamoto": { "full": "坂元達裕", "short": "坂元" } },
     "Hull City": { "Hirakawa": { "full": "平河悠", "short": "平河" } },
     "QPR": { "Saito": { "full": "斉藤光毅", "short": "斉藤" } },
-    "Stoke City": { "Seko": { "full": "瀬古樹", "short": "瀬古" } },
+    "Stoke City": { "Seko": { "full": "瀬古樹", "short": "瀬古樹" } },
     "Birmingham": { 
         "Iwata": { "full": "岩田智輝", "short": "岩田" }, 
         "Fujimoto": { "full": "藤本寛也", "short": "藤本" }, 
         "Furuhashi": { "full": "古橋亨梧", "short": "古橋" } 
     },
-    "Real Sociedad": { "Kubo": { "full": "久保建英", "short": "久保" } },
+    "Real Sociedad": { "Kubo": { "full": "久保建英", "short": "タケ" } },
     "Mallorca": { "Asano": { "full": "浅野拓磨", "short": "浅野" } },
     "Las Palmas": { "Miyashiro": { "full": "宮代大聖", "short": "宮代" } },
-    "Bayern München": { "Itō": { "full": "伊藤洋輝", "short": "伊藤" } },
-    "SC Freiburg": { "Suzuki": { "full": "鈴木唯人", "short": "鈴木" } },
+    "Bayern München": { "Itō": { "full": "伊藤洋輝", "short": "伊藤洋" } },
+    "SC Freiburg": { "Suzuki": { "full": "鈴木唯人", "short": "唯人" } },
     "Werder Bremen": { "Sugawara": { "full": "菅原由勢", "short": "菅原" } },
     "Eintracht Frankfurt": { 
         "Kosugi": { "full": "小杉啓太", "short": "小杉" }, 
@@ -30,7 +30,7 @@
     "1899 Hoffenheim": { "Machida": { "full": "町田浩樹", "short": "町田" } },
     "FSV Mainz 05": { 
         "Kawasaki": { "full": "川崎颯太", "short": "川崎" }, 
-        "Sano": { "full": "佐野海舟", "short": "佐野" } 
+        "Sano": { "full": "佐野海舟", "short": "海舟" } 
     },
     "Borussia Mönchengladbach": { 
         "Takai": { "full": "高井幸大", "short": "高井" }, 
@@ -48,11 +48,11 @@
         "Appelkamp": { "full": "アペルカンプ真大", "short": "アペルカンプ" }, 
         "Tanaka": { "full": "田中聡", "short": "田中聡" } 
     },
-    "Parma": { "Suzuki": { "full": "鈴木彩艶", "short": "鈴木" } },
+    "Parma": { "Suzuki": { "full": "鈴木彩艶", "short": "彩艶" } },
     "Monaco": { "Minamino": { "full": "南野拓実", "short": "南野" } },
     "Le Havre": { "Seko": { "full": "瀬古歩夢", "short": "瀬古" } },
     "St. Truiden": { 
-        "Ito": { "full": "伊藤涼太郎", "short": "伊藤" }, 
+        "Ito": { "full": "伊藤涼太郎", "short": "伊藤涼" }, 
         "Kokubo": { "full": "小久保玲央ブライアン", "short": "小久保" }, 
         "Taniguchi": { "full": "谷口彰悟", "short": "谷口" }, 
         "Yamamoto": { "full": "山本理仁", "short": "山本" } 
