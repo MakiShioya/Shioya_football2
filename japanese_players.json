@@ -1,35 +1,73 @@
 {
-    "Crystal Palace": { "Kamada": "鎌田大地" },
-    "Liverpool": { "Endo": "遠藤航" },
-    "Brighton": { "Mitoma": "三笘薫" },
-    "Southampton": { "Matsuki": "松木玖生" },
-    "Leeds": { "Tanaka": "田中碧" },
-    "Blackburn": { "Ohashi": "大橋祐紀", "Morishita": "森下龍矢" },
-    "Coventry": { "Sakamoto": "坂元達裕" },
-    "Hull City": { "Hirakawa": "平河悠" },
-    "QPR": { "Saito": "斉藤光毅" },
-    "Stoke City": { "Seko": "瀬古樹" },
-    "Birmingham": { "Iwata": "岩田智輝", "Fujimoto": "藤本寛也", "Furuhashi": "古橋亨梧" },
-    "Real Sociedad": { "Kubo": "久保建英" },
-    "Mallorca": { "Asano": "浅野拓磨" },
-    "Las Palmas": { "Miyashiro": "宮代大聖" },
-    "Bayern München": { "Itō": "伊藤洋輝" },
-    "SC Freiburg": { "Suzuki": "鈴木唯人" },
-    "Werder Bremen": { "Sugawara": "菅原由勢" },
-    "Eintracht Frankfurt": { "Kosugi": "小杉啓太", "Doan": "堂安律" },
-    "1899 Hoffenheim": { "Machida": "町田浩樹" },
-    "FSV Mainz 05": { "Kawasaki": "川崎颯太", "Sano": "佐野海舟" },
-    "Borussia Mönchengladbach": { "Takai": "高井幸大", "Machino": "町野修斗" },
-    "FC St. Pauli": { "Schmidt": "ニック・シュミット", "Ando": "安藤智哉", "Hara": "原大智", "Fujita": "藤田譲瑠チマ" },
-    "VfL Wolfsburg": { "Shiogai": "塩貝健人" },
-    "VfL Bochum": { "Miyoshi": "三好康児" },
-    "Fortuna Dusseldorf": { "Appelkamp": "アペルカンプ真大", "Tanaka": "田中聡" },
-    "Parma": { "Suzuki": "鈴木彩艶" },
-    "Monaco": { "Minamino": "南野拓実" },
-    "Le Havre": { "Seko": "瀬古歩夢" },
-    "St. Truiden": { "Ito": "伊藤涼太郎", "Kokubo": "小久保玲央ブライアン", "Taniguchi": "谷口彰悟", "Yamamoto": "山本理仁" },
-    "Ajax": { "Itakura": "板倉滉", "Tomiyasu": "冨安健洋" },
-    "Feyenoord": { "Ueda": "上田綺世", "Watanabe": "渡辺剛" },
-    "Sporting CP": { "Morita": "守田英正" },
-    "Celtic": { "Hatate": "旗手怜央", "Maeda": "前田大然" }
+    "Crystal Palace": { "Kamada": { "full": "鎌田大地", "short": "鎌田" } },
+    "Liverpool": { "Endo": { "full": "遠藤航", "short": "遠藤" } },
+    "Brighton": { "Mitoma": { "full": "三笘薫", "short": "三笘" } },
+    "Southampton": { "Matsuki": { "full": "松木玖生", "short": "松木" } },
+    "Leeds": { "Tanaka": { "full": "田中碧", "short": "田中碧" } },
+    "Blackburn": { 
+        "Ohashi": { "full": "大橋祐紀", "short": "大橋" }, 
+        "Morishita": { "full": "森下龍矢", "short": "森下" } 
+    },
+    "Coventry": { "Sakamoto": { "full": "坂元達裕", "short": "坂元" } },
+    "Hull City": { "Hirakawa": { "full": "平河悠", "short": "平河" } },
+    "QPR": { "Saito": { "full": "斉藤光毅", "short": "斉藤" } },
+    "Stoke City": { "Seko": { "full": "瀬古樹", "short": "瀬古" } },
+    "Birmingham": { 
+        "Iwata": { "full": "岩田智輝", "short": "岩田" }, 
+        "Fujimoto": { "full": "藤本寛也", "short": "藤本" }, 
+        "Furuhashi": { "full": "古橋亨梧", "short": "古橋" } 
+    },
+    "Real Sociedad": { "Kubo": { "full": "久保建英", "short": "久保" } },
+    "Mallorca": { "Asano": { "full": "浅野拓磨", "short": "浅野" } },
+    "Las Palmas": { "Miyashiro": { "full": "宮代大聖", "short": "宮代" } },
+    "Bayern München": { "Itō": { "full": "伊藤洋輝", "short": "伊藤" } },
+    "SC Freiburg": { "Suzuki": { "full": "鈴木唯人", "short": "鈴木" } },
+    "Werder Bremen": { "Sugawara": { "full": "菅原由勢", "short": "菅原" } },
+    "Eintracht Frankfurt": { 
+        "Kosugi": { "full": "小杉啓太", "short": "小杉" }, 
+        "Doan": { "full": "堂安律", "short": "堂安" } 
+    },
+    "1899 Hoffenheim": { "Machida": { "full": "町田浩樹", "short": "町田" } },
+    "FSV Mainz 05": { 
+        "Kawasaki": { "full": "川崎颯太", "short": "川崎" }, 
+        "Sano": { "full": "佐野海舟", "short": "佐野" } 
+    },
+    "Borussia Mönchengladbach": { 
+        "Takai": { "full": "高井幸大", "short": "高井" }, 
+        "Machino": { "full": "町野修斗", "short": "町野" } 
+    },
+    "FC St. Pauli": { 
+        "Schmidt": { "full": "ニック・シュミット", "short": "ニック" }, 
+        "Ando": { "full": "安藤智哉", "short": "安藤" }, 
+        "Hara": { "full": "原大智", "short": "原" }, 
+        "Fujita": { "full": "藤田譲瑠チマ", "short": "藤田" } 
+    },
+    "VfL Wolfsburg": { "Shiogai": { "full": "塩貝健人", "short": "塩貝" } },
+    "VfL Bochum": { "Miyoshi": { "full": "三好康児", "short": "三好" } },
+    "Fortuna Dusseldorf": { 
+        "Appelkamp": { "full": "アペルカンプ真大", "short": "アペルカンプ" }, 
+        "Tanaka": { "full": "田中聡", "short": "田中聡" } 
+    },
+    "Parma": { "Suzuki": { "full": "鈴木彩艶", "short": "鈴木" } },
+    "Monaco": { "Minamino": { "full": "南野拓実", "short": "南野" } },
+    "Le Havre": { "Seko": { "full": "瀬古歩夢", "short": "瀬古" } },
+    "St. Truiden": { 
+        "Ito": { "full": "伊藤涼太郎", "short": "伊藤" }, 
+        "Kokubo": { "full": "小久保玲央ブライアン", "short": "小久保" }, 
+        "Taniguchi": { "full": "谷口彰悟", "short": "谷口" }, 
+        "Yamamoto": { "full": "山本理仁", "short": "山本" } 
+    },
+    "Ajax": { 
+        "Itakura": { "full": "板倉滉", "short": "板倉" }, 
+        "Tomiyasu": { "full": "冨安健洋", "short": "冨安" } 
+    },
+    "Feyenoord": { 
+        "Ueda": { "full": "上田綺世", "short": "上田" }, 
+        "Watanabe": { "full": "渡辺剛", "short": "渡辺" } 
+    },
+    "Sporting CP": { "Morita": { "full": "守田英正", "short": "守田" } },
+    "Celtic": { 
+        "Hatate": { "full": "旗手怜央", "short": "旗手" }, 
+        "Maeda": { "full": "前田大然", "short": "前田" } 
+    }
 }
