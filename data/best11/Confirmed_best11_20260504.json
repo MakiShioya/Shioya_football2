@@ -1,8 +1,8 @@
 {
-  "updated": "2026-05-03T23:54:15.835Z",
+  "updated": "2026-05-04T00:20:13.747Z",
   "dateLabel": "2026年5月4日号",
   "formation": "4-2-3-1",
-  "totalScore": 79.5,
+  "totalScore": 80.24,
   "list": [
     {
       "name": "鈴木彩艶",
@@ -45,12 +45,12 @@
       "isDummy": false
     },
     {
-      "name": "森下龍矢",
+      "name": "伊藤洋輝",
       "posId": "LSB",
       "top": 65,
       "left": 15,
-      "finalScore": 7.49,
-      "originalRating": 7.2,
+      "finalScore": 7.24,
+      "originalRating": 6.7,
       "suit": 1,
       "isDummy": false
     },
@@ -75,12 +75,12 @@
       "isDummy": false
     },
     {
-      "name": "前田大然",
+      "name": "森下龍矢",
       "posId": "RSH",
       "top": 35,
       "left": 85,
-      "finalScore": 6.7,
-      "originalRating": 6.7,
+      "finalScore": 7.49,
+      "originalRating": 7.2,
       "suit": 0.9,
       "isDummy": false
     },
@@ -105,13 +105,13 @@
       "isDummy": false
     },
     {
-      "name": "鈴木唯人",
+      "name": "前田大然",
       "posId": "CF",
       "top": 15,
       "left": 50,
-      "finalScore": 7.13,
-      "originalRating": 6.6,
-      "suit": 0.9,
+      "finalScore": 6.7,
+      "originalRating": 6.7,
+      "suit": 1,
       "isDummy": false
     }
   ]
