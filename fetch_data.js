@@ -4,7 +4,7 @@ const path = require('path');
 const API_KEY = process.env.API_SPORTS_KEY;
 
 // 外部のJSONファイルから共通辞書を読み込む
-const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'japanese_players.json'), 'utf8'));
+const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'japanese_players.json'), 'utf8'));
 
 function getJSTDateString(offset) {
     const d = new Date();
@@ -25,7 +25,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function fetchMatches() {
     const offsets = [-1, 0, 1];
-    const dir = path.join(__dirname, 'data', 'matches');
+    const dir = path.join(__dirname, 'public', 'data', 'matches');
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
     for (const offset of offsets) {
