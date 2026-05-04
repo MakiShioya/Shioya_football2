@@ -247,46 +247,8 @@ const TEAM_DISPLAYS = {
     "Celtic": "セルティック"
 };
 
-// 日本人選手データ
-const JAPANESE_PLAYERS = {
-    "Crystal Palace": ["鎌田大地"],
-    "Liverpool": ["遠藤航"],
-    "Brighton": ["三笘薫"],
-    "Southampton": ["松木玖生"],
-    "Leeds": ["田中碧"],
-    "Blackburn": ["大橋祐紀", "森下龍矢"],
-    "Coventry": ["坂元達裕"],
-    "Hull City": ["平河悠"],
-    "QPR": ["斉藤光毅"],
-    "Stoke City": ["瀬古樹"],
-    "Birmingham": ["岩田智輝", "藤本寛也", "古橋亨梧"],
-
-    "Real Sociedad": ["久保建英"],
-    "Mallorca": ["浅野拓磨"],
-    "Las Palmas": ["宮代大聖"],
-
-    "Bayern München": ["伊藤洋輝"],
-    "SC Freiburg": ["鈴木唯人"],
-    "Werder Bremen": ["菅原由勢"],
-    "Eintracht Frankfurt": ["小杉啓太", "堂安律"],
-    "1899 Hoffenheim": ["町田浩樹"],
-    "FSV Mainz 05": ["川崎颯太", "佐野海舟"],
-    "Borussia Mönchengladbach": ["高井幸大", "町野修斗"],
-    "FC St. Pauli": ["ニック・シュミット", "安藤智哉", "原大智", "藤田譲瑠チマ"],
-    "VfL Wolfsburg": ["塩貝健人"],
-    "VfL Bochum": ["三好康児"],
-    "Fortuna Dusseldorf": ["アペルカンプ真大", "田中聡"],
-
-    "Parma": ["鈴木彩艶"],
-    "Monaco": ["南野拓実"],
-    "Le Havre": ["瀬古歩夢"],
-
-    "St. Truiden": ["伊藤涼太郎", "小久保玲央ブライアン", "谷口彰悟", "山本理仁"],
-    "Ajax": ["板倉滉", "冨安健洋"],
-    "Feyenoord": ["上田綺世", "渡辺剛"],
-    "Sporting CP": ["守田英正"],
-    "Celtic": ["旗手怜央", "前田大然"]
-};
+// 日本人選手データ（起動時に japanese_players.json から読み込んで構築する）
+let JAPANESE_PLAYERS = {};
 
 let allMatches = [];
 let targetDate = new Date();
@@ -473,7 +435,22 @@ function renderMatches() {
     }).join('');
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const cacheBuster = new Date().getTime();
+        const res = await fetch(`japanese_players.json?t=${cacheBuster}`);
+        if (res.ok) {
+            const rawData = await res.json();
+            for (const [team, playersObj] of Object.entries(rawData)) {
+                JAPANESE_PLAYERS[team] = Object.values(playersObj);
+            }
+        } else {
+            console.error("選手辞書の読み込みに失敗しました(HTTP Error)");
+        }
+    } catch (e) {
+        console.error("選手辞書の読み込みに失敗しました", e);
+    }
+
     document.getElementById('league-filter').addEventListener('change', renderMatches);
     document.getElementById('japanese-filter').addEventListener('change', renderMatches);
     document.getElementById('major-league-filter').addEventListener('change', renderMatches);
