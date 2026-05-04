@@ -1,25 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 
-// ★ 外部のJSONファイルから共通辞書を読み込む
+// 外部のJSONファイルから共通辞書を読み込む
 const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'japanese_players.json'), 'utf8'));
 
 // 選手名からチーム名を高速に逆引きするための辞書を作成
 const PLAYER_TO_TEAM = {};
 for (const [team, playersObj] of Object.entries(JP_TEAM_PLAYERS)) {
-    // 値（日本語名）だけを抽出して逆引き辞書を作る
-    for (const jpName of Object.values(playersObj)) {
-        PLAYER_TO_TEAM[jpName] = team;
+    // ★ 修正：playerObj.full をキーにして逆引き
+    for (const playerObj of Object.values(playersObj)) {
+        PLAYER_TO_TEAM[playerObj.full] = team;
     }
 }
 
 async function aggregateSeasonStats() {
-
     const matchesDir = path.join(__dirname, 'data', 'matches');
     const seasonDir = path.join(__dirname, 'data', 'season');
     if (!fs.existsSync(seasonDir)) fs.mkdirSync(seasonDir, { recursive: true });
 
-    // 1. 個人スタッツファイル (stats_*.json) を取得対象にする
     const statsFiles = fs.readdirSync(matchesDir).filter(f => f.startsWith('stats_') && f.endsWith('.json'));
     
     if (statsFiles.length === 0) {
@@ -27,7 +25,6 @@ async function aggregateSeasonStats() {
         return;
     }
 
-    // 2. リーグ名を取得するため、試合結果 (matches_*.json) を辞書化する
     const matchLookup = {};
     const matchFiles = fs.readdirSync(matchesDir).filter(f => f.startsWith('matches_') && f.endsWith('.json'));
     
@@ -52,7 +49,6 @@ async function aggregateSeasonStats() {
             if (!playerAggregates[stat.name]) {
                 playerAggregates[stat.name] = {
                     name: stat.name,
-                    // 辞書を使って正確なチーム名を取得（辞書にない場合は過去の暫定処理をフォールバックとして残す）
                     team: PLAYER_TO_TEAM[stat.name] || (matchInfo ? matchInfo.homeTeam.name : "Unknown"),
                     league: matchInfo ? matchInfo.competition.name : "Unknown",
                     leagueCode: stat.compCode,
@@ -79,7 +75,6 @@ async function aggregateSeasonStats() {
         });
     });
 
-    // 平均評点を計算して整形
     const resultList = Object.values(playerAggregates).map(p => ({
         name: p.name,
         team: p.team,
@@ -92,14 +87,13 @@ async function aggregateSeasonStats() {
         appearances: p.appearances
     }));
 
-    // season_stats.json を上書き保存
     fs.writeFileSync(
         path.join(seasonDir, 'season_stats.json'),
         JSON.stringify({ updated: new Date().toISOString(), players: resultList }, null, 2),
         'utf8'
     );
 
-    console.log(`集計完了: ${statsFiles.length}個のスタッツファイルから ${resultList.length} 名の正確な通算成績を算出しました。`);
+    console.log(`集計完了: ${statsFiles.length}個のスタッツファイルから ${resultList.length} 名の通算成績を算出しました。`);
 }
 
 aggregateSeasonStats();
