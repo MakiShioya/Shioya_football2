@@ -57,6 +57,7 @@
         "Taniguchi": { "full": "谷口彰悟", "short": "谷口" }, 
         "Yamamoto": { "full": "山本理仁", "short": "山本" } 
     },
+    "KRC Genk": { "Junya": { "full": "伊東純也", "short": "伊東" } },
     "Ajax": { 
         "Itakura": { "full": "板倉滉", "short": "板倉" }, 
         "Tomiyasu": { "full": "冨安健洋", "short": "冨安" } 
@@ -73,9 +74,11 @@
         "Ogawa": { "full": "小川航基", "short": "小川" }, 
         "Sano": { "full": "佐野航大", "short": "航大" } 
     },
+    "Sparta Rotterdam": { "Mito": { "full": "三戸舜介", "short": "三戸" } },
     "Sporting CP": { "Morita": { "full": "守田英正", "short": "守田" } },
     "Celtic": { 
         "Hatate": { "full": "旗手怜央", "short": "旗手" }, 
         "Maeda": { "full": "前田大然", "short": "前田" } 
-    }
+    },
+    "Stade de Reims": { "Nakamura": { "full": "中村敬斗", "short": "中村" } },
 }
