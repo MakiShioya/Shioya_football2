@@ -10,7 +10,7 @@ const firebaseConfig = {
   appId: "1:400460108408:web:0d43db04b02cce5230538d",
   measurementId: "G-K9ZLW8L09J"
 };
-
+console.log("📦 認識されているプラグイン一覧:", Object.keys(window.Capacitor.Plugins || {}));
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -406,7 +406,12 @@ async function loginWithGoogle() {
             await setupSocialUser(resultAuth.user);
         }
     } catch (error) {
-        console.error("❌ Googleログインエラー:", error);
+        // ▼▼▼ エラーの詳細をすべて強制的に表示する ▼▼▼
+        console.error("❌ Googleログインエラー発生!");
+        console.error("メッセージ (error.message):", error.message);
+        console.error("コード (error.code):", error.code);
+        console.error("エラーの全貌:", JSON.stringify(error, Object.getOwnPropertyNames(error)));
+        
         if (error.message && error.message.includes("cancel")) return;
         safeAlert("Googleログインに失敗しました。");
     }
@@ -442,3 +447,23 @@ function deleteUserAccount() {
         }
     });
 }
+
+// バナー広告の自動表示スクリプト
+async function showFootballBanner() {
+    // iOSアプリとして動いている時だけ実行
+    const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
+    if (!isNative) return;
+
+    try {
+        console.log("📢 広告の初期化を開始します...");
+        await window.Capacitor.Plugins.AdMobPlugin.initialize();
+        
+        console.log("📢 バナー広告を表示します...");
+        await window.Capacitor.Plugins.AdMobPlugin.showBannerAd();
+    } catch (error) {
+        console.error("❌ 広告の表示に失敗しました:", error);
+    }
+}
+
+// 画面の読み込みが終わったら自動で広告を出す
+document.addEventListener('DOMContentLoaded', showFootballBanner);
