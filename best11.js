@@ -37,7 +37,7 @@ async function loadBest11(targetFile = null) {
         const starterNames = data.list.map(s => s.name);
         const subMembers = (rawPlayersObj.list || [])
             .filter(p => !starterNames.includes(p.name) && !p.isDummy)
-            .sort((a, b) => b.finalScore - a.finalScore)
+            .sort((a, b) => (b.baseScore || b.finalScore) - (a.baseScore || a.finalScore))
             .slice(0, 7);
 
         currentWeeklyData = [...data.list, ...subMembers];
@@ -45,10 +45,11 @@ async function loadBest11(targetFile = null) {
         // 1. ピッチ（スタメン）の描画
         document.querySelector('.top-bar h1').innerText = `今週の日本代表 (${data.formation})`;
         container.innerHTML = data.list.map((p, index) => {
-            // ★ ポジション係数を反映した最終スコアを計算
-            const displayScore = p.isDummy ? 0 : p.finalScore * (p.suit || 1.0);
+            // スタメンは finalScore を使用
+            const score = p.finalScore || 0;
+            const displayScore = p.isDummy ? 0 : score * (p.suit || 1.0);
             const ratingDisplay = p.isDummy ? "-" : displayScore.toFixed(1);
-            const rankClass = getRankClass(displayScore, p.isDummy); // 色判定も補正後で行う
+            const rankClass = getRankClass(displayScore, p.isDummy);
 
             return `
                 <div class="player-node" style="top: ${p.top}%; left: ${p.left}%;" onclick="showPlayerDetail(${index})">
@@ -65,8 +66,9 @@ async function loadBest11(targetFile = null) {
                     <div class="sub-members-title">控え選手 (ベンチ入り)</div>
                     <div class="sub-list">
                         ${subMembers.map((m, i) => {
-                            // 控えも同様に計算（控えは基本的にsuit=1.0）
-                            const displayScore = m.finalScore * (m.suit || 1.0);
+                            // ★重要：baseScore または finalScore のある方を採用
+                            const score = m.baseScore || m.finalScore || 0;
+                            const displayScore = score * (m.suit || 1.0);
                             const rankClass = getRankClass(displayScore, false);
                             const globalIndex = data.list.length + i;
                             
@@ -89,7 +91,6 @@ async function loadBest11(targetFile = null) {
         listContainer.innerHTML = ''; 
     }
 }
-
 function showPlayerDetail(index) {
     const p = currentWeeklyData[index];
     if (!p || p.isDummy) return;
@@ -97,10 +98,11 @@ function showPlayerDetail(index) {
     const modal = document.getElementById('playerDetailModal');
     const content = document.getElementById('player-detail-body');
 
+    // ポップアップでもどちらの項目名でも動くように修正
+    const score = p.finalScore || p.baseScore || 0;
     const suitVal = p.suit || 1.0;
-    const leagueMult = (p.finalScore / p.originalRating).toFixed(2);
-    // 表示用スコアと一致させるため1.0桁で計算
-    const totalEval = (p.finalScore * suitVal).toFixed(1);
+    const leagueMult = (score / p.originalRating).toFixed(2);
+    const totalEval = (score * suitVal).toFixed(1);
 
     content.innerHTML = `
         <div class="detail-header">
