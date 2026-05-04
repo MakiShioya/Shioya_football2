@@ -25,7 +25,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function fetchMatches() {
     const offsets = [-1, 0, 1];
-    const dir = path.join(__dirname, 'data', 'matches');
+    const dir = path.join(__dirname, 'public', 'data', 'matches');
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
     for (const offset of offsets) {
