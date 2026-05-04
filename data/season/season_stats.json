@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-04T06:56:38.327Z",
+  "updated": "2026-05-04T08:04:25.421Z",
   "players": [
     {
       "name": "前田大然",
@@ -120,6 +120,61 @@
       "assists": 0,
       "rating": "0.00",
       "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "野澤大志ブランドン",
+      "team": "Antwerp",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 0,
+      "assists": 0,
+      "rating": "7.30",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "綱島悠斗",
+      "team": "Antwerp",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 0,
+      "assists": 0,
+      "rating": "5.60",
+      "minutes": 66,
+      "appearances": 1
+    },
+    {
+      "name": "毎熊晟矢",
+      "team": "AZ Alkmaar",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "市原吏音",
+      "team": "AZ Alkmaar",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 1
+    },
+    {
+      "name": "三戸舜介",
+      "team": "Sparta Rotterdam",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 1,
+      "assists": 0,
+      "rating": "8.50",
+      "minutes": 90,
       "appearances": 1
     },
     {
