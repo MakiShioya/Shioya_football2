@@ -16,8 +16,8 @@ async function loadPerformance() {
         
         // ★ 修正：matches と stats の両方のファイルを同時に取得する
         const [matchesRes, statsRes] = await Promise.all([
-            fetch(`data/matches/matches_${dateStr}.json?t=${cacheBuster}`),
-            fetch(`data/matches/stats_${dateStr}.json?t=${cacheBuster}`)
+            fetch(`https://football.shioya-soft.com/data/matches/matches_${dateStr}.json?t=${cacheBuster}`),
+            fetch(`https://football.shioya-soft.com/data/matches/stats_${dateStr}.json?t=${cacheBuster}`)
         ]);
         
         // 試合データ自体がない場合
