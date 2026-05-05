@@ -160,6 +160,28 @@ async function generateBest11() {
     // 生データ(全候補者)も保存
     fs.writeFileSync(path.join(best11Dir, `best11_${dateStr}.json`), JSON.stringify({ list: allPlayers.sort((a,b) => b.baseScore - a.baseScore) }), 'utf8');
 
+    // ▼▼▼ 追加：目次（best11_index.json）の更新処理 ▼▼▼
+    const indexPath = path.join(best11Dir, 'best11_index.json');
+    let indexData = [];
+    
+    // 既存の目次ファイルがあれば読み込む
+    if (fs.existsSync(indexPath)) {
+        indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+    }
+
+    const newFileName = `best11_${dateStr}.json`;
+    
+    // すでに同じ日のデータが登録されていなければ追加する（重複防止）
+    const isAlreadyExists = indexData.some(item => item.file === newFileName);
+    if (!isAlreadyExists) {
+        indexData.push({ file: newFileName, label: dateLabel });
+        fs.writeFileSync(indexPath, JSON.stringify(indexData, null, 2), 'utf8');
+        console.log(`目次ファイル (best11_index.json) に ${newFileName} を追加しました。`);
+    } else {
+        console.log(`目次ファイル (best11_index.json) には既に ${newFileName} が存在するため更新をスキップしました。`);
+    }
+    // ▲▲▲ 追加ここまで ▲▲▲
+
     console.log(`数学的最適解: ${absoluteBest.formationName} (Total: ${absoluteBest.totalScore}) を選出しました。`);
 }
 
