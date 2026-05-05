@@ -1,10 +1,11 @@
 async function loadPerformance() {
     const container = document.getElementById('performance-list');
     
-    // 日付計算
+    // app.js と全く同じ計算方法にする
     const targetDate = new Date();
     targetDate.setHours(targetDate.getHours() - 6); 
-    targetDate.setDate(targetDate.getDate() - 1);   
+    // ★ 昨日のデータを見たいので、ここから1日引く
+    targetDate.setDate(targetDate.getDate() - 1); 
     
     const y = targetDate.getFullYear();
     const m = String(targetDate.getMonth() + 1).padStart(2, '0');
@@ -14,13 +15,9 @@ async function loadPerformance() {
     try {
         const cacheBuster = new Date().getTime();
         
-        console.log("--- 状況の確定（デバッグ用） ---");
-        console.log("1. 取得予定のDate文字列:", dateStr);
-        
+        // ★ 絶対URLに戻す（app.jsと同じ形式）
         const matchesUrl = `https://football.shioya-soft.com/data/matches/matches_${dateStr}.json?t=${cacheBuster}`;
         const statsUrl = `https://football.shioya-soft.com/data/matches/stats_${dateStr}.json?t=${cacheBuster}`;
-        
-        console.log("2. Stats参照先URL:", statsUrl);
 
         const [matchesRes, statsRes] = await Promise.all([
             fetch(matchesUrl),
