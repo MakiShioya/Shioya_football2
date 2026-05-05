@@ -3,7 +3,7 @@ name: Daily Football Data Fetch
 on:
   schedule:
     # 毎日 日本時間 09:10 (UTC 00:10) に実行
-    - cron: '10 0 * * *'
+    - cron: '07 0 * * *'
   workflow_dispatch: # 手動実行ボタンを表示
 
 jobs:
