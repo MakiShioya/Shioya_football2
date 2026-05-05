@@ -1,20 +1,23 @@
 name: Daily Football Data Fetch
 
 on:
-  schedule:
-    # 毎日 日本時間 09:10 (UTC 00:10) に実行
-    - cron: '07 0 * * *'
-  workflow_dispatch: # 手動実行ボタンを表示
+  # GitHubの気まぐれなタイマーを削除し、外部(Google)からの呼び出しに変更します
+  repository_dispatch:
+    types: [trigger-fetch-data]
+  workflow_dispatch: # 手動実行ボタンは残す
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # データをGitHubに書き込む権限
+      contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # 【重要】これを絶対に消さないでください
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Setup Node.js 24
         uses: actions/setup-node@v4
@@ -23,7 +26,6 @@ jobs:
 
       - name: Fetch API Data
         env:
-          # 左側がプログラム内での名前、右側がGitHubに保存した名前です
           API_SPORTS_KEY: ${{ secrets.API_SPORTS_KEY }} 
         run: node fetch_data.js
 
@@ -33,7 +35,6 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add public/data/matches/
           
-          # 変更がある場合のみ、最新状態を取り込んでからプッシュ
           git diff --quiet && git diff --staged --quiet || (
             git commit -m "Auto-update matches data"
             git pull --rebase origin main
