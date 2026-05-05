@@ -13,7 +13,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-       with:
+        with:
           token: ${{ secrets.PAT_TOKEN }}
       - uses: actions/setup-node@v4
         with:
