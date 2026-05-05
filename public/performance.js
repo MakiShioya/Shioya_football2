@@ -1,7 +1,7 @@
 async function loadPerformance() {
     const container = document.getElementById('performance-list');
     
-    // 日付の基準を app.js と統一する
+    // 日付計算（変更なし）
     const targetDate = new Date();
     targetDate.setHours(targetDate.getHours() - 6); 
     targetDate.setDate(targetDate.getDate() - 1);   
@@ -14,28 +14,18 @@ async function loadPerformance() {
     try {
         const cacheBuster = new Date().getTime();
         
-        // ★ 修正：matches と stats の両方のファイルを同時に取得する
+        // データの取得
         const [matchesRes, statsRes] = await Promise.all([
             fetch(`https://football.shioya-soft.com/data/matches/matches_${dateStr}.json?t=${cacheBuster}`),
             fetch(`https://football.shioya-soft.com/data/matches/stats_${dateStr}.json?t=${cacheBuster}`)
         ]);
         
-        // 試合データ自体がない場合
-        if (!matchesRes.ok) {
-            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日の詳細データはまだ生成されていません。</p>';
-            return;
-        }
-
-        // 日本人スタッツのファイルがない（誰も出場しなかった）場合
         if (!statsRes.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
             return;
         }
 
-        const matchesData = await matchesRes.json();
         const statsData = await statsRes.json();
-
-        const matchesList = matchesData.response.matches || [];
         const statsList = statsData.stats || [];
 
         if (statsList.length === 0) {
@@ -43,23 +33,43 @@ async function loadPerformance() {
             return;
         }
 
-        // ★ 修正：取得した stats を fixtureId ごとにグループ化する
-        const statsByFixture = {};
+        // 試合データの読み込み（失敗しても続行できるようにする）
+        let matchesMap = {};
+        if (matchesRes.ok) {
+            const matchesData = await matchesRes.json();
+            // APIの構造に合わせて調整（.response.matches か .response 直下か）
+            const rawMatches = matchesData.response.matches || matchesData.response || [];
+            rawMatches.forEach(m => {
+                matchesMap[m.fixtureId || m.fixture?.id] = m;
+            });
+        }
+
+        // ★ ロジック変更：statsList（日本人）をベースにHTMLを生成する
+        // 試合ごとにまとめたいので、一旦整理
+        const reportByMatch = {};
         statsList.forEach(s => {
-            if (!statsByFixture[s.fixtureId]) {
-                statsByFixture[s.fixtureId] = [];
+            if (!reportByMatch[s.fixtureId]) {
+                reportByMatch[s.fixtureId] = {
+                    info: matchesMap[s.fixtureId] || null,
+                    players: []
+                };
             }
-            statsByFixture[s.fixtureId].push(s);
+            reportByMatch[s.fixtureId].players.push(s);
         });
 
-        // スタッツが存在する試合だけを抽出
-        const matchesWithStats = matchesList.filter(m => statsByFixture[m.fixtureId]);
-
-        container.innerHTML = matchesWithStats.map(match => {
-            // その試合に紐づく日本人スタッツを取得
-            const matchStats = statsByFixture[match.fixtureId];
+        container.innerHTML = Object.keys(reportByMatch).map(fId => {
+            const item = reportByMatch[fId];
+            const match = item.info;
             
-            const statsContent = matchStats.map(s => {
+            // 試合情報（取得できていれば表示、なければIDのみ）
+            const matchHeader = match ? `
+                <div class="match-info">
+                    <span>${match.homeTeam?.name || match.teams?.home?.name || 'Home'} vs ${match.awayTeam?.name || match.teams?.away?.name || 'Away'}</span>
+                    <span>スコア: ${match.score?.fullTime?.home ?? '-'} - ${match.score?.fullTime?.away ?? '-'}</span>
+                </div>
+            ` : `<div class="match-info">試合情報取得中 (ID: ${fId})</div>`;
+
+            const playersHtml = item.players.map(s => {
                 const events = [];
                 if (s.goals > 0) events.push(`<span class="event-badge">⚽${s.goals}G</span>`);
                 if (s.assists > 0) events.push(`<span class="event-badge">🅰️${s.assists}A</span>`);
@@ -79,18 +89,15 @@ async function loadPerformance() {
 
             return `
                 <div class="report-card">
-                    <div class="match-info">
-                        <span>${match.homeTeam.name} vs ${match.awayTeam.name}</span>
-                        <span>スコア: ${match.score.fullTime.home} - ${match.score.fullTime.away}</span>
-                    </div>
-                    ${statsContent}
+                    ${matchHeader}
+                    ${playersHtml}
                 </div>
             `;
         }).join('');
 
     } catch (error) {
-        console.error(error);
-        container.innerHTML = '<p style="text-align:center; color: red;">データの読み込みに失敗しました。</p>';
+        console.error("Fatal Error:", error);
+        container.innerHTML = '<p style="text-align:center; color: red;">データの表示中にエラーが発生しました。</p>';
     }
 }
 
