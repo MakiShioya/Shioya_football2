@@ -1,7 +1,7 @@
 async function loadPerformance() {
     const container = document.getElementById('performance-list');
     
-    // 日付計算（変更なし）
+    // 日付計算
     const targetDate = new Date();
     targetDate.setHours(targetDate.getHours() - 6); 
     targetDate.setDate(targetDate.getDate() - 1);   
@@ -14,45 +14,52 @@ async function loadPerformance() {
     try {
         const cacheBuster = new Date().getTime();
         
-        // データの取得
+        console.log("--- 状況の確定（デバッグ用） ---");
+        console.log("1. 取得予定のDate文字列:", dateStr);
+        
+        const matchesUrl = `https://football.shioya-soft.com/data/matches/matches_${dateStr}.json?t=${cacheBuster}`;
+        const statsUrl = `https://football.shioya-soft.com/data/matches/stats_${dateStr}.json?t=${cacheBuster}`;
+        
+        console.log("2. Stats参照先URL:", statsUrl);
+
         const [matchesRes, statsRes] = await Promise.all([
-            fetch(`https://football.shioya-soft.com/data/matches/matches_${dateStr}.json?t=${cacheBuster}`),
-            fetch(`https://football.shioya-soft.com/data/matches/stats_${dateStr}.json?t=${cacheBuster}`)
+            fetch(matchesUrl),
+            fetch(statsUrl)
         ]);
         
+        console.log("3. StatsのHTTPステータス:", statsRes.status, "取得成功フラグ:", statsRes.ok);
+
         if (!statsRes.ok) {
-            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
+            console.log("【結果】ファイルが取得できませんでした（分岐Aに到達）");
+            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。（詳細：ファイル取得失敗）</p>';
             return;
         }
 
         const statsData = await statsRes.json();
         const statsList = statsData.stats || [];
 
+        console.log("4. 取得したStatsの配列の中身:", statsList);
+
         if (statsList.length === 0) {
-            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
+            console.log("【結果】ファイルは取得できましたが中身が空です（分岐Bに到達）");
+            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。（詳細：配列が0件）</p>';
             return;
         }
 
-        // 試合データの読み込み（失敗しても続行できるようにする）
+        // 以降は正常な場合の描画処理
         let matchesMap = {};
         if (matchesRes.ok) {
             const matchesData = await matchesRes.json();
-            // APIの構造に合わせて調整（.response.matches か .response 直下か）
             const rawMatches = matchesData.response.matches || matchesData.response || [];
             rawMatches.forEach(m => {
                 matchesMap[m.fixtureId || m.fixture?.id] = m;
             });
         }
 
-        // ★ ロジック変更：statsList（日本人）をベースにHTMLを生成する
-        // 試合ごとにまとめたいので、一旦整理
         const reportByMatch = {};
         statsList.forEach(s => {
             if (!reportByMatch[s.fixtureId]) {
-                reportByMatch[s.fixtureId] = {
-                    info: matchesMap[s.fixtureId] || null,
-                    players: []
-                };
+                reportByMatch[s.fixtureId] = { info: matchesMap[s.fixtureId] || null, players: [] };
             }
             reportByMatch[s.fixtureId].players.push(s);
         });
@@ -61,7 +68,6 @@ async function loadPerformance() {
             const item = reportByMatch[fId];
             const match = item.info;
             
-            // 試合情報（取得できていれば表示、なければIDのみ）
             const matchHeader = match ? `
                 <div class="match-info">
                     <span>${match.homeTeam?.name || match.teams?.home?.name || 'Home'} vs ${match.awayTeam?.name || match.teams?.away?.name || 'Away'}</span>
@@ -73,7 +79,6 @@ async function loadPerformance() {
                 const events = [];
                 if (s.goals > 0) events.push(`<span class="event-badge">⚽${s.goals}G</span>`);
                 if (s.assists > 0) events.push(`<span class="event-badge">🅰️${s.assists}A</span>`);
-                
                 return `
                     <div class="player-row">
                         <div class="player-header">
@@ -87,13 +92,10 @@ async function loadPerformance() {
                 `;
             }).join('');
 
-            return `
-                <div class="report-card">
-                    ${matchHeader}
-                    ${playersHtml}
-                </div>
-            `;
+            return `<div class="report-card">${matchHeader}${playersHtml}</div>`;
         }).join('');
+
+        console.log("【結果】描画処理まで正常に完了しました");
 
     } catch (error) {
         console.error("Fatal Error:", error);
