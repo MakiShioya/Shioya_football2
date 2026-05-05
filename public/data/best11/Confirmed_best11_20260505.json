@@ -1,8 +1,8 @@
 {
-  "updated": "2026-05-04T19:49:08.821Z",
+  "updated": "2026-05-05T01:49:20.200Z",
   "dateLabel": "2026年5月5日号",
   "formation": "3-4-2-1",
-  "totalScore": 79.53,
+  "totalScore": 81.22,
   "list": [
     {
       "name": "野澤大志ブランドン",
@@ -45,13 +45,13 @@
       "isDummy": false
     },
     {
-      "name": "前田大然",
+      "name": "久保建英",
       "posId": "RSH",
       "top": 45,
       "left": 85,
-      "finalScore": 6.7,
-      "originalRating": 6.7,
-      "suit": 0.9,
+      "finalScore": 7.19,
+      "originalRating": 6.6,
+      "suit": 1,
       "isDummy": false
     },
     {
@@ -75,42 +75,42 @@
       "isDummy": false
     },
     {
-      "name": "藤田譲瑠チマ",
+      "name": "守田英正",
       "posId": "LDMF",
       "top": 50,
       "left": 35,
-      "finalScore": 7.56,
-      "originalRating": 7,
-      "suit": 1,
-      "isDummy": false
-    },
-    {
-      "name": "鎌田大地",
-      "posId": "ROMF",
-      "top": 30,
-      "left": 65,
-      "finalScore": 7.15,
-      "originalRating": 6.5,
+      "finalScore": 7.65,
+      "originalRating": 7.5,
       "suit": 1,
       "isDummy": false
     },
     {
       "name": "鈴木唯人",
-      "posId": "LOMF",
+      "posId": "ROMF",
       "top": 30,
-      "left": 35,
+      "left": 65,
       "finalScore": 7.13,
       "originalRating": 6.6,
       "suit": 1,
       "isDummy": false
     },
     {
-      "name": "上田綺世",
+      "name": "鎌田大地",
+      "posId": "LOMF",
+      "top": 30,
+      "left": 35,
+      "finalScore": 7.15,
+      "originalRating": 6.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "前田大然",
       "posId": "CF",
       "top": 15,
       "left": 50,
-      "finalScore": 6.26,
-      "originalRating": 6.2,
+      "finalScore": 6.7,
+      "originalRating": 6.7,
       "suit": 1,
       "isDummy": false
     }
