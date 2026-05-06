@@ -9,7 +9,10 @@ const LEAGUE_INFO = {
     "DED": { flag: "🇳🇱", jp: "オランダ" },
     "BSA": { flag: "🇧🇪", jp: "ベルギー" },
     "J1":  { flag: "🇯🇵", jp: "Jリーグ" },
-    "SPL": { flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", jp: "スコットランド" }
+    "SPL": { flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", jp: "スコットランド" },
+    "CL":  { flag: "🇪🇺", jp: "CL" },
+    "EL":  { flag: "🇪🇺", jp: "EL" },
+    "ECL": { flag: "🇪🇺", jp: "ECL" }
 };
 
 const COMPETITION_CODES = {
@@ -24,7 +27,8 @@ const COMPETITION_CODES = {
     "netherlands": "DED",
     "j_league": "J1"
 };
-const MAJOR_LEAGUE_CODES = ["PL", "PD", "BL1", "SA1", "FL1"];
+
+const MAJOR_LEAGUE_CODES = ["PL", "PD", "BL1", "SA1", "FL1", "CL", "EL", "ECL"]; 
 
 const TEAM_DISPLAYS = {
     "Arsenal": "アーセナル", "Aston Villa": "アストン・ヴィラ", "Bournemouth": "ボーンマス", 
