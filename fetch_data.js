@@ -16,7 +16,10 @@ function getJSTDateString(offset) {
 function mapLeagueIdToCode(id) {
     const mapping = {
         39: "PL", 40: "ELC", 140: "PD", 78: "BL1", 135: "SA1",
-        61: "FL1", 94: "PPL", 88: "DED", 144: "BSA", 98: "J1", 179: "SPL"
+        61: "FL1", 94: "PPL", 88: "DED", 144: "BSA", 98: "J1", 179: "SPL",
+        2: "CL",  // Champions League
+        3: "EL",  // Europa League
+        848: "ECL" // Conference League 
     };
     return mapping[id] || "OTHER";
 }
