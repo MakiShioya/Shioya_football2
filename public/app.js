@@ -126,12 +126,31 @@ function selectTab(offset, tabId) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
     
+    // カレンダーの入力値をリセット（タブ操作に戻ったため）
+    const debugDateInput = document.getElementById('debug-date');
+    if(debugDateInput) debugDateInput.value = '';
+    
     targetDate = new Date(TODAY);
     targetDate.setDate(TODAY.getDate() + offset);
     
     updateDateUI();
     loadMatches();
 }
+
+// ▼ デバッグ用：特定の日付を選択する関数を追加 ▼
+function selectSpecificDate(dateString) {
+    if (!dateString) return;
+
+    // タブの選択状態を解除
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+    // targetDateを選択した日付に更新
+    targetDate = new Date(dateString);
+
+    updateDateUI();
+    loadMatches();
+}
+// ▲ 追加ここまで ▲
 
 async function loadMatches() {
     const container = document.getElementById('match-list');
@@ -280,7 +299,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         if (res.ok) {
             const rawData = await res.json();
             for (const [team, playersObj] of Object.entries(rawData)) {
-                // ★ ここで short 名だけを配列に入れて JAPANESE_PLAYERS に格納する
                 JAPANESE_PLAYERS[team] = Object.values(playersObj).map(p => p.short);
             }
         }
@@ -291,5 +309,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('league-filter').addEventListener('change', renderMatches);
     document.getElementById('japanese-filter').addEventListener('change', renderMatches);
     document.getElementById('major-league-filter').addEventListener('change', renderMatches);
+    
+    // ▼ デバッグ用：日付ピッカーの変更イベントを追加 ▼
+    document.getElementById('debug-date').addEventListener('change', (e) => {
+        selectSpecificDate(e.target.value);
+    });
+    // ▲ 追加ここまで ▲
+
     selectTab(0, 'tab-today');
 });
