@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-06T04:05:55.916Z",
+  "updated": "2026-05-07T04:05:52.179Z",
   "players": [
     {
       "name": "前田大然",
@@ -263,6 +263,17 @@
       "assists": 1,
       "rating": "7.50",
       "minutes": 45,
+      "appearances": 1
+    },
+    {
+      "name": "伊藤洋輝",
+      "team": "Bayern München",
+      "league": "UEFA Champions League",
+      "leagueCode": "CL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
       "appearances": 1
     }
   ]
