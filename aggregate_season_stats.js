@@ -62,6 +62,19 @@ async function aggregateSeasonStats() {
             }
 
             const p = playerAggregates[stat.name];
+
+            // ★ 追加: リーグ情報の「格上げ」ロジック
+            // 国内1部・2部リーグのコード一覧
+            const mainLeagues = ["PL", "PD", "BL1", "SA1", "FL1", "ELC", "PPL", "DED", "BSA", "J1", "SPL"];
+            const isCurrentMain = mainLeagues.includes(stat.compCode);
+            const isSavedMain = mainLeagues.includes(p.leagueCode);
+
+            // 現在保存されているのが「OTHER」や「CL/EL」で、今回の試合が「リーグ戦」なら、リーグ情報を上書きする
+            if (isCurrentMain && !isSavedMain) {
+                p.leagueCode = stat.compCode;
+                if (matchInfo) p.league = matchInfo.competition.name;
+            }
+
             p.goals += parseInt(stat.goals || 0);
             p.assists += parseInt(stat.assists || 0);
             p.minutes += parseInt(stat.minutes || 0);
