@@ -196,7 +196,8 @@
         <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
     </div>
 
-    <script src="js/firebase-config.js"></script> <script>
+    <script src="auth.js"></script>
+    <script>
         // ログイン状態の監視とデータ取得
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {

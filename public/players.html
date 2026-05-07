@@ -2,41 +2,91 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本人選手一覧 - しおやフットボール</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        .player-card {
-            border: 1px solid #ddd;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <title>日本人選手一覧 - Shioya Football</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions-compat.js"></script>
+    
+    <link rel="stylesheet" href="common.css">
+
+    <style>
+        .players-container {
             padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
+            padding-bottom: 120px; /* 下部メニューの余白 */
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .player-card {
+            background: #ECDBBF;
+            border: 2px solid #8b4513;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #fff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .club-name { color: #666; font-size: 0.9em; }
-        .player-name { font-size: 1.2em; font-weight: bold; }
+
+        .club-name {
+            color: #8b4513;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .player-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #432517;
+            margin-top: 3px;
+        }
+
         .fav-button {
-            background: #e91e63;
+            background: linear-gradient(to bottom, #e91e63, #c2185b);
             color: white;
-            border: none;
-            padding: 8px 15px;
+            border: 2px solid #880e4f;
+            padding: 10px 15px;
             border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
-        .fav-button:disabled { background: #ccc; }
+        .fav-button:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
-    <h1>日本人選手一覧</h1>
-    <div id="player-list">読み込み中...</div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-functions-compat.js"></script>
-    
-    <script src="js/firebase-config.js"></script> <script src="players.js"></script>
+    <header class="top-bar">
+        <button class="menu-icon-btn" onclick="location.href='mypage.html'">◀</button>
+        <h1>選手一覧</h1>
+    </header>
+
+    <main class="players-container">
+        <p style="text-align: center; color: #ECDBBF; font-size: 0.9rem; font-weight: bold;">
+            最推しに設定する選手を選んでください。<br>
+            <span style="font-size: 0.8rem;">（初回は無料、2回目以降は 100G 消費します）</span>
+        </p>
+        
+        <div id="player-list" style="text-align: center; color: #ECDBBF;">読み込み中...</div>
+    </main>
+
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+    </div>
+
+    <script src="auth.js"></script> 
+    <script src="players.js"></script>
+
 </body>
 </html>
