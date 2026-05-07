@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-07T11:50:27.538Z",
+  "updated": "2026-05-07T12:34:52.961Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -70,8 +70,8 @@
     {
       "name": "渡辺剛",
       "team": "Feyenoord",
-      "league": "UEFA Champions League",
-      "leagueCode": "CL",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
       "goals": 5,
       "assists": 0,
       "rating": "7.12",
@@ -81,8 +81,8 @@
     {
       "name": "上田綺世",
       "team": "Feyenoord",
-      "league": "UEFA Champions League",
-      "leagueCode": "CL",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
       "goals": 26,
       "assists": 1,
       "rating": "7.06",
@@ -213,8 +213,8 @@
     {
       "name": "鎌田大地",
       "team": "Crystal Palace",
-      "league": "Community Shield",
-      "leagueCode": "OTHER",
+      "league": "Premier League",
+      "leagueCode": "PL",
       "goals": 1,
       "assists": 4,
       "rating": "6.96",
@@ -224,8 +224,8 @@
     {
       "name": "遠藤航",
       "team": "Liverpool",
-      "league": "Community Shield",
-      "leagueCode": "OTHER",
+      "league": "Premier League",
+      "leagueCode": "PL",
       "goals": 0,
       "assists": 1,
       "rating": "6.77",
@@ -246,8 +246,8 @@
     {
       "name": "藤本寛也",
       "team": "Birmingham",
-      "league": "League Cup",
-      "leagueCode": "OTHER",
+      "league": "Championship",
+      "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
       "rating": "6.50",
@@ -268,8 +268,8 @@
     {
       "name": "町田浩樹",
       "team": "1899 Hoffenheim",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
       "rating": "6.95",
@@ -279,8 +279,8 @@
     {
       "name": "藤田譲瑠チマ",
       "team": "FC St. Pauli",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 1,
       "assists": 4,
       "rating": "6.73",
@@ -301,8 +301,8 @@
     {
       "name": "鈴木唯人",
       "team": "SC Freiburg",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 9,
       "assists": 5,
       "rating": "6.91",
@@ -367,8 +367,8 @@
     {
       "name": "堂安律",
       "team": "Eintracht Frankfurt",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 7,
       "assists": 5,
       "rating": "6.88",
@@ -378,8 +378,8 @@
     {
       "name": "鈴木彩艶",
       "team": "Parma",
-      "league": "Coppa Italia",
-      "leagueCode": "OTHER",
+      "league": "Serie A",
+      "leagueCode": "SA1",
       "goals": 0,
       "assists": 0,
       "rating": "7.01",
@@ -389,8 +389,8 @@
     {
       "name": "佐野海舟",
       "team": "FSV Mainz 05",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 2,
       "assists": 3,
       "rating": "7.05",
@@ -400,8 +400,8 @@
     {
       "name": "川崎颯太",
       "team": "FSV Mainz 05",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 1,
       "assists": 1,
       "rating": "6.72",
@@ -587,8 +587,8 @@
     {
       "name": "原大智",
       "team": "FC St. Pauli",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
       "rating": "6.33",
