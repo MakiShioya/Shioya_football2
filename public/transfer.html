@@ -17,6 +17,24 @@
 
     <style>
         /* transfer.html 固有のスタイル（フィルター、移籍カード） */
+        main {
+    /* 移籍情報のリストが最後まできれいに見えるように余白を確保 */
+    padding-bottom: 250px !important;
+}
+
+/* 移籍カード同士の余白を整える */
+.transfer-card {
+    border: 3px solid #8b4513; 
+    padding: 15px; 
+    margin: 15px auto; /* 上下のマージンを15pxで統一 */
+    width: 95%; 
+    max-width: 500px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+    color: #333; 
+    position: relative;
+}
+        
         .control-panel {
             background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px;
             margin: 15px auto; padding: 15px; width: 95%; max-width: 500px;
