@@ -467,3 +467,16 @@ async function showFootballBanner() {
 
 // 画面の読み込みが終わったら自動で広告を出す
 document.addEventListener('DOMContentLoaded', showFootballBanner);
+
+// アカウントアイコンが押された時の処理
+function handleAccountClick() {
+    const user = firebase.auth().currentUser;
+    if (user) {
+        // ログインしている場合はマイページへ
+        location.href = 'mypage.html';
+    } else {
+        // ログインしていない場合は警告を出して、ログイン画面（モーダル）を開く
+        alert('ログインしてください。');
+        showAuthModal();
+    }
+}

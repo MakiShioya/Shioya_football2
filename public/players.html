@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本人選手一覧 - しおやフットボール</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        .player-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+        }
+        .club-name { color: #666; font-size: 0.9em; }
+        .player-name { font-size: 1.2em; font-weight: bold; }
+        .fav-button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .fav-button:disabled { background: #ccc; }
+    </style>
+</head>
+<body>
+    <h1>日本人選手一覧</h1>
+    <div id="player-list">読み込み中...</div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.x.x/firebase-functions-compat.js"></script>
+    
+    <script src="js/firebase-config.js"></script> <script src="players.js"></script>
+</body>
+</html>

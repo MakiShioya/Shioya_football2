@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <title>マイページ - Shioya Football</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <link rel="stylesheet" href="common.css">
+
+    <style>
+        /* マイページ専用の豪華なスタイル */
+        .mypage-container {
+            padding: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 120px; /* 下部メニューとかぶらないように */
+        }
+
+        .card {
+            background: linear-gradient(145deg, #fff8dc, #fdf5e6);
+            border: 3px solid #8b4513;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+            color: #432517;
+        }
+
+        /* プロフィールエリア */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px dashed #8b4513;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .profile-icon {
+            width: 70px;
+            height: 70px;
+            background: #FFB347;
+            border: 3px solid #8b4513;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .profile-info h2 {
+            margin: 0 0 5px 0;
+            font-size: 1.4rem;
+        }
+
+        .gold-badge {
+            display: inline-block;
+            background: linear-gradient(to right, #ffd700, #daa520);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            border: 1px solid #b8860b;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+        }
+
+        /* 最推し選手エリア */
+        .favorite-section {
+            text-align: center;
+            background: rgba(236, 219, 191, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .favorite-player-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e91e63;
+            margin: 10px 0;
+        }
+
+        .btn-action {
+            background: linear-gradient(to bottom, #ff9800, #f57c00);
+            color: #fff;
+            border: 2px solid #e65100;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 0 #e65100;
+            transition: all 0.1s;
+        }
+        .btn-action:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* メニューリスト */
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-list li {
+            background: #ECDBBF;
+            border: 2px solid #8b4513;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .menu-list button {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            color: #432517;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .menu-list button::after {
+            content: '▶';
+            color: #8b4513;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <button class="menu-icon-btn" onclick="location.href='index.html'">◀</button>
+        <h1>マイページ</h1>
+    </header>
+
+    <div class="mypage-container">
+        <div class="card" id="profile-card" style="display: none;">
+            <div class="profile-header">
+                <div class="profile-icon">👤</div>
+                <div class="profile-info">
+                    <h2 id="my-name">読み込み中...</h2>
+                    <div class="gold-badge">所持: <span id="my-gold">0</span> G</div>
+                </div>
+            </div>
+
+            <div class="favorite-section">
+                <p style="margin: 0; font-size: 0.9rem; font-weight: bold; color: #8b4513;">あなたの最推し選手</p>
+                <div id="my-favorite-player" class="favorite-player-name">未設定</div>
+                <button class="btn-action" onclick="location.href='players.html'">最推し選手を設定・変更する</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <ul class="menu-list">
+                <li><button onclick="openHelpModal()">📖 ヘルプ・遊び方</button></li>
+                <li><button onclick="alert('戦績ページは準備中です')">📊 過去の予想戦績</button></li>
+                <li><button onclick="alert('アイテム一覧は準備中です')">🎒 アイテム一覧</button></li>
+            </ul>
+        </div>
+
+        <div class="card" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+            <button onclick="logoutFromMyPage()" style="width: 100%; padding: 15px; background: #6c757d; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem;">ログアウト</button>
+        </div>
+    </div>
+
+    <div id="helpModal" class="modal-overlay" onclick="closeHelpModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeHelpModal()">×</button>
+            <h2 style="color:#432517; border-bottom: 2px solid #8b4513; padding-bottom: 10px;">ヘルプ・遊び方</h2>
+            <div style="text-align: left; color: #432517; font-size: 0.95rem; line-height: 1.6; max-height: 300px; overflow-y: auto;">
+                <p><b>⚽ 最推し選手とは？</b><br>
+                設定すると、その選手が活躍した時にボーナスポイントがもらえるようになる予定です。変更には100Gかかります。</p>
+                <p><b>💰 ポイント（G）の貯め方</b><br>
+                毎日の試合結果を確認したり、予想を当てることで獲得できます。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+    </div>
+
+    <script src="js/firebase-config.js"></script> <script>
+        // ログイン状態の監視とデータ取得
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                document.getElementById('profile-card').style.display = 'block';
+                
+                // Firestoreから自分のデータを取得
+                const db = firebase.firestore();
+                const docRef = db.collection("users").doc(user.uid);
+                const docSnap = await docRef.get();
+
+                if (docSnap.exists) {
+                    const data = docSnap.data();
+                    
+                    // 名前とゴールドの反映
+                    document.getElementById('my-name').innerText = data.displayName || "名無しサポーター";
+                    document.getElementById('my-gold').innerText = data.gold || 0;
+
+                    // 最推し選手の反映
+                    if (data.mostFavoriteName) {
+                        document.getElementById('my-favorite-player').innerText = data.mostFavoriteName + " 選手";
+                    }
+                }
+            } else {
+                // 万が一ログインせずに直接アクセスした場合は弾く
+                alert('ログインが必要です。');
+                location.href = 'index.html';
+            }
+        });
+
+        // ヘルプモーダルの操作
+        function openHelpModal() { document.getElementById('helpModal').style.display = 'flex'; }
+        function closeHelpModal() { document.getElementById('helpModal').style.display = 'none'; }
+
+        // ログアウト処理
+        function logoutFromMyPage() {
+            if(confirm('ログアウトしますか？')) {
+                firebase.auth().signOut().then(() => {
+                    location.href = 'index.html';
+                });
+            }
+        }
+    </script>
+</body>
+</html>
