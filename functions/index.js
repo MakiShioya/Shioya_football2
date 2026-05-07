@@ -1,22 +1,23 @@
-const functions = require("firebase-functions");
+const { onCall, HttpsError } = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 admin.initializeApp();
 
-// 【最推し設定】アプリから呼び出す命令
-exports.setMostFavoritePlayer = functions.https.onCall(async (data, context) => {
-    // ログイン確認
-    if (!context.auth) {
-        throw new functions.https.HttpsError("unauthenticated", "ログインが必要です。");
+// 【最推し設定】アプリから呼び出す命令（第2世代）
+exports.setMostFavoritePlayer = onCall(async (request) => {
+    // ログイン確認（第2世代では request.auth に入っています）
+    if (!request.auth) {
+        throw new HttpsError("unauthenticated", "ログインが必要です。");
     }
 
-    const uid = context.auth.uid;
-    const { playerId, playerName } = data;
+    const uid = request.auth.uid;
+    // 送られてきたデータは request.data に入っています
+    const { playerId, playerName } = request.data;
     const userRef = admin.firestore().collection("users").doc(uid);
 
     return admin.firestore().runTransaction(async (transaction) => {
         const userDoc = await transaction.get(userRef);
         if (!userDoc.exists) {
-            throw new functions.https.HttpsError("not-found", "ユーザーが見つかりません。");
+            throw new HttpsError("not-found", "ユーザーが見つかりません。");
         }
 
         const userData = userDoc.data();
@@ -25,7 +26,7 @@ exports.setMostFavoritePlayer = functions.https.onCall(async (data, context) => 
         const cost = userData.mostFavoriteId ? 100 : 0;
 
         if (userData.gold < cost) {
-            throw new functions.https.HttpsError("failed-precondition", "ポイントが足りません。");
+            throw new HttpsError("failed-precondition", "ポイントが足りません。");
         }
 
         transaction.update(userRef, {

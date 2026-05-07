@@ -59,6 +59,21 @@
         .fav-button:active {
             transform: scale(0.95);
         }
+
+        /* --- ここから追加：最推し用の特別スタイル --- */
+        .player-card.active-favorite {
+            background: #FFF8E7; /* 少し明るい背景色 */
+            border: 3px solid #e91e63; /* 推しカラー（ピンク）の太枠 */
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.4); /* ぼんやり光らせる */
+        }
+
+        .fav-button.current-btn {
+            background: #8b4513; /* 茶色にして落ち着かせる */
+            border: 2px solid #5D4037;
+            pointer-events: none; /* クリック不可にする */
+            box-shadow: none;
+        }
+        /* --- 追加ここまで --- */
     </style>
 </head>
 <body>
