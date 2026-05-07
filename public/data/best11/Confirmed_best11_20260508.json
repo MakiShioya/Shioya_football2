@@ -1,0 +1,118 @@
+{
+  "updated": "2026-05-07T17:58:57.987Z",
+  "dateLabel": "2026年5月8日号",
+  "formation": "3-4-2-1",
+  "totalScore": 83.76,
+  "list": [
+    {
+      "name": "野澤大志ブランドン",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "安藤智哉",
+      "posId": "RCB",
+      "top": 70,
+      "left": 75,
+      "finalScore": 8.1,
+      "originalRating": 7.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "谷口彰悟",
+      "posId": "CB",
+      "top": 70,
+      "left": 50,
+      "finalScore": 7.93,
+      "originalRating": 7.7,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "渡辺剛",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 7.37,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "伊東純也",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "三戸舜介",
+      "posId": "LSH",
+      "top": 45,
+      "left": 15,
+      "finalScore": 8.38,
+      "originalRating": 8.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "守田英正",
+      "posId": "RDMF",
+      "top": 50,
+      "left": 65,
+      "finalScore": 7.65,
+      "originalRating": 7.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "藤田譲瑠チマ",
+      "posId": "LDMF",
+      "top": 50,
+      "left": 35,
+      "finalScore": 7.56,
+      "originalRating": 7,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "鎌田大地",
+      "posId": "ROMF",
+      "top": 30,
+      "left": 65,
+      "finalScore": 7.79,
+      "originalRating": 8.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "伊藤涼太郎",
+      "posId": "LOMF",
+      "top": 30,
+      "left": 35,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "鈴木唯人",
+      "posId": "CF",
+      "top": 15,
+      "left": 50,
+      "finalScore": 7.13,
+      "originalRating": 6.6,
+      "suit": 0.9,
+      "isDummy": false
+    }
+  ]
+}
