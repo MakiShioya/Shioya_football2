@@ -10,7 +10,8 @@ const firebaseConfig = {
   appId: "1:400460108408:web:0d43db04b02cce5230538d",
   measurementId: "G-K9ZLW8L09J"
 };
-console.log("📦 認識されているプラグイン一覧:", Object.keys(window.Capacitor.Plugins || {}));
+const capPlugins = (window.Capacitor && window.Capacitor.Plugins) ? window.Capacitor.Plugins : {};
+console.log("📦 認識されているプラグイン一覧:", Object.keys(capPlugins));
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
