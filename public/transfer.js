@@ -1,20 +1,22 @@
-// 【テスト用データ】※本番では data/transfers.json などから fetch して読み込みます
+// 移籍情報のマスターデータ
 const MOCK_DATA = [
     {
-        player: "遠藤航",
-        status: "確定",
-        lastUpdated: "2023/08/18 15:30",
+        player: "守田英正",
+        status: "噂",
+        lastUpdated: "2026/05/08 09:00",
         clubs: [
-            { name: "リヴァプール", league: "プレミア" }
+            { name: "リーズ", league: "プレミア" }
         ]
     },
     {
-        player: "塩谷真紀",
+        player: "上田綺世",
         status: "噂",
-        lastUpdated: "2026/05/03 10:00",
+        lastUpdated: "2026/05/08 09:00",
         clubs: [
-            { name: "しおやFC", league: "その他" },
-            { name: "ブライトン", league: "プレミア" } // テスト：複数のリーグから注目されているケース
+            { name: "トッテナム", league: "プレミア" },
+            { name: "ブライトン", league: "プレミア" },
+            { name: "エヴァートン", league: "プレミア" },
+            { name: "リーズ", league: "プレミア" }
         ]
     }
 ];

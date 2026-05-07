@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>400460108408-k3pemerevku1vjvl28a1s6k3543oct0l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.400460108408-k3pemerevku1vjvl28a1s6k3543oct0l</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB2jMxHZd3R_xfbon-Bn_cfbvDpEcr2vIA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>400460108408</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.shioyasoft.football</string>
+	<key>PROJECT_ID</key>
+	<string>shioya-shogi</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shioya-shogi.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:400460108408:ios:2cdb7522910685f730538d</string>
+</dict>
+</plist>
