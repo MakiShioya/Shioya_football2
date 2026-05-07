@@ -7,9 +7,9 @@ const API_KEY = process.env.API_SPORTS_KEY;
 // 共通辞書を読み込む
 const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'japanese_players.json'), 'utf8'));
 
-// 過去データの開始日を設定
-const START_DATE_STR = '2025-08-01'; // ここからスタート
-const END_DATE_STR = '2026-05-07';   // 今日（または目標日）まで
+// 取得期間の設定（開幕から今日まで）
+const START_DATE_STR = '2025-08-01'; 
+const END_DATE_STR = new Date().toISOString().split('T')[0]; // 自動で今日の日付を取得
 
 function mapLeagueIdToCode(id) {
     const mapping = {
@@ -28,22 +28,20 @@ async function fetchHistoricalMatches() {
 
     let currentDate = new Date(START_DATE_STR);
     const targetEndDate = new Date(END_DATE_STR);
-    let fetchCount = 0;
-    const MAX_DAYS_PER_RUN = 30; // 1回の実行で取得する最大日数（タイムアウト対策）
 
-    console.log(`過去データ取得開始: ${START_DATE_STR} から最大 ${MAX_DAYS_PER_RUN}日分を探索します。`);
+    console.log(`過去データ一括取得開始: ${START_DATE_STR} から ${END_DATE_STR} まで`);
 
-    while (currentDate <= targetEndDate && fetchCount < MAX_DAYS_PER_RUN) {
+    while (currentDate <= targetEndDate) {
         const dateStrAPI = currentDate.toISOString().split('T')[0];
         const dateStrFile = dateStrAPI.replace(/-/g, '');
 
-        // すでにファイルが存在する場合はスキップ（カウントは消費しない）
+        // すでにファイルが存在する場合はスキップ（既存機能の維持）
         if (fs.existsSync(path.join(dir, `matches_${dateStrFile}.json`))) {
             currentDate.setDate(currentDate.getDate() + 1);
             continue;
         }
 
-        console.log(`\n[Fetch] ${dateStrAPI} のデータを取得中... (${fetchCount + 1}/${MAX_DAYS_PER_RUN})`);
+        console.log(`\n[Fetch] ${dateStrAPI} を取得中...`);
 
         const url = `https://v3.football.api-sports.io/fixtures?date=${dateStrAPI}`;
         const response = await fetch(url, { headers: { 'x-apisports-key': API_KEY } });
@@ -51,7 +49,7 @@ async function fetchHistoricalMatches() {
 
         if (data.errors && Object.keys(data.errors).length > 0) {
             console.error(`[Error] APIエラー:`, data.errors);
-            await sleep(2000);
+            await sleep(2000); // エラー時は少し休む
             continue;
         }
 
@@ -78,8 +76,8 @@ async function fetchHistoricalMatches() {
                 const isFinished = ["FT", "AET", "PEN"].includes(item.fixture.status.short);
 
                 if (isFinished && isJapaneseMatch) {
-                    console.log(`  >> スタッツ取得: ${homeName} vs ${awayName}`);
-                    await sleep(500); // 有料APIなので短くてOK
+                    // 有料プランのレート制限に配慮しつつ、少しだけ待機
+                    await sleep(300); 
                     
                     const statsUrl = `https://v3.football.api-sports.io/fixtures/players?fixture=${item.fixture.id}`;
                     const statsRes = await fetch(statsUrl, { headers: { 'x-apisports-key': API_KEY } });
@@ -121,17 +119,14 @@ async function fetchHistoricalMatches() {
             fs.writeFileSync(path.join(dir, `stats_${dateStrFile}.json`), JSON.stringify({ stats: dailyStats }), 'utf8');
         }
 
-        console.log(`[Success] ${dateStrFile} 保存完了。試合:${dailyMatches.length}件`);
-        fetchCount++;
-        await sleep(500);
+        console.log(`[Success] ${dateStrFile} 保存完了`);
+        
+        // 次の日に進む前のわずかな待機（APIサーバーへの礼儀）
+        await sleep(200); 
         currentDate.setDate(currentDate.getDate() + 1);
     }
     
-    if (currentDate > targetEndDate) {
-        console.log("★★★ すべての履歴データの取得が完了しました！ ★★★");
-    } else {
-        console.log("規定の日数分を取得しました。再度実行して続きを取得してください。");
-    }
+    console.log("★★★ すべてのシーズンのデータの取得が完了しました！ ★★★");
 }
 
 fetchHistoricalMatches().catch(err => { console.error(err); });
