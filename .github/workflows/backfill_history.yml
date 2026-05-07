@@ -1,0 +1,39 @@
+name: Backfill Historical Data
+
+on:
+  workflow_dispatch: # 手動実行専用
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Run History Fetch Script
+        env:
+          API_SPORTS_KEY: ${{ secrets.API_SPORTS_KEY }}
+        run: node fetch_history.js
+
+      - name: Aggregate Season Stats
+        # 過去データ取得直後に、通算成績も再計算させる
+        run: node aggregate_season_stats.js
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Backfill historical data (30 days chunk)"
+            git pull --rebase origin main
+            git push
+          )
