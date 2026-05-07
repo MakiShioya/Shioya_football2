@@ -116,3 +116,126 @@ main { padding-bottom: 140px; }
     border-color: #fff;
     color: #fff;
 }
+
+/* --- 最推し選手専用：黄金の輝きエフェクト（決定版） --- */
+
+/* 1. 基本：カード形式（index.html / performance.html 等） */
+.favorite-shine {
+    background: linear-gradient(145deg, #fff3e0, #ffecb3) !important;
+    border: 3px solid #ffd700 !important;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6) !important;
+}
+
+/* 2. 基本：カードの上を走る光の筋 */
+.favorite-shine::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    animation: shine-sweep 3s infinite;
+    z-index: 1;
+}
+
+/* 3. 特殊：ピッチ上のノード（best11.html）の調整 */
+/* ノード本体の四角い背景と枠を消す */
+.player-node.favorite-shine {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+/* ピッチ上では本体の光の筋（四角）を消す */
+.player-node.favorite-shine::after { display: none; }
+
+/* 4. ピッチ用：丸い評価点アイコンを個別に光らせる */
+.player-node.favorite-shine .rating-icon {
+    /* background の上書きを消す（または非常に薄い黄金を重ねる） */
+    /* 背景色は .rank-orange などのクラスに任せるため、ここでは指定しない */
+    
+    border: 3px solid #ffd700 !important; /* 外枠を豪華な金にする */
+    box-shadow: 0 0 15px #ffd700, inset 0 0 10px rgba(255, 215, 0, 0.5) !important; /* 外と内側に光を放つ */
+    animation: pulse-gold 2s infinite alternate;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 5. ピッチ用：丸いアイコンの中だけで光を走らせる */
+.player-node.favorite-shine .rating-icon::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    /* 少しだけ白を強めて、元の色の上でも光が見えるようにする */
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 100%
+    ) !important;
+    transform: rotate(25deg);
+    animation: shine-sweep 3s infinite;
+}
+/* 6. ピッチ用：名前ラベルの装飾 */
+.player-node.favorite-shine .player-name-label {
+    background: rgba(233, 30, 99, 0.9) !important;
+    border: 1.5px solid #ffd700 !important;
+    color: #fff !important;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5) !important;
+    z-index: 3;
+}
+
+/* --- アニメーション共通 --- */
+@keyframes shine-sweep {
+    0% { transform: translateX(-150%) rotate(25deg); }
+    20% { transform: translateX(150%) rotate(25deg); }
+    100% { transform: translateX(150%) rotate(25deg); }
+}
+
+@keyframes pulse-gold {
+    from { transform: scale(1); filter: brightness(1); }
+    to { transform: scale(1.1); filter: brightness(1.2); }
+}
+
+/* 文字色強調（全ページ共通） */
+.favorite-shine .player-name, 
+.favorite-shine .jp-player-list b,
+.favorite-shine .player-info b {
+    color: #e91e63 !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+/* --- 7. ダッシュボードのテーブル行専用（暴走しない設定） --- */
+.favorite-row td {
+    background: linear-gradient(145deg, #fff3e0, #ffecb3) !important;
+    border-top: 2px solid #ffd700 !important;
+    border-bottom: 2px solid #ffd700 !important;
+    color: #e91e63 !important; /* 文字を推し色に */
+    font-weight: bold;
+}
+
+/* 左右の端のセルにだけ縦線を入れる */
+.favorite-row td:first-child {
+    border-left: 3px solid #ffd700 !important;
+}
+.favorite-row td:last-child {
+    border-right: 3px solid #ffd700 !important;
+}
+
+/* --- 昨日の日本人レポート用：最推し選手が含まれる試合の枠 --- */
+.report-card.favorite-match-border {
+    border: 4px solid #ffd700 !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4) !important;
+}
+
+/* 選手行（player-row）が光る際のデザイン調整 */
+.player-row.favorite-shine {
+    margin: 5px -5px; /* 少しはみ出させて目立たせる */
+    padding: 12px 15px !important;
+}

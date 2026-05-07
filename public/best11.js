@@ -1,6 +1,7 @@
 const container = document.getElementById('formation-nodes');
 const select = document.getElementById('edition-select');
 let currentWeeklyData = []; 
+let NAME_TO_ID_MAP = {}; // 名前からIDを引くための辞書
 
 function getRankClass(score, isDummy) {
     if (isDummy) return 'rank-grey';
@@ -19,7 +20,7 @@ async function loadBest11(targetFile = null) {
         const indexData = await indexRes.json();
         const reversedIndex = [...indexData].reverse();
 
-        if (select.options[0].value === "") {
+        if (select.innerHTML.includes('読み込み中...') || select.options.length === 0) {
             select.innerHTML = reversedIndex.map(i => `<option value="${i.file}">${i.label}</option>`).join('');
             select.onchange = (e) => loadBest11(e.target.value);
         }
@@ -45,14 +46,18 @@ async function loadBest11(targetFile = null) {
         // 1. ピッチ（スタメン）の描画
         document.querySelector('.top-bar h1').innerText = `今週の日本代表 (${data.formation})`;
         container.innerHTML = data.list.map((p, index) => {
-            // スタメンは finalScore を使用
             const score = p.finalScore || 0;
             const displayScore = p.isDummy ? 0 : score * (p.suit || 1.0);
             const ratingDisplay = p.isDummy ? "-" : displayScore.toFixed(1);
             const rankClass = getRankClass(displayScore, p.isDummy);
 
+            // ★ 最推し判定
+            const playerId = NAME_TO_ID_MAP[p.name];
+            const isFavorite = (playerId && playerId === window.currentFavoriteId);
+            const shineClass = isFavorite ? 'favorite-shine' : '';
+
             return `
-                <div class="player-node" style="top: ${p.top}%; left: ${p.left}%;" onclick="showPlayerDetail(${index})">
+                <div class="player-node ${shineClass}" style="top: ${p.top}%; left: ${p.left}%;" onclick="showPlayerDetail(${index})">
                     <div class="rating-icon ${rankClass}">${ratingDisplay}</div>
                     <div class="player-name-label">${p.name}</div>
                 </div>
@@ -66,14 +71,17 @@ async function loadBest11(targetFile = null) {
                     <div class="sub-members-title">控え選手 (ベンチ入り)</div>
                     <div class="sub-list">
                         ${subMembers.map((m, i) => {
-                            // ★重要：baseScore または finalScore のある方を採用
                             const score = m.baseScore || m.finalScore || 0;
                             const displayScore = score * (m.suit || 1.0);
                             const rankClass = getRankClass(displayScore, false);
                             const globalIndex = data.list.length + i;
                             
+                            // ★ 控え選手ループ内でも判定を行う
+                            const playerId = NAME_TO_ID_MAP[m.name];
+                            const isFavoriteSub = (playerId && playerId === window.currentFavoriteId);
+                            
                             return `
-                                <div class="sub-item" onclick="showPlayerDetail(${globalIndex})">
+                                <div class="sub-item ${isFavoriteSub ? 'favorite-shine' : ''}" onclick="showPlayerDetail(${globalIndex})">
                                     ${m.name} <span class="sub-rating ${rankClass}">${displayScore.toFixed(1)}</span>
                                 </div>
                             `;
@@ -91,19 +99,17 @@ async function loadBest11(targetFile = null) {
         listContainer.innerHTML = ''; 
     }
 }
+
+// 詳細ポップアップ、閉じる処理などは変更なし
 function showPlayerDetail(index) {
     const p = currentWeeklyData[index];
     if (!p || p.isDummy) return;
-
     const modal = document.getElementById('playerDetailModal');
     const content = document.getElementById('player-detail-body');
-
-    // ポップアップでもどちらの項目名でも動くように修正
     const score = p.finalScore || p.baseScore || 0;
     const suitVal = p.suit || 1.0;
     const leagueMult = (score / p.originalRating).toFixed(2);
     const totalEval = (score * suitVal).toFixed(1);
-
     content.innerHTML = `
         <div class="detail-header">
             <div class="detail-name">${p.name}</div>
@@ -115,10 +121,6 @@ function showPlayerDetail(index) {
             <tr><th>リーグ係数</th><td>× ${leagueMult}</td></tr>
             <tr><th>ポジション係数</th><td>× ${suitVal.toFixed(2)}</td></tr>
         </table>
-        <p style="font-size: 0.8rem; color: #666; margin-top: 15px; text-align: center;">
-            ※リーグ係数は所属リーグのレベルに応じて適用されます。<br>
-            ※ポジション係数は選出ポジションへの適性を示します。
-        </p>
     `;
     modal.style.display = 'flex';
 }
@@ -127,4 +129,30 @@ function closePlayerDetailModal() {
     document.getElementById('playerDetailModal').style.display = 'none';
 }
 
-window.addEventListener('DOMContentLoaded', () => loadBest11());
+// --- ここから差し替え ---
+window.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const cacheBuster = new Date().getTime();
+        const res = await fetch(`https://football.shioya-soft.com/japanese_players.json?t=${cacheBuster}`);
+        if (res.ok) {
+            const rawData = await res.json();
+            for (const team in rawData) {
+                for (const [id, pInfo] of Object.entries(rawData[team])) {
+                    NAME_TO_ID_MAP[pInfo.full] = id;
+                    NAME_TO_ID_MAP[pInfo.short] = id;
+                }
+            }
+        }
+    } catch (e) {
+        console.error("選手辞書の読み込みに失敗しました", e);
+    }
+    
+    // ★ ここが重要：ログイン状態（Auth）の変化を監視して、準備が整ってから描画する
+    firebase.auth().onAuthStateChanged((user) => {
+        // auth.js の処理（FirestoreからのID取得）が終わるのを少しだけ待つ
+        setTimeout(() => {
+            loadBest11();
+        }, 500); 
+    });
+});
+// --- ここまで ---

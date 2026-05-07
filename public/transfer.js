@@ -18,7 +18,15 @@ const MOCK_DATA = [
             { name: "エヴァートン", league: "プレミア" },
             { name: "リーズ", league: "プレミア" }
         ]
-    }
+    },
+    {
+        player: "鎌田大地",
+        status: "噂",
+        lastUpdated: "2026/05/08 09:00",
+        clubs: [
+            { name: "ニューカッスル", league: "プレミア" }
+        ]
+    },
 ];
 
 function renderTransfers() {

@@ -183,6 +183,7 @@ function renderMatches() {
         }
 
         if (isJapaneseOnly) {
+            // 構造が変わったので、キーが存在するかでチェック
             const hasJapaneseHome = JAPANESE_PLAYERS[homeName] !== undefined;
             const hasJapaneseAway = JAPANESE_PLAYERS[awayName] !== undefined;
             return hasJapaneseHome || hasJapaneseAway;
@@ -200,30 +201,41 @@ function renderMatches() {
         const info = LEAGUE_INFO[compCode] || { flag: "🏳️" };
 
         const dateObj = new Date(match.utcDate);
-        
         let displayHour = dateObj.getHours();
         const displayMinute = String(dateObj.getMinutes()).padStart(2, '0');
         
         if (dateObj.getDate() !== targetDate.getDate() && dateObj.getTime() > targetDate.getTime()) {
             displayHour += 24;
         }
-        
         const timeDisplayStr = `${displayHour}:${displayMinute}`;
 
         const homeNameRaw = match.homeTeam.name;
         const awayNameRaw = match.awayTeam.name;
+
+        // ★ 最推し判定のデータ準備
+        const homeData = JAPANESE_PLAYERS[homeNameRaw] || { ids: [], names: [] };
+        const awayData = JAPANESE_PLAYERS[awayNameRaw] || { ids: [], names: [] };
+
+        // 最推しが含まれているか確認
+        const isFavInHome = homeData.ids.includes(window.currentFavoriteId);
+        const isFavInAway = awayData.ids.includes(window.currentFavoriteId);
+        const isFavoriteMatch = isFavInHome || isFavInAway;
+
+        // クラスを決定
+        const shineClass = isFavoriteMatch ? 'favorite-shine' : '';
+
         const homeJP = TEAM_DISPLAYS[homeNameRaw] || homeNameRaw;
         const awayJP = TEAM_DISPLAYS[awayNameRaw] || awayNameRaw;
 
         const displayHomeName = `${info.flag} ${homeJP}`;
         const displayAwayName = `${info.flag} ${awayJP}`;
 
-        // ★ ここで short 名が結合されて表示される
-        const homePlayers = JAPANESE_PLAYERS[homeNameRaw] ? JAPANESE_PLAYERS[homeNameRaw].join(', ') : '';
-        const awayPlayers = JAPANESE_PLAYERS[awayNameRaw] ? JAPANESE_PLAYERS[awayNameRaw].join(', ') : '';
+        // 選手名のバッジ（修正済み）
+        const homePlayersStr = homeData.names.join(', ');
+        const awayPlayersStr = awayData.names.join(', ');
         
-        const homeBadge = homePlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">${homePlayers}</div>` : '';
-        const awayBadge = awayPlayers ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">${awayPlayers}</div>` : '';
+        const homeBadge = homePlayersStr ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">${homePlayersStr}</div>` : '';
+        const awayBadge = awayPlayersStr ? `<div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">${awayPlayersStr}</div>` : '';
 
         const hScore = match.score?.fullTime?.home;
         const aScore = match.score?.fullTime?.away;
@@ -234,7 +246,6 @@ function renderMatches() {
         const postponed = ["PST", "CANC", "ABD", "AWD", "WO"];
 
         let scoreDisplay = "";
-
         if (status === "NS" || status === "TBD" || (hScore === null && !finished.includes(status) && !inPlay.includes(status))) {
             scoreDisplay = `<div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>`;
         } else {
@@ -252,19 +263,20 @@ function renderMatches() {
             `;
         }
 
+        // ★ div の class に shineClass を適用するように修正しました
         return `
-            <div style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+            <div class="${shineClass}" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
                 <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeDisplayStr} (日本時間)</div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div style="width: 38%; text-align: center;">
-                        <div style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayHomeName}</div>
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayHomeName}</div>
                         ${homeBadge}
                     </div>
                     <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
                         ${scoreDisplay}
                     </div>
                     <div style="width: 38%; text-align: center;">
-                        <div style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayAwayName}</div>
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayAwayName}</div>
                         ${awayBadge}
                     </div>
                 </div>
@@ -280,8 +292,11 @@ window.addEventListener('DOMContentLoaded', async () => {
         if (res.ok) {
             const rawData = await res.json();
             for (const [team, playersObj] of Object.entries(rawData)) {
-                // ★ ここで short 名だけを配列に入れて JAPANESE_PLAYERS に格納する
-                JAPANESE_PLAYERS[team] = Object.values(playersObj).map(p => p.short);
+                // ★ IDと名前（short）の両方を保持する構造に変更
+                JAPANESE_PLAYERS[team] = {
+                    ids: Object.keys(playersObj), // ["kubo_takefusa", ...]
+                    names: Object.values(playersObj).map(p => p.short) // ["久保", ...]
+                };
             }
         }
     } catch (e) {

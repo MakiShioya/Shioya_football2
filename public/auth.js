@@ -64,6 +64,7 @@ auth.onAuthStateChanged(async (user) => {
 
         if (userDoc.exists) {
             const data = userDoc.data();
+            window.currentFavoriteId = data.mostFavoriteId || null;
             if (!displayName && data.name) displayName = data.name;
             // 将棋用のアイテム救済処理はここでは行いません
             // ポイント（gold）の表示

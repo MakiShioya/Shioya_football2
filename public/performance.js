@@ -1,7 +1,8 @@
+let NAME_TO_ID_MAP = {}; // 名前からIDを引くための辞書
+
 async function loadPerformance() {
     const container = document.getElementById('performance-list');
     
-    // 日付計算（変更なし）
     const targetDate = new Date();
     targetDate.setHours(targetDate.getHours() - 6); 
     targetDate.setDate(targetDate.getDate() - 1);   
@@ -14,11 +15,23 @@ async function loadPerformance() {
     try {
         const cacheBuster = new Date().getTime();
         
-        // データの取得
-        const [matchesRes, statsRes] = await Promise.all([
+        // 1. 選手名簿とデータを並列で取得
+        const [dictRes, matchesRes, statsRes] = await Promise.all([
+            fetch(`https://football.shioya-soft.com/japanese_players.json?t=${cacheBuster}`),
             fetch(`https://football.shioya-soft.com/data/matches/matches_${dateStr}.json?t=${cacheBuster}`),
             fetch(`https://football.shioya-soft.com/data/matches/stats_${dateStr}.json?t=${cacheBuster}`)
         ]);
+
+        // 辞書の作成
+        if (dictRes.ok) {
+            const rawDict = await dictRes.json();
+            for (const team in rawDict) {
+                for (const [id, pInfo] of Object.entries(rawData[team] || rawDict[team])) {
+                    NAME_TO_ID_MAP[pInfo.full] = id;
+                    NAME_TO_ID_MAP[pInfo.short] = id;
+                }
+            }
+        }
         
         if (!statsRes.ok) {
             container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
@@ -33,19 +46,15 @@ async function loadPerformance() {
             return;
         }
 
-        // 試合データの読み込み（失敗しても続行できるようにする）
         let matchesMap = {};
         if (matchesRes.ok) {
             const matchesData = await matchesRes.json();
-            // APIの構造に合わせて調整（.response.matches か .response 直下か）
             const rawMatches = matchesData.response.matches || matchesData.response || [];
             rawMatches.forEach(m => {
                 matchesMap[m.fixtureId || m.fixture?.id] = m;
             });
         }
 
-        // ★ ロジック変更：statsList（日本人）をベースにHTMLを生成する
-        // 試合ごとにまとめたいので、一旦整理
         const reportByMatch = {};
         statsList.forEach(s => {
             if (!reportByMatch[s.fixtureId]) {
@@ -60,8 +69,13 @@ async function loadPerformance() {
         container.innerHTML = Object.keys(reportByMatch).map(fId => {
             const item = reportByMatch[fId];
             const match = item.info;
+
+            // 判定：この試合に最推し選手が含まれているか？
+            const hasFavorite = item.players.some(s => {
+                const pId = NAME_TO_ID_MAP[s.name];
+                return pId && pId === window.currentFavoriteId;
+            });
             
-            // 試合情報（取得できていれば表示、なければIDのみ）
             const matchHeader = match ? `
                 <div class="match-info">
                     <span>${match.homeTeam?.name || match.teams?.home?.name || 'Home'} vs ${match.awayTeam?.name || match.teams?.away?.name || 'Away'}</span>
@@ -74,8 +88,13 @@ async function loadPerformance() {
                 if (s.goals > 0) events.push(`<span class="event-badge">⚽${s.goals}G</span>`);
                 if (s.assists > 0) events.push(`<span class="event-badge">🅰️${s.assists}A</span>`);
                 
+                // 個別の選手行の判定
+                const pId = NAME_TO_ID_MAP[s.name];
+                const isFav = pId && pId === window.currentFavoriteId;
+                const shineClass = isFav ? 'favorite-shine' : '';
+
                 return `
-                    <div class="player-row">
+                    <div class="player-row ${shineClass}">
                         <div class="player-header">
                             <span class="player-name">🇯🇵 ${s.name}</span>
                             <span class="rating-badge">評点: ${s.rating}</span>
@@ -88,7 +107,7 @@ async function loadPerformance() {
             }).join('');
 
             return `
-                <div class="report-card">
+                <div class="report-card ${hasFavorite ? 'favorite-match-border' : ''}">
                     ${matchHeader}
                     ${playersHtml}
                 </div>
@@ -101,4 +120,11 @@ async function loadPerformance() {
     }
 }
 
-window.addEventListener('DOMContentLoaded', loadPerformance);
+// 起動処理（他ページと統一）
+window.addEventListener('DOMContentLoaded', () => {
+    firebase.auth().onAuthStateChanged((user) => {
+        setTimeout(() => {
+            loadPerformance();
+        }, 500);
+    });
+});
