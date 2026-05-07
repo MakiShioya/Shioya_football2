@@ -9,7 +9,10 @@ const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'public'
 
 // 取得期間の設定（開幕から今日まで）
 const START_DATE_STR = '2025-08-01'; 
-const END_DATE_STR = new Date().toISOString().split('T')[0]; // 自動で今日の日付を取得
+const END_DATE_STR = new Date().toISOString().split('T')[0];
+
+// ★ 追加：強制上書きモード（true にすると既存ファイルを無視して再取得します）
+const FORCE_UPDATE = true;
 
 function mapLeagueIdToCode(id) {
     const mapping = {
@@ -30,13 +33,14 @@ async function fetchHistoricalMatches() {
     const targetEndDate = new Date(END_DATE_STR);
 
     console.log(`過去データ一括取得開始: ${START_DATE_STR} から ${END_DATE_STR} まで`);
+    if (FORCE_UPDATE) console.log("【注意】強制上書きモードがONになっています。既存データは再取得されます。");
 
     while (currentDate <= targetEndDate) {
         const dateStrAPI = currentDate.toISOString().split('T')[0];
         const dateStrFile = dateStrAPI.replace(/-/g, '');
 
-        // すでにファイルが存在する場合はスキップ（既存機能の維持）
-        if (fs.existsSync(path.join(dir, `matches_${dateStrFile}.json`))) {
+        // ★ 修正：強制上書きモードが OFF の時だけスキップする
+        if (!FORCE_UPDATE && fs.existsSync(path.join(dir, `matches_${dateStrFile}.json`))) {
             currentDate.setDate(currentDate.getDate() + 1);
             continue;
         }
@@ -49,7 +53,7 @@ async function fetchHistoricalMatches() {
 
         if (data.errors && Object.keys(data.errors).length > 0) {
             console.error(`[Error] APIエラー:`, data.errors);
-            await sleep(2000); // エラー時は少し休む
+            await sleep(2000); 
             continue;
         }
 
@@ -76,7 +80,6 @@ async function fetchHistoricalMatches() {
                 const isFinished = ["FT", "AET", "PEN"].includes(item.fixture.status.short);
 
                 if (isFinished && isJapaneseMatch) {
-                    // 有料プランのレート制限に配慮しつつ、少しだけ待機
                     await sleep(300); 
                     
                     const statsUrl = `https://v3.football.api-sports.io/fixtures/players?fixture=${item.fixture.id}`;
@@ -121,12 +124,11 @@ async function fetchHistoricalMatches() {
 
         console.log(`[Success] ${dateStrFile} 保存完了`);
         
-        // 次の日に進む前のわずかな待機（APIサーバーへの礼儀）
         await sleep(200); 
         currentDate.setDate(currentDate.getDate() + 1);
     }
     
-    console.log("★★★ すべてのシーズンのデータの取得が完了しました！ ★★★");
+    console.log("★★★ すべてのシーズンのデータの取得・上書きが完了しました！ ★★★");
 }
 
 fetchHistoricalMatches().catch(err => { console.error(err); });
