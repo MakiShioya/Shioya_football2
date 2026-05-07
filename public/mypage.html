@@ -181,9 +181,9 @@
             <h2 style="color:#432517; border-bottom: 2px solid #8b4513; padding-bottom: 10px;">ヘルプ・遊び方</h2>
             <div style="text-align: left; color: #432517; font-size: 0.95rem; line-height: 1.6; max-height: 300px; overflow-y: auto;">
                 <p><b>⚽ 最推し選手とは？</b><br>
-                設定すると、その選手が活躍した時にボーナスポイントがもらえるようになる予定です。変更には100Gかかります。</p>
+                設定すると、各ページで該当の試合・選手カードや名前表示が光り輝きます。変更には100Gかかります。</p>
                 <p><b>💰 ポイント（G）の貯め方</b><br>
-                毎日の試合結果を確認したり、予想を当てることで獲得できます。</p>
+                毎日の試合予定・結果を確認したり、今後実装予定の予想を当てる機能で獲得できます。</p>
             </div>
         </div>
     </div>
@@ -212,7 +212,7 @@
                     const data = docSnap.data();
                     
                     // 名前とゴールドの反映
-                    document.getElementById('my-name').innerText = data.displayName || "名無しサポーター";
+                    document.getElementById('my-name').innerText = data.name || user.displayName || "名無しサポーター";
                     document.getElementById('my-gold').innerText = data.gold || 0;
 
                     // 最推し選手の反映
