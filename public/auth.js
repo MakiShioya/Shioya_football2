@@ -71,6 +71,11 @@ auth.onAuthStateChanged(async (user) => {
             if (userGoldDisplay && data.gold !== undefined) {
                 userGoldDisplay.innerText = data.gold;
             }
+            if (data.currentTheme) {
+                // shop.html 等で保存されたテーマがあれば、bodyタグにクラスとして付与する
+                document.body.className = data.currentTheme;
+            }
+        
         }
         if (!displayName) displayName = user.email.split("@")[0];
 

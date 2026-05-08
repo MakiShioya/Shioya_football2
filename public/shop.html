@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <title>着せ替えショップ - Shioya Football</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions-compat.js"></script> <!-- 購入処理用 -->
+    
+    <link rel="stylesheet" href="common.css">
+
+    <style>
+        .shop-container {
+            padding: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 120px;
+        }
+
+        .gold-display-card {
+            background: rgba(67, 37, 23, 0.9);
+            color: #ECDBBF;
+            border: 2px solid #8b4513;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        .gold-display-card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+            color: #FFB347;
+        }
+
+        .gold-display-card .amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .theme-card {
+            background: linear-gradient(145deg, #fff8dc, #fdf5e6);
+            border: 3px solid #8b4513;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+            color: #432517;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .theme-card h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            border-bottom: 2px dashed #8b4513;
+            padding-bottom: 8px;
+        }
+
+        .theme-card p {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .btn-shop {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            border: none;
+            transition: all 0.1s;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .btn-shop:active:not(:disabled) {
+            transform: translateY(4px);
+        }
+
+        .btn-buy {
+            background: linear-gradient(to bottom, #ff9800, #f57c00);
+            border: 2px solid #e65100;
+            box-shadow: 0 4px 0 #e65100;
+        }
+
+        .btn-equip {
+            background: linear-gradient(to bottom, #4facfe, #00f2fe);
+            border: 2px solid #00a8ff;
+            box-shadow: 0 4px 0 #0097e6;
+        }
+
+        .btn-equipped {
+            background: #6c757d;
+            border: 2px solid #495057;
+            box-shadow: none;
+            cursor: default;
+        }
+    </style>
+</head>
+<body class="theme-default">
+
+    <header class="top-bar">
+        <button class="menu-icon-btn" onclick="location.href='mypage.html'">◀</button>
+        <h1>着せ替えショップ</h1>
+    </header>
+
+    <div class="shop-container">
+        
+        <!-- 所持金表示エリア -->
+        <div class="gold-display-card">
+            <h2>現在の所持ゴールド</h2>
+            <div class="amount"><span id="shop-gold-display">---</span> G</div>
+        </div>
+
+        <!-- テーマ1：デフォルト -->
+        <div class="theme-card">
+            <h3>いつもの色（デフォルト）</h3>
+            <p>価格: 最初から所持</p>
+            <button id="btn-theme-default" class="btn-shop" disabled>読み込み中...</button>
+        </div>
+
+        <!-- テーマ2：芝生（スタジアム） -->
+        <div class="theme-card">
+            <h3>芝生（スタジアム・グリーン）</h3>
+            <p>価格: 1,000 G</p>
+            <button id="btn-theme-grass" class="btn-shop" disabled>読み込み中...</button>
+        </div>
+
+        <!-- テーマ3：ミッドナイト -->
+        <div class="theme-card">
+            <h3>ミッドナイト（夜戦）</h3>
+            <p>価格: 2,000 G</p>
+            <button id="btn-theme-midnight" class="btn-shop" disabled>読み込み中...</button>
+        </div>
+
+    </div>
+
+    <!-- 下部メニュー -->
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        let currentUser = null;
+        let userData = null;
+
+        // ログイン状態の監視
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                currentUser = user;
+                await loadShopData();
+            } else {
+                alert('ログインが必要です。');
+                location.href = 'index.html';
+            }
+        });
+
+        // ユーザー情報の読み込みとUI更新
+        async function loadShopData() {
+            const doc = await firebase.firestore().collection("users").doc(currentUser.uid).get();
+            if (doc.exists) {
+                userData = doc.data();
+                
+                // データが存在しない場合の初期化
+                if (!userData.ownedThemes) userData.ownedThemes = ['theme-default'];
+                if (!userData.currentTheme) userData.currentTheme = 'theme-default';
+                if (!userData.gold) userData.gold = 0;
+
+                // 所持金の表示
+                document.getElementById('shop-gold-display').innerText = userData.gold;
+                
+                // 現在のテーマを背景に即時反映（common.css側の設定が必要）
+                document.body.className = userData.currentTheme;
+
+                updateButtons();
+            }
+        }
+
+        // ボタンの表示（購入/着替える/適用中）を切り替える
+        function updateButtons() {
+            const themes = [
+                { id: 'theme-default', price: 0 },
+                { id: 'theme-grass', price: 1000 },
+                { id: 'theme-midnight', price: 2000 }
+            ];
+
+            themes.forEach(theme => {
+                const btn = document.getElementById(`btn-${theme.id}`);
+                if (!btn) return;
+
+                // クラスを一度リセット
+                btn.className = "btn-shop";
+
+                if (userData.currentTheme === theme.id) {
+                    // 現在適用中
+                    btn.innerText = "適用中";
+                    btn.disabled = true;
+                    btn.classList.add("btn-equipped");
+                    btn.onclick = null;
+                } else if (userData.ownedThemes.includes(theme.id) || theme.id === 'theme-default') {
+                    // 購入済み（またはデフォルト）
+                    btn.innerText = "このテーマに着替える";
+                    btn.disabled = false;
+                    btn.classList.add("btn-equip");
+                    btn.onclick = () => equipTheme(theme.id);
+                } else {
+                    // 未購入
+                    btn.innerText = `${theme.price} G で購入`;
+                    btn.disabled = false;
+                    btn.classList.add("btn-buy");
+                    btn.onclick = () => buyTheme(theme.id, theme.price);
+                }
+            });
+        }
+
+        // 着せ替え処理（Firestoreの更新）
+        async function equipTheme(themeId) {
+            try {
+                await firebase.firestore().collection("users").doc(currentUser.uid).update({
+                    currentTheme: themeId
+                });
+                userData.currentTheme = themeId;
+                document.body.className = themeId;
+                updateButtons();
+            } catch (error) {
+                console.error("着せ替えエラー:", error);
+                alert("着せ替えの保存に失敗しました。");
+            }
+        }
+
+        // 購入処理（銀行員呼び出し）
+        async function buyTheme(themeId, price) {
+            if (confirm(`${price} G を消費して「${themeId.replace('theme-', '')}」を購入しますか？`)) {
+                try {
+                    // ボタンを一時的に連打防止
+                    const btn = document.getElementById(`btn-${themeId}`);
+                    btn.disabled = true;
+                    btn.innerText = "通信中...";
+
+                    // 銀行員（Functions）に依頼
+                    const purchaseTheme = firebase.functions().httpsCallable('purchaseTheme');
+                    const result = await purchaseTheme({ themeId: themeId, price: price });
+
+                    if (result.data.success) {
+                        alert("購入が完了しました！");
+                        // 購入後は自動的にそのテーマを着せる
+                        await equipTheme(themeId); 
+                        // 所持金など最新データを再読み込み
+                        await loadShopData();
+                    } else {
+                        alert("購入できませんでした: " + result.data.message);
+                        btn.disabled = false;
+                        updateButtons();
+                    }
+                } catch (error) {
+                    console.error("購入エラー:", error);
+                    alert("通信エラーが発生しました。");
+                    updateButtons();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
