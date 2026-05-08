@@ -22,11 +22,12 @@ async function loadPerformance() {
             fetch(`https://football.shioya-soft.com/data/matches/stats_${dateStr}.json?t=${cacheBuster}`)
         ]);
 
-        // 辞書の作成
+        // 【修正ポイント】辞書の作成（変数のタイポを修正しました）
         if (dictRes.ok) {
             const rawDict = await dictRes.json();
             for (const team in rawDict) {
-                for (const [id, pInfo] of Object.entries(rawData[team] || rawDict[team])) {
+                // ここが rawDict になっている必要があります
+                for (const [id, pInfo] of Object.entries(rawDict[team])) {
                     NAME_TO_ID_MAP[pInfo.full] = id;
                     NAME_TO_ID_MAP[pInfo.short] = id;
                 }
@@ -116,11 +117,11 @@ async function loadPerformance() {
 
     } catch (error) {
         console.error("Fatal Error:", error);
-        container.innerHTML = '<p style="text-align:center; color: red;">データの表示中にエラーが発生しました。</p>';
+        container.innerHTML = '<p style="text-align:center; color: red; padding: 20px;">データの表示中にエラーが発生しました。</p>';
     }
 }
 
-// 起動処理（他ページと統一）
+// 起動処理
 window.addEventListener('DOMContentLoaded', () => {
     firebase.auth().onAuthStateChanged((user) => {
         setTimeout(() => {

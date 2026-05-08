@@ -286,16 +286,16 @@ function renderMatches() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    // 1. 選手辞書の読み込み（既存の処理）
     try {
         const cacheBuster = new Date().getTime();
         const res = await fetch(`https://football.shioya-soft.com/japanese_players.json?t=${cacheBuster}`);
         if (res.ok) {
             const rawData = await res.json();
             for (const [team, playersObj] of Object.entries(rawData)) {
-                // ★ IDと名前（short）の両方を保持する構造に変更
                 JAPANESE_PLAYERS[team] = {
-                    ids: Object.keys(playersObj), // ["kubo_takefusa", ...]
-                    names: Object.values(playersObj).map(p => p.short) // ["久保", ...]
+                    ids: Object.keys(playersObj),
+                    names: Object.values(playersObj).map(p => p.short)
                 };
             }
         }
@@ -303,8 +303,40 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error("選手辞書の読み込みに失敗しました", e);
     }
 
+    // 2. フィルターのイベント登録（既存の処理）
     document.getElementById('league-filter').addEventListener('change', renderMatches);
     document.getElementById('japanese-filter').addEventListener('change', renderMatches);
     document.getElementById('major-league-filter').addEventListener('change', renderMatches);
-    selectTab(0, 'tab-today');
+
+    // 3. 【ここが重要】ログイン状態に応じてボーナスを請求し、描画する
+    firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+            // ログインしている人への処理
+            try {
+                // A. 銀行員（Functions）にボーナスを請求
+                const claimDailyBonus = firebase.functions().httpsCallable('claimDailyBonus');
+                const bonusResult = await claimDailyBonus();
+                
+                if (bonusResult.data.success) {
+                    alert("予定表の確認ありがとうございます！100G獲得しました。");
+                    // UIのポイント表示があれば更新
+                    const goldDisplay = document.getElementById('userGoldDisplay');
+                    if (goldDisplay) {
+                        goldDisplay.innerText = bonusResult.data.newGold;
+                    }
+                }
+
+                // B. 最推しIDを取得して、黄金エフェクトの準備
+                const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
+                if (userDoc.exists) {
+                    window.currentFavoriteId = userDoc.data().mostFavoriteId;
+                }
+            } catch (error) {
+                console.error("ボーナス取得またはデータ取得エラー:", error);
+            }
+        }
+
+        // ログインしている人も、していない人も、最終的に予定表を表示する
+        selectTab(0, 'tab-today');
+    });
 });

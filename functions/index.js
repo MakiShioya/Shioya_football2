@@ -38,3 +38,44 @@ exports.setMostFavoritePlayer = onCall(async (request) => {
         return { success: true, cost: cost };
     });
 });
+
+// 【ログインボーナス】予定表を確認した時に100G付与（第2世代）
+exports.claimDailyBonus = onCall(async (request) => {
+    // 1. ログイン確認
+    if (!request.auth) {
+        throw new HttpsError("unauthenticated", "ログインが必要です。");
+    }
+
+    const uid = request.auth.uid;
+    const userRef = admin.firestore().collection("users").doc(uid);
+
+    return admin.firestore().runTransaction(async (transaction) => {
+        const userDoc = await transaction.get(userRef);
+        if (!userDoc.exists) {
+            throw new HttpsError("not-found", "ユーザーが見つかりません。");
+        }
+
+        const userData = userDoc.data();
+        
+        // 2. 日付の判定（日本時間の今日を取得）
+        const now = new Date();
+        const todayStr = now.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' });
+
+        // 既に今日受け取っているなら何もせず返す
+        if (userData.lastBonusDate === todayStr) {
+            return { success: false, message: "本日分は受取済みです。" };
+        }
+
+        // 3. 銀行員の記帳（ポイント加算と日付更新）
+        transaction.update(userRef, {
+            gold: admin.firestore.FieldValue.increment(100),
+            lastBonusDate: todayStr
+        });
+
+        return { 
+            success: true, 
+            added: 100, 
+            newGold: (userData.gold || 0) + 100 
+        };
+    });
+});

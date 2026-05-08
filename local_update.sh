@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 1. Shioya_football2 ディレクトリに移動
-cd ~/Documents/Shioya_football2
+cd ~/Shioya_football2
 
 # 2. 環境変数の設定 (Node.jsやGitのコマンドを見つけるため)
 export PATH=$PATH:/usr/local/bin:/opt/homebrew/bin:/Users/$USER/.nvm/versions/node/$(node -v 2>/dev/null)/bin
