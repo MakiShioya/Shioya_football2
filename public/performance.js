@@ -35,7 +35,7 @@ async function loadPerformance() {
         }
         
         if (!statsRes.ok) {
-            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
+            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがなかったか、定期メンテナンス中です。（6:00~9:00）毎日朝9時に更新されます。</p>';
             return;
         }
 
@@ -43,7 +43,7 @@ async function loadPerformance() {
         const statsList = statsData.stats || [];
 
         if (statsList.length === 0) {
-            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがありませんでした。</p>';
+            container.innerHTML = '<p style="text-align:center; padding: 40px;">昨日は日本人の出場データがなかったか、定期メンテナンス中です。（6:00~9:00）毎日朝9時に更新されます。</p>';
             return;
         }
 

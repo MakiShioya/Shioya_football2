@@ -21,6 +21,9 @@ class ViewController: CAPBridgeViewController {
             
             bridge.registerPluginInstance(AdMobPlugin())
             print("⚡️ AdMobPlugin を登録しました")
+
+            bridge.registerPluginInstance(AppIconPlugin())
+            print("⚡️ AppIconPlugin を登録しました")
         }
         
         // --- 画面表示の最適化スクリプト（ノッチ対策・ズーム禁止） ---

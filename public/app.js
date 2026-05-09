@@ -286,7 +286,7 @@ function renderMatches() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-    // 1. 選手辞書の読み込み（既存の処理）
+    // 1. 選手辞書の読み込み
     try {
         const cacheBuster = new Date().getTime();
         const res = await fetch(`https://football.shioya-soft.com/japanese_players.json?t=${cacheBuster}`);
@@ -303,40 +303,46 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error("選手辞書の読み込みに失敗しました", e);
     }
 
-    // 2. フィルターのイベント登録（既存の処理）
+    // 2. フィルターのイベント登録
     document.getElementById('league-filter').addEventListener('change', renderMatches);
     document.getElementById('japanese-filter').addEventListener('change', renderMatches);
     document.getElementById('major-league-filter').addEventListener('change', renderMatches);
 
-    // 3. 【ここが重要】ログイン状態に応じてボーナスを請求し、描画する
+    // 3. ログイン状態の監視
     firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
-            // ログインしている人への処理
             try {
-                // A. 銀行員（Functions）にボーナスを請求
-                const claimDailyBonus = firebase.functions().httpsCallable('claimDailyBonus');
-                const bonusResult = await claimDailyBonus();
-                
-                if (bonusResult.data.success) {
-                    alert("予定表の確認ありがとうございます！100G獲得しました。");
-                    // UIのポイント表示があれば更新
-                    const goldDisplay = document.getElementById('userGoldDisplay');
-                    if (goldDisplay) {
-                        goldDisplay.innerText = bonusResult.data.newGold;
-                    }
-                }
-
-                // B. 最推しIDを取得して、黄金エフェクトの準備
+                // 【変更点 1】まずは「最推しID」だけサクッと取得する（光らせるために必要）
                 const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
                 if (userDoc.exists) {
                     window.currentFavoriteId = userDoc.data().mostFavoriteId;
                 }
-            } catch (error) {
-                console.error("ボーナス取得またはデータ取得エラー:", error);
-            }
-        }
 
-        // ログインしている人も、していない人も、最終的に予定表を表示する
-        selectTab(0, 'tab-today');
+                // 【変更点 2】IDが取れたら、ボーナスを待たずに「即座に」試合を描画する！
+                selectTab(0, 'tab-today');
+
+                // 【変更点 3】裏でこっそりボーナス処理を走らせる（awaitを外して画面を止めない）
+                const claimDailyBonus = firebase.functions().httpsCallable('claimDailyBonus');
+                claimDailyBonus().then(bonusResult => {
+                    if (bonusResult.data.success) {
+                        alert("予定表の確認ありがとうございます！100G獲得しました。");
+                        const goldDisplay = document.getElementById('userGoldDisplay');
+                        if (goldDisplay) {
+                            goldDisplay.innerText = bonusResult.data.newGold;
+                        }
+                    }
+                }).catch(err => {
+                    console.error("ボーナス取得エラー:", err);
+                });
+
+            } catch (error) {
+                console.error("データ取得エラー:", error);
+                // エラーが起きても絶対に試合は描画する
+                selectTab(0, 'tab-today');
+            }
+        } else {
+            // 未ログイン時はそのまま描画
+            selectTab(0, 'tab-today');
+        }
     });
 });

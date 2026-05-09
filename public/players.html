@@ -77,6 +77,10 @@
     </style>
 </head>
 <body>
+    <script>
+        const savedTheme = localStorage.getItem('shioya_theme');
+        if (savedTheme) document.body.className = savedTheme;
+    </script>
 
     <header class="top-bar">
         <button class="menu-icon-btn" onclick="location.href='mypage.html'">◀</button>

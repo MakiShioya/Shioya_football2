@@ -29,6 +29,8 @@
 		65C0979D2FA9158100C2EBEB /* GoogleAuthPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C097962FA9158100C2EBEB /* GoogleAuthPlugin.m */; };
 		65C0979E2FA9158100C2EBEB /* GoogleAuthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C097972FA9158100C2EBEB /* GoogleAuthPlugin.swift */; };
 		65C0979F2FA9158100C2EBEB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65C097982FA9158100C2EBEB /* GoogleService-Info.plist */; };
+		65EF17D92FAEAB6800A39037 /* AppIconPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF17D82FAEAB6800A39037 /* AppIconPlugin.swift */; };
+		65EF17DB2FAEAB7100A39037 /* AppIconPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF17DA2FAEAB7100A39037 /* AppIconPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		65C097972FA9158100C2EBEB /* GoogleAuthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthPlugin.swift; sourceTree = "<group>"; };
 		65C097982FA9158100C2EBEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65C097992FA9158100C2EBEB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		65EF17D82FAEAB6800A39037 /* AppIconPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconPlugin.swift; sourceTree = "<group>"; };
+		65EF17DA2FAEAB7100A39037 /* AppIconPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppIconPlugin.m; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -110,6 +114,8 @@
 				65C097992FA9158100C2EBEB /* ViewController.swift */,
 				65996B862FA9322700DAB391 /* AdMobPlugin.swift */,
 				65996B882FA9325500DAB391 /* AdMobPlugin.m */,
+				65EF17D82FAEAB6800A39037 /* AppIconPlugin.swift */,
+				65EF17DA2FAEAB7100A39037 /* AppIconPlugin.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -209,8 +215,10 @@
 				65C0979B2FA9158100C2EBEB /* ViewController.swift in Sources */,
 				65996B892FA9325500DAB391 /* AdMobPlugin.m in Sources */,
 				65C0979C2FA9158100C2EBEB /* AuthPlugin.m in Sources */,
+				65EF17D92FAEAB6800A39037 /* AppIconPlugin.swift in Sources */,
 				65C0979D2FA9158100C2EBEB /* GoogleAuthPlugin.m in Sources */,
 				65C0979E2FA9158100C2EBEB /* GoogleAuthPlugin.swift in Sources */,
+				65EF17DB2FAEAB7100A39037 /* AppIconPlugin.m in Sources */,
 				65996B872FA9322700DAB391 /* AdMobPlugin.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 			);
@@ -243,6 +251,7 @@
 			baseConfigurationReference = 958DCC722DB07C7200EA8C5F /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "\"HappaIcon ShioyaIcon MachidaIcon\"";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -300,6 +309,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "\"HappaIcon ShioyaIcon MachidaIcon\"";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

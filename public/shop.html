@@ -109,6 +109,10 @@
     </style>
 </head>
 <body class="theme-default">
+    <script>
+        const savedTheme = localStorage.getItem('shioya_theme');
+        if (savedTheme) document.body.className = savedTheme;
+    </script>
 
     <header class="top-bar">
         <button class="menu-icon-btn" onclick="location.href='mypage.html'">◀</button>
@@ -237,6 +241,7 @@
                 });
                 userData.currentTheme = themeId;
                 document.body.className = themeId;
+                localStorage.setItem('shioya_theme', themeId);
                 updateButtons();
             } catch (error) {
                 console.error("着せ替えエラー:", error);

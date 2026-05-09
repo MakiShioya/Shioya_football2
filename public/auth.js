@@ -74,6 +74,7 @@ auth.onAuthStateChanged(async (user) => {
             if (data.currentTheme) {
                 // shop.html 等で保存されたテーマがあれば、bodyタグにクラスとして付与する
                 document.body.className = data.currentTheme;
+                localStorage.setItem('shioya_theme', data.currentTheme);
             }
         
         }

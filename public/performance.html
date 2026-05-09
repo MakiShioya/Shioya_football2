@@ -71,6 +71,10 @@
     </style>
 </head>
 <body>
+    <script>
+        const savedTheme = localStorage.getItem('shioya_theme');
+        if (savedTheme) document.body.className = savedTheme;
+    </script>
 
     <!-- ① 上部メニュー -->
     <header class="top-bar">
