@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-08T03:54:05.451Z",
+  "updated": "2026-05-09T03:56:21.364Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -382,9 +382,9 @@
       "leagueCode": "BL1",
       "goals": 7,
       "assists": 5,
-      "rating": "6.88",
-      "minutes": 2885,
-      "appearances": 40
+      "rating": "6.86",
+      "minutes": 2967,
+      "appearances": 41
     },
     {
       "name": "鈴木彩艶",
@@ -569,9 +569,9 @@
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 1,
-      "rating": "6.71",
-      "minutes": 356,
-      "appearances": 9
+      "rating": "6.73",
+      "minutes": 377,
+      "appearances": 10
     },
     {
       "name": "塩貝健人",
