@@ -5,9 +5,14 @@
 	<key>NSUserTrackingUsageDescription</key>
 	<string>お客様の興味関心に合わせたパーソナライズ広告を表示するために使用します。</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>ca-app-pub-4686002256203931~6883257092</string>
 	<key>SKAdNetworkItems</key>
-	<array/>
+<array>
+    <dict>
+        <key>SKAdNetworkIdentifier</key>
+        <string>cstr6suwn9.skadnetwork</string>
+    </dict>
+</array>
 	<key>CAPACITOR_DEBUG</key>
 	<string>$(CAPACITOR_DEBUG)</string>
 	<key>CFBundleDevelopmentRegion</key>

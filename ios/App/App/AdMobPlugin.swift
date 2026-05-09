@@ -46,7 +46,7 @@ public class AdMobPlugin: CAPPlugin {
 
             print("⏳ バナー広告をロード中...")
             // Google公式のバナー用テストID
-            let adUnitID = "ca-app-pub-3940256099942544/2934735716"
+            let adUnitID = "ca-app-pub-4686002256203931/9996121154"
 
             // バナーの作成（標準的な 320x50 サイズ）
             let banner = BannerView(adSize: AdSizeBanner)
