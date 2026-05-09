@@ -9,7 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions-compat.js"></script> <!-- 購入処理用 -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions-compat.js"></script>
     
     <link rel="stylesheet" href="common.css">
 
@@ -21,91 +21,72 @@
             padding-bottom: 120px;
         }
 
+        /* ① ゴールド表示の小型化 */
         .gold-display-card {
             background: rgba(67, 37, 23, 0.9);
             color: #ECDBBF;
             border: 2px solid #8b4513;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 12px;
             text-align: center;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            margin-bottom: 15px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .gold-display-card h2 { margin: 0; font-size: 1rem; color: #FFB347; }
+        .gold-display-card .amount { font-size: 1.6rem; font-weight: bold; color: #ffd700; text-shadow: 1px 1px 2px #000; }
 
-        .gold-display-card h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-            color: #FFB347;
+        /* ③ タブデザイン */
+        .shop-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #8b4513;
         }
-
-        .gold-display-card .amount {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 1px 1px 2px #000;
+        .tab-btn {
+            flex: 1; padding: 10px; border: none; background: #ECDBBF; color: #8b4513;
+            font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: 0.2s;
         }
+        .tab-btn.active { background: linear-gradient(to bottom, #ff9800, #f57c00); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
+        /* ② カード全体の小型化 */
         .theme-card {
             background: linear-gradient(145deg, #fff8dc, #fdf5e6);
-            border: 3px solid #8b4513;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+            border: 2px solid #8b4513;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             color: #432517;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
         }
 
-        .theme-card h3 {
-            margin: 0;
-            font-size: 1.3rem;
-            border-bottom: 2px dashed #8b4513;
-            padding-bottom: 8px;
+        /* ⑤ アイコンプレビュー用の横並びレイアウト */
+        .item-row { display: flex; align-items: center; gap: 15px; }
+        .item-icon-img {
+            width: 60px; height: 60px; /* 実際のアプリアイコンに近いサイズ */
+            border-radius: 14px; /* iOS風の角丸 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            object-fit: cover;
+            background: #ccc;
         }
+        .item-info { flex: 1; }
+        .item-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; border-bottom: 1px dashed #8b4513; padding-bottom: 4px; }
+        .item-info p { margin: 0; font-size: 0.9rem; font-weight: bold; color: #e65100; }
 
-        .theme-card p {
-            margin: 0;
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
+        /* ボタンの小型化 */
         .btn-shop {
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            border: none;
-            transition: all 0.1s;
-            color: white;
-            margin-top: 10px;
+            padding: 8px 15px; border-radius: 8px; font-size: 0.95rem; font-weight: bold;
+            cursor: pointer; width: 100%; border: none; color: white; margin-top: 10px;
         }
-
-        .btn-shop:active:not(:disabled) {
-            transform: translateY(4px);
-        }
-
-        .btn-buy {
-            background: linear-gradient(to bottom, #ff9800, #f57c00);
-            border: 2px solid #e65100;
-            box-shadow: 0 4px 0 #e65100;
-        }
-
-        .btn-equip {
-            background: linear-gradient(to bottom, #4facfe, #00f2fe);
-            border: 2px solid #00a8ff;
-            box-shadow: 0 4px 0 #0097e6;
-        }
-
-        .btn-equipped {
-            background: #6c757d;
-            border: 2px solid #495057;
-            box-shadow: none;
-            cursor: default;
-        }
+        .btn-shop:active:not(:disabled) { transform: translateY(3px); }
+        .btn-buy { background: linear-gradient(to bottom, #ff9800, #f57c00); border: 2px solid #e65100; box-shadow: 0 3px 0 #e65100; }
+        .btn-equip { background: linear-gradient(to bottom, #4facfe, #00f2fe); border: 2px solid #00a8ff; box-shadow: 0 3px 0 #0097e6; }
+        .btn-equipped { background: #6c757d; border: 2px solid #495057; box-shadow: none; cursor: default; }
     </style>
 </head>
 <body class="theme-default">
@@ -116,36 +97,102 @@
 
     <header class="top-bar">
         <button class="menu-icon-btn" onclick="location.href='mypage.html'">◀</button>
-        <h1>着せ替えショップ</h1>
+        <h1>ショップ</h1>
     </header>
 
     <div class="shop-container">
         
-        <!-- 所持金表示エリア -->
+        <!-- 所持金表示（小型化） -->
         <div class="gold-display-card">
-            <h2>現在の所持ゴールド</h2>
+            <h2>所持ゴールド</h2>
             <div class="amount"><span id="shop-gold-display">---</span> G</div>
         </div>
 
-        <!-- テーマ1：デフォルト -->
-        <div class="theme-card">
-            <h3>いつもの色（デフォルト）</h3>
-            <p>価格: 最初から所持</p>
-            <button id="btn-theme-default" class="btn-shop" disabled>読み込み中...</button>
+        <!-- タブ切り替えボタン -->
+        <div class="shop-tabs">
+            <button id="tabBtn-color" class="tab-btn active" onclick="switchTab('color')">背景テーマ</button>
+            <button id="tabBtn-icon" class="tab-btn" onclick="switchTab('icon')">アイコン</button>
         </div>
 
-        <!-- テーマ2：芝生（スタジアム） -->
-        <div class="theme-card">
-            <h3>芝生（スタジアム・グリーン）</h3>
-            <p>価格: 1,000 G</p>
-            <button id="btn-theme-grass" class="btn-shop" disabled>読み込み中...</button>
+        <!-- ==============================
+             背景テーマ 売り場
+        ============================== -->
+        <div id="tabContent-color" class="tab-content active">
+            <div class="theme-card">
+                <div class="item-info">
+                    <h3>いつもの色（デフォルト）</h3>
+                    <p>初期装備</p>
+                </div>
+                <button id="btn-theme-default" class="btn-shop" disabled>読み込み中...</button>
+            </div>
+
+            <div class="theme-card">
+                <div class="item-info">
+                    <h3>スタジアム・グリーン</h3>
+                    <p>1,000 G</p>
+                </div>
+                <button id="btn-theme-grass" class="btn-shop" disabled>読み込み中...</button>
+            </div>
+
+            <div class="theme-card">
+                <div class="item-info">
+                    <h3>ミッドナイト（夜戦）</h3>
+                    <p>2,000 G</p>
+                </div>
+                <button id="btn-theme-midnight" class="btn-shop" disabled>読み込み中...</button>
+            </div>
         </div>
 
-        <!-- テーマ3：ミッドナイト -->
-        <div class="theme-card">
-            <h3>ミッドナイト（夜戦）</h3>
-            <p>価格: 2,000 G</p>
-            <button id="btn-theme-midnight" class="btn-shop" disabled>読み込み中...</button>
+        <!-- ==============================
+             アプリアイコン 売り場
+        ============================== -->
+        <div id="tabContent-icon" class="tab-content">
+            
+            <div class="theme-card">
+                <div class="item-row">
+                    <!-- 画像はご自身のフォルダ構成に合わせてください -->
+                    <img src="img/komiya-icon.png" class="item-icon-img" alt="こみや" onerror="this.src='https://via.placeholder.com/60/ECDBBF/432517?text=KOMIYA'">
+                    <div class="item-info">
+                        <h3>こみや</h3>
+                        <p>初期装備</p>
+                    </div>
+                </div>
+                <button id="btn-icon-default" class="btn-shop" disabled>読み込み中...</button>
+            </div>
+
+            <div class="theme-card">
+                <div class="item-row">
+                    <img src="img/shioya-icon.png" class="item-icon-img" alt="しおや" onerror="this.src='https://via.placeholder.com/60/ECDBBF/432517?text=SHIOYA'">
+                    <div class="item-info">
+                        <h3>しおや</h3>
+                        <p>500 G</p>
+                    </div>
+                </div>
+                <button id="btn-icon-shioya" class="btn-shop" disabled>読み込み中...</button>
+            </div>
+
+            <div class="theme-card">
+                <div class="item-row">
+                    <img src="img/happa-icon.png" class="item-icon-img" alt="はっぱ" onerror="this.src='https://via.placeholder.com/60/ECDBBF/432517?text=HAPPA'">
+                    <div class="item-info">
+                        <h3>はっぱ</h3>
+                        <p>500 G</p>
+                    </div>
+                </div>
+                <button id="btn-icon-happa" class="btn-shop" disabled>読み込み中...</button>
+            </div>
+
+            <div class="theme-card">
+                <div class="item-row">
+                    <img src="img/machida-icon.png" class="item-icon-img" alt="町田" onerror="this.src='https://via.placeholder.com/60/ECDBBF/432517?text=MACHIDA'">
+                    <div class="item-info">
+                        <h3>町田</h3>
+                        <p>500 G</p>
+                    </div>
+                </div>
+                <button id="btn-icon-machida" class="btn-shop" disabled>読み込み中...</button>
+            </div>
+
         </div>
 
     </div>
@@ -164,7 +211,30 @@
         let currentUser = null;
         let userData = null;
 
-        // ログイン状態の監視
+        // タブ切り替え処理
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            document.getElementById(`tabBtn-${tabId}`).classList.add('active');
+            document.getElementById(`tabContent-${tabId}`).classList.add('active');
+        }
+
+        // ネイティブ側へアイコン変更の命令を送る（Swiftプラグイン呼び出し）
+        async function callNativeIconChange(xcodeIconName) {
+            const capPlugins = (window.Capacitor && window.Capacitor.Plugins) ? window.Capacitor.Plugins : {};
+            if (capPlugins.AppIconPlugin) {
+                try {
+                    await capPlugins.AppIconPlugin.changeIcon({ iconName: xcodeIconName });
+                    console.log("アイコン変更命令送信:", xcodeIconName);
+                } catch (error) {
+                    console.error("アイコン変更エラー:", error);
+                }
+            } else {
+                console.log("Webブラウザではアイコンは変更できません");
+            }
+        }
+
         firebase.auth().onAuthStateChanged(async (user) => {
             if (user) {
                 currentUser = user;
@@ -175,111 +245,132 @@
             }
         });
 
-        // ユーザー情報の読み込みとUI更新
         async function loadShopData() {
             const doc = await firebase.firestore().collection("users").doc(currentUser.uid).get();
             if (doc.exists) {
                 userData = doc.data();
                 
-                // データが存在しない場合の初期化
-                if (!userData.ownedThemes) userData.ownedThemes = ['theme-default'];
+                // データ初期化（アイコン所持データもownedThemesに混ぜて管理します）
+                if (!userData.ownedThemes) userData.ownedThemes = ['theme-default', 'icon-default'];
                 if (!userData.currentTheme) userData.currentTheme = 'theme-default';
+                if (!userData.currentIcon) userData.currentIcon = 'icon-default';
                 if (!userData.gold) userData.gold = 0;
 
-                // 所持金の表示
                 document.getElementById('shop-gold-display').innerText = userData.gold;
-                
-                // 現在のテーマを背景に即時反映（common.css側の設定が必要）
                 document.body.className = userData.currentTheme;
 
                 updateButtons();
             }
         }
 
-        // ボタンの表示（購入/着替える/適用中）を切り替える
         function updateButtons() {
+            // 背景テーマの定義
             const themes = [
-                { id: 'theme-default', price: 0 },
-                { id: 'theme-grass', price: 1000 },
-                { id: 'theme-midnight', price: 2000 }
+                { id: 'theme-default', price: 0, type: 'theme' },
+                { id: 'theme-grass', price: 1000, type: 'theme' },
+                { id: 'theme-midnight', price: 2000, type: 'theme' }
+            ];
+            
+            // アイコンの定義 (xcodeNameはXcodeのBuild Settingsに入力した名前)
+            const icons = [
+                { id: 'icon-default', price: 0, type: 'icon', xcodeName: 'default' },
+                { id: 'icon-shioya', price: 500, type: 'icon', xcodeName: 'ShioyaIcon' },
+                { id: 'icon-happa', price: 500, type: 'icon', xcodeName: 'HappaIcon' },
+                { id: 'icon-machida', price: 500, type: 'icon', xcodeName: 'MachidaIcon' }
             ];
 
-            themes.forEach(theme => {
-                const btn = document.getElementById(`btn-${theme.id}`);
+            const allItems = [...themes, ...icons];
+
+            allItems.forEach(item => {
+                const btn = document.getElementById(`btn-${item.id}`);
                 if (!btn) return;
 
-                // クラスを一度リセット
                 btn.className = "btn-shop";
 
-                if (userData.currentTheme === theme.id) {
-                    // 現在適用中
-                    btn.innerText = "適用中";
+                // 現在装備中かどうかの判定
+                const isEquipped = (item.type === 'theme' && userData.currentTheme === item.id) || 
+                                   (item.type === 'icon' && userData.currentIcon === item.id);
+
+                if (isEquipped) {
+                    btn.innerText = "装備中";
                     btn.disabled = true;
                     btn.classList.add("btn-equipped");
                     btn.onclick = null;
-                } else if (userData.ownedThemes.includes(theme.id) || theme.id === 'theme-default') {
-                    // 購入済み（またはデフォルト）
-                    btn.innerText = "このテーマに着替える";
+                } else if (userData.ownedThemes.includes(item.id) || item.id === 'theme-default' || item.id === 'icon-default') {
+                    btn.innerText = "着替える";
                     btn.disabled = false;
                     btn.classList.add("btn-equip");
-                    btn.onclick = () => equipTheme(theme.id);
+                    btn.onclick = () => equipItem(item.id, item.type, item.xcodeName);
                 } else {
-                    // 未購入
-                    btn.innerText = `${theme.price} G で購入`;
+                    btn.innerText = `${item.price} G で購入`;
                     btn.disabled = false;
                     btn.classList.add("btn-buy");
-                    btn.onclick = () => buyTheme(theme.id, theme.price);
+                    btn.onclick = () => buyItem(item.id, item.price, item.type, item.xcodeName);
                 }
             });
         }
 
-        // 着せ替え処理（Firestoreの更新）
-        async function equipTheme(themeId) {
-            try {
-                await firebase.firestore().collection("users").doc(currentUser.uid).update({
-                    currentTheme: themeId
-                });
-                userData.currentTheme = themeId;
-                document.body.className = themeId;
-                localStorage.setItem('shioya_theme', themeId);
-                updateButtons();
-            } catch (error) {
-                console.error("着せ替えエラー:", error);
-                alert("着せ替えの保存に失敗しました。");
-            }
+        // 装備（着替え）処理
+        async function equipItem(itemId, itemType, xcodeName) {
+    try {
+        if (itemType === 'theme') {
+            await firebase.firestore().collection("users").doc(currentUser.uid).update({ currentTheme: itemId });
+            userData.currentTheme = itemId;
+            document.body.className = itemId;
+            localStorage.setItem('shioya_theme', itemId);
+        } else if (itemType === 'icon') {
+            await firebase.firestore().collection("users").doc(currentUser.uid).update({ currentIcon: itemId });
+            userData.currentIcon = itemId;
+            // Swiftプラグインを呼び出してホーム画面のアイコンを変更
+            await callNativeIconChange(xcodeName);
         }
+    } catch (error) {
+        console.error("装備エラー:", error);
+        alert("装備の反映に失敗しました。");
+    } finally {
+        // 成功・失敗に関わらず、ボタンの表示を最新の状態に更新
+        updateButtons();
+    }
+}
 
-        // 購入処理（銀行員呼び出し）
-        async function buyTheme(themeId, price) {
-            if (confirm(`${price} G を消費して「${themeId.replace('theme-', '')}」を購入しますか？`)) {
-                try {
-                    // ボタンを一時的に連打防止
-                    const btn = document.getElementById(`btn-${themeId}`);
-                    btn.disabled = true;
-                    btn.innerText = "通信中...";
+        // 購入処理（共通の銀行員を呼び出す）
+        async function buyItem(itemId, price, itemType, xcodeName) {
+    const displayName = itemId.replace('theme-', '背景：').replace('icon-', 'アイコン：');
+    if (!confirm(`${price} G を消費して「${displayName}」を購入しますか？`)) return;
 
-                    // 銀行員（Functions）に依頼
-                    const purchaseTheme = firebase.functions().httpsCallable('purchaseTheme');
-                    const result = await purchaseTheme({ themeId: themeId, price: price });
+    const btn = document.getElementById(`btn-${itemId}`);
+    try {
+        // ボタンを無効化し、通信中を表示
+        btn.disabled = true;
+        btn.innerText = "通信中...";
 
-                    if (result.data.success) {
-                        alert("購入が完了しました！");
-                        // 購入後は自動的にそのテーマを着せる
-                        await equipTheme(themeId); 
-                        // 所持金など最新データを再読み込み
-                        await loadShopData();
-                    } else {
-                        alert("購入できませんでした: " + result.data.message);
-                        btn.disabled = false;
-                        updateButtons();
-                    }
-                } catch (error) {
-                    console.error("購入エラー:", error);
-                    alert("通信エラーが発生しました。");
-                    updateButtons();
-                }
+        // 銀行員（Functions）に依頼
+        const purchaseTheme = firebase.functions().httpsCallable('purchaseTheme');
+        const result = await purchaseTheme({ themeId: itemId, price: price });
+
+        if (result.data.success) {
+            alert("購入が完了しました！");
+            
+            // 重要：サーバーの再読み込みを待たずに、手元のデータを即座に更新する
+            if (!userData.ownedThemes.includes(itemId)) {
+                userData.ownedThemes.push(itemId);
             }
+            userData.gold = result.data.newGold;
+            document.getElementById('shop-gold-display').innerText = userData.gold;
+
+            // 購入後はそのまま装備（この中で updateButtons が呼ばれる）
+            await equipItem(itemId, itemType, xcodeName);
+        } else {
+            alert("購入できませんでした: " + result.data.message);
         }
+    } catch (error) {
+        console.error("購入エラー:", error);
+        alert("通信エラーが発生しました。");
+    } finally {
+        // 全ての処理が終わったらボタンの状態をリセット
+        updateButtons();
+    }
+}
     </script>
 </body>
 </html>
