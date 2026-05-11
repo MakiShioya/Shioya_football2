@@ -1,0 +1,118 @@
+{
+  "updated": "2026-05-11T20:09:33.593Z",
+  "dateLabel": "2026年5月12日号",
+  "formation": "3-4-2-1",
+  "totalScore": 91.69,
+  "list": [
+    {
+      "name": "小久保玲央ブライアン",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 9.48,
+      "originalRating": 9.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "伊藤洋輝",
+      "posId": "RCB",
+      "top": 70,
+      "left": 75,
+      "finalScore": 7.88,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "安藤智哉",
+      "posId": "CB",
+      "top": 70,
+      "left": 50,
+      "finalScore": 8.1,
+      "originalRating": 7.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "谷口彰悟",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "伊東純也",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 9.17,
+      "originalRating": 8.9,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "中村敬斗",
+      "posId": "LSH",
+      "top": 45,
+      "left": 15,
+      "finalScore": 9.5,
+      "originalRating": 10,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "佐野海舟",
+      "posId": "RDMF",
+      "top": 50,
+      "left": 65,
+      "finalScore": 7.56,
+      "originalRating": 7,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "守田英正",
+      "posId": "LDMF",
+      "top": 50,
+      "left": 35,
+      "finalScore": 7.65,
+      "originalRating": 7.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "三戸舜介",
+      "posId": "ROMF",
+      "top": 30,
+      "left": 65,
+      "finalScore": 8.38,
+      "originalRating": 8.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "鎌田大地",
+      "posId": "LOMF",
+      "top": 30,
+      "left": 35,
+      "finalScore": 8.25,
+      "originalRating": 7.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "前田大然",
+      "posId": "CF",
+      "top": 15,
+      "left": 50,
+      "finalScore": 8.2,
+      "originalRating": 8.2,
+      "suit": 1,
+      "isDummy": false
+    }
+  ]
+}
