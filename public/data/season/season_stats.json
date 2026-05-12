@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-11T04:37:05.664Z",
+  "updated": "2026-05-12T04:06:05.783Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -130,8 +130,8 @@
       "goals": 1,
       "assists": 5,
       "rating": "6.92",
-      "minutes": 2326,
-      "appearances": 44
+      "minutes": 2391,
+      "appearances": 45
     },
     {
       "name": "坂元達裕",
@@ -426,9 +426,9 @@
       "leagueCode": "PL",
       "goals": 4,
       "assists": 0,
-      "rating": "6.84",
-      "minutes": 1480,
-      "appearances": 39
+      "rating": "6.83",
+      "minutes": 1569,
+      "appearances": 40
     },
     {
       "name": "野澤大志ブランドン",
@@ -571,7 +571,7 @@
       "assists": 1,
       "rating": "6.73",
       "minutes": 377,
-      "appearances": 10
+      "appearances": 11
     },
     {
       "name": "塩貝健人",
