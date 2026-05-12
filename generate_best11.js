@@ -74,6 +74,7 @@ function solveAssignment(players, positions) {
     backtrack(0, 0);
     return { score: bestScore, assignment: bestAssignment };
 }
+
 async function generateBest11() {
     const matchesDir = path.join(__dirname, 'public', 'data', 'matches');
     const best11Dir = path.join(__dirname, 'public', 'data', 'best11');
@@ -82,9 +83,32 @@ async function generateBest11() {
 
     const playersData = {};
 
-    // ★ 変更: stats_ から始まるファイルを対象にする
+    // ★ 変更: 現在の日付から1週間前（7日前）のしきい値を作成
+    const now = new Date();
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(now.getDate() - 7);
+    
+    // 比較用の文字列を作成 (例: "20260505")
+    const threshold = sevenDaysAgo.toISOString().split('T')[0].replace(/-/g, '');
+
+    // ★ 変更: ファイル名から抽出した日付部分で、直近1週間のものだけをフィルタリング
     const files = fs.readdirSync(matchesDir).filter(f => f.startsWith('stats_') && f.endsWith('.json'));
-    const targets = files.sort().reverse().slice(0, 7);
+    
+    const targets = files.filter(f => {
+        // ファイル名から日付部分(8桁の数字)を抽出
+        const dateMatch = f.match(/\d{8}/);
+        if (!dateMatch) return false;
+        
+        // しきい値以上の日付（＝直近7日以内）のファイルのみ残す
+        return dateMatch[0] >= threshold;
+    }).sort().reverse();
+
+    if (targets.length === 0) {
+        console.log(`直近1週間 (${threshold}以降) の試合データが見つかりませんでした。処理を終了します。`);
+        return;
+    }
+
+    console.log(`対象ファイル数: ${targets.length}件 (${threshold} 以降のデータを処理します)`);
 
     targets.forEach(file => {
         const content = JSON.parse(fs.readFileSync(path.join(matchesDir, file), 'utf8'));
@@ -106,7 +130,6 @@ async function generateBest11() {
             }
         });
     });
-
 
     const allPlayers = Object.values(playersData);
 
@@ -142,10 +165,11 @@ async function generateBest11() {
     }
 
     // 3. 保存処理 (Confirmed_... と 目次更新)
-    const now = new Date();
-    now.setUTCHours(now.getUTCHours() + 9);
-    const dateStr = now.toISOString().split('T')[0].replace(/-/g, '');
-    const dateLabel = `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日号`;
+    // 変数名の衝突を避けるため、保存用の時刻取得を saveDate とする
+    const saveDate = new Date();
+    saveDate.setUTCHours(saveDate.getUTCHours() + 9);
+    const dateStr = saveDate.toISOString().split('T')[0].replace(/-/g, '');
+    const dateLabel = `${saveDate.getFullYear()}年${saveDate.getMonth()+1}月${saveDate.getDate()}日号`;
 
     const confirmedResult = {
         updated: new Date().toISOString(),
