@@ -177,9 +177,18 @@
             <button onclick="logoutFromMyPage()" style="width: 100%; padding: 15px; background: #6c757d; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem;">ログアウト</button>
         </div>
 
-        <div class="card" style="background: transparent; border: none; box-shadow: none; padding: 0; margin-top: 15px;">
-            <button onclick="deleteUserAccount()" style="width: 100%; padding: 15px; background: transparent; color: #d32f2f; border: 2px solid #d32f2f; border-radius: 8px; font-weight: bold; font-size: 1rem;">退会（アカウントを削除）</button>
+        <div class="card" style="margin-top: 40px; border: 2px solid #d32f2f; background: #ffebee;">
+            <p style="color: #d32f2f; font-weight: bold; text-align: center; font-size: 0.9rem; margin-top: 0; margin-bottom: 10px;">
+                ※アカウントを完全に削除します
+            </p>
+            <button onclick="deleteUserAccount()" style="width: 100%; padding: 15px; background: #d32f2f; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 0 #b71c1c;">
+                退会（アカウントを削除）
+            </button>
         </div>
+        
+        <!-- 下部メニューとの被り防止用の確実な余白スペース -->
+        <div style="height: 80px;"></div>
+        
     </div>
 
     <div id="helpModal" class="modal-overlay" onclick="closeHelpModal()">

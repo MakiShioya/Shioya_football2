@@ -428,6 +428,12 @@ async function loginWithGoogle() {
 // ▼▼▼ 追加：アカウント削除（退会）処理 ▼▼▼
 function deleteUserAccount() {
     safeConfirm("本当に退会（アカウント削除）しますか？\n※すべてのゲームデータ・所持アイテムが消去され、復元することはできなくなります。", async () => {
+        const confirmText = prompt("退会処理を続行する場合は、下の入力欄に「わかりました」と入力してOKを押してください。");
+        
+        if (confirmText !== "わかりました") {
+            safeAlert("入力が一致しませんでした。\n退会処理をキャンセルしました。");
+            return;
+        }
         const user = auth.currentUser;
         if (!user) return;
 
