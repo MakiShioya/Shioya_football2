@@ -1,8 +1,8 @@
 {
-  "updated": "2026-05-11T20:09:33.593Z",
+  "updated": "2026-05-12T00:48:08.568Z",
   "dateLabel": "2026年5月12日号",
   "formation": "3-4-2-1",
-  "totalScore": 91.69,
+  "totalScore": 89.98,
   "list": [
     {
       "name": "小久保玲央ブライアン",
@@ -25,22 +25,22 @@
       "isDummy": false
     },
     {
-      "name": "安藤智哉",
+      "name": "谷口彰悟",
       "posId": "CB",
       "top": 70,
       "left": 50,
-      "finalScore": 8.1,
-      "originalRating": 7.5,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
       "suit": 1,
       "isDummy": false
     },
     {
-      "name": "谷口彰悟",
+      "name": "安藤智哉",
       "posId": "LCB",
       "top": 70,
       "left": 25,
-      "finalScore": 7.52,
-      "originalRating": 7.3,
+      "finalScore": 7.45,
+      "originalRating": 6.9,
       "suit": 1,
       "isDummy": false
     },
@@ -65,7 +65,7 @@
       "isDummy": false
     },
     {
-      "name": "佐野海舟",
+      "name": "藤田譲瑠チマ",
       "posId": "RDMF",
       "top": 50,
       "left": 65,
@@ -75,32 +75,32 @@
       "isDummy": false
     },
     {
-      "name": "守田英正",
+      "name": "佐野海舟",
       "posId": "LDMF",
       "top": 50,
       "left": 35,
-      "finalScore": 7.65,
-      "originalRating": 7.5,
-      "suit": 1,
-      "isDummy": false
-    },
-    {
-      "name": "三戸舜介",
-      "posId": "ROMF",
-      "top": 30,
-      "left": 65,
-      "finalScore": 8.38,
-      "originalRating": 8.3,
+      "finalScore": 7.45,
+      "originalRating": 6.9,
       "suit": 1,
       "isDummy": false
     },
     {
       "name": "鎌田大地",
+      "posId": "ROMF",
+      "top": 30,
+      "left": 65,
+      "finalScore": 8.25,
+      "originalRating": 7.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "久保建英",
       "posId": "LOMF",
       "top": 30,
       "left": 35,
-      "finalScore": 8.25,
-      "originalRating": 7.5,
+      "finalScore": 7.52,
+      "originalRating": 6.9,
       "suit": 1,
       "isDummy": false
     },
