@@ -3,7 +3,7 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 
 // 【最推し設定】アプリから呼び出す命令（第2世代）
-exports.setMostFavoritePlayer = onCall(async (request) => {
+exports.setMostFavoritePlayer = onCall({ region: "asia-northeast1" }, async (request) => {
     // ログイン確認（第2世代では request.auth に入っています）
     if (!request.auth) {
         throw new HttpsError("unauthenticated", "ログインが必要です。");
@@ -40,7 +40,7 @@ exports.setMostFavoritePlayer = onCall(async (request) => {
 });
 
 // 【ログインボーナス】予定表を確認した時に100G付与（第2世代）
-exports.claimDailyBonus = onCall(async (request) => {
+exports.claimDailyBonus = onCall({ region: "asia-northeast1" }, async (request) => {
     // 1. ログイン確認
     if (!request.auth) {
         throw new HttpsError("unauthenticated", "ログインが必要です。");
@@ -83,7 +83,7 @@ exports.claimDailyBonus = onCall(async (request) => {
 // functions/index.js に追記
 
 // 【ショップ】テーマを購入する（第2世代）
-exports.purchaseTheme = onCall(async (request) => {
+exports.purchaseTheme = onCall({ region: "asia-northeast1" }, async (request) => {
     if (!request.auth) throw new HttpsError("unauthenticated", "ログインが必要です。");
 
     const uid = request.auth.uid;
@@ -118,7 +118,7 @@ exports.purchaseTheme = onCall(async (request) => {
 // functions/index.js に追加
 
 // 【ミュージック用ショップ】アイコンを購入する
-exports.purchaseMusicIcon = onCall(async (request) => {
+exports.purchaseMusicIcon = onCall({ region: "asia-northeast1" }, async (request) => {
     if (!request.auth) throw new HttpsError("unauthenticated", "ログインが必要です。");
 
     const uid = request.auth.uid;
