@@ -117,12 +117,13 @@ exports.purchaseTheme = onCall({ region: "asia-northeast1" }, async (request) =>
 
 // functions/index.js に追加
 
-// 【ミュージック用ショップ】アイコンを購入する
+// 【ミュージック用ショップ】アイテム購入処理（統合版）
 exports.purchaseMusicIcon = onCall({ region: "asia-northeast1" }, async (request) => {
     if (!request.auth) throw new HttpsError("unauthenticated", "ログインが必要です。");
 
     const uid = request.auth.uid;
-    const { iconId, price } = request.data;
+    // アプリ側から送られてくる名前（itemId, itemType）に合わせる
+    const { itemId, itemType, price } = request.data;
     const userRef = admin.firestore().collection("users").doc(uid);
 
     return admin.firestore().runTransaction(async (transaction) => {
@@ -130,22 +131,27 @@ exports.purchaseMusicIcon = onCall({ region: "asia-northeast1" }, async (request
         if (!userDoc.exists) throw new HttpsError("not-found", "ユーザーが見つかりません。");
 
         const userData = userDoc.data();
-        // ミュージック専用の所持リストを確認（なければ空配列）
-        const owned = userData.ownedMusicIcons || [];
+        
+        // アイコンなら ownedMusicIcons、テーマなら ownedMusicThemes の箱を確認
+        const fieldName = (itemType === 'icon') ? 'ownedMusicIcons' : 'ownedMusicThemes';
+        const owned = userData[fieldName] || [];
 
-        if (owned.includes(iconId)) {
+        if (owned.includes(itemId)) {
             return { success: false, message: "既に所有しています。" };
         }
-        if ((userData.gold || 0) < price) {
+        
+        // ゴールド（int64）が足りるかチェック
+        const currentGold = userData.gold || 0;
+        if (currentGold < price) {
             return { success: false, message: "ゴールドが足りません。" };
         }
 
-        // 銀行員の処理：共通のGoldを減らし、ミュージック専用リストに追加
+        // 銀行員の更新処理
         transaction.update(userRef, {
-            gold: admin.firestore.FieldValue.increment(-price),
-            ownedMusicIcons: admin.firestore.FieldValue.arrayUnion(iconId)
+            gold: admin.firestore.FieldValue.increment(-price), // ゴールドを減らす
+            [fieldName]: admin.firestore.FieldValue.arrayUnion(itemId) // 適切な箱にアイテムを追加
         });
 
-        return { success: true, newGold: (userData.gold || 0) - price };
+        return { success: true, newGold: currentGold - price };
     });
 });
