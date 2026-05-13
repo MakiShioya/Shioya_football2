@@ -114,3 +114,38 @@ exports.purchaseTheme = onCall(async (request) => {
         return { success: true, newGold: (userData.gold || 0) - price };
     });
 });
+
+// functions/index.js に追加
+
+// 【ミュージック用ショップ】アイコンを購入する
+exports.purchaseMusicIcon = onCall(async (request) => {
+    if (!request.auth) throw new HttpsError("unauthenticated", "ログインが必要です。");
+
+    const uid = request.auth.uid;
+    const { iconId, price } = request.data;
+    const userRef = admin.firestore().collection("users").doc(uid);
+
+    return admin.firestore().runTransaction(async (transaction) => {
+        const userDoc = await transaction.get(userRef);
+        if (!userDoc.exists) throw new HttpsError("not-found", "ユーザーが見つかりません。");
+
+        const userData = userDoc.data();
+        // ミュージック専用の所持リストを確認（なければ空配列）
+        const owned = userData.ownedMusicIcons || [];
+
+        if (owned.includes(iconId)) {
+            return { success: false, message: "既に所有しています。" };
+        }
+        if ((userData.gold || 0) < price) {
+            return { success: false, message: "ゴールドが足りません。" };
+        }
+
+        // 銀行員の処理：共通のGoldを減らし、ミュージック専用リストに追加
+        transaction.update(userRef, {
+            gold: admin.firestore.FieldValue.increment(-price),
+            ownedMusicIcons: admin.firestore.FieldValue.arrayUnion(iconId)
+        });
+
+        return { success: true, newGold: (userData.gold || 0) - price };
+    });
+});
