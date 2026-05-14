@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-13T04:13:01.258Z",
+  "updated": "2026-05-14T04:12:46.921Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -9,19 +9,19 @@
       "goals": 5,
       "assists": 3,
       "rating": "6.71",
-      "minutes": 2416,
-      "appearances": 45
+      "minutes": 2446,
+      "appearances": 46
     },
     {
       "name": "前田大然",
       "team": "Celtic",
       "league": "Premiership",
       "leagueCode": "SPL",
-      "goals": 12,
+      "goals": 13,
       "assists": 9,
-      "rating": "6.66",
-      "minutes": 3484,
-      "appearances": 45
+      "rating": "6.67",
+      "minutes": 3584,
+      "appearances": 46
     },
     {
       "name": "小久保玲央ブライアン",
@@ -228,9 +228,9 @@
       "leagueCode": "PL",
       "goals": 1,
       "assists": 4,
-      "rating": "6.97",
-      "minutes": 2975,
-      "appearances": 42
+      "rating": "6.95",
+      "minutes": 2990,
+      "appearances": 43
     },
     {
       "name": "遠藤航",
@@ -349,9 +349,9 @@
       "leagueCode": "PD",
       "goals": 1,
       "assists": 1,
-      "rating": "6.61",
-      "minutes": 731,
-      "appearances": 28
+      "rating": "6.60",
+      "minutes": 761,
+      "appearances": 29
     },
     {
       "name": "久保建英",
