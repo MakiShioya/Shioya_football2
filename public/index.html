@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
-    <title>Shioya Football</title>
+    <meta name="description" content="海外で活躍する日本人サッカー選手の試合日程・成績・移籍情報を確認できる、しおやフットボール公式サイト。">
+    <meta property="og:title" content="しおやフットボール">
+<meta property="og:description" content="海外日本人サッカー選手の試合日程・成績・移籍情報">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://football.shioya-soft.com/">
+<meta property="og:image" content="https://football.shioya-soft.com/ogp.png">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://football.shioya-soft.com/">
+    <title>しおやフットボール | 海外日本人サッカー選手の試合日程・結果</title>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "しおやフットボール",
+  "url": "https://football.shioya-soft.com/",
+  "description": "海外で活躍する日本人サッカー選手の試合日程・成績・移籍情報を確認できるサイト"
+}
+</script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -131,7 +149,11 @@
     </script>
     <header class="top-bar">
         <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
-        <h1>試合予定を確認</h1>
+        <h1>海外日本人サッカー選手の試合予定</h1>
+        <p class="seo-description">
+しおやフットボールは、海外で活躍する日本人サッカー選手の
+試合日程・試合結果・移籍情報・シーズン成績を確認できるサイトです。
+</p>
         <!-- 追加: 右上のアカウントアイコン -->
         <button id="accountIconBtn" class="account-icon-btn" onclick="handleAccountClick()">👤</button>
     </header>
@@ -177,6 +199,7 @@
     </div>
 
     <main id="match-list">
+  <h2>今日の試合一覧</h2>
         <p style="text-align: center; color: #ECDBBF; margin-top: 20px;">試合情報を読み込み中...</p>
     </main>
 
