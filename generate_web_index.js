@@ -191,6 +191,9 @@ if (filtered.length === 0) {
 let indexHtml = fs.readFileSync(indexPath, 'utf8');
 const regex = /(<main id="match-list">)[\s\S]*?(<\/main>)/i;
 indexHtml = indexHtml.replace(regex, `$1${matchHtml}$2`);
-
+indexHtml = indexHtml.replace(
+    '<h1>予定確認</h1>',
+    '<h1 style="font-size: 1.2rem;">海外日本人サッカー選手 試合日程・予定</h1>'
+);
 fs.writeFileSync(outputPath, indexHtml, 'utf8');
 console.log(`[SEO] Web版専用の index_web.html を同じ階層に生成しました。`);
