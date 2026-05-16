@@ -30,6 +30,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      - name: Copy index_web.html to index.html for Web SEO
+        run: cp public/index_web.html public/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
