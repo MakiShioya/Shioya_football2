@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <meta name="description" content="海外で活躍する日本人サッカー選手の試合日程・成績・移籍情報を確認できる、しおやフットボール公式サイト。">
+    <meta property="og:title" content="しおやフットボール">
+<meta property="og:description" content="海外日本人サッカー選手の試合日程・成績・移籍情報">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://football.shioya-soft.com/">
+<meta property="og:image" content="https://football.shioya-soft.com/ogp.png">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://football.shioya-soft.com/">
+    <title>しおやフットボール | 海外日本人サッカー選手の試合日程・結果</title>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "しおやフットボール",
+  "url": "https://football.shioya-soft.com/",
+  "description": "海外で活躍する日本人サッカー選手の試合日程・成績・移籍情報を確認できるサイト"
+}
+</script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-functions-compat.js"></script>    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
+    <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
+    
+    <!-- ▼ 新しく作った common.css を読み込む ▼ -->
+    <link rel="stylesheet" href="common.css">
+
+    <style>
+        /* index.html 固有のスタイル（フィルターやコントロールパネル） */
+        .control-panel {
+            background: #fff8dc;
+            border: 3px solid #8b4513;
+            border-radius: 12px;
+            margin: 15px auto;
+            padding: 15px;
+            width: 95%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background: #ECDBBF;
+            border-radius: 10px;
+            border: 2px solid #8b4513;
+            overflow: hidden;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            color: #8b4513;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .tab-btn:not(:last-child) {
+            border-right: 2px solid #8b4513;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(to bottom, #ff9800, #f57c00);
+            color: #fff;
+            text-shadow: 1px 1px 2px #432517;
+        }
+
+        .filter-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-select {
+            flex: 1.2;
+            padding: 8px 2px;
+            border-radius: 8px;
+            border: 2px solid #8b4513;
+            font-size: 0.85rem;
+            background-color: #ECDBBF;
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .filter-toggle {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: #ECDBBF;
+            border: 2px solid #8b4513;
+            padding: 8px 2px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: #432517;
+            white-space: nowrap;
+        }
+
+        .filter-toggle input[type="checkbox"] {
+            margin-right: 4px;
+            transform: scale(1.1);
+        }
+
+        /* ネタバレ防止ボタン */
+        .spoiler-btn {
+            cursor: pointer;
+            background: linear-gradient(to bottom, #8b4513, #432517);
+            color: #ECDBBF;
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 1px solid #2c160c;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            text-align: center;
+            line-height: 1.3;
+            width: 100%;
+        }
+        .spoiler-btn:active { transform: scale(0.95); }
+        .spoiler-btn span { font-size: 0.7rem; opacity: 0.9; }
+        .actual-score {
+            display: none; font-size: 1.3em; font-weight: 900; color: #432517;
+        }
+        
+        /* 現在のページのメニューボタンの枠線を強調 */
+        .btn-schedule { border-color: white !important; }
+    </style>
+</head>
+<body>
+<script>
+        const savedTheme = localStorage.getItem('shioya_theme');
+        if (savedTheme) document.body.className = savedTheme;
+    </script>
+    <header class="top-bar">
+        <button class="menu-icon-btn" onclick="openNavModal()">☰</button>
+        <h1>海外日本人サッカー選手の試合予定</h1>
+
+        <!-- 追加: 右上のアカウントアイコン -->
+        <button id="accountIconBtn" class="account-icon-btn" onclick="handleAccountClick()">👤</button>
+    </header>
+
+    <div class="control-panel">
+        <div class="tab-container" style="margin-bottom: 12px;">
+            <button id="tab-yesterday" class="tab-btn" onclick="selectTab(-1, 'tab-yesterday')">昨日</button>
+            <button id="tab-today" class="tab-btn" onclick="selectTab(0, 'tab-today')">今日</button>
+            <button id="tab-tomorrow" class="tab-btn" onclick="selectTab(1, 'tab-tomorrow')">明日</button>
+        </div>
+
+        <div class="filter-row">
+            <select id="league-filter" class="filter-select">
+                <option value="all">全リーグ</option>
+                <optgroup label="5大リーグ 1部">
+                    <option value="premier_league">プレミア</option>
+                    <option value="laliga">ラ・リーガ</option>
+                    <option value="bundesliga">ブンデス</option>
+                    <option value="serie_a">セリエA</option>
+                    <option value="ligue_1">リーグアン</option>
+                </optgroup>
+                <optgroup label="2部リーグ">
+                    <option value="championship">英2部</option>
+                </optgroup>
+                <optgroup label="その他">
+                    <option value="belgium">ベルギー</option>
+                    <option value="portugal">ポルトガル</option>
+                    <option value="netherlands">オランダ</option>
+                    <option value="j_league">J1</option>
+                </optgroup>
+            </select>
+
+            <label class="filter-toggle">
+                <input type="checkbox" id="japanese-filter" checked>
+                日本人
+            </label>
+
+            <label class="filter-toggle">
+                <input type="checkbox" id="major-league-filter" checked>
+                五大
+            </label>
+        </div>
+    </div>
+
+    <main id="match-list">
+ <h2>今日の試合一覧</h2>
+
+            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">22:30 (日本時間)</div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 バイエルン</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">伊藤洋</div>
+                    </div>
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>
+                    </div>
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 1. FC Köln</div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">22:30 (日本時間)</div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ボルシアMG</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">高井, 町野</div>
+                    </div>
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>
+                    </div>
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ホッフェンハイム</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">町田</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">22:30 (日本時間)</div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 フランクフルト</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">小杉, 堂安</div>
+                    </div>
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>
+                    </div>
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 シュトゥットガルト</div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">22:30 (日本時間)</div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 フライブルク</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">唯人</div>
+                    </div>
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>
+                    </div>
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ライプツィヒ</div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">22:30 (日本時間)</div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ハイデンハイム</div>
+                        
+                    </div>
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>
+                    </div>
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 マインツ</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">川崎, 海舟</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">22:30 (日本時間)</div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ザンクトパウリ</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">ニック, 安藤, 原, 藤田</div>
+                    </div>
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>
+                    </div>
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ヴォルフスブルク</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">塩貝</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">22:30 (日本時間)</div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ブレーメン</div>
+                        <div style="font-size: 0.75em; color: white; background: #0046A7; padding: 3px 8px; border-radius: 10px; margin-top: 8px; display: inline-block;">菅原</div>
+                    </div>
+                    <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>
+                    </div>
+                    <div style="width: 38%; text-align: center;">
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">🇩🇪 ドルトムント</div>
+                        
+                    </div>
+                </div>
+            </div></main>
+
+    <!-- 下部メニュー -->
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='index.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+    </div>
+
+
+
+    <!-- ナビゲーションモーダル -->
+    <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeNavModal()">×</button>
+            <h2 style="color:#432517; font-size: 1.2rem; margin-bottom: 20px; border-bottom: 2px dashed #432517; padding-bottom:10px;">メニュー</h2>
+            <a href="https://shioya-soft.com/" target="_blank" rel="noopener noreferrer" class="modal-link" style="background: #ff9800;">しおやソフト公式</a>
+            <a href="https://shioya-soft.com/terms.html" target="_blank" rel="noopener noreferrer" class="modal-link">利用規約</a>
+            <a href="https://shioya-soft.com/privacy.html" target="_blank" rel="noopener noreferrer" class="modal-link">プライバシーポリシー</a>
+        </div>
+    </div>
+
+    <div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center;">
+        <div style="background: #fff8dc; padding: 20px; border: 4px solid #8b4513; border-radius: 10px; text-align: center; width: 320px; max-height: 90vh; overflow-y: auto; box-sizing: border-box;">
+          <h2 id="authTitle" style="margin-top: 0; color: #8b4513; font-size: 1.2rem;">アカウント</h2>
+          
+          <!-- 現在のポイント(Gold)表示エリア（ログイン中のみ表示） -->
+          <div id="pointsArea" style="display: none; background: #FFB347; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; text-shadow: 1px 1px 2px #432517;">
+              所持ポイント: <span id="userGoldDisplay">0</span> G
+          </div>
+
+          <div id="authButtons" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+            <button id="btnEmailLogin" onclick="showEmailInputs()" style="background: #8b4513; color: #ECDBBF; width: 100%; height: 40px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;">
+              しおやアカウントでサインイン
+            </button>
+            <button id="btnAppleLogin" onclick="loginWithApple()" style="background: #000; color: #fff; width: 100%; height: 40px; border: none; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+              <span style="font-size: 18px; margin-right: 8px;"></span> Appleでサインイン
+            </button>
+            <button id="btnGoogleLogin" onclick="loginWithGoogle()" style="background: #fff; color: #757575; width: 100%; height: 40px; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18" style="margin-right: 8px;"> Googleでサインイン
+            </button>
+          </div>
+      
+          <div id="emailInputArea" style="display: none; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 15px;">
+            <input type="email" id="authEmail" placeholder="メールアドレス" style="width: 100%; padding: 8px; font-size: 16px; margin-bottom: 10px; box-sizing: border-box;">
+            <input type="password" id="authPass" placeholder="パスワード" style="width: 100%; padding: 8px; font-size: 16px; margin-bottom: 10px; box-sizing: border-box;">
+            <div style="display: flex; justify-content: space-between; gap: 5px;">
+              <button onclick="loginUser()" style="background: #007bff; color: #fff; flex: 1; height: 35px; border: none; border-radius: 5px; font-size: 14px;">ログイン</button>
+              <button onclick="registerUser()" style="background: #28a745; color: #fff; flex: 1; height: 35px; border: none; border-radius: 5px; font-size: 14px;">新規登録</button>
+            </div>
+            <button onclick="hideEmailInputs()" style="margin-top: 10px; background: none; border: none; color: #8b4513; text-decoration: underline; font-size: 12px; cursor: pointer;">戻る</button>
+          </div>
+      
+          <div id="loggedInStatusArea" style="display: none; margin: 15px 0 10px 0; font-size: 1rem; color: #333; font-weight: bold; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 5px; text-align: center;">
+            ✅ <span id="loginProviderText"></span> でログイン中
+          </div>
+      
+          <div id="tosPrivacyText" style="margin-top: 15px; font-size: 0.75rem; color: #555; line-height: 1.4; text-align: left;">
+           サインイン（または新規登録）をすることで、<br>
+           <a href="https://shioya-soft.com/terms.html" target="_blank" style="color: #007bff;">利用規約</a> および <a href="https://shioya-soft.com/privacy.html" target="_blank" style="color: #007bff;">プライバシーポリシー</a><br>
+           に同意したものとみなされます。
+          </div>
+      
+          <div style="margin-top:15px; border-top:1px solid #ccc; padding-top:10px;">
+             <button id="logoutBtnInModal" onclick="logoutUser()" style="display:none; background: #6c757d; border:none; border-radius:5px; color: #ECDBBF; width: 100%; height: 40px; font-size: 14px; cursor:pointer; margin-bottom: 10px;">ログアウト</button>
+             <button id="deleteAccountBtnInModal" onclick="deleteUserAccount()" style="display:none; background: transparent; border: 1px solid #dc3545; border-radius:5px; color: #dc3545; width: 100%; height: 35px; font-size: 13px; font-weight:bold; margin-bottom: 10px; cursor:pointer;">退会（アカウントを削除する）</button>
+             <button onclick="closeAuthModal()" style="margin-top: 10px; background: #ccc; border: none; color: black; width: 100%; height: 35px; font-size: 14px; border-radius: 5px; cursor:pointer;">閉じる</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- 名前入力用モーダル（初回登録時） -->
+    <div id="initialNameModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
+        <div style="background: #fff8dc; padding: 25px; border: 4px solid #8b4513; border-radius: 10px; text-align: center; width: 300px;">
+          <h3 style="margin-top: 0; color: #8b4513;">登録ありがとうございます！</h3>
+          <p style="font-size: 0.9rem; color: #333; line-height: 1.5; text-align: left;">
+            まずはあなたのお名前を入力してください。<br>
+            <span style="font-size: 0.8rem; color: #666;">（8文字以内）</span>
+          </p>
+          <input type="text" id="initialNameInput" maxlength="8" placeholder="なまえ" style="width: 100%; padding: 10px; font-size: 1.2rem; border: 2px solid #8b4513; border-radius: 5px; text-align: center; box-sizing: border-box; margin-bottom: 20px;">
+          <button onclick="saveNewName()" style="background: #28a745; color: #ECDBBF; width: 100%; height: 45px; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer;">決定</button>
+        </div>
+    </div>
+
+    <!-- フットボール用 auth.js の読み込み -->
+    <script src="auth.js"></script>
+    <script>
+        function showEmailInputs() {
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('emailInputArea').style.display = 'block';
+        }
+        function hideEmailInputs() {
+            document.getElementById('authButtons').style.display = 'flex';
+            document.getElementById('emailInputArea').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        function openNavModal() { document.getElementById('navModal').style.display = 'flex'; }
+        function closeNavModal() { document.getElementById('navModal').style.display = 'none'; }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
