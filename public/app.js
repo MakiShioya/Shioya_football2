@@ -322,7 +322,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 selectTab(0, 'tab-today');
 
                 // 【変更点 3】裏でこっそりボーナス処理を走らせる（awaitを外して画面を止めない）
-                const claimDailyBonus = firebase.functions().httpsCallable('claimDailyBonus');
+                const claimDailyBonus = firebase.functions('asia-northeast1').httpsCallable('claimDailyBonus');
                 claimDailyBonus().then(bonusResult => {
                     if (bonusResult.data.success) {
                         alert("予定表の確認ありがとうございます！100G獲得しました。");
