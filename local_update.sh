@@ -12,15 +12,17 @@ export API_SPORTS_KEY="aa2f95b0ac362f94bee0b8bfdef67dc9"
 # 4. データ取得スクリプトの実行
 node fetch_data.js
 
-# 5. GitHubへのプッシュ処理
-git add public/data/matches/
+# 5. Web版SEO用のHTMLファイルを自動生成
+node generate_web_index.js
+
+# 6. GitHubへのプッシュ処理 (public/index_web.html を追加)
+git add public/data/matches/ public/index_web.html
 
 # 変更があった場合のみコミットとプッシュを行う
 if ! git diff --staged --quiet; then
-    git commit -m "Auto-update matches data from local Mac"
+    git commit -m "Auto-update matches data and index_web.html from local Mac"
     git pull --rebase origin main
     git push origin main
 else
     echo "変更がないためプッシュをスキップしました。"
 fi
-
