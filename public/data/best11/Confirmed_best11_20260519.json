@@ -1,0 +1,118 @@
+{
+  "updated": "2026-05-18T20:06:53.850Z",
+  "dateLabel": "2026年5月19日号",
+  "formation": "3-5-2",
+  "totalScore": 83.85,
+  "list": [
+    {
+      "name": "鈴木彩艶",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 9.2,
+      "originalRating": 8.6,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "板倉滉",
+      "posId": "RCB",
+      "top": 70,
+      "left": 75,
+      "finalScore": 8.28,
+      "originalRating": 8.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "安藤智哉",
+      "posId": "CB",
+      "top": 70,
+      "left": 50,
+      "finalScore": 7.45,
+      "originalRating": 6.9,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "綱島悠斗",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 6.7,
+      "originalRating": 6.5,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "伊東純也",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 8.24,
+      "originalRating": 8,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "佐野航大",
+      "posId": "LSH",
+      "top": 45,
+      "left": 15,
+      "finalScore": 7.58,
+      "originalRating": 7.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "佐野海舟",
+      "posId": "DMF",
+      "top": 55,
+      "left": 50,
+      "finalScore": 7.56,
+      "originalRating": 7,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "山本理仁",
+      "posId": "RCMF",
+      "top": 40,
+      "left": 70,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "田中碧",
+      "posId": "LCMF",
+      "top": 40,
+      "left": 30,
+      "finalScore": 7.59,
+      "originalRating": 6.9,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "前田大然",
+      "posId": "RCF",
+      "top": 20,
+      "left": 65,
+      "finalScore": 7.6,
+      "originalRating": 7.6,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "町野修斗",
+      "posId": "LCF",
+      "top": 20,
+      "left": 35,
+      "finalScore": 6.8,
+      "originalRating": 6.3,
+      "suit": 1,
+      "isDummy": false
+    }
+  ]
+}
