@@ -2,8 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// --- 1. 設定 ---
-const TARGET_DATE = '20260517'; 
+// --- 1. 基本設定 ---
 const BASE_DIR = path.join(__dirname, 'public'); 
 
 // --- 2. 辞書データ ---
@@ -92,46 +91,7 @@ const TEAM_DISPLAYS = {
     "Celtic": "セルティック"
 };
 
-// --- 3. 全日付のパースと「有効な日付」リストの作成 ---
-const MATCHES_DIR = path.join(BASE_DIR, 'data', 'matches');
-const files = fs.readdirSync(MATCHES_DIR);
-
-let validDates = [];
-
-files.forEach(file => {
-    if (file.startsWith('matches_') && file.endsWith('.json')) {
-        const dateStr = file.replace('matches_', '').replace('.json', '');
-        const statsPath = path.join(MATCHES_DIR, `stats_${dateStr}.json`);
-        
-        if (fs.existsSync(statsPath)) {
-            try {
-                const statsData = JSON.parse(fs.readFileSync(statsPath, 'utf8')).stats;
-                if (statsData && statsData.length > 0) {
-                    validDates.push(dateStr);
-                }
-            } catch (e) {
-                // パースエラー
-            }
-        }
-    }
-});
-
-validDates.sort();
-
-if (!validDates.includes(TARGET_DATE)) {
-    console.log(`[スキップ] ${TARGET_DATE} は日本人選手の出場記録がありません。`);
-    process.exit(0);
-}
-
-const currentIndex = validDates.indexOf(TARGET_DATE);
-const prevDate = currentIndex > 0 ? validDates[currentIndex - 1] : null;
-const nextDate = currentIndex < validDates.length - 1 ? validDates[currentIndex + 1] : null;
-
-const statsData = JSON.parse(fs.readFileSync(path.join(MATCHES_DIR, `stats_${TARGET_DATE}.json`), 'utf8')).stats;
-const matchesRaw = JSON.parse(fs.readFileSync(path.join(MATCHES_DIR, `matches_${TARGET_DATE}.json`), 'utf8'));
-const matchesData = matchesRaw.matches || matchesRaw.response.matches;
-
-// --- 4. ヘルパー関数 ---
+// --- 3. ヘルパー関数 ---
 function formatJST(utcDateString) {
     const date = new Date(utcDateString);
     date.setHours(date.getHours() + 9);
@@ -152,37 +112,88 @@ function displayDate(dateStr) {
     return `${dateStr.substring(0,4)}年${dateStr.substring(4,6)}月${dateStr.substring(6,8)}日`;
 }
 
-// --- 5. HTMLの組み立て ---
-const currentDisplayDate = displayDate(TARGET_DATE);
+// --- 4. 全日付のパースと「有効な日付」リストの作成 ---
+const MATCHES_DIR = path.join(BASE_DIR, 'data', 'matches');
+const files = fs.readdirSync(MATCHES_DIR);
 
-// 【SEO用】パンくずリスト構造化データ (フルURL指定)
-const breadcrumbJsonLD = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "しおやフットボール TOP",
-      "item": "https://football.shioya-soft.com/index_web.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "試合結果アーカイブ",
-      "item": "https://football.shioya-soft.com/archive/index.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": `${currentDisplayDate}の試合結果`,
-      "item": `https://football.shioya-soft.com/archive/${TARGET_DATE}/index.html`
+let validDates = [];
+
+// stats_*.json が存在する日だけをリストアップする
+files.forEach(file => {
+    if (file.startsWith('stats_') && file.endsWith('.json')) {
+        const dateStr = file.replace('stats_', '').replace('.json', '');
+        validDates.push(dateStr);
     }
-  ]
-};
+});
 
-let htmlContent = `
-<!DOCTYPE html>
+// 古い日付順にソート（前後のリンク計算に必須）
+validDates.sort();
+
+if (validDates.length === 0) {
+    console.log("対象となるデータが存在しません。処理を終了します。");
+    process.exit(0);
+}
+
+// --- 5. 全日付のループ処理とHTML生成 ---
+let generatedCount = 0;
+let skippedCount = 0;
+
+validDates.forEach((targetDate, index) => {
+    
+    // 【重要】出力先ディレクトリとファイルの確認（すでにあればスキップ）
+    const ARCHIVE_DIR = path.join(BASE_DIR, 'archive', targetDate);
+    const OUT_FILE = path.join(ARCHIVE_DIR, 'index.html');
+    
+    if (fs.existsSync(OUT_FILE)) {
+        console.log(`[スキップ] ${targetDate} は既に作成されています。`);
+        skippedCount++;
+        return; // 次のループへ
+    }
+
+    // データの読み込み
+    const statsPath = path.join(MATCHES_DIR, `stats_${targetDate}.json`);
+    const matchesPath = path.join(MATCHES_DIR, `matches_${targetDate}.json`);
+
+    // matchファイルがない異常データの場合はスキップ
+    if (!fs.existsSync(matchesPath)) return; 
+
+    const statsData = JSON.parse(fs.readFileSync(statsPath, 'utf8')).stats;
+    const matchesRaw = JSON.parse(fs.readFileSync(matchesPath, 'utf8'));
+    const matchesData = matchesRaw.matches || matchesRaw.response.matches;
+
+    // 前後の日付を取得
+    const prevDate = index > 0 ? validDates[index - 1] : null;
+    const nextDate = index < validDates.length - 1 ? validDates[index + 1] : null;
+
+    const currentDisplayDate = displayDate(targetDate);
+
+    // 【SEO対策】構造化データ
+    const breadcrumbJsonLD = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "しおやフットボール TOP",
+          "item": "https://football.shioya-soft.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "試合結果アーカイブ",
+          "item": "https://football.shioya-soft.com/archive/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": `${currentDisplayDate}の試合結果`,
+          "item": `https://football.shioya-soft.com/archive/${targetDate}/index.html`
+        }
+      ]
+    };
+
+    let htmlContent = `<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -192,10 +203,10 @@ let htmlContent = `
     <meta property="og:title" content="${currentDisplayDate} 海外日本人選手 試合結果・成績 | しおやフットボール">
     <meta property="og:description" content="${currentDisplayDate}に行われた海外日本人サッカー選手の試合結果と個人成績一覧です。">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://football.shioya-soft.com/archive/${TARGET_DATE}/index.html">
+    <meta property="og:url" content="https://football.shioya-soft.com/archive/${targetDate}/index.html">
     <meta name="robots" content="index, follow">
     
-    <link rel="canonical" href="https://football.shioya-soft.com/archive/${TARGET_DATE}/index.html">
+    <link rel="canonical" href="https://football.shioya-soft.com/archive/${targetDate}/index.html">
     
     <title>${currentDisplayDate} 海外日本人選手 試合結果・成績 | しおやフットボール</title>
     
@@ -245,9 +256,8 @@ let htmlContent = `
         <h1>過去の試合結果</h1>
     </header>
 
-    <!-- 【修正】視覚的パンくずリスト。TOPとアーカイブ一覧の両方をクリック可能に変更 -->
     <nav class="breadcrumb-nav" aria-label="パンくずリスト">
-        <a href="../../index_web.html">TOP</a> ＞ <a href="../index.html">試合結果アーカイブ</a> ＞ <span>${TARGET_DATE}</span>
+        <a href="../../index_web.html">TOP</a> ＞ <a href="../index.html">試合結果アーカイブ</a> ＞ <span>${targetDate}</span>
     </nav>
 
     <main id="match-list">
@@ -258,71 +268,71 @@ let htmlContent = `
         </div>
 `;
 
-// 試合ごとにループ
-matchesData.forEach(match => {
-    const japanesePlayersInThisMatch = statsData.filter(stat => stat.fixtureId === match.fixtureId);
-    if (japanesePlayersInThisMatch.length === 0) return;
+    // 試合ごとにループ
+    matchesData.forEach(match => {
+        const japanesePlayersInThisMatch = statsData.filter(stat => stat.fixtureId === match.fixtureId);
+        if (japanesePlayersInThisMatch.length === 0) return;
 
-    const compCode = match.competition.code || "OTHER";
-    const leagueName = LEAGUE_INFO[compCode] ? LEAGUE_INFO[compCode].jp : match.competition.name;
-    const jstTime = formatJST(match.utcDate);
-    const homeName = getTeamName(match.homeTeam.name);
-    const awayName = getTeamName(match.awayTeam.name);
-    
-    let scoreText = "VS";
-    if (match.status === "FT" || match.status === "AET" || match.status === "PEN") {
-        scoreText = `${match.score.fullTime.home} - ${match.score.fullTime.away}`;
-    } else if (match.status === "CANC" || match.status === "PST") {
-        scoreText = "延期";
-    }
-
-    let playersHtml = "";
-    let matchPlayerIdsStr = ""; 
-
-    japanesePlayersInThisMatch.forEach(player => {
-        const pName = player.name;
-        matchPlayerIdsStr += pName + ","; 
-
-        let statusText = "途中出場";
-        let badgeClass = "badge-sub";
+        const compCode = match.competition.code || "OTHER";
+        const leagueName = LEAGUE_INFO[compCode] ? LEAGUE_INFO[compCode].jp : match.competition.name;
+        const jstTime = formatJST(match.utcDate);
+        const homeName = getTeamName(match.homeTeam.name);
+        const awayName = getTeamName(match.awayTeam.name);
         
-        if (player.minutes === 0) {
-            statusText = "出場なし";
-            badgeClass = "badge-none";
-        } else if (player.starter) {
-            statusText = "スタメン";
-            badgeClass = "badge-starter";
+        let scoreText = "VS";
+        if (match.status === "FT" || match.status === "AET" || match.status === "PEN") {
+            scoreText = `${match.score.fullTime.home} - ${match.score.fullTime.away}`;
+        } else if (match.status === "CANC" || match.status === "PST") {
+            scoreText = "延期";
         }
 
-        let events = [];
-        if (player.goals > 0) events.push(`${player.goals}G`);
-        if (player.assists > 0) events.push(`${player.assists}A`);
-        const eventsHtml = events.length > 0 ? ` <span style="color:#d9534f; font-weight:bold;">${events.join(' ')}</span>` : '';
+        let playersHtml = "";
+        let matchPlayerIdsStr = ""; 
 
-        playersHtml += `
-            <div class="player-row" data-player-name="${pName}">
-                <div class="player-name-text">${pName} <span class="status-badge ${badgeClass}">${statusText}</span></div>
-                <div>${player.minutes}分 評価:${player.rating} ${eventsHtml}</div>
-            </div>
+        japanesePlayersInThisMatch.forEach(player => {
+            const pName = player.name;
+            matchPlayerIdsStr += pName + ","; 
+
+            let statusText = "途中出場";
+            let badgeClass = "badge-sub";
+            
+            if (player.minutes === 0) {
+                statusText = "出場なし";
+                badgeClass = "badge-none";
+            } else if (player.starter) {
+                statusText = "スタメン";
+                badgeClass = "badge-starter";
+            }
+
+            let events = [];
+            if (player.goals > 0) events.push(`${player.goals}G`);
+            if (player.assists > 0) events.push(`${player.assists}A`);
+            const eventsHtml = events.length > 0 ? ` <span style="color:#d9534f; font-weight:bold;">${events.join(' ')}</span>` : '';
+
+            playersHtml += `
+                <div class="player-row" data-player-name="${pName}">
+                    <div class="player-name-text">${pName} <span class="status-badge ${badgeClass}">${statusText}</span></div>
+                    <div>${player.minutes}分 評価:${player.rating} ${eventsHtml}</div>
+                </div>
+            `;
+        });
+
+        htmlContent += `
+            <article class="archive-match-card" data-match-players="${matchPlayerIdsStr}">
+                <div class="archive-info">${leagueName} | ${jstTime} (日本時間)</div>
+                <div class="archive-score-board">
+                    <div class="archive-team">${homeName}</div>
+                    <div class="archive-score">${scoreText}</div>
+                    <div class="archive-team">${awayName}</div>
+                </div>
+                <div class="archive-players">
+                    ${playersHtml}
+                </div>
+            </article>
         `;
     });
 
     htmlContent += `
-        <article class="archive-match-card" data-match-players="${matchPlayerIdsStr}">
-            <div class="archive-info">${leagueName} | ${jstTime} (日本時間)</div>
-            <div class="archive-score-board">
-                <div class="archive-team">${homeName}</div>
-                <div class="archive-score">${scoreText}</div>
-                <div class="archive-team">${awayName}</div>
-            </div>
-            <div class="archive-players">
-                ${playersHtml}
-            </div>
-        </article>
-    `;
-});
-
-htmlContent += `
         <div class="static-back-link">
             <a href="../../index_web.html">海外日本人サッカー選手 試合日程予定表トップへ戻る</a>
         </div>
@@ -376,10 +386,19 @@ htmlContent += `
 </html>
 `;
 
-// --- 6. ファイルの出力 ---
-const ARCHIVE_DIR = path.join(__dirname, 'public', 'archive', TARGET_DATE);
-if (!fs.existsSync(ARCHIVE_DIR)){
-    fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
-}
-fs.writeFileSync(path.join(ARCHIVE_DIR, 'index.html'), htmlContent, 'utf8');
-console.log(`[成功] ${TARGET_DATE}/index.html を生成しました。（前:${prevDate} / 次:${nextDate}）`);
+    // フォルダの作成と書き出し
+    if (!fs.existsSync(ARCHIVE_DIR)){
+        fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
+    }
+    fs.writeFileSync(OUT_FILE, htmlContent, 'utf8');
+    console.log(`[成功] ${targetDate} のHTMLを生成しました。`);
+    generatedCount++;
+
+}); // loop終了
+
+// 最終結果の表示
+console.log(`\n============================`);
+console.log(`【完了】 全処理が終了しました。`);
+console.log(`新規作成: ${generatedCount} 件`);
+console.log(`スキップ済: ${skippedCount} 件`);
+console.log(`============================\n`);
