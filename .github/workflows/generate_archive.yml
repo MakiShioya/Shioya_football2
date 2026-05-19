@@ -1,0 +1,30 @@
+name: Generate Daily Archive HTML
+
+# 手動で実行できるようにする（テスト用）
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node.js のセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 安定版のNode.js
+
+      - name: アーカイブ生成スクリプトの実行
+        run: node generate_archive.js
+
+      - name: 生成されたHTMLをコミットしてプッシュ
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/archive/
+          # 変更がなければコミットしない
+          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate archive for 20260517"
+          git push
