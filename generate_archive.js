@@ -3,26 +3,27 @@ const fs = require('fs');
 const path = require('path');
 
 // --- 1. 設定 ---
+// ここを引数や日付計算で動的にしますが、まずは手動テスト用に固定します
 const TARGET_DATE = '20260517'; 
-const BASE_DIR = path.join(__dirname, 'public');
-const ARCHIVE_DIR = path.join(BASE_DIR, 'archive', TARGET_DATE);
+// __dirname は GitHub Actions 実行時のルートディレクトリを指します
+const BASE_DIR = path.join(__dirname, 'public'); 
 
 // --- 2. 辞書データ ---
 const LEAGUE_INFO = {
-    "PL":  { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", jp: "プレミア" },
-    "PD":  { flag: "🇪🇸", jp: "ラ・リーガ" },
-    "BL1": { flag: "🇩🇪", jp: "ブンデス" },
-    "SA1": { flag: "🇮🇹", jp: "セリエA" },
-    "FL1": { flag: "🇫🇷", jp: "リーグアン" },
-    "ELC": { flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿❷", jp: "英2部" },
-    "PPL": { flag: "🇵🇹", jp: "ポルトガル" },
-    "DED": { flag: "🇳🇱", jp: "オランダ" },
-    "BSA": { flag: "🇧🇪", jp: "ベルギー" },
-    "J1":  { flag: "🇯🇵", jp: "Jリーグ" },
-    "SPL": { flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿", jp: "スコットランド" },
-    "CL":  { flag: "🇪🇺", jp: "CL" },
-    "EL":  { flag: "🇪🇺", jp: "EL" },
-    "ECL": { flag: "🇪🇺", jp: "ECL" }
+    "PL":  { jp: "プレミア" },
+    "PD":  { jp: "ラ・リーガ" },
+    "BL1": { jp: "ブンデス" },
+    "SA1": { jp: "セリエA" },
+    "FL1": { jp: "リーグアン" },
+    "ELC": { jp: "英2部" },
+    "PPL": { jp: "ポルトガル" },
+    "DED": { jp: "オランダ" },
+    "BSA": { jp: "ベルギー" },
+    "J1":  { jp: "Jリーグ" },
+    "SPL": { jp: "スコットランド" },
+    "CL":  { jp: "CL" },
+    "EL":  { jp: "EL" },
+    "ECL": { jp: "ECL" }
 };
 
 const TEAM_DISPLAYS = {
@@ -93,23 +94,56 @@ const TEAM_DISPLAYS = {
     "Celtic": "セルティック"
 };
 
-// --- 3. データの読み込み ---
-const statsPath = path.join(BASE_DIR, 'data', 'matches', `stats_${TARGET_DATE}.json`);
-const matchesPath = path.join(BASE_DIR, 'data', 'matches', `matches_${TARGET_DATE}.json`);
+// --- 3. 全日付のパースと「有効な日付」リストの作成 ---
+const MATCHES_DIR = path.join(BASE_DIR, 'data', 'matches');
+const files = fs.readdirSync(MATCHES_DIR);
 
-if (!fs.existsSync(statsPath) || !fs.existsSync(matchesPath)) {
-    console.log(`[スキップ] ${TARGET_DATE} のデータが見つかりません。`);
+// "YYYYMMDD" の形式で、試合データが存在し、かつ日本人が1人でも出場している日付のリストを作る
+let validDates = [];
+
+// 全ファイルをスキャン
+files.forEach(file => {
+    if (file.startsWith('matches_') && file.endsWith('.json')) {
+        const dateStr = file.replace('matches_', '').replace('.json', '');
+        const statsPath = path.join(MATCHES_DIR, `stats_${dateStr}.json`);
+        
+        if (fs.existsSync(statsPath)) {
+            try {
+                const statsData = JSON.parse(fs.readFileSync(statsPath, 'utf8')).stats;
+                // 日本人選手が1人でもいれば有効な日付として追加
+                if (statsData && statsData.length > 0) {
+                    validDates.push(dateStr);
+                }
+            } catch (e) {
+                // パースエラーなどは無視
+            }
+        }
+    }
+});
+
+// 日付順にソート
+validDates.sort();
+
+// --- 4. ターゲット日付の処理 ---
+// テスト時は TARGET_DATE のみ処理しますが、後日この部分をループ化します
+if (!validDates.includes(TARGET_DATE)) {
+    console.log(`[スキップ] ${TARGET_DATE} は日本人選手の出場記録がありません。`);
     process.exit(0);
 }
 
-const statsData = JSON.parse(fs.readFileSync(statsPath, 'utf8')).stats;
-const matchesData = JSON.parse(fs.readFileSync(matchesPath, 'utf8')).matches || JSON.parse(fs.readFileSync(matchesPath, 'utf8')).response.matches;
+const currentIndex = validDates.indexOf(TARGET_DATE);
+const prevDate = currentIndex > 0 ? validDates[currentIndex - 1] : null;
+const nextDate = currentIndex < validDates.length - 1 ? validDates[currentIndex + 1] : null;
 
-// --- 4. 便利なヘルパー関数 ---
-// UTC日時を日本時間（YYYY/MM/DD HH:mm）に変換
+// データ読み込み
+const statsData = JSON.parse(fs.readFileSync(path.join(MATCHES_DIR, `stats_${TARGET_DATE}.json`), 'utf8')).stats;
+const matchesRaw = JSON.parse(fs.readFileSync(path.join(MATCHES_DIR, `matches_${TARGET_DATE}.json`), 'utf8'));
+const matchesData = matchesRaw.matches || matchesRaw.response.matches;
+
+// --- 5. ヘルパー関数 ---
 function formatJST(utcDateString) {
     const date = new Date(utcDateString);
-    date.setHours(date.getHours() + 9); // JSTに変換
+    date.setHours(date.getHours() + 9);
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, '0');
     const dd = String(date.getDate()).padStart(2, '0');
@@ -118,67 +152,88 @@ function formatJST(utcDateString) {
     return `${yyyy}/${mm}/${dd} ${hh}:${min}`;
 }
 
-// チーム名の日本語化（辞書にない場合は英語そのまま）
 function getTeamName(englishName) {
     return TEAM_DISPLAYS[englishName] || englishName;
 }
 
-// --- 5. HTMLの組み立て ---
-const displayYear = TARGET_DATE.substring(0,4);
-const displayMonth = TARGET_DATE.substring(4,6);
-const displayDay = TARGET_DATE.substring(6,8);
+// 日付文字列を「YYYY年MM月DD日」に変換する関数
+function displayDate(dateStr) {
+    if (!dateStr) return "";
+    return `${dateStr.substring(0,4)}年${dateStr.substring(4,6)}月${dateStr.substring(6,8)}日`;
+}
+
+// --- 6. HTMLの組み立て ---
+const currentDisplayDate = displayDate(TARGET_DATE);
 
 let htmlContent = `
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${displayYear}年${displayMonth}月${displayDay}日 海外日本人選手 試合結果 | しおやフットボール</title>
-    <meta name="description" content="${displayYear}年${displayMonth}月${displayDay}日に行われた海外日本人サッカー選手の試合結果と個人成績（スタメン、ゴール、アシスト、評価点）です。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <meta name="description" content="${currentDisplayDate}の海外日本人サッカー選手の試合結果や個人成績です。">
+    <meta property="og:title" content="${currentDisplayDate} 試合結果 | しおやフットボール">
+    <meta property="og:type" content="article">
+    <meta name="robots" content="index, follow">
+    <title>${currentDisplayDate} 試合結果 | しおやフットボール</title>
+    
+    <!-- Firebaseの読み込み (推し選手ハイライト用) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <!-- common.cssの読み込み -->
     <link rel="stylesheet" href="../../common.css">
+
     <style>
-        /* アーカイブ用の追加スタイル */
-        .archive-match-card { background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px; margin: 15px auto; padding: 15px; width: 95%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .archive-header { display: flex; justify-content: space-between; font-size: 0.85em; color: #666; margin-bottom: 10px; font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-        .archive-score-board { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .archive-team { width: 40%; text-align: center; font-weight: bold; font-size: 1rem; }
-        .archive-score { width: 20%; text-align: center; font-size: 1.4em; font-weight: 900; color: #432517; }
-        .archive-players { background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; font-size: 0.9em; }
-        .player-row { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 4px 0; }
-        .player-row:last-child { border-bottom: none; }
-        .status-badge { font-size: 0.7em; padding: 2px 6px; border-radius: 4px; color: white; margin-left: 5px; }
-        .starter-badge { background-color: #d9534f; }
-        .sub-badge { background-color: #5bc0de; }
-        .goal-assist { color: #d9534f; font-weight: bold; }
+        .archive-header-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; }
+        .nav-btn { background: #8b4513; color: #ECDBBF; padding: 10px 15px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .nav-btn.disabled { background: #ccc; color: #666; pointer-events: none; }
+        .date-title { font-size: 1.2rem; font-weight: bold; color: var(--text-color); }
+        
+        .archive-match-card { background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px; margin: 15px auto; padding: 15px; width: 95%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333; }
+        .archive-info { font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold; }
+        .archive-score-board { display: flex; justify-content: space-between; align-items: flex-start; }
+        .archive-team { width: 38%; text-align: center; font-weight: bold; font-size: 1rem; line-height: 1.4; }
+        .archive-score { width: 24%; text-align: center; margin-top: 5px; font-size: 1.3em; font-weight: 900; color: #432517; }
+        
+        .archive-players { margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px; }
+        .player-row { display: flex; justify-content: space-between; font-size: 0.9em; padding: 4px 0; align-items: center; }
+        
+        /* 最推しハイライト用クラス (JSで付与) */
+        .favorite-shine { background: linear-gradient(145deg, #fff3e0, #ffecb3) !important; border: 3px solid #ffd700 !important; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6) !important; }
+        .favorite-shine .player-name-text { color: #e91e63 !important; font-weight: bold; }
     </style>
 </head>
-<body>
-    <header class="top-bar">
-        <h1>${displayYear}年${displayMonth}月${displayDay}日<br>日本人選手 試合結果</h1>
-    </header>
-    <main id="match-list">
-`;
+<body class="theme-default">
 
-let renderedMatchCount = 0;
+    <!-- ナビゲーションバー (簡易版) -->
+    <header class="top-bar">
+        <a href="../../index_web.html" style="position: absolute; left: 15px; color: #ECDBBF; text-decoration: none; font-size: 1.2rem;">◀ 戻る</a>
+        <h1>過去の試合結果</h1>
+    </header>
+
+    <main id="match-list">
+        <!-- 前後の日付ナビゲーション -->
+        <div class="archive-header-nav">
+            ${prevDate ? `<a href="../${prevDate}/index.html" class="nav-btn">前の試合日</a>` : `<span class="nav-btn disabled">前の試合日</span>`}
+            <div class="date-title">${currentDisplayDate}</div>
+            ${nextDate ? `<a href="../${nextDate}/index.html" class="nav-btn">次の試合日</a>` : `<span class="nav-btn disabled">次の試合日</span>`}
+        </div>
+`;
 
 // 試合ごとにループ
 matchesData.forEach(match => {
-    // この試合に出場した日本人選手を抽出
     const japanesePlayersInThisMatch = statsData.filter(stat => stat.fixtureId === match.fixtureId);
-
-    // 日本人がいない試合はスキップ（SEO対策）
     if (japanesePlayersInThisMatch.length === 0) return;
 
-    renderedMatchCount++;
-
     const compCode = match.competition.code || "OTHER";
-    const leagueInfo = LEAGUE_INFO[compCode] || { flag: "⚽", jp: match.competition.name };
+    const leagueName = LEAGUE_INFO[compCode] ? LEAGUE_INFO[compCode].jp : match.competition.name;
     const jstTime = formatJST(match.utcDate);
     const homeName = getTeamName(match.homeTeam.name);
     const awayName = getTeamName(match.awayTeam.name);
     
-    // スコアの処理（試合前や中止の場合はスコアが入っていないため）
+    // スコア処理
     let scoreText = "VS";
     if (match.status === "FT" || match.status === "AET" || match.status === "PEN") {
         scoreText = `${match.score.fullTime.home} - ${match.score.fullTime.away}`;
@@ -186,33 +241,32 @@ matchesData.forEach(match => {
         scoreText = "延期";
     }
 
-    // 選手情報のHTMLを組み立て
+    // 出場選手データの構築 (HTMLに data-name 属性を仕込んで後からJSでハイライトする)
     let playersHtml = "";
+    let matchPlayerIdsStr = ""; // この試合に出場した全日本人選手のID(名前)のリスト
+
     japanesePlayersInThisMatch.forEach(player => {
-        const statusBadge = player.starter 
-            ? `<span class="status-badge starter-badge">スタメン</span>` 
-            : `<span class="status-badge sub-badge">途中出場</span>`;
-            
+        const pName = player.name;
+        matchPlayerIdsStr += pName + ","; // クライアント側の推し判定に使う
+
+        const statusText = player.starter ? "スタメン" : "途中出場";
         let events = [];
-        if (player.goals > 0) events.push(`⚽ ${player.goals}G`);
-        if (player.assists > 0) events.push(`👟 ${player.assists}A`);
-        const eventsHtml = events.length > 0 ? `<span class="goal-assist">${events.join(' ')}</span>` : '';
+        if (player.goals > 0) events.push(`${player.goals}G`);
+        if (player.assists > 0) events.push(`${player.assists}A`);
+        const eventsHtml = events.length > 0 ? ` <span style="color:#d9534f; font-weight:bold;">${events.join(' ')}</span>` : '';
 
         playersHtml += `
-            <div class="player-row">
-                <div><strong>${player.name}</strong> ${statusBadge}</div>
-                <div>⏱${player.minutes}分 📊${player.rating} ${eventsHtml}</div>
+            <div class="player-row" data-player-name="${pName}">
+                <div class="player-name-text">${pName} <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">${statusText}</span></div>
+                <div>${player.minutes}分 評価:${player.rating} ${eventsHtml}</div>
             </div>
         `;
     });
 
-    // 試合カードHTMLを追記
+    // 試合カードの出力
     htmlContent += `
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>${leagueInfo.flag} ${leagueInfo.jp}</span>
-                <span>${jstTime}</span>
-            </div>
+        <article class="archive-match-card" data-match-players="${matchPlayerIdsStr}">
+            <div class="archive-info">${leagueName} | ${jstTime} (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">${homeName}</div>
                 <div class="archive-score">${scoreText}</div>
@@ -225,23 +279,67 @@ matchesData.forEach(match => {
     `;
 });
 
-// もし1試合も日本人が出場していなかった場合のメッセージ
-if (renderedMatchCount === 0) {
-    htmlContent += `<p style="text-align:center; padding: 40px; color: #888;">この日に出場した日本人選手の記録はありません。</p>`;
-}
-
 htmlContent += `
-        <div style="text-align: center; margin: 30px 0;">
-            <a href="../../index_web.html" style="padding: 10px 20px; background: #8b4513; color: white; text-decoration: none; border-radius: 8px;">トップページへ戻る</a>
-        </div>
     </main>
+
+    <!-- 下部メニュー (共通) -->
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='../../index_web.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='../../performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='../../best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='../../transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='../../dashboard.html'">シーズン</button>
+    </div>
+
+    <!-- クライアント側のJS: Firebaseにログインしていれば推し選手を光らせる -->
+    <script>
+        // auth.js と同じFirebase設定が読み込まれている前提
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('shioya_theme');
+            if (savedTheme) document.body.className = savedTheme;
+
+            // japanese_players.jsonを読み込んで、推しIDから名前を逆引きできるようにする
+            fetch('../../japanese_players.json').then(res => res.json()).then(playerDict => {
+                firebase.auth().onAuthStateChanged(async (user) => {
+                    if (user) {
+                        try {
+                            const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
+                            if (userDoc.exists) {
+                                const favId = userDoc.data().mostFavoriteId;
+                                if (!favId) return;
+
+                                // favId ("Mitoma" など) に該当する日本語名 ("三笘薫" など) を探す
+                                let favFullName = "";
+                                for (const team in playerDict) {
+                                    if (playerDict[team][favId]) {
+                                        favFullName = playerDict[team][favId].full;
+                                        break;
+                                    }
+                                }
+
+                                if (favFullName) {
+                                    // その選手が出場している試合カードを光らせる
+                                    document.querySelectorAll('.archive-match-card').forEach(card => {
+                                        if (card.getAttribute('data-match-players').includes(favFullName)) {
+                                            card.classList.add('favorite-shine');
+                                        }
+                                    });
+                                }
+                            }
+                        } catch(e) { console.error(e); }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 `;
 
-// --- 6. ファイルの出力 ---
+// --- 7. ファイルの出力 ---
+const ARCHIVE_DIR = path.join(__dirname, 'public', 'archive', TARGET_DATE);
 if (!fs.existsSync(ARCHIVE_DIR)){
     fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
 }
 fs.writeFileSync(path.join(ARCHIVE_DIR, 'index.html'), htmlContent, 'utf8');
-console.log(`[成功] ${TARGET_DATE}/index.html に ${renderedMatchCount} 試合の記録を生成しました！`);
+console.log(`[成功] ${TARGET_DATE}/index.html を生成しました。（前:${prevDate} / 次:${nextDate}）`);
