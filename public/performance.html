@@ -10,7 +10,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-    <!-- （不要になったAdSenseのタグはコメントアウト/削除推奨ですが、とりあえず残しています） -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4686002256203931" crossorigin="anonymous"></script>
     <link rel="preload" href="font/setofont.ttf" as="font" type="font/ttf" crossorigin>
     
@@ -20,10 +19,10 @@
     <style>
         /* performance.html 固有のスタイル */
         .container { 
-    padding: 15px; 
-    /* 下部メニューを避けて最後までスクロールできるよう、余白を強化 */
-    padding-bottom: 250px !important;
-}
+            padding: 15px; 
+            /* 下部メニューを避けて最後までスクロールできるよう、余白を強化 */
+            padding-bottom: 250px !important;
+        }
         
         .report-card {
             background: #fff8dc;
@@ -68,6 +67,34 @@
 
         /* アクティブボタンの強調 */
         .btn-results { border-color: white !important; }
+
+        /* 【新設】カレンダーページへのリンクボタン用スタイル */
+        .archive-nav-wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 20px;
+            text-align: center;
+            display: block; /* デフォルトは表示 */
+        }
+        .archive-redirect-btn {
+            display: block;
+            width: 100%;
+            background: #8b4513;
+            color: #ECDBBF;
+            border: 2px solid #432517;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 2px #432517;
+            text-decoration: none;
+            font-family: inherit;
+        }
+        .archive-redirect-btn:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
 <body>
@@ -86,10 +113,15 @@
 
     <!-- ② ページごとの固有コンテンツ -->
     <main id="performance-list" class="container">
-        <p style="text-align: center;">データを読み込み中...</p>
+        
+        <!-- 【新設】「カレンダーから過去の日付を確認」ボタンエリア（クローラー導線確保のためメイン枠の最上部に配置） -->
+        <div id="archiveNavSection" class="archive-nav-wrapper">
+            <a href="archive/index.html" class="archive-redirect-btn">カレンダーから過去の日付を確認</a>
+        </div>
+
+        <!-- 試合カード群はここに動的挿入される想定 -->
+        <p id="loadingText" style="text-align: center;">データを読み込み中...</p>
     </main>
-    
-    <!-- 150pxの余白は common.css の main { padding-bottom: 150px; } で担保されるため削除 -->
 
     <!-- ③ 下部メニュー（全ページ共通：5ボタン） -->
     <div class="bottom-menu">
@@ -99,8 +131,6 @@
         <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
         <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
     </div>
-
-    <!-- ④ 広告エリア（ネイティブバナー用になったため不要・削除） -->
 
     <!-- ⑤ ナビゲーションモーダル -->
     <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
@@ -113,7 +143,7 @@
         </div>
     </div>
 
-    <!-- ▼ ⑥ アカウント関連モーダル（index.htmlから移植） ▼ -->
+    <!-- ⑥ アカウント関連モーダル -->
     <div id="authModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center;">
         <div style="background: #fff8dc; padding: 20px; border: 4px solid #8b4513; border-radius: 10px; text-align: center; width: 320px; max-height: 90vh; overflow-y: auto; box-sizing: border-box;">
           <h2 id="authTitle" style="margin-top: 0; color: #8b4513; font-size: 1.2rem;">アカウント</h2>
@@ -175,7 +205,7 @@
         </div>
     </div>
 
-    <!-- ▼ ⑦ スクリプトの読み込み ▼ -->
+    <!-- ⑦ スクリプトの読み込み -->
     <script>
         function showEmailInputs() {
             document.getElementById('authButtons').style.display = 'none';
@@ -187,6 +217,21 @@
         }
         function openNavModal() { document.getElementById('navModal').style.display = 'flex'; }
         function closeNavModal() { document.getElementById('navModal').style.display = 'none'; }
+
+        // ▼▼▼ 【新設】iOS版（Capacitor環境など）の判定・非表示ロジック ▼▼▼
+        document.addEventListener("DOMContentLoaded", () => {
+            const ua = window.navigator.userAgent.toLowerCase();
+            const isIOSApp = ua.includes('iphone') || ua.includes('ipad') || ua.includes('ipod');
+            
+            // Xcode上のWebView（Capacitor等）でラップされている環境を検出
+            if (isIOSApp && (window.webkit && window.webkit.messageHandlers)) {
+                const navSection = document.getElementById('archiveNavSection');
+                if (navSection) {
+                    navSection.style.display = 'none'; // iOSアプリ内であれば要素ごと消去
+                }
+            }
+        });
+        // ▲▲▲ ここまで ▲▲▲
     </script>
     
     <script src="performance.js"></script>
