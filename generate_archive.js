@@ -155,7 +155,7 @@ function displayDate(dateStr) {
 // --- 5. HTMLの組み立て ---
 const currentDisplayDate = displayDate(TARGET_DATE);
 
-// 【SEO対策】パンくずリストのJSON-LD構造化データ
+// 【SEO用】パンくずリスト構造化データ (フルURL指定)
 const breadcrumbJsonLD = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -170,6 +170,12 @@ const breadcrumbJsonLD = {
       "@type": "ListItem",
       "position": 2,
       "name": "試合結果アーカイブ",
+      "item": "https://football.shioya-soft.com/archive/index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": `${currentDisplayDate}の試合結果`,
       "item": `https://football.shioya-soft.com/archive/${TARGET_DATE}/index.html`
     }
   ]
@@ -239,8 +245,9 @@ let htmlContent = `
         <h1>過去の試合結果</h1>
     </header>
 
+    <!-- 【修正】視覚的パンくずリスト。TOPとアーカイブ一覧の両方をクリック可能に変更 -->
     <nav class="breadcrumb-nav" aria-label="パンくずリスト">
-        <a href="../../index_web.html">TOP</a> ＞ <span>試合結果アーカイブ</span> ＞ <span>${TARGET_DATE}</span>
+        <a href="../../index_web.html">TOP</a> ＞ <a href="../index.html">試合結果アーカイブ</a> ＞ <span>${TARGET_DATE}</span>
     </nav>
 
     <main id="match-list">
