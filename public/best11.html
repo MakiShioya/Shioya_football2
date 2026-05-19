@@ -261,21 +261,23 @@
             <h2 style="color:#432517; font-size: 1.2rem; margin-bottom: 15px; border-bottom: 2px dashed #432517; padding-bottom:10px; text-align: center;">「今週の日本代表」選出基準と仕組み</h2>
             
             <div style="font-size: 0.9rem; line-height: 1.6; color: #333;">
-                <p><b>しおやフットボール（Shioya Football）</b>では、イングランド・プレミアリーグ、スペイン・ラ・リーガ、ドイツ・ブンデスリーガなどの欧州5大リーグをはじめ、ベルギー、オランダ、ポルトガルなど世界各国のリーグで活躍する<b>海外日本人サッカー選手</b>のリアルタイムスタッツを日々自動集計しています。</p>
+                <p><b>しおやフットボール（Shioya Football）</b>では、イングランド・プレミアリーグ、スペイン・ラ・リーガ、ドイツ・ブンデスリーガなどの欧州5大リーグをはじめ、世界各国のトップリーグで活躍する<b>海外日本人サッカー選手</b>の公式戦スタッツを自動集計し、毎週独自のアルゴリズムでベストイレブンを選出しています。</p>
+                
+                <p style="font-size: 0.85rem; color: #d35400; font-weight: bold; background: #fff8dc; padding: 5px 8px; border-radius: 5px; text-align: center;">🔄 更新タイミング：毎週火曜日 03:00〜09:00 JST頃</p>
                 
                 <h3 style="font-size: 1rem; color: #8b4513; margin-top: 15px; margin-bottom: 5px;">1. 総合評価点の算出アルゴリズム</h3>
-                <p>毎週火曜日に更新されるこの「今週の日本代表（ベストイレブン）」は、直近の公式戦における各日本人選手のスタッツをベースに、独自のデータ処理によって算出された週間優秀選手選出システムです。評価点の計算には以下の3つの重要な係数が掛け合わされています。</p>
+                <p>本システムのベストイレブンは、単純なポジションごとの点数比較ではなく、チーム全体の総合力が最大化されるよう「数学的最適化アルゴリズム」を用いてフォーメーションと配置を決定しています。評価点には以下の3つの重要な係数が用いられます。</p>
                 
                 <table style="width: 100%; font-size: 0.85rem; border-collapse: collapse; margin: 10px 0; background: rgba(0,0,0,0.03);">
-                    <tr style="border-bottom: 1px solid #ccc;"><th style="padding: 6px; text-align: left;">係数タイプ</th><th style="padding: 6px; text-align: left;">補正内容と目的</th></tr>
-                    <tr style="border-bottom: 1px solid #ccc;"><td style="padding: 6px; font-weight: bold;">元の評価点</td><td style="padding: 6px;">試合中のプレイ（得点・アシスト・パス成功率・インターセプト数など）から算出される基本レーティング。</td></tr>
-                    <tr style="border-bottom: 1px solid #ccc;"><td style="padding: 6px; font-weight: bold;">リーグ係数</td><td style="padding: 6px;">所属するリーグのUEFAカントリーランキングや競争環境に応じた難易度補正。5大リーグの1部が高く評価されます。</td></tr>
-                    <tr style="border-bottom: 1px solid #ccc;"><td style="padding: 6px; font-weight: bold;">ポジション係数</td><td style="padding: 6px;">選手本来のメインポジションと、その試合で実際に起用された位置の適性を評価する適合率係数。</td></tr>
+                    <tr style="border-bottom: 1px solid #ccc;"><th style="padding: 6px; text-align: left; width: 35%;">係数タイプ</th><th style="padding: 6px; text-align: left;">補正内容と目的</th></tr>
+                    <tr style="border-bottom: 1px solid #ccc;"><td style="padding: 6px; font-weight: bold;">元の評価点</td><td style="padding: 6px;">実際の試合データ（得点・アシスト・パス成功率など）から算出される基本レーティング。</td></tr>
+                    <tr style="border-bottom: 1px solid #ccc;"><td style="padding: 6px; font-weight: bold;">リーグ係数</td><td style="padding: 6px;"><b>Opta社（英）の「League Power Rankings」</b>を基準に設定された、所属リーグの相対的な難易度補正。</td></tr>
+                    <tr style="border-bottom: 1px solid #ccc;"><td style="padding: 6px; font-weight: bold;">ポジション係数</td><td style="padding: 6px;">当サイトのベストイレブン上で配置されたポジションに対する適性値。<b>実際の試合で起用されたポジションとは無関係</b>に、選手本来のプレースタイルからシステムが適合率を判定し、パズルを組み上げます。</td></tr>
                 </table>
 
                 <h3 style="font-size: 1rem; color: #8b4513; margin-top: 15px; margin-bottom: 5px;">2. 評点によるアイコンの色の違い</h3>
-                <p>サッカーピッチ上に配置された各選手の評価点アイコンは、その週のパフォーマンスの高さに応じて視覚的にカラー分類されています。10点満点を超えて活躍した最優秀選手には、特別なエフェクトが適用されます。</p>
-                <ul>
+                <p>ピッチ上に配置された各選手の評価点アイコンは、その週のパフォーマンスの高さに応じて視覚的にカラー分類されています。10点満点を超えて活躍した最優秀選手には、特別なエフェクトが適用されます。</p>
+                <ul style="padding-left: 20px;">
                     <li><span style="color:#f57c00; font-weight:bold;">★ 10点以上（虹色・星型）</span>: 異次元の大活躍を見せた今週のワールドクラスMVP。</li>
                     <li><span style="color:#ff9800; font-weight:bold;">9.0点以上（オレンジ）</span>: 試合を決定づける仕事を果たした極めて優秀なパフォーマンス。</li>
                     <li><span style="color:#9c27b0; font-weight:bold;">8.0点以上（パープル）</span>: チームの勝利に大きく貢献した素晴らしいスタッツ。</li>
@@ -283,7 +285,7 @@
                     <li><span style="color:#4caf50; font-weight:bold;">6.0点以上（グリーン）</span>: 標準的なパフォーマンスを維持した状態。</li>
                 </ul>
                 
-                <p style="margin-top: 15px; font-size: 0.8rem; color: #666; border-top: 1px solid #ccc; padding-top: 10px;">※当サイトで集計している試合予定や個人スタッツデータは、検索エンジン最適化（SEO）に基づき正確にインデックスされています。アカウントログイン機能をご利用いただくことで、あなたのご自身の「最推し選手」のスタメン情報をピッチ上で黄金に輝かせるカスタムハイライト機能が有効になります。</p>
+                <p style="margin-top: 15px; font-size: 0.8rem; color: #666; border-top: 1px solid #ccc; padding-top: 10px;">※アカウントログイン機能をご利用いただくことで、あなたのご自身の「最推し選手」のスタメン情報をピッチ上で黄金に輝かせるカスタムハイライト機能が有効になります。</p>
             </div>
         </div>
     </div>
