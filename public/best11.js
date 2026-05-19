@@ -156,3 +156,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     });
 });
 // --- ここまで ---
+// ヘルプモーダルを開く処理
+function openHelpModal() {
+    const modal = document.getElementById('helpModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+// ヘルプモーダルを閉じる処理
+function closeHelpModal() {
+    const modal = document.getElementById('helpModal');
+    if (modal) modal.style.display = 'none';
+}
