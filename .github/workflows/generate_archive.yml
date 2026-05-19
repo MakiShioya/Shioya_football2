@@ -27,7 +27,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/archive/
+          git add public/archive/ public/sitemap.xml
           # 変更がなければコミットしない
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate archive for 20260517"
           git push
