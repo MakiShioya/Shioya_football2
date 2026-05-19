@@ -1,3 +1,4 @@
+// generate_web_index.js
 const fs = require('fs');
 const path = require('path');
 
@@ -75,7 +76,7 @@ const TEAM_DISPLAYS = {
     "Parma": "パルマ", "AS Roma": "ローマ", "Torino": "トリノ", "Udinese": "ウディネーゼ", 
     "Venezia": "ヴェネツィア", "Hellas Verona": "ヴェローナ", "Angers": "アンジェ", "Auxerre": "オセール", 
     "Stade Brestois 29": "ブレスト", "Le Havre": "ル・アーヴル", "Lens": "ランス", "Lille": "リール", 
-    "Lyon": "リヨン", "Marseille": "マルセイ修", "Monaco": "モナコ", "Montpellier": "モンペリエ", 
+    "Lyon": "リヨン", "Marseille": "マルセイユ", "Monaco": "モナコ", "Montpellier": "モンペリエ", 
     "Nantes": "ナント", "Nice": "ニース", "Paris Saint Germain": "パリSG", "Reims": "スタッド・ランス", 
     "Rennes": "レンヌ", "Saint Etienne": "サンテティエンヌ", "Strasbourg": "ストラスブール", 
     "Toulouse": "トゥールーズ", "Metz": "メス", "SL Benfica": "ベンフィカ", "Boavista FC": "ボアヴィスタ", 
@@ -192,11 +193,18 @@ let indexHtml = fs.readFileSync(indexPath, 'utf8');
 const regex = /(<main id="match-list">)[\s\S]*?(<\/main>)/i;
 indexHtml = indexHtml.replace(regex, `$1${matchHtml}$2`);
 
-// ▼ 改行タグ（<br>）と行高（line-height）を追加 ▼
+// 改行タグ（<br>）と行高（line-height）を追加
 indexHtml = indexHtml.replace(
     '<h1>予定確認</h1>',
     '<h1 style="font-size: 1.2rem; line-height: 1.4;">海外日本人サッカー選手<br>試合日程・予定</h1>'
 );
 
+// ▼▼▼ 【新設】タブコンテナの左側に「過去の結果」ボタンをインジェクションする処理 ▼▼▼
+const targetTabContainer = '<div class="tab-container" style="margin-bottom: 12px;">';
+const injectedButtonHtml = `${targetTabContainer}\n            <button class="tab-btn" onclick="location.href='archive/index.html'" style="background: #8b4513; color: #ECDBBF;">過去の結果</button>`;
+
+indexHtml = indexHtml.replace(targetTabContainer, injectedButtonHtml);
+// ▲▲▲ ここまで ▲▲▲
+
 fs.writeFileSync(outputPath, indexHtml, 'utf8');
-console.log(`[SEO] Web版専用の index_web.html を同じ階層に生成しました。`);
+console.log(`[SEO] Web版専用の index_web.html を同じ階層に生成しました。（過去の結果ボタン追加済）`);
