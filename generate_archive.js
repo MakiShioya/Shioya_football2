@@ -532,7 +532,9 @@ console.log(`[成功] アーカイブカレンダー (public/archive/index.html)
 console.log("[SEO] sitemap.xml を動的に更新中...");
 const sitemapPath = path.join(BASE_DIR, 'sitemap.xml');
 
-// 今日の日付 (YYYY-MM-DD)
+// 【修正】エラーの原因だった変数 'd' を、厳密に日本時間(JST)基準で再定義します
+const d = new Date();
+d.setUTCHours(d.getUTCHours() + 9);
 const todayFormatted = d.toISOString().split('T')[0];
 
 let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
