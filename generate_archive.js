@@ -118,7 +118,6 @@ const files = fs.readdirSync(MATCHES_DIR);
 
 let validDates = [];
 
-// stats_*.json が存在する日だけをリストアップする
 files.forEach(file => {
     if (file.startsWith('stats_') && file.endsWith('.json')) {
         const dateStr = file.replace('stats_', '').replace('.json', '');
@@ -126,7 +125,6 @@ files.forEach(file => {
     }
 });
 
-// 古い日付順にソート（前後のリンク計算に必須）
 validDates.sort();
 
 if (validDates.length === 0) {
@@ -139,35 +137,28 @@ let generatedCount = 0;
 let skippedCount = 0;
 
 validDates.forEach((targetDate, index) => {
-    
-    // 【重要】出力先ディレクトリとファイルの確認（すでにあればスキップ）
     const ARCHIVE_DIR = path.join(BASE_DIR, 'archive', targetDate);
     const OUT_FILE = path.join(ARCHIVE_DIR, 'index.html');
     
     if (fs.existsSync(OUT_FILE)) {
-        console.log(`[スキップ] ${targetDate} は既に作成されています。`);
         skippedCount++;
-        return; // 次のループへ
+        return; 
     }
 
-    // データの読み込み
     const statsPath = path.join(MATCHES_DIR, `stats_${targetDate}.json`);
     const matchesPath = path.join(MATCHES_DIR, `matches_${targetDate}.json`);
 
-    // matchファイルがない異常データの場合はスキップ
     if (!fs.existsSync(matchesPath)) return; 
 
     const statsData = JSON.parse(fs.readFileSync(statsPath, 'utf8')).stats;
     const matchesRaw = JSON.parse(fs.readFileSync(matchesPath, 'utf8'));
     const matchesData = matchesRaw.matches || matchesRaw.response.matches;
 
-    // 前後の日付を取得
     const prevDate = index > 0 ? validDates[index - 1] : null;
     const nextDate = index < validDates.length - 1 ? validDates[index + 1] : null;
 
     const currentDisplayDate = displayDate(targetDate);
 
-    // 【SEO対策】構造化データ
     const breadcrumbJsonLD = {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -268,7 +259,6 @@ validDates.forEach((targetDate, index) => {
         </div>
 `;
 
-    // 試合ごとにループ
     matchesData.forEach(match => {
         const japanesePlayersInThisMatch = statsData.filter(stat => stat.fixtureId === match.fixtureId);
         if (japanesePlayersInThisMatch.length === 0) return;
@@ -386,29 +376,17 @@ validDates.forEach((targetDate, index) => {
 </html>
 `;
 
-    // フォルダの作成と書き出し
     if (!fs.existsSync(ARCHIVE_DIR)){
         fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
     }
     fs.writeFileSync(OUT_FILE, htmlContent, 'utf8');
-    console.log(`[成功] ${targetDate} のHTMLを生成しました。`);
     generatedCount++;
+}); 
 
-}); // loop終了
+console.log(`新規作成: ${generatedCount} 件 / スキップ済: ${skippedCount} 件`);
 
-// 最終結果の表示
-console.log(`\n============================`);
-console.log(`【完了】 全処理が終了しました。`);
-console.log(`新規作成: ${generatedCount} 件`);
-console.log(`スキップ済: ${skippedCount} 件`);
-console.log(`============================\n`);
-
-// --- (ここから追加) 6. カレンダーページ（アーカイブ一覧）の自動生成 ---
-
+// --- 6. カレンダーページ（archive/index.html）の自動生成 ---
 console.log("カレンダー用一覧ページ (archive/index.html) を生成中...");
-
-// 日付ごとに「出場した全日本人選手」をリスト化するマッピングデータを作成
-// (例: { "20260517": ["鎌田大地", "遠藤航"], ... })
 const playerAppearanceMap = {};
 
 validDates.forEach(dateStr => {
@@ -423,69 +401,49 @@ validDates.forEach(dateStr => {
     }
 });
 
-// カレンダーページのHTML組み立て
 const calendarHtmlPath = path.join(BASE_DIR, 'archive', 'index.html');
-
-let calendarHtmlContent = `
-<!DOCTYPE html>
+let calendarHtmlContent = `<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
     <meta name="description" content="海外で活躍する日本人サッカー選手の過去の試合結果・成績をカレンダーから確認できます。">
     <title>試合結果アーカイブカレンダー | しおやフットボール</title>
-    
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    
     <link rel="stylesheet" href="../common.css">
-
     <style>
         .calendar-container { width: 95%; max-width: 600px; margin: 20px auto 40px; background: rgba(255,255,255,0.8); border: 4px solid #8b4513; border-radius: 12px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .month-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-weight: bold; color: #432517; font-size: 1.3rem; }
         .month-btn { background: #8b4513; color: #ECDBBF; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: inherit; }
         .month-btn:active { transform: scale(0.95); }
-        
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; margin-bottom: 10px; }
         .day-header { font-weight: bold; color: #8b4513; padding: 5px 0; border-bottom: 2px dashed #8b4513; margin-bottom: 5px; }
-        
         .day-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; color: #333; position: relative; }
         .day-empty { background: transparent; }
-        
-        /* 試合がある日のボタン（クリック可能） */
         .day-active { background: #fff8dc; border: 2px solid #8b4513; color: #432517; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); text-decoration: none; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
         .day-active:hover { background: #ffecb3; }
         .day-active:active { transform: scale(0.95); }
-        
-        /* 試合がない日（クリック不可） */
         .day-inactive { background: rgba(0,0,0,0.05); color: #999; border: 1px dashed #ccc; }
-
-        /* ★ 最推し選手が出場した日の特別ハイライト */
         .favorite-shine-day { background: linear-gradient(145deg, #fff3e0, #ffecb3) !important; border: 3px solid #ffd700 !important; color: #e91e63 !important; font-weight: 900 !important; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8) !important; z-index: 10; transform: scale(1.05); }
         .favorite-shine-day::after { content: '★'; position: absolute; top: -8px; right: -5px; font-size: 0.8rem; color: #e91e63; text-shadow: 1px 1px 0 #ffd700; }
     </style>
 </head>
 <body class="theme-default">
-
     <header class="top-bar">
         <h1>試合結果アーカイブ</h1>
     </header>
-
     <main>
         <div class="calendar-container">
             <div class="month-header">
                 <button id="prevMonthBtn" class="month-btn">◀ 前月</button>
-                <div id="currentMonthLabel">2026年5月</div>
+                <div id="currentMonthLabel"></div>
                 <button id="nextMonthBtn" class="month-btn">次月 ▶</button>
             </div>
-            
-            <div class="calendar-grid" id="calendarGrid">
-                <!-- ここにJSでカレンダーのマスが生成されます -->
-            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
         </div>
     </main>
-
     <div class="bottom-menu">
         <button class="menu-btn btn-schedule" onclick="location.href='../index_web.html'">予定を確認</button>
         <button class="menu-btn btn-results" onclick="location.href='../performance.html'">昨日の日本人</button>
@@ -493,38 +451,23 @@ let calendarHtmlContent = `
         <button class="menu-btn btn-transfer" onclick="location.href='../transfer.html'">移籍</button>
         <button class="menu-btn btn-notes" onclick="location.href='../dashboard.html'">シーズン</button>
     </div>
-
     <script>
-        // Node.jsから渡されたデータをJS変数として埋め込み
         const validDates = ${JSON.stringify(validDates)};
         const playerAppearanceMap = ${JSON.stringify(playerAppearanceMap)};
-        
-        // 描画用の状態管理
-        let currentYear = 0;
-        let currentMonth = 0; // 0-11
-        let favoritePlayerName = ""; // 推し選手の名前（日本語）
-
-        // 初期化処理
+        let currentYear = 0, currentMonth = 0, favoritePlayerName = "";
         document.addEventListener("DOMContentLoaded", () => {
             const savedTheme = localStorage.getItem('shioya_theme');
             if (savedTheme) document.body.className = savedTheme;
-
-            // リストの最後（最新）の日付の月を初期表示とする
             if (validDates.length > 0) {
                 const latestDateStr = validDates[validDates.length - 1];
                 currentYear = parseInt(latestDateStr.substring(0, 4), 10);
                 currentMonth = parseInt(latestDateStr.substring(4, 6), 10) - 1;
             } else {
                 const today = new Date();
-                currentYear = today.getFullYear();
-                currentMonth = today.getMonth();
+                currentYear = today.getFullYear(); currentMonth = today.getMonth();
             }
-
-            // ボタンのイベント
             document.getElementById('prevMonthBtn').addEventListener('click', () => changeMonth(-1));
             document.getElementById('nextMonthBtn').addEventListener('click', () => changeMonth(1));
-
-            // Firebase等からの推し選手判定
             fetch('../japanese_players.json').then(res => res.json()).then(playerDict => {
                 firebase.auth().onAuthStateChanged(async (user) => {
                     if (user) {
@@ -535,90 +478,124 @@ let calendarHtmlContent = `
                                 if (favId) {
                                     for (const team in playerDict) {
                                         if (playerDict[team][favId]) {
-                                            favoritePlayerName = playerDict[team][favId].full;
-                                            break;
+                                            favoritePlayerName = playerDict[team][favId].full; break;
                                         }
                                     }
                                 }
                             }
                         } catch(e) { console.error(e); }
                     }
-                    renderCalendar(); // 推しの判定が終わってから（または非ログイン確定後に）描画
+                    renderCalendar();
                 });
-            }).catch(() => {
-                renderCalendar(); // 辞書読み込み失敗時もとにかく描画
-            });
+            }).catch(() => { renderCalendar(); });
         });
-
         function changeMonth(offset) {
             currentMonth += offset;
             if (currentMonth < 0) { currentMonth = 11; currentYear--; }
             else if (currentMonth > 11) { currentMonth = 0; currentYear++; }
             renderCalendar();
         }
-
         function renderCalendar() {
             document.getElementById('currentMonthLabel').textContent = \`\${currentYear}年\${currentMonth + 1}月\`;
-            
-            const grid = document.getElementById('calendarGrid');
-            grid.innerHTML = '';
-
-            // 曜日のヘッダー
+            const grid = document.getElementById('calendarGrid'); grid.innerHTML = '';
             const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
             dayNames.forEach(day => {
-                const el = document.createElement('div');
-                el.className = 'day-header';
-                el.textContent = day;
-                grid.appendChild(el);
+                const el = document.createElement('div'); el.className = 'day-header'; el.textContent = day; grid.appendChild(el);
             });
-
-            // 月の最初の日と日数
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-            // 空白のセル（月の始まりまで）
             for (let i = 0; i < firstDay; i++) {
-                const el = document.createElement('div');
-                el.className = 'day-cell day-empty';
-                grid.appendChild(el);
+                const el = document.createElement('div'); el.className = 'day-cell day-empty'; grid.appendChild(el);
             }
-
-            // 日付のセル
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = \`\${currentYear}\${String(currentMonth + 1).padStart(2, '0')}\${String(day).padStart(2, '0')}\`;
-                
-                const cell = document.createElement('div');
-                cell.className = 'day-cell';
-                
-                // その日が有効な日付リストに存在するか
+                const cell = document.createElement('div'); cell.className = 'day-cell';
                 if (validDates.includes(dateStr)) {
-                    const link = document.createElement('a');
-                    link.href = \`\${dateStr}/index.html\`;
-                    link.className = 'day-active';
-                    link.textContent = day;
-
-                    // 最推し選手が出場している日ならハイライトクラスを付与
+                    const link = document.createElement('a'); link.href = \`\${dateStr}/index.html\`; link.className = 'day-active'; link.textContent = day;
                     if (favoritePlayerName && playerAppearanceMap[dateStr] && playerAppearanceMap[dateStr].includes(favoritePlayerName)) {
                         link.classList.add('favorite-shine-day');
                     }
-
                     cell.appendChild(link);
                 } else {
-                    // データなし
-                    const div = document.createElement('div');
-                    div.className = 'day-inactive day-cell';
-                    div.style.width = '100%';
-                    div.textContent = day;
-                    cell.appendChild(div);
+                    const div = document.createElement('div'); div.className = 'day-inactive day-cell'; div.style.width = '100%'; div.textContent = day; cell.appendChild(div);
                 }
                 grid.appendChild(cell);
             }
         }
     </script>
 </body>
-</html>
-`;
-
-// カレンダーファイルの書き出し（すでに存在していても常に最新に上書き）
+</html>`;
 fs.writeFileSync(calendarHtmlPath, calendarHtmlContent, 'utf8');
 console.log(`[成功] アーカイブカレンダー (public/archive/index.html) の生成が完了しました！`);
+
+// --- 7. sitemap.xml の自動同期更新 ---
+console.log("[SEO] sitemap.xml を動的に更新中...");
+const sitemapPath = path.join(BASE_DIR, 'sitemap.xml');
+
+// 今日の日付 (YYYY-MM-DD)
+const todayFormatted = d.toISOString().split('T')[0];
+
+let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- 1. 固定ページ（主要コンテンツ群） -->
+  <url>
+    <loc>https://football.shioya-soft.com/</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://football.shioya-soft.com/index.html</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://football.shioya-soft.com/dashboard.html</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://football.shioya-soft.com/performance.html</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://football.shioya-soft.com/best11.html</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://football.shioya-soft.com/transfer.html</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2. アーカイブのハブ（カレンダーインデックス） -->
+  <url>
+    <loc>https://football.shioya-soft.com/archive/index.html</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+`;
+
+// 3. 有効な日別アーカイブページをすべてインジェクション
+validDates.forEach(date => {
+    sitemapContent += `  <url>
+    <loc>https://football.shioya-soft.com/archive/${date}/index.html</loc>
+    <lastmod>${todayFormatted}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>\n`;
+});
+
+sitemapContent += `</urlset>`;
+
+fs.writeFileSync(sitemapPath, sitemapContent, 'utf8');
+console.log(`[成功] 最新の有効なアーカイブ計 ${validDates.length} 件を組み込んだ sitemap.xml を上書き保存しました。`);
