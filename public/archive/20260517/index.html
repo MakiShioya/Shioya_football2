@@ -3,37 +3,59 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026年05月17日 海外日本人選手 試合結果 | しおやフットボール</title>
-    <meta name="description" content="2026年05月17日に行われた海外日本人サッカー選手の試合結果と個人成績（スタメン、ゴール、アシスト、評価点）です。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, viewport-fit=cover">
+    <meta name="description" content="2026年05月17日の海外日本人サッカー選手の試合結果や個人成績です。">
+    <meta property="og:title" content="2026年05月17日 試合結果 | しおやフットボール">
+    <meta property="og:type" content="article">
+    <meta name="robots" content="index, follow">
+    <title>2026年05月17日 試合結果 | しおやフットボール</title>
+    
+    <!-- Firebaseの読み込み (推し選手ハイライト用) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <!-- common.cssの読み込み -->
     <link rel="stylesheet" href="../../common.css">
+
     <style>
-        /* アーカイブ用の追加スタイル */
-        .archive-match-card { background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px; margin: 15px auto; padding: 15px; width: 95%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .archive-header { display: flex; justify-content: space-between; font-size: 0.85em; color: #666; margin-bottom: 10px; font-weight: bold; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-        .archive-score-board { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .archive-team { width: 40%; text-align: center; font-weight: bold; font-size: 1rem; }
-        .archive-score { width: 20%; text-align: center; font-size: 1.4em; font-weight: 900; color: #432517; }
-        .archive-players { background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; font-size: 0.9em; }
-        .player-row { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 4px 0; }
-        .player-row:last-child { border-bottom: none; }
-        .status-badge { font-size: 0.7em; padding: 2px 6px; border-radius: 4px; color: white; margin-left: 5px; }
-        .starter-badge { background-color: #d9534f; }
-        .sub-badge { background-color: #5bc0de; }
-        .goal-assist { color: #d9534f; font-weight: bold; }
+        .archive-header-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; }
+        .nav-btn { background: #8b4513; color: #ECDBBF; padding: 10px 15px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .nav-btn.disabled { background: #ccc; color: #666; pointer-events: none; }
+        .date-title { font-size: 1.2rem; font-weight: bold; color: var(--text-color); }
+        
+        .archive-match-card { background: #fff8dc; border: 3px solid #8b4513; border-radius: 12px; margin: 15px auto; padding: 15px; width: 95%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333; }
+        .archive-info { font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold; }
+        .archive-score-board { display: flex; justify-content: space-between; align-items: flex-start; }
+        .archive-team { width: 38%; text-align: center; font-weight: bold; font-size: 1rem; line-height: 1.4; }
+        .archive-score { width: 24%; text-align: center; margin-top: 5px; font-size: 1.3em; font-weight: 900; color: #432517; }
+        
+        .archive-players { margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px; }
+        .player-row { display: flex; justify-content: space-between; font-size: 0.9em; padding: 4px 0; align-items: center; }
+        
+        /* 最推しハイライト用クラス (JSで付与) */
+        .favorite-shine { background: linear-gradient(145deg, #fff3e0, #ffecb3) !important; border: 3px solid #ffd700 !important; box-shadow: 0 0 15px rgba(255, 215, 0, 0.6) !important; }
+        .favorite-shine .player-name-text { color: #e91e63 !important; font-weight: bold; }
     </style>
 </head>
-<body>
-    <header class="top-bar">
-        <h1>2026年05月17日<br>日本人選手 試合結果</h1>
-    </header>
-    <main id="match-list">
+<body class="theme-default">
 
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🇮🇹 セリエA</span>
-                <span>2026/05/17 19:00</span>
-            </div>
+    <!-- ナビゲーションバー (簡易版) -->
+    <header class="top-bar">
+        <a href="../../index_web.html" style="position: absolute; left: 15px; color: #ECDBBF; text-decoration: none; font-size: 1.2rem;">◀ 戻る</a>
+        <h1>過去の試合結果</h1>
+    </header>
+
+    <main id="match-list">
+        <!-- 前後の日付ナビゲーション -->
+        <div class="archive-header-nav">
+            <a href="../20260516/index.html" class="nav-btn">前の試合日</a>
+            <div class="date-title">2026年05月17日</div>
+            <span class="nav-btn disabled">次の試合日</span>
+        </div>
+
+        <article class="archive-match-card" data-match-players="鈴木彩艶,">
+            <div class="archive-info">セリエA | 2026/05/17 19:00 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">コモ</div>
                 <div class="archive-score">1 - 0</div>
@@ -41,19 +63,16 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>鈴木彩艶</strong> <span class="status-badge starter-badge">スタメン</span></div>
-                <div>⏱90分 📊8.6 </div>
+            <div class="player-row" data-player-name="鈴木彩艶">
+                <div class="player-name-text">鈴木彩艶 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">スタメン</span></div>
+                <div>90分 評価:8.6 </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🇳🇱 オランダ</span>
-                <span>2026/05/17 21:30</span>
-            </div>
+        <article class="archive-match-card" data-match-players="市原吏音,毎熊晟矢,">
+            <div class="archive-info">オランダ | 2026/05/17 21:30 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">AZ</div>
                 <div class="archive-score">3 - 3</div>
@@ -61,24 +80,21 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>市原吏音</strong> <span class="status-badge sub-badge">途中出場</span></div>
-                <div>⏱0分 📊- </div>
+            <div class="player-row" data-player-name="市原吏音">
+                <div class="player-name-text">市原吏音 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">途中出場</span></div>
+                <div>0分 評価:- </div>
             </div>
         
-            <div class="player-row">
-                <div><strong>毎熊晟矢</strong> <span class="status-badge sub-badge">途中出場</span></div>
-                <div>⏱0分 📊- </div>
+            <div class="player-row" data-player-name="毎熊晟矢">
+                <div class="player-name-text">毎熊晟矢 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">途中出場</span></div>
+                <div>0分 評価:- </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🇳🇱 オランダ</span>
-                <span>2026/05/17 21:30</span>
-            </div>
+        <article class="archive-match-card" data-match-players="板倉滉,冨安健洋,">
+            <div class="archive-info">オランダ | 2026/05/17 21:30 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">ヘーレンフェーン</div>
                 <div class="archive-score">0 - 0</div>
@@ -86,24 +102,21 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>板倉滉</strong> <span class="status-badge starter-badge">スタメン</span></div>
-                <div>⏱90分 📊8.2 </div>
+            <div class="player-row" data-player-name="板倉滉">
+                <div class="player-name-text">板倉滉 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">スタメン</span></div>
+                <div>90分 評価:8.2 </div>
             </div>
         
-            <div class="player-row">
-                <div><strong>冨安健洋</strong> <span class="status-badge sub-badge">途中出場</span></div>
-                <div>⏱0分 📊- </div>
+            <div class="player-row" data-player-name="冨安健洋">
+                <div class="player-name-text">冨安健洋 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">途中出場</span></div>
+                <div>0分 評価:- </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🇳🇱 オランダ</span>
-                <span>2026/05/17 21:30</span>
-            </div>
+        <article class="archive-match-card" data-match-players="佐野航大,小川航基,">
+            <div class="archive-info">オランダ | 2026/05/17 21:30 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">NEC</div>
                 <div class="archive-score">2 - 1</div>
@@ -111,24 +124,21 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>佐野航大</strong> <span class="status-badge starter-badge">スタメン</span></div>
-                <div>⏱95分 📊7.5 </div>
+            <div class="player-row" data-player-name="佐野航大">
+                <div class="player-name-text">佐野航大 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">スタメン</span></div>
+                <div>95分 評価:7.5 </div>
             </div>
         
-            <div class="player-row">
-                <div><strong>小川航基</strong> <span class="status-badge sub-badge">途中出場</span></div>
-                <div>⏱24分 📊6.5 </div>
+            <div class="player-row" data-player-name="小川航基">
+                <div class="player-name-text">小川航基 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">途中出場</span></div>
+                <div>24分 評価:6.5 </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🇳🇱 オランダ</span>
-                <span>2026/05/17 21:30</span>
-            </div>
+        <article class="archive-match-card" data-match-players="三戸舜介,">
+            <div class="archive-info">オランダ | 2026/05/17 21:30 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">スパルタ</div>
                 <div class="archive-score">2 - 3</div>
@@ -136,19 +146,16 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>三戸舜介</strong> <span class="status-badge starter-badge">スタメン</span></div>
-                <div>⏱71分 📊6.6 </div>
+            <div class="player-row" data-player-name="三戸舜介">
+                <div class="player-name-text">三戸舜介 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">スタメン</span></div>
+                <div>71分 評価:6.6 </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>⚽ 2. Bundesliga</span>
-                <span>2026/05/17 22:30</span>
-            </div>
+        <article class="archive-match-card" data-match-players="三好康児,">
+            <div class="archive-info">2. Bundesliga | 2026/05/17 22:30 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">Karlsruher SC</div>
                 <div class="archive-score">1 - 2</div>
@@ -156,19 +163,16 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>三好康児</strong> <span class="status-badge sub-badge">途中出場</span></div>
-                <div>⏱9分 📊6.9 </div>
+            <div class="player-row" data-player-name="三好康児">
+                <div class="player-name-text">三好康児 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">途中出場</span></div>
+                <div>9分 評価:6.9 </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 プレミア</span>
-                <span>2026/05/17 23:00</span>
-            </div>
+        <article class="archive-match-card" data-match-players="鎌田大地,">
+            <div class="archive-info">プレミア | 2026/05/17 23:00 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">ブレントフォード</div>
                 <div class="archive-score">2 - 2</div>
@@ -176,19 +180,16 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>鎌田大地</strong> <span class="status-badge starter-badge">スタメン</span></div>
-                <div>⏱90分 📊6.9 </div>
+            <div class="player-row" data-player-name="鎌田大地">
+                <div class="player-name-text">鎌田大地 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">スタメン</span></div>
+                <div>90分 評価:6.9 </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 プレミア</span>
-                <span>2026/05/17 23:00</span>
-            </div>
+        <article class="archive-match-card" data-match-players="田中碧,">
+            <div class="archive-info">プレミア | 2026/05/17 23:00 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">リーズ</div>
                 <div class="archive-score">1 - 0</div>
@@ -196,19 +197,16 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>田中碧</strong> <span class="status-badge starter-badge">スタメン</span></div>
-                <div>⏱60分 📊6.9 </div>
+            <div class="player-row" data-player-name="田中碧">
+                <div class="player-name-text">田中碧 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">スタメン</span></div>
+                <div>60分 評価:6.9 </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🇪🇸 ラ・リーガ</span>
-                <span>2026/05/18 02:00</span>
-            </div>
+        <article class="archive-match-card" data-match-players="浅野拓磨,">
+            <div class="archive-info">ラ・リーガ | 2026/05/18 02:00 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">Levante</div>
                 <div class="archive-score">2 - 0</div>
@@ -216,19 +214,16 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>浅野拓磨</strong> <span class="status-badge sub-badge">途中出場</span></div>
-                <div>⏱21分 📊6.7 </div>
+            <div class="player-row" data-player-name="浅野拓磨">
+                <div class="player-name-text">浅野拓磨 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">途中出場</span></div>
+                <div>21分 評価:6.7 </div>
             </div>
         
             </div>
         </article>
     
-        <article class="archive-match-card">
-            <div class="archive-header">
-                <span>🇪🇸 ラ・リーガ</span>
-                <span>2026/05/18 02:00</span>
-            </div>
+        <article class="archive-match-card" data-match-players="久保建英,">
+            <div class="archive-info">ラ・リーガ | 2026/05/18 02:00 (日本時間)</div>
             <div class="archive-score-board">
                 <div class="archive-team">レアル・ソシエダ</div>
                 <div class="archive-score">3 - 4</div>
@@ -236,17 +231,65 @@
             </div>
             <div class="archive-players">
                 
-            <div class="player-row">
-                <div><strong>久保建英</strong> <span class="status-badge sub-badge">途中出場</span></div>
-                <div>⏱0分 📊- </div>
+            <div class="player-row" data-player-name="久保建英">
+                <div class="player-name-text">久保建英 <span style="font-size:0.7em; background:#8b4513; color:#ECDBBF; padding:2px 4px; border-radius:4px;">途中出場</span></div>
+                <div>0分 評価:- </div>
             </div>
         
             </div>
         </article>
     
-        <div style="text-align: center; margin: 30px 0;">
-            <a href="../../index_web.html" style="padding: 10px 20px; background: #8b4513; color: white; text-decoration: none; border-radius: 8px;">トップページへ戻る</a>
-        </div>
     </main>
+
+    <!-- 下部メニュー (共通) -->
+    <div class="bottom-menu">
+        <button class="menu-btn btn-schedule" onclick="location.href='../../index_web.html'">予定を確認</button>
+        <button class="menu-btn btn-results" onclick="location.href='../../performance.html'">昨日の日本人</button>
+        <button class="menu-btn btn-calendar" onclick="location.href='../../best11.html'">今週の日本代表</button>
+        <button class="menu-btn btn-transfer" onclick="location.href='../../transfer.html'">移籍</button>
+        <button class="menu-btn btn-notes" onclick="location.href='../../dashboard.html'">シーズン</button>
+    </div>
+
+    <!-- クライアント側のJS: Firebaseにログインしていれば推し選手を光らせる -->
+    <script>
+        // auth.js と同じFirebase設定が読み込まれている前提
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedTheme = localStorage.getItem('shioya_theme');
+            if (savedTheme) document.body.className = savedTheme;
+
+            // japanese_players.jsonを読み込んで、推しIDから名前を逆引きできるようにする
+            fetch('../../japanese_players.json').then(res => res.json()).then(playerDict => {
+                firebase.auth().onAuthStateChanged(async (user) => {
+                    if (user) {
+                        try {
+                            const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
+                            if (userDoc.exists) {
+                                const favId = userDoc.data().mostFavoriteId;
+                                if (!favId) return;
+
+                                // favId ("Mitoma" など) に該当する日本語名 ("三笘薫" など) を探す
+                                let favFullName = "";
+                                for (const team in playerDict) {
+                                    if (playerDict[team][favId]) {
+                                        favFullName = playerDict[team][favId].full;
+                                        break;
+                                    }
+                                }
+
+                                if (favFullName) {
+                                    // その選手が出場している試合カードを光らせる
+                                    document.querySelectorAll('.archive-match-card').forEach(card => {
+                                        if (card.getAttribute('data-match-players').includes(favFullName)) {
+                                            card.classList.add('favorite-shine');
+                                        }
+                                    });
+                                }
+                            }
+                        } catch(e) { console.error(e); }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
