@@ -186,6 +186,29 @@
             padding: 2px 6px;
             border-radius: 10px;
         }
+
+        /* 「？」ヘルプボタンの配置スタイル */
+        .help-trigger-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 30px;
+            height: 30px;
+            background: rgba(67, 37, 23, 0.8);
+            color: #ECDBBF;
+            border: 2px solid #ECDBBF;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-family: 'SetoFont', sans-serif;
+        }
+        .help-trigger-btn:active { transform: scale(0.9); }
         
     </style>
 </head>
@@ -371,6 +394,8 @@
             document.getElementById('authButtons').style.display = 'flex';
             document.getElementById('emailInputArea').style.display = 'none';
         }
+
+        
     </script>
 
     <!-- 既存のデータ・ロジックスクリプト -->
