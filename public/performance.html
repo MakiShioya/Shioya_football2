@@ -112,14 +112,10 @@
     </header>
 
     <!-- ② ページごとの固有コンテンツ -->
-    <main id="performance-list" class="container">
-        
-        <!-- 【新設】「カレンダーから過去の日付を確認」ボタンエリア（クローラー導線確保のためメイン枠の最上部に配置） -->
-        <div id="archiveNavSection" class="archive-nav-wrapper">
-            <a href="archive/index.html" class="archive-redirect-btn">カレンダーから過去の日付を確認</a>
-        </div>
-
-        <!-- 試合カード群はここに動的挿入される想定 -->
+    <div id="archiveNavSection" class="archive-nav-wrapper" style="padding: 15px 15px 0; margin-top: 10px;">
+        <a href="archive/index.html" class="archive-redirect-btn">カレンダーから過去の日付を確認</a>
+    </div>
+    <main id="performance-list" class="container" style="padding-top: 5px;">
         <p id="loadingText" style="text-align: center;">データを読み込み中...</p>
     </main>
 
