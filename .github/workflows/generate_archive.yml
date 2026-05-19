@@ -3,6 +3,9 @@ name: Generate Daily Archive HTML
 # 手動で実行できるようにする（テスト用）
 on:
   workflow_dispatch:
+  
+permissions:
+  contents: write
 
 jobs:
   build:
