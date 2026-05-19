@@ -253,7 +253,7 @@
         </div>
     </main>
 
-    <!-- 【新設】SEO対策：クローラーが100%インデックスできる静的解説文（ヘルプモーダル） -->
+    <!-- ② ページごとの固有コンテンツ：ヘルプモーダル -->
     <div id="helpModal" class="modal-overlay" onclick="closeHelpModal()">
         <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 450px; text-align: left; max-height: 80vh; overflow-y: auto;">
             <button class="modal-close-btn" onclick="closeHelpModal()">×</button>
@@ -266,7 +266,7 @@
                 <p style="font-size: 0.85rem; color: #d35400; font-weight: bold; background: #fff8dc; padding: 5px 8px; border-radius: 5px; text-align: center;">🔄 更新タイミング：毎週火曜日 03:00〜09:00 JST頃</p>
                 
                 <h3 style="font-size: 1rem; color: #8b4513; margin-top: 15px; margin-bottom: 5px;">1. 総合評価点の算出アルゴリズム</h3>
-                <p>本システムのベストイレブンは、単純なポジションごとの点数比較ではなく、チーム全体の総合力が最大化されるよう「数学的最適化アルゴリズム」を用いてフォーメーションと配置を決定しています。評価点には以下の3つの重要な係数が用いられます。</p>
+                <p>本システムのベストイレブンは、単純なポジションごとの点数比較ではなく、チーム全体の総合力が最大化されるよう、ハンガリアン法の要素（総当たりの最大重み割当という思想）を取り入れた、バックトラッキング（分枝限定法・全探索）アルゴリズムを用いてフォーメーションと配置を決定しています。評価点には以下の3つの重要な係数が用いられます。</p>
                 
                 <table style="width: 100%; font-size: 0.85rem; border-collapse: collapse; margin: 10px 0; background: rgba(0,0,0,0.03);">
                     <tr style="border-bottom: 1px solid #ccc;"><th style="padding: 6px; text-align: left; width: 35%;">係数タイプ</th><th style="padding: 6px; text-align: left;">補正内容と目的</th></tr>
@@ -275,7 +275,12 @@
                     <tr style="border-bottom: 1px solid #ccc;"><td style="padding: 6px; font-weight: bold;">ポジション係数</td><td style="padding: 6px;">当サイトのベストイレブン上で配置されたポジションに対する適性値。<b>実際の試合で起用されたポジションとは無関係</b>に、選手本来のプレースタイルからシステムが適合率を判定し、パズルを組み上げます。</td></tr>
                 </table>
 
-                <h3 style="font-size: 1rem; color: #8b4513; margin-top: 15px; margin-bottom: 5px;">2. 評点によるアイコンの色の違い</h3>
+                <!-- 【強化項目】数学的選出ロジックに関する詳細なテキスト解説（SEO読み物要素） -->
+                <h3 style="font-size: 1rem; color: #8b4513; margin-top: 15px; margin-bottom: 5px;">3. 数学的最適化による選出ロジック</h3>
+                <p>単純にスタッツが高い順（例えばウイングの選手ばかりが高得点だった場合など）で選出すると、特定のポジションだけが重複し、サッカーのフォーメーションとして成立しなくなってしまいます。</p>
+                <p>そこで当システムでは、用意された複数のフォーメーション（4-2-3-1、4-3-3、3-5-2など）のすべてのポジション枠に対し、ノミネートされた全日本人選手の「実効スコア（基礎点×適性値）」の組み合わせ総数をプログラムが全探索します。計算途中で期待値の低い組み合わせを効率的に間引く（枝刈り）ことで精度を担保しつつ、<b>『ピッチ上の11人全体の合計評点が最も高くなる数学的最適解』</b>となる唯一の組み合わせを完全自動で導き出しています。</p>
+
+                <h3 style="font-size: 1rem; color: #8b4513; margin-top: 15px; margin-bottom: 5px;">4. 評点によるアイコンの色の違い</h3>
                 <p>ピッチ上に配置された各選手の評価点アイコンは、その週のパフォーマンスの高さに応じて視覚的にカラー分類されています。10点満点を超えて活躍した最優秀選手には、特別なエフェクトが適用されます。</p>
                 <ul style="padding-left: 20px;">
                     <li><span style="color:#f57c00; font-weight:bold;">★ 10点以上（虹色・星型）</span>: 異次元の大活躍を見せた今週のワールドクラスMVP。</li>
