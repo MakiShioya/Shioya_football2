@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-19T04:33:47.224Z",
+  "updated": "2026-05-20T04:36:43.564Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -250,9 +250,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 0,
-      "rating": "6.80",
-      "minutes": 2560,
-      "appearances": 32
+      "rating": "6.85",
+      "minutes": 2650,
+      "appearances": 33
     },
     {
       "name": "藤本寛也",
@@ -273,8 +273,8 @@
       "goals": 6,
       "assists": 5,
       "rating": "7.03",
-      "minutes": 2044,
-      "appearances": 34
+      "minutes": 2133,
+      "appearances": 35
     },
     {
       "name": "町田浩樹",
@@ -437,9 +437,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "7.12",
-      "minutes": 2564,
-      "appearances": 34
+      "rating": "7.22",
+      "minutes": 2654,
+      "appearances": 35
     },
     {
       "name": "町野修斗",
