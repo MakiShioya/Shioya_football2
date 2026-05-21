@@ -33,6 +33,9 @@ jobs:
       - name: Copy index_web.html to index.html for Web SEO
         run: cp public/index_web.html public/index.html
 
+      - name: Copy transfer_web.html to transfer.html for Web SEO # 👈 【追記】
+        run: cp public/transfer_web.html public/transfer.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
