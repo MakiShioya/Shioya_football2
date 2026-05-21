@@ -3,9 +3,10 @@
     {
       "player": "守田英正",
       "status": "噂",
-      "lastUpdated": "2026/05/08 09:00",
+      "lastUpdated": "2026/05/21 09:00",
       "clubs": [
-        { "name": "リーズ", "league": "プレミア" }
+        { "name": "リーズ", "league": "プレミア" },
+        { "name": "レアル・マドリード", "league": "ラ・リーガ" }
       ]
     },
     {
@@ -25,6 +26,31 @@
       "lastUpdated": "2026/05/08 09:00",
       "clubs": [
         { "name": "ニューカッスル", "league": "プレミア" }
+      ]
+    },
+    {
+      "player": "宇野禅斗",
+      "status": "噂",
+      "lastUpdated": "2026/05/21 09:00",
+      "clubs": [
+        { "name": "ボルシアMG", "league": "ブンデス" }
+      ]
+    },
+    {
+      "player": "伊藤涼太郎",
+      "status": "噂",
+      "lastUpdated": "2026/05/21 09:00",
+      "clubs": [
+        { "name": "ハンブルガーSV", "league": "ブンデス" },
+        { "name": "ボルシアMG", "league": "ブンデス" }
+      ]
+    },
+    {
+      "player": "福井太智",
+      "status": "噂",
+      "lastUpdated": "2026/05/21 09:00",
+      "clubs": [
+        { "name": "ラージョ", "league": "ラ・リーガ" }
       ]
     }
   ]
