@@ -1,0 +1,31 @@
+{
+  "transfers": [
+    {
+      "player": "守田英正",
+      "status": "噂",
+      "lastUpdated": "2026/05/08 09:00",
+      "clubs": [
+        { "name": "リーズ", "league": "プレミア" }
+      ]
+    },
+    {
+      "player": "上田綺世",
+      "status": "噂",
+      "lastUpdated": "2026/05/08 09:00",
+      "clubs": [
+        { "name": "トッテナム", "league": "プレミア" },
+        { "name": "ブライトン", "league": "プレミア" },
+        { "name": "エヴァートン", "league": "プレミア" },
+        { "name": "リーズ", "league": "プレミア" }
+      ]
+    },
+    {
+      "player": "鎌田大地",
+      "status": "噂",
+      "lastUpdated": "2026/05/08 09:00",
+      "clubs": [
+        { "name": "ニューカッスル", "league": "プレミア" }
+      ]
+    }
+  ]
+}
