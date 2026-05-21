@@ -14,9 +14,10 @@ node fetch_data.js
 
 # 5. Web版SEO用のHTMLファイルを自動生成
 node generate_web_index.js
+node generate_web_transfer.js
 
 # 6. GitHubへのプッシュ処理 (public/index_web.html を追加)
-git add public/data/matches/ public/index_web.html
+git add public/data/matches/ public/data/transfers.json public/index_web.html public/transfer_web.html
 
 # 変更があった場合のみコミットとプッシュを行う
 if ! git diff --staged --quiet; then
