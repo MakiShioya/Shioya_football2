@@ -26,10 +26,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 /**
  * 【iOSアプリ用】 データを取得してグローバルに格納し、初回描画
  */
+
+
 async function loadTransferDataForApp() {
+    const listContainer = document.getElementById('transfer-list');
+    
     try {
-        const response = await fetch('data/transfers.json');
+        // 修正前: const response = await fetch('data/transfers.json');
+        // 👈 【修正】URLをインターネット上の本番ドメインのものに変更します
+        const response = await fetch('https://football.shioya-soft.com/data/transfers.json');
+        
         const data = await response.json();
+        // （以下、既存のレンダリング処理は一切変えずにそのまま維持します）
         appTransferData = data.transfers || [];
         renderTransfersForApp();
     } catch (error) {
