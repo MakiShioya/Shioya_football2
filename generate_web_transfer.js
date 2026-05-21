@@ -17,19 +17,19 @@ if (transferData.length === 0) {
     transferHtml = '<p style="text-align:center; padding: 40px; color: #ECDBBF;">該当する移籍情報はありません。</p>';
 } else {
     // generate_web_transfer.js のループ処理修正案
+    // generate_web_transfer.js のループ処理修正
     transferHtml = transferData.map(data => {
         const cardClass = data.status === "確定" ? "status-confirmed" : "status-rumor";
         const badgeClass = data.status === "確定" ? "badge-confirmed" : "badge-rumor";
         const clubsHtml = data.clubs.map(club => `<li class="club-item">➡ ${club.name}</li>`).join('');
         const leaguesAttr = data.clubs.map(c => c.league).join(',');
 
-        // コメント（文章欄）のHTMLを生成（データがある場合のみ枠を作る）
+        // 移籍先の下に表示される小さめの文章欄
         const commentHtml = data.comment ? `
-            <div class="transfer-comment" style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(139,69,19,0.2); font-size: 0.95rem; color: #432517; line-height: 1.5; text-align: left;">
+            <div class="transfer-comment" style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(139,69,19,0.2); font-size: 0.85rem; color: #555; line-height: 1.4; text-align: left;">
                 ${data.comment}
             </div>` : '';
 
-        // data-time と data-player 属性を新しくカードに付与する
         return `
             <div class="transfer-card ${cardClass}" data-status="${data.status}" data-leagues="${leaguesAttr}" data-time="${data.lastUpdated}" data-player="${data.player}">
                 <div class="update-time">更新: ${data.lastUpdated}</div>

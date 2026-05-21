@@ -79,6 +79,28 @@
 
         /* アクティブボタンの強調 */
         .btn-transfer { border-color: white !important; }
+
+        /* 3列横並び用のコンテナ */
+.filter-row-three {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+
+/* 3列横並び用のセレクトボックススタイル */
+.control-select-three {
+    flex: 1;
+    min-width: 0; /* 幅がはみ出るのを防ぐ */
+    padding: 8px 2px;
+    border-radius: 8px;
+    border: 2px solid #8b4513;
+    font-size: 0.85rem;
+    background-color: #ECDBBF;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+}
     </style>
 </head>
 <body>
@@ -95,29 +117,31 @@
     </header>
 
     <div class="control-panel">
-        <select id="status-filter" class="control-select">
-            <option value="all">すべての状況</option>
-            <option value="確定">確定のみ</option>
-            <option value="噂">噂のみ</option>
-        </select>
-
-        <select id="league-filter" class="control-select">
-            <option value="all">すべてのリーグ</option>
-            <option value="プレミア">プレミアリーグ</option>
-            <option value="ラ・リーガ">ラ・リーガ</option>
-            <option value="ブンデス">ブンデスリーガ</option>
-            <option value="セリエA">セリエA</option>
-            <option value="リーグアン">リーグ・アン</option>
-            <option value="その他">その他</option>
-        </select>
-
-        <input type="text" id="player-search" class="control-select" placeholder="選手名で検索..." style="background-color: #ffffff; font-weight: normal; box-sizing: border-box;">
+        <input type="text" id="player-search" class="control-select" placeholder="選手名で検索..." style="background-color: #ffffff; font-weight: normal; box-sizing: border-box; margin-bottom: 5px;">
         
-        <select id="sort-order" class="control-select">
-            <option value="desc">更新日時が新しい順</option>
-            <option value="asc">更新日時が古い順</option>
-        </select>
+        <div class="filter-row-three">
+            <select id="status-filter" class="control-select-three">
+                <option value="all">全状況</option>
+                <option value="確定">確定</option>
+                <option value="噂">噂</option>
+            </select>
+
+            <select id="league-filter" class="control-select-three">
+                <option value="all">全リーグ</option>
+                <option value="プレミア">プレミア</option>
+                <option value="ラ・リーガ">ラ・リーガ</option>
+                <option value="ブンデス">ブンデス</option>
+                <option value="セリエA">セリエA</option>
+                <option value="リーグアン">リーグ1</option>
+                <option value="その他">その他</option>
+            </select>
+
+            <select id="sort-order" class="control-select-three">
+                <option value="desc">新しい順</option>
+                <option value="asc">古い順</option>
+            </select>
         </div>
+    </div>
 
     <main id="transfer-list">
         <p style="text-align: center; color: #ECDBBF; margin-top: 20px;">情報を読み込み中...</p>

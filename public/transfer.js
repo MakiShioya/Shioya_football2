@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// iOSアプリ用：データをインターネット（本番サーバー）から取得
+// iOSアプリ用：データをインターネットから取得
 async function loadTransferDataForApp() {
     try {
         const response = await fetch('https://football.shioya-soft.com/data/transfers.json');
@@ -35,7 +35,7 @@ async function loadTransferDataForApp() {
     }
 }
 
-// iOSアプリ用：並び替え・検索を含めた動的レンダリング
+// iOSアプリ用：動的レンダリング（コメント表示位置とサイズ調整済）
 function renderTransfersForApp() {
     const container = document.getElementById('transfer-list');
     const statusFilter = document.getElementById('status-filter').value;
@@ -43,7 +43,6 @@ function renderTransfersForApp() {
     const searchQuery = document.getElementById('player-search').value.trim().toLowerCase();
     const sortOrder = document.getElementById('sort-order').value;
 
-    // 1. 絞り込みと検索
     let filtered = appTransferData.filter(data => {
         if (statusFilter !== "all" && data.status !== statusFilter) return false;
         if (leagueFilter !== "all") {
@@ -54,7 +53,6 @@ function renderTransfersForApp() {
         return true;
     });
 
-    // 2. 日時での並び替え
     filtered.sort((a, b) => {
         const timeA = new Date(a.lastUpdated).getTime();
         const timeB = new Date(b.lastUpdated).getTime();
@@ -71,8 +69,9 @@ function renderTransfersForApp() {
         const badgeClass = data.status === "確定" ? "badge-confirmed" : "badge-rumor";
         const clubsHtml = data.clubs.map(club => `<li class="club-item">➡ ${club.name}</li>`).join('');
         
+        // 小さめのコメント欄（移籍先リストの下）
         const commentHtml = data.comment ? `
-            <div class="transfer-comment" style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(139,69,19,0.2); font-size: 0.95rem; color: #432517; line-height: 1.5; text-align: left;">
+            <div class="transfer-comment" style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(139,69,19,0.2); font-size: 0.85rem; color: #555; line-height: 1.4; text-align: left;">
                 ${data.comment}
             </div>` : '';
 
@@ -92,7 +91,7 @@ function renderTransfersForApp() {
     }).join('');
 }
 
-// Web環境用：既存の静的HTMLカードの絞り込み・検索・並び替え（DOM操作）
+// Web環境用：カードの絞り込み・検索・並び替え制御
 function filterAndSortWebCards() {
     const statusFilter = document.getElementById('status-filter').value;
     const leagueFilter = document.getElementById('league-filter').value;
@@ -104,7 +103,6 @@ function filterAndSortWebCards() {
     
     let visibleCount = 0;
 
-    // 絞り込みと非表示の制御
     cards.forEach(card => {
         const cardStatus = card.getAttribute('data-status');
         const cardLeagues = card.getAttribute('data-leagues') ? card.getAttribute('data-leagues').split(',') : [];
@@ -122,17 +120,14 @@ function filterAndSortWebCards() {
         }
     });
 
-    // 並び替え（DOM要素の並び順を変更）
     cards.sort((a, b) => {
         const timeA = new Date(a.getAttribute('data-time')).getTime();
         const timeB = new Date(b.getAttribute('data-time')).getTime();
         return sortOrder === 'desc' ? timeB - timeA : timeA - timeB;
     });
 
-    // 並び替えた要素を親要素(container)に再追加して画面に反映
     cards.forEach(card => container.appendChild(card));
 
-    // メッセージ制御
     let noMatchMessage = document.getElementById('web-no-match-message');
     if (visibleCount === 0) {
         if (!noMatchMessage) {
@@ -143,7 +138,7 @@ function filterAndSortWebCards() {
             container.appendChild(noMatchMessage);
         } else {
             noMatchMessage.style.display = 'block';
-            container.appendChild(noMatchMessage); // 常に最下部に置く
+            container.appendChild(noMatchMessage);
         }
     } else if (noMatchMessage) {
         noMatchMessage.style.display = 'none';
