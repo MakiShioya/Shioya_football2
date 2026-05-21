@@ -41,7 +41,7 @@
 
   <!-- 2. アーカイブのハブ（カレンダーインデックス） -->
   <url>
-    <loc>https://football.shioya-soft.com/archive/index.html</loc>
+    <loc>https://football.shioya-soft.com/archive/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
