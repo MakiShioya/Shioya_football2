@@ -1,43 +1,32 @@
-// グローバル変数として保持（アプリ環境でのみ使用）
 let appTransferData = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // iOSアプリ環境（Capacitor）または、ローカルのファイルシステム環境かどうかを判定
     const isApp = window.Capacitor !== undefined || window.location.protocol === 'file:';
 
     if (isApp) {
-        // ① iOSアプリ環境: JSONを非同期でフェッチして、動的に描画
+        // ① iOSアプリ環境
         await loadTransferDataForApp();
         
-        // フィルターイベントの設定（アプリは従来通りイベントで再描画を走らせる）
         document.getElementById('status-filter').addEventListener('change', renderTransfersForApp);
         document.getElementById('league-filter').addEventListener('change', renderTransfersForApp);
+        document.getElementById('player-search').addEventListener('input', renderTransfersForApp);
+        document.getElementById('sort-order').addEventListener('change', renderTransfersForApp);
     } else {
-        // ② Web環境: すでにHTMLがサーバー側で埋め込まれているため、
-        // 再描画（innerHTMLの書き換え）はせず、スタイル（display）の切り替えだけで絞り込みを行う
-        document.getElementById('status-filter').addEventListener('change', filterWebHtmlCards);
-        document.getElementById('league-filter').addEventListener('change', filterWebHtmlCards);
+        // ② Web環境
+        document.getElementById('status-filter').addEventListener('change', filterAndSortWebCards);
+        document.getElementById('league-filter').addEventListener('change', filterAndSortWebCards);
+        document.getElementById('player-search').addEventListener('input', filterAndSortWebCards);
+        document.getElementById('sort-order').addEventListener('change', filterAndSortWebCards);
         
-        // 初回読み込み時に現在のフィルター値に合わせておく
-        filterWebHtmlCards();
+        filterAndSortWebCards();
     }
 });
 
-/**
- * 【iOSアプリ用】 データを取得してグローバルに格納し、初回描画
- */
-
-
+// iOSアプリ用：データをインターネット（本番サーバー）から取得
 async function loadTransferDataForApp() {
-    const listContainer = document.getElementById('transfer-list');
-    
     try {
-        // 修正前: const response = await fetch('data/transfers.json');
-        // 👈 【修正】URLをインターネット上の本番ドメインのものに変更します
         const response = await fetch('https://football.shioya-soft.com/data/transfers.json');
-        
         const data = await response.json();
-        // （以下、既存のレンダリング処理は一切変えずにそのまま維持します）
         appTransferData = data.transfers || [];
         renderTransfersForApp();
     } catch (error) {
@@ -46,21 +35,30 @@ async function loadTransferDataForApp() {
     }
 }
 
-/**
- * 【iOSアプリ用】 従来のロジックに基づく動的レンダリング
- */
+// iOSアプリ用：並び替え・検索を含めた動的レンダリング
 function renderTransfersForApp() {
     const container = document.getElementById('transfer-list');
     const statusFilter = document.getElementById('status-filter').value;
     const leagueFilter = document.getElementById('league-filter').value;
+    const searchQuery = document.getElementById('player-search').value.trim().toLowerCase();
+    const sortOrder = document.getElementById('sort-order').value;
 
-    const filtered = appTransferData.filter(data => {
+    // 1. 絞り込みと検索
+    let filtered = appTransferData.filter(data => {
         if (statusFilter !== "all" && data.status !== statusFilter) return false;
         if (leagueFilter !== "all") {
             const hasTargetLeague = data.clubs.some(club => club.league === leagueFilter);
             if (!hasTargetLeague) return false;
         }
+        if (searchQuery !== "" && !data.player.toLowerCase().includes(searchQuery)) return false;
         return true;
+    });
+
+    // 2. 日時での並び替え
+    filtered.sort((a, b) => {
+        const timeA = new Date(a.lastUpdated).getTime();
+        const timeB = new Date(b.lastUpdated).getTime();
+        return sortOrder === 'desc' ? timeB - timeA : timeA - timeB;
     });
 
     if (filtered.length === 0) {
@@ -72,6 +70,11 @@ function renderTransfersForApp() {
         const cardClass = data.status === "確定" ? "status-confirmed" : "status-rumor";
         const badgeClass = data.status === "確定" ? "badge-confirmed" : "badge-rumor";
         const clubsHtml = data.clubs.map(club => `<li class="club-item">➡ ${club.name}</li>`).join('');
+        
+        const commentHtml = data.comment ? `
+            <div class="transfer-comment" style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(139,69,19,0.2); font-size: 0.95rem; color: #432517; line-height: 1.5; text-align: left;">
+                ${data.comment}
+            </div>` : '';
 
         return `
             <div class="transfer-card ${cardClass}">
@@ -83,31 +86,35 @@ function renderTransfersForApp() {
                 <ul class="club-list">
                     ${clubsHtml}
                 </ul>
+                ${commentHtml}
             </div>
         `;
     }).join('');
 }
 
-/**
- * 【Web環境用】 すでに構築されている静的HTML要素の表示/非表示(CSS)を切り替える
- */
-function filterWebHtmlCards() {
+// Web環境用：既存の静的HTMLカードの絞り込み・検索・並び替え（DOM操作）
+function filterAndSortWebCards() {
     const statusFilter = document.getElementById('status-filter').value;
     const leagueFilter = document.getElementById('league-filter').value;
-    const cards = document.querySelectorAll('.transfer-card');
+    const searchQuery = document.getElementById('player-search').value.trim().toLowerCase();
+    const sortOrder = document.getElementById('sort-order').value;
+    
+    const container = document.getElementById('transfer-list');
+    const cards = Array.from(document.querySelectorAll('.transfer-card'));
     
     let visibleCount = 0;
 
+    // 絞り込みと非表示の制御
     cards.forEach(card => {
         const cardStatus = card.getAttribute('data-status');
-        // カンマ区切りの文字列から配列化
         const cardLeagues = card.getAttribute('data-leagues') ? card.getAttribute('data-leagues').split(',') : [];
+        const cardPlayer = card.getAttribute('data-player') ? card.getAttribute('data-player').toLowerCase() : '';
 
-        // 絞り込み条件判定
         const matchStatus = (statusFilter === "all" || cardStatus === statusFilter);
         const matchLeague = (leagueFilter === "all" || cardLeagues.includes(leagueFilter));
+        const matchSearch = (searchQuery === "" || cardPlayer.includes(searchQuery));
 
-        if (matchStatus && matchLeague) {
+        if (matchStatus && matchLeague && matchSearch) {
             card.style.display = 'block';
             visibleCount++;
         } else {
@@ -115,7 +122,17 @@ function filterWebHtmlCards() {
         }
     });
 
-    // 該当するカードが0件のときのメッセージ制御用の「ノーマッチカード」がなければ作成、あれば表示切り替え
+    // 並び替え（DOM要素の並び順を変更）
+    cards.sort((a, b) => {
+        const timeA = new Date(a.getAttribute('data-time')).getTime();
+        const timeB = new Date(b.getAttribute('data-time')).getTime();
+        return sortOrder === 'desc' ? timeB - timeA : timeA - timeB;
+    });
+
+    // 並び替えた要素を親要素(container)に再追加して画面に反映
+    cards.forEach(card => container.appendChild(card));
+
+    // メッセージ制御
     let noMatchMessage = document.getElementById('web-no-match-message');
     if (visibleCount === 0) {
         if (!noMatchMessage) {
@@ -123,9 +140,10 @@ function filterWebHtmlCards() {
             noMatchMessage.id = 'web-no-match-message';
             noMatchMessage.style.cssText = 'text-align:center; padding: 40px; color: #ECDBBF;';
             noMatchMessage.innerText = '該当する移籍情報はありません。';
-            document.getElementById('transfer-list').appendChild(noMatchMessage);
+            container.appendChild(noMatchMessage);
         } else {
             noMatchMessage.style.display = 'block';
+            container.appendChild(noMatchMessage); // 常に最下部に置く
         }
     } else if (noMatchMessage) {
         noMatchMessage.style.display = 'none';
