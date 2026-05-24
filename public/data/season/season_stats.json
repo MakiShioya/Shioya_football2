@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-22T04:35:34.443Z",
+  "updated": "2026-05-24T04:39:20.479Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -32,7 +32,7 @@
       "assists": 0,
       "rating": "7.28",
       "minutes": 3330,
-      "appearances": 37
+      "appearances": 38
     },
     {
       "name": "山本理仁",
@@ -41,9 +41,9 @@
       "leagueCode": "BSA",
       "goals": 5,
       "assists": 5,
-      "rating": "7.06",
-      "minutes": 3038,
-      "appearances": 35
+      "rating": "7.07",
+      "minutes": 3137,
+      "appearances": 36
     },
     {
       "name": "伊藤涼太郎",
@@ -65,7 +65,7 @@
       "assists": 1,
       "rating": "7.12",
       "minutes": 2864,
-      "appearances": 37
+      "appearances": 38
     },
     {
       "name": "渡辺剛",
@@ -97,8 +97,8 @@
       "goals": 11,
       "assists": 7,
       "rating": "6.79",
-      "minutes": 2786,
-      "appearances": 36
+      "minutes": 2813,
+      "appearances": 37
     },
     {
       "name": "岩田智輝",
@@ -582,7 +582,7 @@
       "assists": 0,
       "rating": "6.54",
       "minutes": 334,
-      "appearances": 16
+      "appearances": 17
     },
     {
       "name": "冨安健洋",
@@ -591,9 +591,9 @@
       "leagueCode": "DED",
       "goals": 0,
       "assists": 0,
-      "rating": "6.57",
-      "minutes": 211,
-      "appearances": 13
+      "rating": "6.61",
+      "minutes": 222,
+      "appearances": 14
     },
     {
       "name": "宮代大聖",
