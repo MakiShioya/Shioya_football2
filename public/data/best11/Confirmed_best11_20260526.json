@@ -1,0 +1,118 @@
+{
+  "updated": "2026-05-25T20:03:46.019Z",
+  "dateLabel": "2026年5月26日号",
+  "formation": "3-5-2",
+  "totalScore": 80.58,
+  "list": [
+    {
+      "name": "野澤大志ブランドン",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 10.3,
+      "originalRating": 10,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "綱島悠斗",
+      "posId": "RCB",
+      "top": 70,
+      "left": 75,
+      "finalScore": 8.55,
+      "originalRating": 8.3,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "谷口彰悟",
+      "posId": "CB",
+      "top": 70,
+      "left": 50,
+      "finalScore": 7.42,
+      "originalRating": 7.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "冨安健洋",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 6.97,
+      "originalRating": 6.9,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "伊東純也",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 7.83,
+      "originalRating": 7.6,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "平河悠",
+      "posId": "LSH",
+      "top": 45,
+      "left": 15,
+      "finalScore": 6.97,
+      "originalRating": 6.7,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "守田英正",
+      "posId": "DMF",
+      "top": 55,
+      "left": 50,
+      "finalScore": 6.84,
+      "originalRating": 7.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "山本理仁",
+      "posId": "RCMF",
+      "top": 40,
+      "left": 70,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "田中碧",
+      "posId": "LCMF",
+      "top": 40,
+      "left": 30,
+      "finalScore": 7.37,
+      "originalRating": 6.7,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "浅野拓磨",
+      "posId": "RCF",
+      "top": 20,
+      "left": 65,
+      "finalScore": 7.09,
+      "originalRating": 6.5,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "宮代大聖",
+      "posId": "LCF",
+      "top": 20,
+      "left": 35,
+      "finalScore": 5.98,
+      "originalRating": 6.3,
+      "suit": 1,
+      "isDummy": false
+    }
+  ]
+}
