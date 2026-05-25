@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-24T04:39:20.479Z",
+  "updated": "2026-05-25T04:52:17.015Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -40,10 +40,10 @@
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
       "goals": 5,
-      "assists": 5,
-      "rating": "7.07",
-      "minutes": 3137,
-      "appearances": 36
+      "assists": 6,
+      "rating": "7.06",
+      "minutes": 3222,
+      "appearances": 37
     },
     {
       "name": "伊藤涼太郎",
@@ -64,8 +64,8 @@
       "goals": 1,
       "assists": 1,
       "rating": "7.12",
-      "minutes": 2864,
-      "appearances": 38
+      "minutes": 2949,
+      "appearances": 39
     },
     {
       "name": "渡辺剛",
@@ -97,8 +97,8 @@
       "goals": 11,
       "assists": 7,
       "rating": "6.79",
-      "minutes": 2813,
-      "appearances": 37
+      "minutes": 2894,
+      "appearances": 38
     },
     {
       "name": "岩田智輝",
@@ -130,8 +130,8 @@
       "goals": 1,
       "assists": 5,
       "rating": "6.93",
-      "minutes": 2464,
-      "appearances": 46
+      "minutes": 2534,
+      "appearances": 47
     },
     {
       "name": "坂元達裕",
@@ -228,9 +228,9 @@
       "leagueCode": "PL",
       "goals": 1,
       "assists": 4,
-      "rating": "6.95",
-      "minutes": 3080,
-      "appearances": 44
+      "rating": "6.94",
+      "minutes": 3125,
+      "appearances": 45
     },
     {
       "name": "遠藤航",
@@ -241,7 +241,7 @@
       "assists": 1,
       "rating": "6.77",
       "minutes": 492,
-      "appearances": 30
+      "appearances": 31
     },
     {
       "name": "綱島悠斗",
@@ -251,8 +251,8 @@
       "goals": 1,
       "assists": 0,
       "rating": "6.85",
-      "minutes": 2650,
-      "appearances": 33
+      "minutes": 2744,
+      "appearances": 34
     },
     {
       "name": "藤本寛也",
@@ -270,11 +270,11 @@
       "team": "Genk",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 6,
+      "goals": 7,
       "assists": 5,
-      "rating": "7.03",
-      "minutes": 2133,
-      "appearances": 35
+      "rating": "7.05",
+      "minutes": 2205,
+      "appearances": 36
     },
     {
       "name": "町田浩樹",
@@ -349,9 +349,9 @@
       "leagueCode": "PD",
       "goals": 1,
       "assists": 1,
-      "rating": "6.61",
-      "minutes": 782,
-      "appearances": 30
+      "rating": "6.60",
+      "minutes": 843,
+      "appearances": 31
     },
     {
       "name": "久保建英",
@@ -362,7 +362,7 @@
       "assists": 4,
       "rating": "7.02",
       "minutes": 1745,
-      "appearances": 29
+      "appearances": 30
     },
     {
       "name": "板倉滉",
@@ -371,9 +371,9 @@
       "leagueCode": "DED",
       "goals": 1,
       "assists": 0,
-      "rating": "6.84",
-      "minutes": 1880,
-      "appearances": 33
+      "rating": "6.82",
+      "minutes": 1915,
+      "appearances": 34
     },
     {
       "name": "堂安律",
@@ -395,7 +395,7 @@
       "assists": 0,
       "rating": "7.03",
       "minutes": 1985,
-      "appearances": 24
+      "appearances": 25
     },
     {
       "name": "佐野海舟",
@@ -427,8 +427,8 @@
       "goals": 4,
       "assists": 0,
       "rating": "6.83",
-      "minutes": 1629,
-      "appearances": 41
+      "minutes": 1707,
+      "appearances": 42
     },
     {
       "name": "野澤大志ブランドン",
@@ -439,7 +439,7 @@
       "assists": 0,
       "rating": "7.22",
       "minutes": 2654,
-      "appearances": 35
+      "appearances": 36
     },
     {
       "name": "町野修斗",
@@ -515,8 +515,8 @@
       "goals": 1,
       "assists": 2,
       "rating": "6.76",
-      "minutes": 1070,
-      "appearances": 33
+      "minutes": 1071,
+      "appearances": 34
     },
     {
       "name": "小杉啓太",
@@ -570,8 +570,8 @@
       "goals": 0,
       "assists": 1,
       "rating": "6.73",
-      "minutes": 377,
-      "appearances": 11
+      "minutes": 391,
+      "appearances": 12
     },
     {
       "name": "塩貝健人",
@@ -590,10 +590,10 @@
       "league": "Eredivisie",
       "leagueCode": "DED",
       "goals": 0,
-      "assists": 0,
+      "assists": 1,
       "rating": "6.61",
-      "minutes": 222,
-      "appearances": 14
+      "minutes": 247,
+      "appearances": 15
     },
     {
       "name": "宮代大聖",
@@ -602,9 +602,9 @@
       "leagueCode": "OTHER",
       "goals": 4,
       "assists": 1,
-      "rating": "6.71",
-      "minutes": 1016,
-      "appearances": 16
+      "rating": "6.68",
+      "minutes": 1079,
+      "appearances": 17
     },
     {
       "name": "原大智",
