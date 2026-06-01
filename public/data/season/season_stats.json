@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-31T04:51:55.591Z",
+  "updated": "2026-06-01T05:16:12.272Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -601,10 +601,10 @@
       "league": "Segunda División",
       "leagueCode": "OTHER",
       "goals": 4,
-      "assists": 1,
-      "rating": "6.68",
-      "minutes": 1079,
-      "appearances": 17
+      "assists": 2,
+      "rating": "6.69",
+      "minutes": 1169,
+      "appearances": 18
     },
     {
       "name": "原大智",
