@@ -3,7 +3,7 @@
     {
       "player": "守田英正",
       "status": "噂",
-      "lastUpdated": "2026/05/21 09:00",
+      "lastUpdated": "2026/06/26 09:00",
       "clubs": [
         { "name": "リーズ", "league": "プレミア" },
         { "name": "レアル・マドリード", "league": "ラ・リーガ" }
@@ -13,7 +13,7 @@
     {
       "player": "上田綺世",
       "status": "噂",
-      "lastUpdated": "2026/05/08 09:00",
+      "lastUpdated": "2026/06/26 09:00",
       "clubs": [
         { "name": "トッテナム", "league": "プレミア" },
         { "name": "ブライトン", "league": "プレミア" },
@@ -25,7 +25,7 @@
     {
       "player": "鎌田大地",
       "status": "噂",
-      "lastUpdated": "2026/05/08 09:00",
+      "lastUpdated": "2026/06/26 09:00",
       "clubs": [
         { "name": "ニューカッスル", "league": "プレミア" }
       ],
@@ -33,17 +33,17 @@
     },
     {
       "player": "宇野禅斗",
-      "status": "噂",
-      "lastUpdated": "2026/05/21 09:00",
+      "status": "確定",
+      "lastUpdated": "2026/06/18 23:59",
       "clubs": [
         { "name": "ボルシアMG", "league": "ブンデス" }
       ],
-      "comment": "複数クラブが興味を示しており、今夏の去就が注目されています。"
+      "comment": "2026年06月18日、完全移籍が公式発表。"
     },
     {
       "player": "伊藤涼太郎",
       "status": "噂",
-      "lastUpdated": "2026/05/21 09:00",
+      "lastUpdated": "2026/06/21 09:00",
       "clubs": [
         { "name": "ハンブルガーSV", "league": "ブンデス" },
         { "name": "ボルシアMG", "league": "ブンデス" }
@@ -53,11 +53,68 @@
     {
       "player": "福井太智",
       "status": "噂",
-      "lastUpdated": "2026/05/21 09:00",
+      "lastUpdated": "2026/06/26 09:00",
       "clubs": [
         { "name": "ラージョ", "league": "ラ・リーガ" }
       ],
       "comment": "複数クラブが興味を示しており、今夏の去就が注目されています。"
-    }
+    },
+    {
+      "player": "鎌田大地",
+      "status": "噂",
+      "lastUpdated": "2026/06/26 09:00",
+      "clubs": [
+        { "name": "ACミラン", "league": "セリエA" }
+      ],
+      "comment": "クリスタル・パレスから契約延長オファーあり。"
+    },
+    {
+      "player": "菅原由勢",
+      "status": "噂",
+      "lastUpdated": "2026/06/26 09:00",
+      "clubs": [
+        { "name": "ブレーメン", "league": "ブンデス" }
+      ],
+      "comment": "完全移籍の噂あり。"
+    },
+    {
+      "player": "伊藤洋輝",
+      "status": "噂",
+      "lastUpdated": "2026/06/26 09:00",
+      "clubs": [
+        { "name": "ドルトムント", "league": "ブンデス" },
+        { "name": "ウエストハム", "league": "プレミア" }
+      ],
+      "comment": "バイエルン退団の噂あり。"
+    },
+    {
+      "player": "後藤啓介",
+      "status": "確定",
+      "lastUpdated": "2026/06/11 23:59",
+      "clubs": [
+        { "name": "フライブルク", "league": "ブンデス" }
+      ],
+      "comment": "2026年06月11日、完全移籍が公式発表。"
+    },
+    {
+      "player": "山本理仁",
+      "status": "確定",
+      "lastUpdated": "2026/05/27 23:59",
+      "clubs": [
+        { "name": "フライブルク", "league": "ブンデス" }
+      ],
+      "comment": "2026年05月27日、完全移籍が公式発表。"
+    },
+    {
+      "player": "田中聡",
+      "status": "確定",
+      "lastUpdated": "2026/06/10 23:59",
+      "clubs": [
+        { "name": "シャルケ", "league": "ブンデス" }
+      ],
+      "comment": "2026年06月10日、完全移籍が公式発表。"
+    },
+
+
   ]
 }
