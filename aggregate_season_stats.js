@@ -1,13 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 
+// ★ 新シーズンの対象期間（2026年8月1日〜2027年7月1日）
+const SEASON_START_DATE = '2026-08-01';
+const SEASON_END_DATE   = '2027-07-01';
+
 // 外部のJSONファイルから共通辞書を読み込む
 const JP_TEAM_PLAYERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'japanese_players.json'), 'utf8'));
 
 // 選手名からチーム名を高速に逆引きするための辞書を作成
 const PLAYER_TO_TEAM = {};
 for (const [team, playersObj] of Object.entries(JP_TEAM_PLAYERS)) {
-    // ★ 修正：playerObj.full をキーにして逆引き
     for (const playerObj of Object.values(playersObj)) {
         PLAYER_TO_TEAM[playerObj.full] = team;
     }
@@ -46,6 +49,16 @@ async function aggregateSeasonStats() {
         content.stats.forEach(stat => {
             const matchInfo = matchLookup[stat.fixtureId];
             
+            // ★【追加】日付フィルタリング判定
+            // matchInfo が存在し、かつ date がある場合に期間チェックを行う
+            if (matchInfo && matchInfo.date) {
+                const matchDate = matchInfo.date.substring(0, 10); // "YYYY-MM-DD" を抽出
+                // 設定したシーズン期間外の試合であれば集計をスキップ
+                if (matchDate < SEASON_START_DATE || matchDate > SEASON_END_DATE) {
+                    return;
+                }
+            }
+
             if (!playerAggregates[stat.name]) {
                 playerAggregates[stat.name] = {
                     name: stat.name,
@@ -63,13 +76,11 @@ async function aggregateSeasonStats() {
 
             const p = playerAggregates[stat.name];
 
-            // ★ 追加: リーグ情報の「格上げ」ロジック
-            // 国内1部・2部リーグのコード一覧
+            // リーグ情報の「格上げ」ロジック
             const mainLeagues = ["PL", "PD", "BL1", "SA1", "FL1", "ELC", "PPL", "DED", "BSA", "J1", "SPL"];
             const isCurrentMain = mainLeagues.includes(stat.compCode);
             const isSavedMain = mainLeagues.includes(p.leagueCode);
 
-            // 現在保存されているのが「OTHER」や「CL/EL」で、今回の試合が「リーグ戦」なら、リーグ情報を上書きする
             if (isCurrentMain && !isSavedMain) {
                 p.leagueCode = stat.compCode;
                 if (matchInfo) p.league = matchInfo.competition.name;
@@ -106,7 +117,7 @@ async function aggregateSeasonStats() {
         'utf8'
     );
 
-    console.log(`集計完了: ${statsFiles.length}個のスタッツファイルから ${resultList.length} 名の通算成績を算出しました。`);
+    console.log(`集計完了: 2026-2027シーズンの通算成績（${resultList.length} 名）を算出しました。`);
 }
 
 aggregateSeasonStats();
