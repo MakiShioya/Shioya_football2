@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T01:49:14.816Z",
+  "updated": "2026-08-16T01:56:59.027Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -108,8 +108,8 @@
       "goals": 3,
       "assists": 1,
       "rating": "6.83",
-      "minutes": 4093,
-      "appearances": 48
+      "minutes": 4183,
+      "appearances": 49
     },
     {
       "name": "古橋亨梧",
@@ -263,7 +263,7 @@
       "assists": 0,
       "rating": "6.50",
       "minutes": 159,
-      "appearances": 33
+      "appearances": 34
     },
     {
       "name": "伊東純也",
@@ -468,11 +468,11 @@
       "team": "QPR",
       "league": "Championship",
       "leagueCode": "ELC",
-      "goals": 3,
+      "goals": 4,
       "assists": 2,
-      "rating": "6.64",
-      "minutes": 2009,
-      "appearances": 38
+      "rating": "6.66",
+      "minutes": 2067,
+      "appearances": 39
     },
     {
       "name": "菅原由勢",
@@ -536,9 +536,9 @@
       "leagueCode": "DED",
       "goals": 0,
       "assists": 0,
-      "rating": "6.79",
-      "minutes": 308,
-      "appearances": 17
+      "rating": "6.78",
+      "minutes": 317,
+      "appearances": 18
     },
     {
       "name": "高井幸大",
@@ -569,9 +569,9 @@
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 1,
-      "rating": "6.73",
-      "minutes": 391,
-      "appearances": 12
+      "rating": "6.72",
+      "minutes": 436,
+      "appearances": 13
     },
     {
       "name": "塩貝健人",
@@ -624,9 +624,9 @@
       "leagueCode": "DED",
       "goals": 0,
       "assists": 0,
-      "rating": "6.83",
-      "minutes": 184,
-      "appearances": 21
+      "rating": "6.78",
+      "minutes": 198,
+      "appearances": 22
     },
     {
       "name": "畑大雅",
