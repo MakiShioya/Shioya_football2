@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-16T01:56:59.027Z",
+  "updated": "2026-08-17T01:55:04.709Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -74,20 +74,20 @@
       "leagueCode": "DED",
       "goals": 5,
       "assists": 0,
-      "rating": "7.11",
-      "minutes": 3320,
-      "appearances": 39
+      "rating": "7.10",
+      "minutes": 3384,
+      "appearances": 40
     },
     {
       "name": "上田綺世",
       "team": "Feyenoord",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 26,
-      "assists": 1,
-      "rating": "7.02",
-      "minutes": 3296,
-      "appearances": 41
+      "goals": 27,
+      "assists": 2,
+      "rating": "7.04",
+      "minutes": 3391,
+      "appearances": 42
     },
     {
       "name": "後藤啓介",
@@ -151,9 +151,9 @@
       "leagueCode": "ELC",
       "goals": 6,
       "assists": 2,
-      "rating": "6.86",
-      "minutes": 1455,
-      "appearances": 39
+      "rating": "6.85",
+      "minutes": 1544,
+      "appearances": 40
     },
     {
       "name": "大橋祐紀",
@@ -373,7 +373,7 @@
       "assists": 0,
       "rating": "6.82",
       "minutes": 1915,
-      "appearances": 34
+      "appearances": 35
     },
     {
       "name": "堂安律",
@@ -580,9 +580,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.52",
-      "minutes": 376,
-      "appearances": 19
+      "rating": "6.53",
+      "minutes": 392,
+      "appearances": 20
     },
     {
       "name": "冨安健洋",
@@ -601,10 +601,10 @@
       "league": "Segunda División",
       "leagueCode": "OTHER",
       "goals": 4,
-      "assists": 2,
-      "rating": "6.69",
-      "minutes": 1268,
-      "appearances": 19
+      "assists": 3,
+      "rating": "6.74",
+      "minutes": 1358,
+      "appearances": 20
     },
     {
       "name": "原大智",
