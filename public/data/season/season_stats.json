@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-21T01:57:21.209Z",
+  "updated": "2026-08-22T01:49:46.160Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -94,11 +94,11 @@
       "team": "SC Freiburg",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 11,
+      "goals": 12,
       "assists": 7,
-      "rating": "6.79",
-      "minutes": 2894,
-      "appearances": 38
+      "rating": "6.80",
+      "minutes": 2904,
+      "appearances": 39
     },
     {
       "name": "岩田智輝",
@@ -142,7 +142,7 @@
       "assists": 3,
       "rating": "7.07",
       "minutes": 2539,
-      "appearances": 38
+      "appearances": 39
     },
     {
       "name": "松木玖生",
@@ -316,9 +316,9 @@
       "leagueCode": "BL1",
       "goals": 9,
       "assists": 5,
-      "rating": "6.91",
-      "minutes": 2951,
-      "appearances": 47
+      "rating": "6.90",
+      "minutes": 3025,
+      "appearances": 48
     },
     {
       "name": "南野拓実",
@@ -361,8 +361,8 @@
       "goals": 2,
       "assists": 4,
       "rating": "7.02",
-      "minutes": 1745,
-      "appearances": 30
+      "minutes": 1803,
+      "appearances": 31
     },
     {
       "name": "板倉滉",
