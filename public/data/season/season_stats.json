@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T01:57:18.632Z",
+  "updated": "2026-08-25T01:52:11.254Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -75,19 +75,19 @@
       "goals": 5,
       "assists": 0,
       "rating": "7.10",
-      "minutes": 3384,
-      "appearances": 40
+      "minutes": 3451,
+      "appearances": 41
     },
     {
       "name": "上田綺世",
       "team": "Feyenoord",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 27,
+      "goals": 28,
       "assists": 2,
       "rating": "7.04",
-      "minutes": 3391,
-      "appearances": 42
+      "minutes": 3458,
+      "appearances": 43
     },
     {
       "name": "後藤啓介",
@@ -96,9 +96,9 @@
       "leagueCode": "BSA",
       "goals": 12,
       "assists": 7,
-      "rating": "6.80",
-      "minutes": 2904,
-      "appearances": 39
+      "rating": "6.79",
+      "minutes": 2912,
+      "appearances": 40
     },
     {
       "name": "岩田智輝",
@@ -217,9 +217,9 @@
       "leagueCode": "OTHER",
       "goals": 3,
       "assists": 4,
-      "rating": "6.69",
-      "minutes": 1342,
-      "appearances": 25
+      "rating": "6.67",
+      "minutes": 1432,
+      "appearances": 26
     },
     {
       "name": "鎌田大地",
@@ -241,7 +241,7 @@
       "assists": 1,
       "rating": "6.77",
       "minutes": 492,
-      "appearances": 31
+      "appearances": 32
     },
     {
       "name": "綱島悠斗",
@@ -294,9 +294,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 4,
-      "rating": "6.72",
-      "minutes": 3223,
-      "appearances": 38
+      "rating": "6.71",
+      "minutes": 3283,
+      "appearances": 39
     },
     {
       "name": "三笘薫",
@@ -316,9 +316,9 @@
       "leagueCode": "BL1",
       "goals": 9,
       "assists": 5,
-      "rating": "6.90",
-      "minutes": 3025,
-      "appearances": 48
+      "rating": "6.88",
+      "minutes": 3094,
+      "appearances": 49
     },
     {
       "name": "南野拓実",
@@ -339,8 +339,8 @@
       "goals": 0,
       "assists": 0,
       "rating": "6.80",
-      "minutes": 2625,
-      "appearances": 30
+      "minutes": 2715,
+      "appearances": 31
     },
     {
       "name": "浅野拓磨",
@@ -449,8 +449,8 @@
       "goals": 4,
       "assists": 1,
       "rating": "6.66",
-      "minutes": 1252,
-      "appearances": 35
+      "minutes": 1272,
+      "appearances": 36
     },
     {
       "name": "ニック・シュミット",
@@ -558,9 +558,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.73",
-      "minutes": 1531,
-      "appearances": 20
+      "rating": "6.75",
+      "minutes": 1621,
+      "appearances": 21
     },
     {
       "name": "平河悠",
@@ -580,9 +580,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.53",
-      "minutes": 392,
-      "appearances": 20
+      "rating": "6.51",
+      "minutes": 512,
+      "appearances": 21
     },
     {
       "name": "冨安健洋",
@@ -613,9 +613,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.56",
-      "minutes": 178,
-      "appearances": 17
+      "rating": "6.58",
+      "minutes": 243,
+      "appearances": 18
     },
     {
       "name": "市原吏音",
@@ -690,9 +690,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.00",
-      "minutes": 90,
-      "appearances": 1
+      "rating": "5.95",
+      "minutes": 180,
+      "appearances": 2
     },
     {
       "name": "坂本一彩",
@@ -701,9 +701,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 1,
-      "rating": "6.90",
-      "minutes": 90,
-      "appearances": 1
+      "rating": "6.55",
+      "minutes": 165,
+      "appearances": 2
     },
     {
       "name": "佐藤龍之介",
@@ -714,6 +714,50 @@
       "assists": 0,
       "rating": "6.70",
       "minutes": 57,
+      "appearances": 1
+    },
+    {
+      "name": "橋岡太樹",
+      "team": "Borussia Mönchengladbach",
+      "league": "DFB Pokal",
+      "leagueCode": "OTHER",
+      "goals": 1,
+      "assists": 0,
+      "rating": "7.90",
+      "minutes": 90,
+      "appearances": 1
+    },
+    {
+      "name": "中村草太",
+      "team": "Le Havre",
+      "league": "Ligue 1",
+      "leagueCode": "FL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.20",
+      "minutes": 20,
+      "appearances": 1
+    },
+    {
+      "name": "水多海斗",
+      "team": "Le Havre",
+      "league": "Ligue 1",
+      "leagueCode": "FL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 2,
+      "appearances": 1
+    },
+    {
+      "name": "田中聡",
+      "team": "FC Schalke 04",
+      "league": "DFB Pokal",
+      "leagueCode": "OTHER",
+      "goals": 0,
+      "assists": 0,
+      "rating": "7.00",
+      "minutes": 15,
       "appearances": 1
     }
   ]
