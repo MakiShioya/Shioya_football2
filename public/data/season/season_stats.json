@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T01:52:11.254Z",
+  "updated": "2026-08-26T01:58:16.370Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -8,9 +8,9 @@
       "leagueCode": "SPL",
       "goals": 5,
       "assists": 3,
-      "rating": "6.71",
-      "minutes": 2446,
-      "appearances": 47
+      "rating": "6.70",
+      "minutes": 2503,
+      "appearances": 48
     },
     {
       "name": "前田大然",
@@ -19,9 +19,9 @@
       "leagueCode": "SPL",
       "goals": 14,
       "assists": 9,
-      "rating": "6.68",
-      "minutes": 3754,
-      "appearances": 48
+      "rating": "6.67",
+      "minutes": 3763,
+      "appearances": 49
     },
     {
       "name": "小久保玲央ブライアン",
@@ -107,9 +107,9 @@
       "leagueCode": "ELC",
       "goals": 3,
       "assists": 1,
-      "rating": "6.84",
-      "minutes": 4273,
-      "appearances": 50
+      "rating": "6.83",
+      "minutes": 4281,
+      "appearances": 51
     },
     {
       "name": "古橋亨梧",
@@ -140,9 +140,9 @@
       "leagueCode": "ELC",
       "goals": 7,
       "assists": 3,
-      "rating": "7.07",
-      "minutes": 2539,
-      "appearances": 39
+      "rating": "7.05",
+      "minutes": 2634,
+      "appearances": 40
     },
     {
       "name": "松木玖生",
@@ -151,9 +151,9 @@
       "leagueCode": "ELC",
       "goals": 6,
       "assists": 2,
-      "rating": "6.85",
-      "minutes": 1633,
-      "appearances": 41
+      "rating": "6.83",
+      "minutes": 1663,
+      "appearances": 42
     },
     {
       "name": "大橋祐紀",
@@ -163,8 +163,8 @@
       "goals": 10,
       "assists": 1,
       "rating": "6.55",
-      "minutes": 3585,
-      "appearances": 51
+      "minutes": 3596,
+      "appearances": 52
     },
     {
       "name": "瀬古樹",
@@ -261,9 +261,9 @@
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 0,
-      "rating": "6.50",
-      "minutes": 159,
-      "appearances": 35
+      "rating": "6.47",
+      "minutes": 220,
+      "appearances": 36
     },
     {
       "name": "伊東純也",
@@ -426,9 +426,9 @@
       "leagueCode": "PL",
       "goals": 4,
       "assists": 0,
-      "rating": "6.83",
-      "minutes": 1707,
-      "appearances": 43
+      "rating": "6.81",
+      "minutes": 1775,
+      "appearances": 44
     },
     {
       "name": "野澤大志ブランドン",
@@ -491,10 +491,10 @@
       "league": "Championship",
       "leagueCode": "ELC",
       "goals": 4,
-      "assists": 10,
-      "rating": "6.82",
-      "minutes": 2895,
-      "appearances": 41
+      "assists": 11,
+      "rating": "6.83",
+      "minutes": 2985,
+      "appearances": 42
     },
     {
       "name": "中村敬斗",
@@ -712,9 +712,9 @@
       "leagueCode": "PD",
       "goals": 0,
       "assists": 0,
-      "rating": "6.70",
-      "minutes": 57,
-      "appearances": 1
+      "rating": "6.60",
+      "minutes": 154,
+      "appearances": 2
     },
     {
       "name": "橋岡太樹",
