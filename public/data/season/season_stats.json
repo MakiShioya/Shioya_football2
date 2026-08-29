@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-28T11:23:51.194Z",
+  "updated": "2026-08-29T07:04:43.424Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -108,8 +108,8 @@
       "goals": 3,
       "assists": 1,
       "rating": "6.83",
-      "minutes": 4281,
-      "appearances": 51
+      "minutes": 4376,
+      "appearances": 52
     },
     {
       "name": "古橋亨梧",
@@ -217,9 +217,9 @@
       "leagueCode": "OTHER",
       "goals": 3,
       "assists": 4,
-      "rating": "6.67",
-      "minutes": 1432,
-      "appearances": 26
+      "rating": "6.66",
+      "minutes": 1522,
+      "appearances": 27
     },
     {
       "name": "鎌田大地",
@@ -228,9 +228,9 @@
       "leagueCode": "PL",
       "goals": 1,
       "assists": 4,
-      "rating": "6.95",
-      "minutes": 3305,
-      "appearances": 47
+      "rating": "6.96",
+      "minutes": 3401,
+      "appearances": 48
     },
     {
       "name": "遠藤航",
@@ -270,11 +270,11 @@
       "team": "Genk",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 7,
+      "goals": 8,
       "assists": 6,
-      "rating": "7.02",
-      "minutes": 2374,
-      "appearances": 38
+      "rating": "7.06",
+      "minutes": 2464,
+      "appearances": 39
     },
     {
       "name": "町田浩樹",
@@ -516,7 +516,7 @@
       "assists": 2,
       "rating": "6.76",
       "minutes": 1071,
-      "appearances": 35
+      "appearances": 36
     },
     {
       "name": "小杉啓太",
@@ -591,9 +591,9 @@
       "leagueCode": "DED",
       "goals": 0,
       "assists": 1,
-      "rating": "6.62",
-      "minutes": 265,
-      "appearances": 16
+      "rating": "6.53",
+      "minutes": 339,
+      "appearances": 17
     },
     {
       "name": "宮代大聖",
