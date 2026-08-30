@@ -46,7 +46,7 @@ async function setFavorite(playerId, playerName) {
     if (!confirm(`${playerName}選手を「最推し」に設定しますか？\n（2回目以降の変更は100G必要です）`)) return;
 
     // 処理中はボタンを連打できないようにする工夫を入れるのもありですが、今回はFunctions呼び出しを待機
-    const setMostFavoritePlayer = firebase.functions().httpsCallable('setMostFavoritePlayer');
+    const setMostFavoritePlayer = firebase.app().functions('asia-northeast1').httpsCallable('setMostFavoritePlayer');
 
     try {
         const result = await setMostFavoritePlayer({ 
