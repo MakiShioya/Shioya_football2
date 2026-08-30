@@ -201,7 +201,7 @@ indexHtml = indexHtml.replace(
 
 // ▼▼▼ 【新設】タブコンテナの左側に「過去の結果」ボタンをインジェクションする処理 ▼▼▼
 const targetTabContainer = '<div class="tab-container" style="margin-bottom: 12px;">';
-const injectedButtonHtml = `${targetTabContainer}\n            <button class="tab-btn" onclick="location.href='archive/index.html'" style="background: #8b4513; color: #ECDBBF;">過去の結果</button>`;
+const injectedButtonHtml = `${targetTabContainer}\n            <button class="tab-btn" onclick="location.href='archive/index.html'" style="background: #8b4513; color: #ECDBBF;">過去</button>`;
 
 indexHtml = indexHtml.replace(targetTabContainer, injectedButtonHtml);
 // ▲▲▲ ここまで ▲▲▲
