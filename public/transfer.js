@@ -1,5 +1,8 @@
 let appTransferData = [];
 
+// 5大リーグの定義
+const BIG_FIVE_LEAGUES = ["プレミア", "ラ・リーガ", "ブンデス", "セリエA", "リーグアン"];
+
 document.addEventListener('DOMContentLoaded', async () => {
     const isApp = window.Capacitor !== undefined || window.location.protocol === 'file:';
 
@@ -35,7 +38,7 @@ async function loadTransferDataForApp() {
     }
 }
 
-// iOSアプリ用：動的レンダリング（コメント表示位置とサイズ調整済）
+// iOSアプリ用：動的レンダリング
 function renderTransfersForApp() {
     const container = document.getElementById('transfer-list');
     const statusFilter = document.getElementById('status-filter').value;
@@ -45,10 +48,18 @@ function renderTransfersForApp() {
 
     let filtered = appTransferData.filter(data => {
         if (statusFilter !== "all" && data.status !== statusFilter) return false;
+        
+        // リーグ絞り込み（5大リーグ判定対応）
         if (leagueFilter !== "all") {
-            const hasTargetLeague = data.clubs.some(club => club.league === leagueFilter);
-            if (!hasTargetLeague) return false;
+            if (leagueFilter === "5大リーグ") {
+                const hasBigFive = data.clubs.some(club => BIG_FIVE_LEAGUES.includes(club.league));
+                if (!hasBigFive) return false;
+            } else {
+                const hasTargetLeague = data.clubs.some(club => club.league === leagueFilter);
+                if (!hasTargetLeague) return false;
+            }
         }
+
         if (searchQuery !== "" && !data.player.toLowerCase().includes(searchQuery)) return false;
         return true;
     });
@@ -69,7 +80,6 @@ function renderTransfersForApp() {
         const badgeClass = data.status === "確定" ? "badge-confirmed" : "badge-rumor";
         const clubsHtml = data.clubs.map(club => `<li class="club-item">➡ ${club.name}</li>`).join('');
         
-        // 小さめのコメント欄（移籍先リストの下）
         const commentHtml = data.comment ? `
             <div class="transfer-comment" style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(139,69,19,0.2); font-size: 0.85rem; color: #555; line-height: 1.4; text-align: left;">
                 ${data.comment}
@@ -109,7 +119,17 @@ function filterAndSortWebCards() {
         const cardPlayer = card.getAttribute('data-player') ? card.getAttribute('data-player').toLowerCase() : '';
 
         const matchStatus = (statusFilter === "all" || cardStatus === statusFilter);
-        const matchLeague = (leagueFilter === "all" || cardLeagues.includes(leagueFilter));
+        
+        // 5大リーグ対応のWeb版判定
+        let matchLeague = false;
+        if (leagueFilter === "all") {
+            matchLeague = true;
+        } else if (leagueFilter === "5大リーグ") {
+            matchLeague = cardLeagues.some(l => BIG_FIVE_LEAGUES.includes(l));
+        } else {
+            matchLeague = cardLeagues.includes(leagueFilter);
+        }
+
         const matchSearch = (searchQuery === "" || cardPlayer.includes(searchQuery));
 
         if (matchStatus && matchLeague && matchSearch) {
