@@ -24,8 +24,7 @@
         "Iwata": { "full": "岩田智輝", "short": "岩田" }, 
         "Fujimoto": { "full": "藤本寛也", "short": "藤本" }
     },
-    "Real Sociedad": { "Kubo": { "full": "久保建英", "short": "タケ" },
-                       "Fujimoto": { "full": "喜多壱也", "short": "喜多" }
+    "Real Sociedad": { "Kubo": { "full": "久保建英", "short": "タケ" }
     },
     "Valencia": { "Sato": { "full": "佐藤龍之介", "short": "佐藤" } },
     "Las Palmas": { "Miyashiro": { "full": "宮代大聖", "short": "宮代" } },
@@ -45,6 +44,7 @@
     "Borussia Mönchengladbach": { 
         "Machino": { "full": "町野修斗", "short": "町野" },
         "Uno": { "full": "宇野禅斗", "short": "宇野" },
+        "Itakura": { "full": "板倉滉", "short": "板倉" },
         "Hashioka": { "full": "橋岡太樹", "short": "橋岡" } 
     },
     "FC Schalke 04": { "Tanaka": { "full": "田中聡", "short": "田中聡" } },
@@ -59,7 +59,6 @@
     "Fortuna Dusseldorf": { 
         "Appelkamp": { "full": "アペルカンプ真大", "short": "アペルカンプ" }
     },
-    "Parma": { "Suzuki": { "full": "鈴木彩艶", "short": "彩艶" } },
     "Monaco": { "Minamino": { "full": "南野拓実", "short": "南野" } },
     "Le Havre": { "Seko": { "full": "瀬古歩夢", "short": "瀬古" },
                   "Nakamura": { "full": "中村草太", "short": "中村草太" },
@@ -67,9 +66,6 @@
     "FC Arouca": { "Fukui": { "full": "福井太智", "short": "福井" } },
     "PSV": { 
         "Sano": { "full": "佐野航大", "short": "航大" }
-    },
-    "Ajax": { 
-        "Itakura": { "full": "板倉滉", "short": "板倉" }
     },
     "Feyenoord": { 
         "Ueda": { "full": "上田綺世", "short": "上田" }, 
