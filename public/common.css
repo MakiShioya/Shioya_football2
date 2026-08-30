@@ -1,4 +1,5 @@
 /* common.css */
+/* common.css */
 @font-face {
     font-family: 'SetoFont';
     src: url('font/setofont.ttf') format('truetype');
@@ -10,19 +11,27 @@
     box-sizing: border-box;
 }
 
-html, body {
-    margin: 0; padding: 0; width: 100%; height: 100%;
-    background-color: var(--bg-color); /* 変数に変更 */
-    color: var(--text-color);           /* 変数に変更 */
-    -webkit-user-select: none; user-select: none;
-    transition: background-color 0.5s, color 0.5s; /* 切り替えを滑らかに */
-}
-
-body.theme-default {
+/* ▼ デフォルトのテーマ変数を :root に定義（未ログイン時・初期状態の適用） ▼ */
+:root {
     --bg-color: #ECDBBF;          /* 全体の背景 */
     --text-color: #432517;        /* 基本の文字色 */
     --bar-bg: rgba(67, 37, 23, 0.9); /* バーの背景 */
     --btn-text: #ECDBBF;          /* ボタン内の文字 */
+}
+
+html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    -webkit-user-select: none; user-select: none;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+body.theme-default {
+    --bg-color: #ECDBBF;
+    --text-color: #432517;
+    --bar-bg: rgba(67, 37, 23, 0.9);
+    --btn-text: #ECDBBF;
 }
 
 /* 芝生テーマ（1000G：スタジアム風） */
