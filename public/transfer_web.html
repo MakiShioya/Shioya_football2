@@ -127,14 +127,17 @@
             </select>
 
             <select id="league-filter" class="control-select-three">
-                <option value="all">全リーグ</option>
-                <option value="プレミア">プレミア</option>
-                <option value="ラ・リーガ">ラ・リーガ</option>
-                <option value="ブンデス">ブンデス</option>
-                <option value="セリエA">セリエA</option>
-                <option value="リーグアン">リーグ1</option>
-                <option value="その他">その他</option>
-            </select>
+    <option value="all">全リーグ</option>
+    <option value="5大リーグ">5大リーグ</option>
+    <option value="プレミア">プレミア</option>
+    <option value="ラ・リーガ">ラ・リーガ</option>
+    <option value="ブンデス">ブンデス</option>
+    <option value="セリエA">セリエA</option>
+    <option value="リーグアン">リーグアン</option>
+    <option value="ベルギー１部">ベルギー１部</option>
+    <option value="オランダ１部">オランダ１部</option>
+    <option value="ポルトガル１部">ポルトガル１部</option>
+</select>
 
             <select id="sort-order" class="control-select-three">
                 <option value="desc">新しい順</option>
@@ -193,7 +196,7 @@
             </div>
         
 
-            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="エールディヴィジ" data-time="2026/08/08 23:59" data-player="佐野航大">
+            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="オランダ１部" data-time="2026/08/08 23:59" data-player="佐野航大">
                 <div class="update-time">更新: 2026/08/08 23:59</div>
                 <div class="card-header">
                     <span class="player-name">🇯🇵 佐野航大</span>
@@ -225,7 +228,7 @@
             </div>
         
 
-            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="プリメイラ" data-time="2026/08/05 23:59" data-player="中島翔哉">
+            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="ポルトガル１部" data-time="2026/08/05 23:59" data-player="中島翔哉">
                 <div class="update-time">更新: 2026/08/05 23:59</div>
                 <div class="card-header">
                     <span class="player-name">🇯🇵 中島翔哉</span>
@@ -305,7 +308,7 @@
             </div>
         
 
-            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="リーグ1" data-time="2026/07/17 23:59" data-player="中村草太">
+            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="リーグアン" data-time="2026/07/17 23:59" data-player="中村草太">
                 <div class="update-time">更新: 2026/07/17 23:59</div>
                 <div class="card-header">
                     <span class="player-name">🇯🇵 中村草太</span>
@@ -369,7 +372,7 @@
             </div>
         
 
-            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="リーグ1" data-time="2026/07/07 23:59" data-player="水多海斗">
+            <div class="transfer-card status-confirmed" data-status="確定" data-leagues="リーグアン" data-time="2026/07/07 23:59" data-player="水多海斗">
                 <div class="update-time">更新: 2026/07/07 23:59</div>
                 <div class="card-header">
                     <span class="player-name">🇯🇵 水多海斗</span>
@@ -536,7 +539,7 @@
                     <span class="status-badge badge-confirmed">確定</span>
                 </div>
                 <ul class="club-list">
-                    <li class="club-item">➡ アントワープ</li>
+                    <li class="club-item">➡ シャルケ</li>
                 </ul>
                 
             <div class="transfer-comment" style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed rgba(139,69,19,0.2); font-size: 0.85rem; color: #555; line-height: 1.4; text-align: left;">
@@ -585,7 +588,7 @@
         <button class="menu-btn btn-results" onclick="location.href='performance.html'">昨日の日本人</button>
         <button class="menu-btn btn-calendar" onclick="location.href='best11.html'">今週の日本代表</button>
         <button class="menu-btn btn-transfer" onclick="location.href='transfer.html'">移籍</button>
-        <button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>
+        <!--<button class="menu-btn btn-notes" onclick="location.href='dashboard.html'">シーズン</button>-->
     </div>
 
     <div id="navModal" class="modal-overlay" onclick="closeNavModal()">
