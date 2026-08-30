@@ -305,7 +305,12 @@ function renderMatches() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-    // 1. 選手辞書の読み込み
+    // 1. フィルターのイベント登録（最優先でUIを動かせる状態にする）
+    document.getElementById('league-filter').addEventListener('change', renderMatches);
+    document.getElementById('japanese-filter').addEventListener('change', renderMatches);
+    document.getElementById('major-league-filter').addEventListener('change', renderMatches);
+
+    // 2. 選手辞書を読み込みつつ、即座に試合一覧を描画（ログイン待機ゼロ）
     try {
         const cacheBuster = new Date().getTime();
         const res = await fetch(`https://football.shioya-soft.com/japanese_players.json?t=${cacheBuster}`);
@@ -322,25 +327,22 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error("選手辞書の読み込みに失敗しました", e);
     }
 
-    // 2. フィルターのイベント登録
-    document.getElementById('league-filter').addEventListener('change', renderMatches);
-    document.getElementById('japanese-filter').addEventListener('change', renderMatches);
-    document.getElementById('major-league-filter').addEventListener('change', renderMatches);
+    // ★ ここで即座に描画する（Firebaseの応答を一切待たない）
+    selectTab(0, 'tab-today');
 
-    // 3. ログイン状態の監視
+    // 3. ログイン状態の確認・最推し情報の取得・ボーナス処理はすべて裏（バックグラウンド）で実行
     firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
             try {
-                // 【変更点 1】まずは「最推しID」だけサクッと取得する（光らせるために必要）
+                // 最推しIDを取得
                 const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
                 if (userDoc.exists) {
                     window.currentFavoriteId = userDoc.data().mostFavoriteId;
+                    // ★ 最推しIDが取れたら、既に表示されている試合一覧に推しエフェクトを即反映
+                    renderMatches();
                 }
 
-                // 【変更点 2】IDが取れたら、ボーナスを待たずに「即座に」試合を描画する！
-                selectTab(0, 'tab-today');
-
-                // 【変更点 3】裏でこっそりボーナス処理を走らせる（awaitを外して画面を止めない）
+                // デイリーボーナスの処理（非同期で裏実行）
                 const claimDailyBonus = firebase.functions('asia-northeast1').httpsCallable('claimDailyBonus');
                 claimDailyBonus().then(bonusResult => {
                     if (bonusResult.data.success) {
@@ -355,13 +357,8 @@ window.addEventListener('DOMContentLoaded', async () => {
                 });
 
             } catch (error) {
-                console.error("データ取得エラー:", error);
-                // エラーが起きても絶対に試合は描画する
-                selectTab(0, 'tab-today');
+                console.error("ユーザーデータ取得エラー:", error);
             }
-        } else {
-            // 未ログイン時はそのまま描画
-            selectTab(0, 'tab-today');
         }
     });
 });
