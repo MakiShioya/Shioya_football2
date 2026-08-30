@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29T07:04:43.424Z",
+  "updated": "2026-08-30T05:24:47.327Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -140,9 +140,9 @@
       "leagueCode": "ELC",
       "goals": 7,
       "assists": 3,
-      "rating": "7.05",
-      "minutes": 2634,
-      "appearances": 40
+      "rating": "7.04",
+      "minutes": 2671,
+      "appearances": 41
     },
     {
       "name": "松木玖生",
@@ -152,8 +152,8 @@
       "goals": 6,
       "assists": 2,
       "rating": "6.83",
-      "minutes": 1663,
-      "appearances": 42
+      "minutes": 1744,
+      "appearances": 43
     },
     {
       "name": "大橋祐紀",
@@ -206,9 +206,9 @@
       "leagueCode": "DED",
       "goals": 9,
       "assists": 7,
-      "rating": "7.00",
-      "minutes": 2248,
-      "appearances": 30
+      "rating": "6.98",
+      "minutes": 2338,
+      "appearances": 31
     },
     {
       "name": "三好康児",
@@ -241,7 +241,7 @@
       "assists": 1,
       "rating": "6.77",
       "minutes": 492,
-      "appearances": 32
+      "appearances": 33
     },
     {
       "name": "綱島悠斗",
@@ -338,9 +338,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.80",
-      "minutes": 2715,
-      "appearances": 31
+      "rating": "6.81",
+      "minutes": 2805,
+      "appearances": 32
     },
     {
       "name": "浅野拓磨",
@@ -360,9 +360,9 @@
       "leagueCode": "PD",
       "goals": 2,
       "assists": 4,
-      "rating": "6.99",
-      "minutes": 1877,
-      "appearances": 32
+      "rating": "6.97",
+      "minutes": 1895,
+      "appearances": 33
     },
     {
       "name": "板倉滉",
@@ -404,9 +404,9 @@
       "leagueCode": "BL1",
       "goals": 2,
       "assists": 3,
-      "rating": "7.04",
-      "minutes": 4163,
-      "appearances": 48
+      "rating": "7.05",
+      "minutes": 4253,
+      "appearances": 49
     },
     {
       "name": "川崎颯太",
@@ -417,7 +417,7 @@
       "assists": 1,
       "rating": "6.72",
       "minutes": 697,
-      "appearances": 37
+      "appearances": 38
     },
     {
       "name": "田中碧",
@@ -450,7 +450,7 @@
       "assists": 1,
       "rating": "6.66",
       "minutes": 1272,
-      "appearances": 36
+      "appearances": 37
     },
     {
       "name": "ニック・シュミット",
@@ -472,7 +472,7 @@
       "assists": 2,
       "rating": "6.71",
       "minutes": 2143,
-      "appearances": 40
+      "appearances": 41
     },
     {
       "name": "菅原由勢",
@@ -490,11 +490,11 @@
       "team": "Blackburn",
       "league": "Championship",
       "leagueCode": "ELC",
-      "goals": 4,
+      "goals": 5,
       "assists": 11,
-      "rating": "6.83",
-      "minutes": 2985,
-      "appearances": 42
+      "rating": "6.85",
+      "minutes": 3080,
+      "appearances": 43
     },
     {
       "name": "中村敬斗",
@@ -525,9 +525,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "0.00",
-      "minutes": 0,
-      "appearances": 7
+      "rating": "5.60",
+      "minutes": 90,
+      "appearances": 8
     },
     {
       "name": "毎熊晟矢",
@@ -536,9 +536,9 @@
       "leagueCode": "DED",
       "goals": 0,
       "assists": 0,
-      "rating": "6.79",
-      "minutes": 326,
-      "appearances": 19
+      "rating": "6.75",
+      "minutes": 342,
+      "appearances": 20
     },
     {
       "name": "高井幸大",
@@ -569,9 +569,9 @@
       "leagueCode": "ELC",
       "goals": 0,
       "assists": 1,
-      "rating": "6.73",
-      "minutes": 525,
-      "appearances": 14
+      "rating": "6.70",
+      "minutes": 599,
+      "appearances": 15
     },
     {
       "name": "塩貝健人",
@@ -580,9 +580,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.51",
-      "minutes": 512,
-      "appearances": 21
+      "rating": "6.47",
+      "minutes": 578,
+      "appearances": 22
     },
     {
       "name": "冨安健洋",
@@ -600,11 +600,11 @@
       "team": "Las Palmas",
       "league": "Segunda División",
       "leagueCode": "OTHER",
-      "goals": 5,
+      "goals": 6,
       "assists": 4,
-      "rating": "6.79",
-      "minutes": 1448,
-      "appearances": 21
+      "rating": "6.81",
+      "minutes": 1545,
+      "appearances": 22
     },
     {
       "name": "原大智",
@@ -626,7 +626,7 @@
       "assists": 0,
       "rating": "6.78",
       "minutes": 198,
-      "appearances": 23
+      "appearances": 24
     },
     {
       "name": "畑大雅",
@@ -719,13 +719,13 @@
     {
       "name": "橋岡太樹",
       "team": "Borussia Mönchengladbach",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "7.90",
-      "minutes": 90,
-      "appearances": 1
+      "rating": "6.90",
+      "minutes": 166,
+      "appearances": 2
     },
     {
       "name": "中村草太",
@@ -734,9 +734,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.20",
-      "minutes": 20,
-      "appearances": 1
+      "rating": "6.25",
+      "minutes": 34,
+      "appearances": 2
     },
     {
       "name": "水多海斗",
@@ -745,9 +745,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 0,
-      "rating": "0.00",
-      "minutes": 2,
-      "appearances": 1
+      "rating": "6.90",
+      "minutes": 67,
+      "appearances": 2
     },
     {
       "name": "田中聡",
