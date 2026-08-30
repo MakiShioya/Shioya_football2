@@ -183,7 +183,6 @@ function renderMatches() {
         }
 
         if (isJapaneseOnly) {
-            // 構造が変わったので、キーが存在するかでチェック
             const hasJapaneseHome = JAPANESE_PLAYERS[homeName] !== undefined;
             const hasJapaneseAway = JAPANESE_PLAYERS[awayName] !== undefined;
             return hasJapaneseHome || hasJapaneseAway;
@@ -196,33 +195,59 @@ function renderMatches() {
         return;
     }
 
+    const nowTime = new Date().getTime();
+
     container.innerHTML = filtered.map(match => {
         const compCode = match.competition.code;
         const info = LEAGUE_INFO[compCode] || { flag: "🏳️" };
 
         const dateObj = new Date(match.utcDate);
+        const matchStartTime = dateObj.getTime();
+        const elapsedMinutes = (nowTime - matchStartTime) / (1000 * 60);
+
         let displayHour = dateObj.getHours();
         const displayMinute = String(dateObj.getMinutes()).padStart(2, '0');
         
         if (dateObj.getDate() !== targetDate.getDate() && dateObj.getTime() > targetDate.getTime()) {
             displayHour += 24;
         }
-        const timeDisplayStr = `${displayHour}:${displayMinute}`;
+        let timeDisplayStr = `${displayHour}:${displayMinute} (日本時間)`;
+
+        const inPlayCodes = ["1H", "2H", "HT", "ET", "BT", "P", "SUSP", "INT", "LIVE"];
+        const finishedCodes = ["FT", "AET", "PEN"];
+        const postponedCodes = ["PST", "CANC", "ABD", "AWD", "WO"];
+
+        // 試合進行中・終了の判定
+        let isMatchInProgress = false;
+        let isMatchFinished = false;
+
+        if (finishedCodes.includes(match.status) || elapsedMinutes >= 120) {
+            isMatchFinished = true;
+        } else if (inPlayCodes.includes(match.status) || (elapsedMinutes >= 0 && elapsedMinutes < 120)) {
+            isMatchInProgress = true;
+        }
+
+        // 進行中の場合は「試合中」の文字を時間表記に追加
+        if (isMatchInProgress) {
+            timeDisplayStr += ` <span style="color: #d32f2f; font-weight: bold;">試合中</span>`;
+        }
 
         const homeNameRaw = match.homeTeam.name;
         const awayNameRaw = match.awayTeam.name;
 
-        // ★ 最推し判定のデータ準備
+        // 最推し判定
         const homeData = JAPANESE_PLAYERS[homeNameRaw] || { ids: [], names: [] };
         const awayData = JAPANESE_PLAYERS[awayNameRaw] || { ids: [], names: [] };
 
-        // 最推しが含まれているか確認
         const isFavInHome = homeData.ids.includes(window.currentFavoriteId);
         const isFavInAway = awayData.ids.includes(window.currentFavoriteId);
         const isFavoriteMatch = isFavInHome || isFavInAway;
 
-        // クラスを決定
-        const shineClass = isFavoriteMatch ? 'favorite-shine' : '';
+        // クラス設定
+        let cardClasses = ['match-card'];
+        if (isFavoriteMatch) cardClasses.push('favorite-shine');
+        if (isMatchInProgress) cardClasses.push('match-in-play');
+        else if (isMatchFinished) cardClasses.push('match-finished');
 
         const homeJP = TEAM_DISPLAYS[homeNameRaw] || homeNameRaw;
         const awayJP = TEAM_DISPLAYS[awayNameRaw] || awayNameRaw;
@@ -230,7 +255,7 @@ function renderMatches() {
         const displayHomeName = `${info.flag} ${homeJP}`;
         const displayAwayName = `${info.flag} ${awayJP}`;
 
-        // 選手名のバッジ（修正済み）
+        // 選手名バッジ
         const homePlayersStr = homeData.names.join(', ');
         const awayPlayersStr = awayData.names.join(', ');
         
@@ -241,17 +266,13 @@ function renderMatches() {
         const aScore = match.score?.fullTime?.away;
         const status = match.status;
 
-        const inPlay = ["1H", "2H", "HT", "ET", "BT", "P", "SUSP", "INT", "LIVE"];
-        const finished = ["FT", "AET", "PEN"];
-        const postponed = ["PST", "CANC", "ABD", "AWD", "WO"];
-
         let scoreDisplay = "";
-        if (status === "NS" || status === "TBD" || (hScore === null && !finished.includes(status) && !inPlay.includes(status))) {
+        if (status === "NS" || status === "TBD" || (hScore === null && !isMatchFinished && !isMatchInProgress)) {
             scoreDisplay = `<div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>`;
         } else {
             let statusJp = "試合中";
-            if (finished.includes(status)) statusJp = "終了";
-            else if (postponed.includes(status)) statusJp = "延期・中止";
+            if (isMatchFinished) statusJp = "終了";
+            else if (postponedCodes.includes(status)) statusJp = "延期・中止";
 
             scoreDisplay = `
                 <div class="spoiler-btn" onclick="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -263,10 +284,9 @@ function renderMatches() {
             `;
         }
 
-        // ★ div の class に shineClass を適用するように修正しました
         return `
-            <div class="${shineClass}" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
-                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeDisplayStr} (日本時間)</div>
+            <div class="${cardClasses.join(' ')}">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeDisplayStr}</div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div style="width: 38%; text-align: center;">
                         <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayHomeName}</div>

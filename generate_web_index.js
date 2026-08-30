@@ -62,7 +62,7 @@ const TEAM_DISPLAYS = {
     "Osasuna": "オサスナ", "Rayo Vallecano": "ラージョ", "Real Betis": "ベティス", 
     "Real Madrid": "レアル・マドリード", "Real Sociedad": "レアル・ソシエダ", "Sevilla": "セビージャ", 
     "Valencia": "バレンシア", "Valladolid": "バジャドリード", "Villarreal": "ビジャレアル", 
-    "oviedo": "オビエド", "Bayern München": "バイエルン", "Borussia Dortmund": "ドルトムント", 
+    "oviedo": "オビエド", "Bayern München": "バイエルン", "Borussia Dortmund": "ドルトムント", "FC Schalke 04": "シャルケ",
     "RB Leipzig": "ライプツィヒ", "VfB Stuttgart": "シュトゥットガルト", "1899 Hoffenheim": "ホッフェンハイム", 
     "Bayer Leverkusen": "レヴァークーゼン", "Eintracht Frankfurt": "フランクフルト", "SC Freiburg": "フライブルク", 
     "FC Augsburg": "アウクスブルク", "FSV Mainz 05": "マインツ", "Borussia Mönchengladbach": "ボルシアMG", 
@@ -113,6 +113,8 @@ const filtered = allMatches.filter(match => {
     return JP_TEAM_PLAYERS[match.homeTeam.name] !== undefined || JP_TEAM_PLAYERS[match.awayTeam.name] !== undefined;
 });
 
+const nowTime = new Date().getTime();
+
 let matchHtml = '\n <h2>今日の試合一覧</h2>\n';
 if (filtered.length === 0) {
     matchHtml += '<p style="text-align:center; padding: 40px; color: #888;">該当する試合予定はありません。</p>\n';
@@ -120,8 +122,11 @@ if (filtered.length === 0) {
     matchHtml += filtered.map(match => {
         const info = LEAGUE_INFO[match.competition.code] || { flag: "🏳️" };
         
-        // タイムゾーン（JST）の計算を厳密に処理
+        // タイムゾーン（JST）の計算
         const dateObj = new Date(match.utcDate);
+        const matchStartTime = dateObj.getTime();
+        const elapsedMinutes = (nowTime - matchStartTime) / (1000 * 60);
+
         const jstTime = new Date(dateObj.getTime() + 9 * 60 * 60 * 1000);
         
         let displayHour = jstTime.getUTCHours();
@@ -133,7 +138,25 @@ if (filtered.length === 0) {
         if (jstTime.getUTCDate() !== todayObj.getUTCDate() && jstTime.getTime() > todayObj.getTime()) {
             displayHour += 24;
         }
-        const timeStr = `${displayHour}:${displayMinute}`;
+        let timeStr = `${displayHour}:${displayMinute} (日本時間)`;
+
+        const finishedCodes = ["FT", "AET", "PEN"];
+        const inPlayCodes = ["1H", "2H", "HT", "ET", "BT", "P", "SUSP", "INT", "LIVE"];
+        const postponedCodes = ["PST", "CANC", "ABD", "AWD", "WO"];
+
+        // 試合進行中・終了の判定
+        let isMatchInProgress = false;
+        let isMatchFinished = false;
+
+        if (finishedCodes.includes(match.status) || elapsedMinutes >= 120) {
+            isMatchFinished = true;
+        } else if (inPlayCodes.includes(match.status) || (elapsedMinutes >= 0 && elapsedMinutes < 120)) {
+            isMatchInProgress = true;
+        }
+
+        if (isMatchInProgress) {
+            timeStr += ` <span style="color: #d32f2f; font-weight: bold;">試合中</span>`;
+        }
         
         const homeJP = TEAM_DISPLAYS[match.homeTeam.name] || match.homeTeam.name;
         const awayJP = TEAM_DISPLAYS[match.awayTeam.name] || match.awayTeam.name;
@@ -147,17 +170,14 @@ if (filtered.length === 0) {
         const hScore = match.score?.fullTime?.home;
         const aScore = match.score?.fullTime?.away;
         const status = match.status;
-        const finished = ["FT", "AET", "PEN"];
-        const inPlay = ["1H", "2H", "HT", "ET", "BT", "P", "SUSP", "INT", "LIVE"];
-        const postponed = ["PST", "CANC", "ABD", "AWD", "WO"];
 
         let scoreDisplay = "";
-        if (status === "NS" || status === "TBD" || (hScore === null && !finished.includes(status) && !inPlay.includes(status))) {
+        if (status === "NS" || status === "TBD" || (hScore === null && !isMatchFinished && !isMatchInProgress)) {
             scoreDisplay = `<div style="font-size: 1.3em; font-weight: 900; color: #432517;">VS</div>`;
         } else {
             let statusJp = "試合中";
-            if (finished.includes(status)) statusJp = "終了";
-            else if (postponed.includes(status)) statusJp = "延期・中止";
+            if (isMatchFinished) statusJp = "終了";
+            else if (postponedCodes.includes(status)) statusJp = "延期・中止";
 
             scoreDisplay = `
                 <div class="spoiler-btn" onclick="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -168,9 +188,13 @@ if (filtered.length === 0) {
                 </div>`;
         }
 
+        let cardClasses = ['match-card'];
+        if (isMatchInProgress) cardClasses.push('match-in-play');
+        else if (isMatchFinished) cardClasses.push('match-finished');
+
         return `
-            <div class="" style="border: 3px solid #8b4513; padding: 15px; margin: 15px auto; width: 95%; max-width: 500px; border-radius: 12px; background: #fff8dc; box-shadow: 0 4px 6px rgba(0,0,0,0.3); color: #333;">
-                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeStr} (日本時間)</div>
+            <div class="${cardClasses.join(' ')}">
+                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeStr}</div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div style="width: 38%; text-align: center;">
                         <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${info.flag} ${homeJP}</div>
@@ -199,12 +223,11 @@ indexHtml = indexHtml.replace(
     '<h1 style="font-size: 1.2rem; line-height: 1.4;">海外日本人サッカー選手<br>試合日程・予定</h1>'
 );
 
-// ▼▼▼ 【新設】タブコンテナの左側に「過去の結果」ボタンをインジェクションする処理 ▼▼▼
+// タブコンテナの左側に「過去の結果」ボタンをインジェクションする処理
 const targetTabContainer = '<div class="tab-container" style="margin-bottom: 12px;">';
 const injectedButtonHtml = `${targetTabContainer}\n            <button class="tab-btn" onclick="location.href='archive/index.html'" style="background: #8b4513; color: #ECDBBF;">過去</button>`;
 
 indexHtml = indexHtml.replace(targetTabContainer, injectedButtonHtml);
-// ▲▲▲ ここまで ▲▲▲
 
 fs.writeFileSync(outputPath, indexHtml, 'utf8');
 console.log(`[SEO] Web版専用の index_web.html を同じ階層に生成しました。（過去の結果ボタン追加済）`);
