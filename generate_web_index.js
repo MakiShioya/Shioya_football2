@@ -194,17 +194,20 @@ if (filtered.length === 0) {
 
         return `
             <div class="${cardClasses.join(' ')}">
-                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeStr}</div>
+                <div style="position: relative; margin-bottom: 10px; text-align: center;">
+                    <span style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 1.1rem;">${info.flag}</span>
+                    <span style="font-size: 0.85em; color: #666; font-weight: bold;">${timeStr}</span>
+                </div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div style="width: 38%; text-align: center;">
-                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${info.flag} ${homeJP}</div>
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${homeJP}</div>
                         ${homeBadge}
                     </div>
                     <div style="width: 24%; text-align: center; margin-top: 5px; display: flex; justify-content: center; align-items: center;">
                         ${scoreDisplay}
                     </div>
                     <div style="width: 38%; text-align: center;">
-                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${info.flag} ${awayJP}</div>
+                        <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${awayJP}</div>
                         ${awayBadge}
                     </div>
                 </div>

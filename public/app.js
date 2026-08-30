@@ -217,7 +217,6 @@ function renderMatches() {
         const finishedCodes = ["FT", "AET", "PEN"];
         const postponedCodes = ["PST", "CANC", "ABD", "AWD", "WO"];
 
-        // 試合進行中・終了の判定
         let isMatchInProgress = false;
         let isMatchFinished = false;
 
@@ -227,7 +226,6 @@ function renderMatches() {
             isMatchInProgress = true;
         }
 
-        // 進行中の場合は「試合中」の文字を時間表記に追加
         if (isMatchInProgress) {
             timeDisplayStr += ` <span style="color: #d32f2f; font-weight: bold;">試合中</span>`;
         }
@@ -235,7 +233,6 @@ function renderMatches() {
         const homeNameRaw = match.homeTeam.name;
         const awayNameRaw = match.awayTeam.name;
 
-        // 最推し判定
         const homeData = JAPANESE_PLAYERS[homeNameRaw] || { ids: [], names: [] };
         const awayData = JAPANESE_PLAYERS[awayNameRaw] || { ids: [], names: [] };
 
@@ -243,7 +240,6 @@ function renderMatches() {
         const isFavInAway = awayData.ids.includes(window.currentFavoriteId);
         const isFavoriteMatch = isFavInHome || isFavInAway;
 
-        // クラス設定
         let cardClasses = ['match-card'];
         if (isFavoriteMatch) cardClasses.push('favorite-shine');
         if (isMatchInProgress) cardClasses.push('match-in-play');
@@ -252,10 +248,10 @@ function renderMatches() {
         const homeJP = TEAM_DISPLAYS[homeNameRaw] || homeNameRaw;
         const awayJP = TEAM_DISPLAYS[awayNameRaw] || awayNameRaw;
 
-        const displayHomeName = `${info.flag} ${homeJP}`;
-        const displayAwayName = `${info.flag} ${awayJP}`;
+        // チーム名から国旗を削除
+        const displayHomeName = homeJP;
+        const displayAwayName = awayJP;
 
-        // 選手名バッジ
         const homePlayersStr = homeData.names.join(', ');
         const awayPlayersStr = awayData.names.join(', ');
         
@@ -286,7 +282,10 @@ function renderMatches() {
 
         return `
             <div class="${cardClasses.join(' ')}">
-                <div style="font-size: 0.85em; color: #666; margin-bottom: 10px; text-align: center; font-weight: bold;">${timeDisplayStr}</div>
+                <div style="position: relative; margin-bottom: 10px; text-align: center;">
+                    <span style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 1.1rem;">${info.flag}</span>
+                    <span style="font-size: 0.85em; color: #666; font-weight: bold;">${timeDisplayStr}</span>
+                </div>
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div style="width: 38%; text-align: center;">
                         <div class="player-name" style="font-weight: bold; font-size: 1rem; line-height: 1.4;">${displayHomeName}</div>
