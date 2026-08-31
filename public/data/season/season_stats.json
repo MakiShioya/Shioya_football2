@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30T05:24:47.327Z",
+  "updated": "2026-08-31T05:35:28.897Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -179,7 +179,7 @@
     },
     {
       "name": "佐野航大",
-      "team": "PSV",
+      "team": "PSV Eindhoven",
       "league": "Eredivisie",
       "leagueCode": "DED",
       "goals": 3,
@@ -366,14 +366,14 @@
     },
     {
       "name": "板倉滉",
-      "team": "Ajax",
+      "team": "Borussia Mönchengladbach",
       "league": "Eredivisie",
       "leagueCode": "DED",
       "goals": 1,
       "assists": 0,
-      "rating": "6.82",
-      "minutes": 1915,
-      "appearances": 35
+      "rating": "6.80",
+      "minutes": 2005,
+      "appearances": 36
     },
     {
       "name": "堂安律",
@@ -388,7 +388,7 @@
     },
     {
       "name": "鈴木彩艶",
-      "team": "Parma",
+      "team": "Aston Villa",
       "league": "Serie A",
       "leagueCode": "SA1",
       "goals": 0,
