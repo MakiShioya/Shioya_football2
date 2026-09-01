@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31T05:35:28.897Z",
+  "updated": "2026-09-01T05:08:54.898Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -19,9 +19,9 @@
       "leagueCode": "SPL",
       "goals": 14,
       "assists": 9,
-      "rating": "6.67",
-      "minutes": 3763,
-      "appearances": 49
+      "rating": "6.66",
+      "minutes": 3836,
+      "appearances": 50
     },
     {
       "name": "小久保玲央ブライアン",
@@ -31,8 +31,8 @@
       "goals": 0,
       "assists": 0,
       "rating": "7.29",
-      "minutes": 3519,
-      "appearances": 40
+      "minutes": 3609,
+      "appearances": 41
     },
     {
       "name": "山本理仁",
@@ -63,9 +63,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 1,
-      "rating": "7.10",
-      "minutes": 2958,
-      "appearances": 41
+      "rating": "7.08",
+      "minutes": 3048,
+      "appearances": 42
     },
     {
       "name": "渡辺剛",
@@ -75,19 +75,19 @@
       "goals": 5,
       "assists": 0,
       "rating": "7.10",
-      "minutes": 3451,
-      "appearances": 41
+      "minutes": 3545,
+      "appearances": 42
     },
     {
       "name": "上田綺世",
       "team": "Feyenoord",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 28,
+      "goals": 29,
       "assists": 2,
-      "rating": "7.04",
-      "minutes": 3458,
-      "appearances": 43
+      "rating": "7.05",
+      "minutes": 3538,
+      "appearances": 44
     },
     {
       "name": "後藤啓介",
@@ -97,8 +97,8 @@
       "goals": 12,
       "assists": 7,
       "rating": "6.79",
-      "minutes": 2912,
-      "appearances": 40
+      "minutes": 2922,
+      "appearances": 41
     },
     {
       "name": "岩田智輝",
@@ -250,9 +250,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 0,
-      "rating": "6.85",
-      "minutes": 2913,
-      "appearances": 36
+      "rating": "6.83",
+      "minutes": 3003,
+      "appearances": 37
     },
     {
       "name": "藤本寛也",
@@ -296,7 +296,7 @@
       "assists": 4,
       "rating": "6.71",
       "minutes": 3283,
-      "appearances": 39
+      "appearances": 40
     },
     {
       "name": "三笘薫",
@@ -314,11 +314,11 @@
       "team": "SC Freiburg",
       "league": "Bundesliga",
       "leagueCode": "BL1",
-      "goals": 9,
+      "goals": 12,
       "assists": 5,
-      "rating": "6.88",
-      "minutes": 3094,
-      "appearances": 49
+      "rating": "6.94",
+      "minutes": 3174,
+      "appearances": 50
     },
     {
       "name": "南野拓実",
@@ -393,9 +393,9 @@
       "leagueCode": "SA1",
       "goals": 0,
       "assists": 0,
-      "rating": "7.03",
-      "minutes": 1985,
-      "appearances": 25
+      "rating": "7.00",
+      "minutes": 2085,
+      "appearances": 26
     },
     {
       "name": "佐野海舟",
@@ -426,9 +426,9 @@
       "leagueCode": "PL",
       "goals": 4,
       "assists": 0,
-      "rating": "6.81",
-      "minutes": 1775,
-      "appearances": 44
+      "rating": "6.82",
+      "minutes": 1820,
+      "appearances": 45
     },
     {
       "name": "野澤大志ブランドン",
@@ -437,9 +437,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "7.21",
-      "minutes": 2823,
-      "appearances": 38
+      "rating": "7.16",
+      "minutes": 2913,
+      "appearances": 39
     },
     {
       "name": "町野修斗",
@@ -558,9 +558,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.75",
-      "minutes": 1621,
-      "appearances": 21
+      "rating": "6.74",
+      "minutes": 1715,
+      "appearances": 22
     },
     {
       "name": "平河悠",
@@ -612,10 +612,10 @@
       "league": "Bundesliga",
       "leagueCode": "BL1",
       "goals": 1,
-      "assists": 0,
-      "rating": "6.58",
-      "minutes": 243,
-      "appearances": 18
+      "assists": 1,
+      "rating": "6.73",
+      "minutes": 326,
+      "appearances": 19
     },
     {
       "name": "市原吏音",
@@ -635,9 +635,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "7.00",
-      "minutes": 189,
-      "appearances": 2
+      "rating": "6.83",
+      "minutes": 279,
+      "appearances": 3
     },
     {
       "name": "石渡ネルソン",
@@ -646,20 +646,20 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 1,
-      "rating": "7.60",
-      "minutes": 186,
-      "appearances": 2
+      "rating": "7.37",
+      "minutes": 201,
+      "appearances": 3
     },
     {
       "name": "松澤海斗",
       "team": "St. Truiden",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 0,
+      "goals": 1,
       "assists": 0,
-      "rating": "7.20",
-      "minutes": 31,
-      "appearances": 2
+      "rating": "7.55",
+      "minutes": 46,
+      "appearances": 3
     },
     {
       "name": "新川志音",
@@ -669,19 +669,19 @@
       "goals": 0,
       "assists": 0,
       "rating": "6.30",
-      "minutes": 10,
-      "appearances": 2
+      "minutes": 11,
+      "appearances": 3
     },
     {
       "name": "荒木遼太郎",
       "team": "St. Truiden",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 0,
+      "goals": 1,
       "assists": 0,
-      "rating": "0.00",
-      "minutes": 0,
-      "appearances": 2
+      "rating": "8.20",
+      "minutes": 75,
+      "appearances": 3
     },
     {
       "name": "木村誠二",
@@ -690,9 +690,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "5.95",
-      "minutes": 180,
-      "appearances": 2
+      "rating": "6.37",
+      "minutes": 270,
+      "appearances": 3
     },
     {
       "name": "坂本一彩",
@@ -701,9 +701,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 1,
-      "rating": "6.55",
-      "minutes": 165,
-      "appearances": 2
+      "rating": "6.77",
+      "minutes": 182,
+      "appearances": 3
     },
     {
       "name": "佐藤龍之介",
@@ -712,9 +712,9 @@
       "leagueCode": "PD",
       "goals": 0,
       "assists": 0,
-      "rating": "6.60",
-      "minutes": 154,
-      "appearances": 2
+      "rating": "6.47",
+      "minutes": 214,
+      "appearances": 3
     },
     {
       "name": "橋岡太樹",
@@ -752,13 +752,13 @@
     {
       "name": "田中聡",
       "team": "FC Schalke 04",
-      "league": "DFB Pokal",
-      "leagueCode": "OTHER",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
       "rating": "7.00",
       "minutes": 15,
-      "appearances": 1
+      "appearances": 2
     }
   ]
 }
