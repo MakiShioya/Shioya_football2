@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02T04:34:40.417Z",
+  "updated": "2026-09-03T04:34:08.402Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -30,9 +30,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "7.29",
-      "minutes": 3609,
-      "appearances": 41
+      "rating": "7.24",
+      "minutes": 3699,
+      "appearances": 42
     },
     {
       "name": "山本理仁",
@@ -65,7 +65,7 @@
       "assists": 1,
       "rating": "7.08",
       "minutes": 3048,
-      "appearances": 42
+      "appearances": 43
     },
     {
       "name": "渡辺剛",
@@ -635,9 +635,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.83",
-      "minutes": 279,
-      "appearances": 3
+      "rating": "6.60",
+      "minutes": 297,
+      "appearances": 4
     },
     {
       "name": "石渡ネルソン",
@@ -646,9 +646,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 1,
-      "rating": "7.37",
-      "minutes": 201,
-      "appearances": 3
+      "rating": "7.03",
+      "minutes": 258,
+      "appearances": 4
     },
     {
       "name": "松澤海斗",
@@ -657,9 +657,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 0,
-      "rating": "7.55",
-      "minutes": 46,
-      "appearances": 3
+      "rating": "7.16",
+      "minutes": 71,
+      "appearances": 4
     },
     {
       "name": "新川志音",
@@ -668,9 +668,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.30",
-      "minutes": 11,
-      "appearances": 3
+      "rating": "6.00",
+      "minutes": 29,
+      "appearances": 4
     },
     {
       "name": "荒木遼太郎",
@@ -679,9 +679,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 0,
-      "rating": "8.20",
-      "minutes": 75,
-      "appearances": 3
+      "rating": "6.88",
+      "minutes": 140,
+      "appearances": 4
     },
     {
       "name": "木村誠二",
