@@ -61,6 +61,8 @@
         "Appelkamp": { "full": "アペルカンプ真大", "short": "アペルカンプ" }
     },
     "Monaco": { "Minamino": { "full": "南野拓実", "short": "南野" } },
+    "Lille": {"Ueda": { "full": "上田綺世", "short": "上田" }}, 
+    "Lyon": {"Nakamura": { "full": "中村敬斗", "short": "中村" }}, 
     "Le Havre": { "Seko": { "full": "瀬古歩夢", "short": "瀬古" },
                   "Nakamura": { "full": "中村草太", "short": "中村草太" },
                   "Mizuta": { "full": "水多海斗", "short": "水多" } },
@@ -69,7 +71,6 @@
         "Sano": { "full": "佐野航大", "short": "航大" }
     },
     "Feyenoord": { 
-        "Ueda": { "full": "上田綺世", "short": "上田" }, 
         "Watanabe": { "full": "渡辺剛", "short": "渡辺" } 
     },
     "AZ Alkmaar": { 
@@ -110,6 +111,5 @@
     "Celtic": { 
         "Hatate": { "full": "旗手怜央", "short": "旗手" }
     },
-    "Reims": { "Nakamura": { "full": "中村敬斗", "short": "中村" },
-               "Sekine": { "full": "関根大輝", "short": "関根" }}
+    "Reims": {  "Sekine": { "full": "関根大輝", "short": "関根" }}
 }
