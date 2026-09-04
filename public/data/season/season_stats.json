@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-03T04:34:08.402Z",
+  "updated": "2026-09-04T04:33:49.929Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -80,14 +80,14 @@
     },
     {
       "name": "上田綺世",
-      "team": "Feyenoord",
+      "team": "Lille",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 29,
+      "goals": 30,
       "assists": 2,
-      "rating": "7.05",
-      "minutes": 3538,
-      "appearances": 44
+      "rating": "7.06",
+      "minutes": 3571,
+      "appearances": 45
     },
     {
       "name": "後藤啓介",
@@ -360,9 +360,9 @@
       "leagueCode": "PD",
       "goals": 2,
       "assists": 4,
-      "rating": "6.97",
-      "minutes": 1895,
-      "appearances": 33
+      "rating": "6.94",
+      "minutes": 1956,
+      "appearances": 34
     },
     {
       "name": "板倉滉",
@@ -498,7 +498,7 @@
     },
     {
       "name": "中村敬斗",
-      "team": "Reims",
+      "team": "Lyon",
       "league": "Ligue 2",
       "leagueCode": "OTHER",
       "goals": 14,
