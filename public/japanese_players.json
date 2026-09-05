@@ -83,8 +83,7 @@
         "Kokubo": { "full": "小久保玲央ブライアン", "short": "小久保" }, 
         "Taniguchi": { "full": "谷口彰悟", "short": "谷口" }, 
         "Ito": { "full": "伊藤涼太郎", "short": "伊藤涼太郎" },
-        "Takai": { "full": "高井幸大", "short": "高井" },
-        "Yamamoto": { "full": "山本理仁", "short": "山本" } 
+        "Takai": { "full": "高井幸大", "short": "高井" }
     },
     "Genk": { "Junya": { "full": "伊東純也", "short": "伊東" },
               "Yokoyama": { "full": "横山歩夢", "short": "横山" } },
@@ -111,8 +110,7 @@
     "Cagliari": { "Sugawara": { "full": "菅原由勢", "short": "菅原" } },
     
     "Hannover": {
-    "Matsuda": { "full": "松田隼風", "short": "松田" },
-    "Yokota": { "full": "横田大祐", "short": "横田" }
+    "Matsuda": { "full": "松田隼風", "short": "松田" }
 },
 
 "Darmstadt 98": {
