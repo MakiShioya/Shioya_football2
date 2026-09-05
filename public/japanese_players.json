@@ -92,7 +92,6 @@
         "Tsunashima": { "full": "綱島悠斗", "short": "綱島" },
         "Ando": { "full": "安藤晃希", "short": "安藤晃希" }
     },
-    "Royale Union Saint-Gilloise": { "Nikki": { "full": "ハーフナー・ニッキ", "short": "ニッキ" } },
     "Oud-Heverlee Leuven": { "Yamada": { "full": "山田新", "short": "山田" },
                              "Ogiwara": { "full": "荻原拓也", "short": "荻原" } },
     "KVC Westerlo": { 
@@ -124,5 +123,8 @@
 
 "Karlsruher SC": {
     "Fukuda": { "full": "福田師王", "short": "福田" }
+},
+"Union St. Gilloise":{
+    "Nikki": { "full": "ハーフナー・ニッキ", "short": "ハーフナー" }
 }
 }
