@@ -5,13 +5,12 @@
     },
     "Aston Villa": { "Suzuki": { "full": "鈴木彩艶", "short": "彩艶" } },
     "Liverpool": { "Endo": { "full": "遠藤航", "short": "遠藤" } },
-    "Tottenham": { "Takai": { "full": "高井幸大", "short": "高井" } },
+
     "Brighton": { "Mitoma": { "full": "三笘薫", "short": "三笘" } },
     "Coventry": { "Sakamoto": { "full": "坂元達裕", "short": "坂元" } },
-    "Hull City": { "Hirakawa": { "full": "守田英正", "short": "守田" } },
+    "Hull City": { "Morita": { "full": "守田英正", "short": "守田" } },
     "Ipswich": { "Maeda": { "full": "前田大然", "short": "前田" } }, 
-    "Southampton": { "Matsuki": { "full": "松木玖生", "short": "松木" },
-                     "Sugawara": { "full": "菅原由勢", "short": "菅原" }
+    "Southampton": { "Matsuki": { "full": "松木玖生", "short": "松木" }
                     },
     "Bristol City": { "Hirakawa": { "full": "平河悠", "short": "平河" } }, 
     "Leeds": { "Tanaka": { "full": "田中碧", "short": "田中碧" } },
@@ -57,9 +56,6 @@
     },
     "VfL Wolfsburg": { "Shiogai": { "full": "塩貝健人", "short": "塩貝" } },
     "VfL Bochum": { "Miyoshi": { "full": "三好康児", "short": "三好" } },
-    "Fortuna Dusseldorf": { 
-        "Appelkamp": { "full": "アペルカンプ真大", "short": "アペルカンプ" }
-    },
     "Monaco": { "Minamino": { "full": "南野拓実", "short": "南野" } },
     "Lille": {"Ueda": { "full": "上田綺世", "short": "上田" }}, 
     "Lyon": {"Nakamura": { "full": "中村敬斗", "short": "中村" }}, 
@@ -77,9 +73,6 @@
         "Maikuma": { "full": "毎熊晟矢", "short": "毎熊" }, 
         "Ichihara": { "full": "市原吏音", "short": "市原" } 
     },
-    "NEC Nijmegen": { 
-        "Ogawa": { "full": "小川航基", "short": "小川" } 
-    },
     "Sparta Rotterdam": { "Mito": { "full": "三戸舜介", "short": "三戸" } },
     "St. Truiden": { 
         "Shinkawa": { "full": "新川志音", "short": "新川" }, 
@@ -90,10 +83,11 @@
         "Kokubo": { "full": "小久保玲央ブライアン", "short": "小久保" }, 
         "Taniguchi": { "full": "谷口彰悟", "short": "谷口" }, 
         "Ito": { "full": "伊藤涼太郎", "short": "伊藤涼太郎" },
+        "Takai": { "full": "高井幸大", "short": "高井" },
         "Yamamoto": { "full": "山本理仁", "short": "山本" } 
     },
-    "Genk": { "Junya": { "full": "伊東純也", "short": "伊東" } },
-    "Gent": { "Junya": { "full": "伊藤敦樹", "short": "伊藤敦樹" } },
+    "Genk": { "Junya": { "full": "伊東純也", "short": "伊東" },
+              "Yokoyama": { "full": "横山歩夢", "short": "横山" } },
     "Antwerp": { 
         "Nozawa": { "full": "野澤大志ブランドン", "short": "野澤" }, 
         "Tsunashima": { "full": "綱島悠斗", "short": "綱島" },
@@ -108,8 +102,29 @@
         "Kimura": { "full": "木村誠二", "short": "木村" }
     },
     "KV Kortrijk": { "Masui": { "full": "倍井謙", "short": "倍井" } },
-    "Celtic": { 
-        "Hatate": { "full": "旗手怜央", "short": "旗手" }
-    },
-    "Reims": {  "Sekine": { "full": "関根大輝", "short": "関根" }}
+    "Burnley": { "Hatate": { "full": "旗手怜央", "short": "旗手怜央" } },
+    "Holstein Kiel": {  "Sekine": { "full": "関根大輝", "short": "関根" },
+                        "Abe": { "full": "安部大晴", "short": "安部" },
+                        "Takahashi": { "full": "高橋仁胡", "short": "高橋" } },
+    "Bolton Wanderers": { "Ito": { "full": "伊藤敦樹", "short": "伊藤敦樹" } },
+    "Charleroi": { "Nawata": { "full": "名和田我空", "short": "名和田" } },
+    "Cagliari": { "Sugawara": { "full": "菅原由勢", "short": "菅原" } },
+    
+    "Hannover": {
+    "Matsuda": { "full": "松田隼風", "short": "松田" },
+    "Yokota": { "full": "横田大祐", "short": "横田" }
+},
+
+"Darmstadt 98": {
+    "Akiyama": { "full": "秋山裕紀", "short": "秋山" },
+    "Furukawa": { "full": "古川陽介", "short": "古川" }
+},
+
+"Greuther Fürth": {
+    "Appelkamp": { "full": "アペルカンプ真大", "short": "アペルカンプ" }
+},
+
+"Karlsruher SC": {
+    "Fukuda": { "full": "福田師王", "short": "福田" }
+}
 }

@@ -80,14 +80,14 @@ const TEAM_DISPLAYS = {
     "AZ Alkmaar": "AZ", "Feyenoord": "フェイエノールト", "Fortuna Sittard": "フォルトゥナ", 
     "GO Ahead Eagles": "ゴー・アヘッド", "FC Groningen": "フローニンゲン", "Heerenveen": "ヘーレンフェーン", 
     "Heracles": "ヘラクレス", "NAC Breda": "NAC", "NEC Nijmegen": "NEC", "PEC Zwolle": "ズヴォレ", 
-    "PSV": "PSV", "Waalwijk": "RKC", "Sparta Rotterdam": "スパルタ", "Twente": "トゥウェンテ", 
+    "PSV Eindhoven": "PSV", "Waalwijk": "RKC", "Sparta Rotterdam": "スパルタ", "Twente": "トゥウェンテ", 
     "FC Utrecht": "ユヒト", "Willem II": "ヴィレムII", "Anderlecht": "アンデルレヒト", 
     "Antwerp": "アントワープ", "Cercle Brugge KSV": "セルクル・ブルッヘ", 
     "Sporting du Pays de Charleroi": "シャルルロワ", "Club Brugge KV": "クラブ・ブルッヘ", 
     "Dender": "デンデル", "Genk": "ヘンク", "Gent": "ヘント", 
     "KV Kortrijk": "コルトレイク", "KV Mechelen": "メヘレン", "Oud-Heverlee Leuven": "OHルーヴェン", 
     "St. Truiden": "シント＝トロイデン", "Standard de Liège": "S・リエージュ", 
-    "Royale Union Saint-Gilloise": "サン＝ジロワーズ", "KVC Westerlo": "ウェステルロー", 
+    "Union St. Gilloise": "サン＝ジロワーズ", "KVC Westerlo": "ウェステルロー", 
     "SV Zulte Waregem": "ズルテ・ワレヘム", "Albirex Niigata": "新潟", "Avispa Fukuoka": "福岡", 
     "Cerezo Osaka": "C大阪", "Consadole Sapporo": "札幌", "FC Tokyo": "FC東京", 
     "Gamba Osaka": "G大阪", "Jubilo Iwata": "磐田", "Kashima": "鹿島", 
@@ -95,7 +95,8 @@ const TEAM_DISPLAYS = {
     "Machida Zelvia": "町田", "Nagoya Grampus": "名古屋", "Sagan Tosu": "鳥栖", 
     "Sanfrecce Hiroshima": "広島", "Shonan Bellmare": "湘南", "Tokyo Verdy": "東京V", 
     "Urawa Red Diamonds": "浦和", "Vissel Kobe": "神戸", "Yokohama F. Marinos": "横浜FM", 
-    "Celtic": "セルティック"
+    "Celtic": "セルティック", "Holstein Kiel": "キール", "Bolton Wanderers": "ボルトン", "Charleroi": "シャルルロワ",
+    "Hannover": "ハノーファー", "Greuther Fürth": "グロイター・フュルト", "Karlsruher SC" : "カールスルーエ"
 };
 
 let JAPANESE_PLAYERS = {};
