@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04T04:33:49.929Z",
+  "updated": "2026-09-05T04:30:01.225Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -19,9 +19,9 @@
       "leagueCode": "SPL",
       "goals": 14,
       "assists": 9,
-      "rating": "6.66",
-      "minutes": 3836,
-      "appearances": 50
+      "rating": "6.65",
+      "minutes": 3902,
+      "appearances": 51
     },
     {
       "name": "小久保玲央ブライアン",
@@ -206,9 +206,9 @@
       "leagueCode": "DED",
       "goals": 9,
       "assists": 7,
-      "rating": "6.98",
-      "minutes": 2338,
-      "appearances": 31
+      "rating": "6.96",
+      "minutes": 2428,
+      "appearances": 32
     },
     {
       "name": "三好康児",
@@ -241,7 +241,7 @@
       "assists": 1,
       "rating": "6.77",
       "minutes": 492,
-      "appearances": 33
+      "appearances": 34
     },
     {
       "name": "綱島悠斗",
@@ -296,7 +296,7 @@
       "assists": 4,
       "rating": "6.71",
       "minutes": 3283,
-      "appearances": 40
+      "appearances": 41
     },
     {
       "name": "三笘薫",
@@ -558,9 +558,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.74",
-      "minutes": 1715,
-      "appearances": 22
+      "rating": "6.72",
+      "minutes": 1805,
+      "appearances": 23
     },
     {
       "name": "平河悠",
@@ -602,20 +602,20 @@
       "leagueCode": "OTHER",
       "goals": 6,
       "assists": 4,
-      "rating": "6.81",
-      "minutes": 1545,
-      "appearances": 22
+      "rating": "6.79",
+      "minutes": 1635,
+      "appearances": 23
     },
     {
       "name": "原大智",
       "team": "FC St. Pauli",
       "league": "Bundesliga",
       "leagueCode": "BL1",
-      "goals": 1,
+      "goals": 2,
       "assists": 1,
-      "rating": "6.73",
-      "minutes": 326,
-      "appearances": 19
+      "rating": "6.80",
+      "minutes": 402,
+      "appearances": 20
     },
     {
       "name": "市原吏音",
