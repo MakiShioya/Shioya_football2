@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-06T04:39:39.997Z",
+  "updated": "2026-09-07T04:42:20.083Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -107,9 +107,9 @@
       "leagueCode": "ELC",
       "goals": 3,
       "assists": 1,
-      "rating": "6.83",
-      "minutes": 4376,
-      "appearances": 52
+      "rating": "6.82",
+      "minutes": 4466,
+      "appearances": 53
     },
     {
       "name": "古橋亨梧",
@@ -263,7 +263,7 @@
       "assists": 0,
       "rating": "6.47",
       "minutes": 220,
-      "appearances": 36
+      "appearances": 37
     },
     {
       "name": "伊東純也",
@@ -403,10 +403,10 @@
       "league": "Bundesliga",
       "leagueCode": "BL1",
       "goals": 2,
-      "assists": 3,
-      "rating": "7.05",
-      "minutes": 4253,
-      "appearances": 49
+      "assists": 4,
+      "rating": "7.06",
+      "minutes": 4341,
+      "appearances": 50
     },
     {
       "name": "川崎颯太",
@@ -417,7 +417,7 @@
       "assists": 1,
       "rating": "6.72",
       "minutes": 697,
-      "appearances": 38
+      "appearances": 39
     },
     {
       "name": "田中碧",
@@ -525,9 +525,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "5.60",
-      "minutes": 90,
-      "appearances": 8
+      "rating": "5.99",
+      "minutes": 180,
+      "appearances": 9
     },
     {
       "name": "毎熊晟矢",
@@ -536,9 +536,9 @@
       "leagueCode": "DED",
       "goals": 0,
       "assists": 0,
-      "rating": "6.75",
-      "minutes": 342,
-      "appearances": 20
+      "rating": "6.72",
+      "minutes": 364,
+      "appearances": 21
     },
     {
       "name": "高井幸大",
@@ -626,7 +626,7 @@
       "assists": 0,
       "rating": "6.78",
       "minutes": 198,
-      "appearances": 24
+      "appearances": 25
     },
     {
       "name": "畑大雅",
@@ -712,9 +712,9 @@
       "leagueCode": "PD",
       "goals": 0,
       "assists": 0,
-      "rating": "6.47",
-      "minutes": 214,
-      "appearances": 3
+      "rating": "6.35",
+      "minutes": 242,
+      "appearances": 4
     },
     {
       "name": "橋岡太樹",
@@ -791,6 +791,17 @@
       "assists": 0,
       "rating": "5.84",
       "minutes": 4,
+      "appearances": 1
+    },
+    {
+      "name": "横山歩夢",
+      "team": "Genk",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.09",
+      "minutes": 45,
       "appearances": 1
     }
   ]
