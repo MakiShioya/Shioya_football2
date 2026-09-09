@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08T04:36:51.045Z",
+  "updated": "2026-09-09T04:42:37.866Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -8,9 +8,9 @@
       "leagueCode": "SPL",
       "goals": 5,
       "assists": 4,
-      "rating": "6.69",
-      "minutes": 2566,
-      "appearances": 49
+      "rating": "6.67",
+      "minutes": 2578,
+      "appearances": 50
     },
     {
       "name": "前田大然",
@@ -83,11 +83,11 @@
       "team": "Lille",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 30,
+      "goals": 31,
       "assists": 2,
-      "rating": "7.06",
-      "minutes": 3571,
-      "appearances": 45
+      "rating": "7.07",
+      "minutes": 3648,
+      "appearances": 46
     },
     {
       "name": "後藤啓介",
@@ -150,10 +150,10 @@
       "league": "Championship",
       "leagueCode": "ELC",
       "goals": 6,
-      "assists": 2,
-      "rating": "6.82",
-      "minutes": 1828,
-      "appearances": 44
+      "assists": 3,
+      "rating": "6.81",
+      "minutes": 1842,
+      "appearances": 45
     },
     {
       "name": "大橋祐紀",
@@ -226,11 +226,11 @@
       "team": "Crystal Palace",
       "league": "Premier League",
       "leagueCode": "PL",
-      "goals": 1,
+      "goals": 2,
       "assists": 5,
-      "rating": "6.95",
-      "minutes": 3490,
-      "appearances": 49
+      "rating": "6.97",
+      "minutes": 3521,
+      "appearances": 50
     },
     {
       "name": "遠藤航",
@@ -393,9 +393,9 @@
       "leagueCode": "SA1",
       "goals": 0,
       "assists": 0,
-      "rating": "7.03",
-      "minutes": 2175,
-      "appearances": 27
+      "rating": "7.04",
+      "minutes": 2265,
+      "appearances": 28
     },
     {
       "name": "佐野海舟",
@@ -492,9 +492,9 @@
       "leagueCode": "ELC",
       "goals": 5,
       "assists": 11,
-      "rating": "6.81",
-      "minutes": 3170,
-      "appearances": 44
+      "rating": "6.80",
+      "minutes": 3260,
+      "appearances": 45
     },
     {
       "name": "中村敬斗",
@@ -591,9 +591,9 @@
       "leagueCode": "DED",
       "goals": 0,
       "assists": 1,
-      "rating": "6.53",
-      "minutes": 339,
-      "appearances": 18
+      "rating": "6.61",
+      "minutes": 429,
+      "appearances": 19
     },
     {
       "name": "宮代大聖",
