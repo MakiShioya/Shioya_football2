@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-13T04:48:29.488Z",
+  "updated": "2026-09-14T04:57:24.992Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -74,9 +74,9 @@
       "leagueCode": "DED",
       "goals": 5,
       "assists": 0,
-      "rating": "7.08",
-      "minutes": 3725,
-      "appearances": 44
+      "rating": "7.09",
+      "minutes": 3815,
+      "appearances": 45
     },
     {
       "name": "上田綺世",
@@ -85,9 +85,9 @@
       "leagueCode": "DED",
       "goals": 31,
       "assists": 2,
-      "rating": "7.07",
-      "minutes": 3648,
-      "appearances": 46
+      "rating": "7.06",
+      "minutes": 3719,
+      "appearances": 47
     },
     {
       "name": "後藤啓介",
@@ -142,7 +142,7 @@
       "assists": 3,
       "rating": "7.04",
       "minutes": 2671,
-      "appearances": 42
+      "appearances": 43
     },
     {
       "name": "松木玖生",
@@ -182,11 +182,11 @@
       "team": "PSV Eindhoven",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 3,
+      "goals": 4,
       "assists": 8,
-      "rating": "7.07",
-      "minutes": 3679,
-      "appearances": 41
+      "rating": "7.10",
+      "minutes": 3769,
+      "appearances": 42
     },
     {
       "name": "小川航基",
@@ -250,9 +250,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 0,
-      "rating": "6.83",
-      "minutes": 3093,
-      "appearances": 38
+      "rating": "6.82",
+      "minutes": 3183,
+      "appearances": 39
     },
     {
       "name": "藤本寛也",
@@ -360,9 +360,9 @@
       "leagueCode": "PD",
       "goals": 2,
       "assists": 4,
-      "rating": "6.94",
-      "minutes": 1956,
-      "appearances": 35
+      "rating": "6.93",
+      "minutes": 1974,
+      "appearances": 36
     },
     {
       "name": "板倉滉",
@@ -436,10 +436,10 @@
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
       "goals": 0,
-      "assists": 0,
-      "rating": "7.18",
-      "minutes": 3003,
-      "appearances": 40
+      "assists": 1,
+      "rating": "7.17",
+      "minutes": 3093,
+      "appearances": 41
     },
     {
       "name": "町野修斗",
@@ -767,9 +767,9 @@
       "leagueCode": "OTHER",
       "goals": 0,
       "assists": 0,
-      "rating": "6.67",
-      "minutes": 90,
-      "appearances": 1
+      "rating": "6.37",
+      "minutes": 180,
+      "appearances": 2
     },
     {
       "name": "高橋仁胡",
@@ -780,7 +780,7 @@
       "assists": 0,
       "rating": "0.00",
       "minutes": 0,
-      "appearances": 1
+      "appearances": 2
     },
     {
       "name": "名和田我空",
@@ -789,9 +789,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "5.84",
-      "minutes": 4,
-      "appearances": 1
+      "rating": "6.30",
+      "minutes": 30,
+      "appearances": 2
     },
     {
       "name": "横山歩夢",
@@ -800,8 +800,19 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.09",
-      "minutes": 45,
+      "rating": "6.34",
+      "minutes": 90,
+      "appearances": 2
+    },
+    {
+      "name": "福田師王",
+      "team": "Karlsruher SC",
+      "league": "2. Bundesliga",
+      "leagueCode": "OTHER",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.84",
+      "minutes": 90,
       "appearances": 1
     }
   ]
