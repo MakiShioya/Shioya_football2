@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T04:49:33.427Z",
+  "updated": "2026-09-17T04:53:36.892Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -140,9 +140,9 @@
       "leagueCode": "ELC",
       "goals": 7,
       "assists": 3,
-      "rating": "7.04",
-      "minutes": 2671,
-      "appearances": 43
+      "rating": "7.01",
+      "minutes": 2728,
+      "appearances": 44
     },
     {
       "name": "松木玖生",
@@ -393,9 +393,9 @@
       "leagueCode": "SA1",
       "goals": 0,
       "assists": 0,
-      "rating": "7.03",
-      "minutes": 2355,
-      "appearances": 29
+      "rating": "7.01",
+      "minutes": 2400,
+      "appearances": 30
     },
     {
       "name": "佐野海舟",
@@ -501,11 +501,11 @@
       "team": "Lyon",
       "league": "Ligue 1",
       "leagueCode": "FL1",
-      "goals": 14,
+      "goals": 15,
       "assists": 3,
-      "rating": "7.09",
-      "minutes": 2506,
-      "appearances": 34
+      "rating": "7.14",
+      "minutes": 2596,
+      "appearances": 35
     },
     {
       "name": "伊藤洋輝",
@@ -538,7 +538,7 @@
       "assists": 0,
       "rating": "6.72",
       "minutes": 364,
-      "appearances": 22
+      "appearances": 23
     },
     {
       "name": "高井幸大",
@@ -626,7 +626,7 @@
       "assists": 0,
       "rating": "6.78",
       "minutes": 198,
-      "appearances": 26
+      "appearances": 27
     },
     {
       "name": "畑大雅",
