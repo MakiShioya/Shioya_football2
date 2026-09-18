@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17T04:53:36.892Z",
+  "updated": "2026-09-18T04:43:59.428Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -228,9 +228,9 @@
       "leagueCode": "PL",
       "goals": 2,
       "assists": 7,
-      "rating": "6.97",
-      "minutes": 3605,
-      "appearances": 51
+      "rating": "6.96",
+      "minutes": 3679,
+      "appearances": 52
     },
     {
       "name": "遠藤航",
@@ -283,9 +283,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.86",
-      "minutes": 155,
-      "appearances": 3
+      "rating": "6.67",
+      "minutes": 200,
+      "appearances": 4
     },
     {
       "name": "藤田譲瑠チマ",
@@ -360,9 +360,9 @@
       "leagueCode": "PD",
       "goals": 2,
       "assists": 4,
-      "rating": "6.93",
-      "minutes": 1974,
-      "appearances": 36
+      "rating": "6.91",
+      "minutes": 1981,
+      "appearances": 37
     },
     {
       "name": "板倉滉",
@@ -593,7 +593,7 @@
       "assists": 1,
       "rating": "6.59",
       "minutes": 482,
-      "appearances": 20
+      "appearances": 21
     },
     {
       "name": "宮代大聖",
