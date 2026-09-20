@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-19T04:38:00.233Z",
+  "updated": "2026-09-20T04:54:18.333Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -9,8 +9,8 @@
       "goals": 5,
       "assists": 4,
       "rating": "6.65",
-      "minutes": 2586,
-      "appearances": 51
+      "minutes": 2647,
+      "appearances": 52
     },
     {
       "name": "前田大然",
@@ -19,9 +19,9 @@
       "leagueCode": "SPL",
       "goals": 14,
       "assists": 9,
-      "rating": "6.65",
-      "minutes": 3929,
-      "appearances": 53
+      "rating": "6.64",
+      "minutes": 3945,
+      "appearances": 54
     },
     {
       "name": "小久保玲央ブライアン",
@@ -96,9 +96,9 @@
       "leagueCode": "BSA",
       "goals": 12,
       "assists": 7,
-      "rating": "6.78",
-      "minutes": 2942,
-      "appearances": 43
+      "rating": "6.77",
+      "minutes": 2949,
+      "appearances": 44
     },
     {
       "name": "岩田智輝",
@@ -107,9 +107,9 @@
       "leagueCode": "ELC",
       "goals": 3,
       "assists": 1,
-      "rating": "6.78",
-      "minutes": 4638,
-      "appearances": 55
+      "rating": "6.77",
+      "minutes": 4728,
+      "appearances": 56
     },
     {
       "name": "古橋亨梧",
@@ -142,7 +142,7 @@
       "assists": 3,
       "rating": "7.01",
       "minutes": 2728,
-      "appearances": 44
+      "appearances": 45
     },
     {
       "name": "松木玖生",
@@ -151,9 +151,9 @@
       "leagueCode": "ELC",
       "goals": 7,
       "assists": 3,
-      "rating": "6.83",
-      "minutes": 1932,
-      "appearances": 46
+      "rating": "6.80",
+      "minutes": 2008,
+      "appearances": 47
     },
     {
       "name": "大橋祐紀",
@@ -314,11 +314,11 @@
       "team": "SC Freiburg",
       "league": "Bundesliga",
       "leagueCode": "BL1",
-      "goals": 12,
+      "goals": 13,
       "assists": 5,
-      "rating": "6.93",
-      "minutes": 3334,
-      "appearances": 52
+      "rating": "6.95",
+      "minutes": 3417,
+      "appearances": 53
     },
     {
       "name": "南野拓実",
@@ -339,8 +339,8 @@
       "goals": 0,
       "assists": 0,
       "rating": "6.82",
-      "minutes": 2985,
-      "appearances": 34
+      "minutes": 3075,
+      "appearances": 35
     },
     {
       "name": "浅野拓磨",
@@ -371,9 +371,9 @@
       "leagueCode": "DED",
       "goals": 1,
       "assists": 0,
-      "rating": "6.75",
-      "minutes": 2185,
-      "appearances": 38
+      "rating": "6.72",
+      "minutes": 2269,
+      "appearances": 39
     },
     {
       "name": "堂安律",
@@ -393,9 +393,9 @@
       "leagueCode": "SA1",
       "goals": 0,
       "assists": 0,
-      "rating": "7.01",
-      "minutes": 2400,
-      "appearances": 30
+      "rating": "7.05",
+      "minutes": 2490,
+      "appearances": 31
     },
     {
       "name": "佐野海舟",
@@ -403,10 +403,10 @@
       "league": "Bundesliga",
       "leagueCode": "BL1",
       "goals": 2,
-      "assists": 4,
+      "assists": 5,
       "rating": "7.04",
-      "minutes": 4431,
-      "appearances": 51
+      "minutes": 4521,
+      "appearances": 52
     },
     {
       "name": "川崎颯太",
@@ -446,11 +446,11 @@
       "team": "Borussia Mönchengladbach",
       "league": "Bundesliga",
       "leagueCode": "BL1",
-      "goals": 4,
+      "goals": 5,
       "assists": 1,
-      "rating": "6.63",
-      "minutes": 1317,
-      "appearances": 39
+      "rating": "6.66",
+      "minutes": 1323,
+      "appearances": 40
     },
     {
       "name": "ニック・シュミット",
@@ -471,8 +471,8 @@
       "goals": 4,
       "assists": 2,
       "rating": "6.69",
-      "minutes": 2228,
-      "appearances": 43
+      "minutes": 2273,
+      "appearances": 44
     },
     {
       "name": "菅原由勢",
@@ -481,20 +481,20 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 6,
-      "rating": "6.54",
-      "minutes": 2460,
-      "appearances": 33
+      "rating": "6.55",
+      "minutes": 2491,
+      "appearances": 34
     },
     {
       "name": "森下龍矢",
       "team": "Blackburn",
       "league": "Championship",
       "leagueCode": "ELC",
-      "goals": 5,
+      "goals": 6,
       "assists": 11,
       "rating": "6.79",
-      "minutes": 3350,
-      "appearances": 46
+      "minutes": 3440,
+      "appearances": 47
     },
     {
       "name": "中村敬斗",
@@ -503,9 +503,9 @@
       "leagueCode": "FL1",
       "goals": 15,
       "assists": 3,
-      "rating": "7.14",
-      "minutes": 2596,
-      "appearances": 35
+      "rating": "7.11",
+      "minutes": 2607,
+      "appearances": 36
     },
     {
       "name": "伊藤洋輝",
@@ -525,9 +525,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.15",
-      "minutes": 270,
-      "appearances": 10
+      "rating": "6.09",
+      "minutes": 360,
+      "appearances": 11
     },
     {
       "name": "毎熊晟矢",
@@ -723,9 +723,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.90",
-      "minutes": 166,
-      "appearances": 2
+      "rating": "6.48",
+      "minutes": 180,
+      "appearances": 3
     },
     {
       "name": "中村草太",
@@ -733,10 +733,10 @@
       "league": "Ligue 1",
       "leagueCode": "FL1",
       "goals": 0,
-      "assists": 0,
-      "rating": "6.31",
-      "minutes": 142,
-      "appearances": 4
+      "assists": 1,
+      "rating": "6.47",
+      "minutes": 163,
+      "appearances": 5
     },
     {
       "name": "水多海斗",
@@ -747,7 +747,7 @@
       "assists": 0,
       "rating": "7.13",
       "minutes": 152,
-      "appearances": 4
+      "appearances": 5
     },
     {
       "name": "田中聡",
@@ -767,9 +767,9 @@
       "leagueCode": "OTHER",
       "goals": 0,
       "assists": 0,
-      "rating": "6.37",
-      "minutes": 180,
-      "appearances": 2
+      "rating": "6.18",
+      "minutes": 269,
+      "appearances": 3
     },
     {
       "name": "高橋仁胡",
@@ -789,9 +789,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.30",
-      "minutes": 30,
-      "appearances": 2
+      "rating": "6.19",
+      "minutes": 58,
+      "appearances": 3
     },
     {
       "name": "横山歩夢",
@@ -811,9 +811,9 @@
       "leagueCode": "OTHER",
       "goals": 0,
       "assists": 0,
-      "rating": "6.84",
-      "minutes": 90,
-      "appearances": 1
+      "rating": "6.63",
+      "minutes": 180,
+      "appearances": 2
     }
   ]
 }
