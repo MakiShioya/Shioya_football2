@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-13T06:47:22.851Z",
+  "updated": "2026-10-14T04:54:10.320Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -8,9 +8,9 @@
       "leagueCode": "SPL",
       "goals": 6,
       "assists": 5,
-      "rating": "6.70",
-      "minutes": 2737,
-      "appearances": 53
+      "rating": "6.69",
+      "minutes": 2827,
+      "appearances": 54
     },
     {
       "name": "前田大然",
@@ -85,9 +85,9 @@
       "leagueCode": "DED",
       "goals": 32,
       "assists": 2,
-      "rating": "7.06",
-      "minutes": 3842,
-      "appearances": 49
+      "rating": "7.04",
+      "minutes": 3920,
+      "appearances": 50
     },
     {
       "name": "後藤啓介",
@@ -108,8 +108,8 @@
       "goals": 3,
       "assists": 1,
       "rating": "6.77",
-      "minutes": 4818,
-      "appearances": 57
+      "minutes": 4893,
+      "appearances": 58
     },
     {
       "name": "古橋亨梧",
@@ -184,9 +184,9 @@
       "leagueCode": "DED",
       "goals": 4,
       "assists": 8,
-      "rating": "7.08",
-      "minutes": 3949,
-      "appearances": 44
+      "rating": "7.07",
+      "minutes": 4039,
+      "appearances": 45
     },
     {
       "name": "小川航基",
@@ -492,9 +492,9 @@
       "leagueCode": "ELC",
       "goals": 6,
       "assists": 12,
-      "rating": "6.80",
-      "minutes": 3504,
-      "appearances": 48
+      "rating": "6.79",
+      "minutes": 3566,
+      "appearances": 49
     },
     {
       "name": "中村敬斗",
@@ -570,8 +570,8 @@
       "goals": 1,
       "assists": 1,
       "rating": "6.63",
-      "minutes": 905,
-      "appearances": 20
+      "minutes": 950,
+      "appearances": 21
     },
     {
       "name": "塩貝健人",
