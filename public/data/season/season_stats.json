@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14T04:54:10.320Z",
+  "updated": "2026-10-15T04:39:46.305Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -74,9 +74,9 @@
       "leagueCode": "DED",
       "goals": 5,
       "assists": 0,
-      "rating": "7.10",
-      "minutes": 3905,
-      "appearances": 46
+      "rating": "7.08",
+      "minutes": 3916,
+      "appearances": 47
     },
     {
       "name": "上田綺世",
@@ -149,11 +149,11 @@
       "team": "Southampton",
       "league": "Championship",
       "leagueCode": "ELC",
-      "goals": 7,
+      "goals": 8,
       "assists": 3,
-      "rating": "6.79",
-      "minutes": 2041,
-      "appearances": 48
+      "rating": "6.83",
+      "minutes": 2131,
+      "appearances": 49
     },
     {
       "name": "大橋祐紀",
@@ -393,9 +393,9 @@
       "leagueCode": "SA1",
       "goals": 0,
       "assists": 0,
-      "rating": "7.02",
-      "minutes": 2580,
-      "appearances": 32
+      "rating": "7.04",
+      "minutes": 2670,
+      "appearances": 33
     },
     {
       "name": "佐野海舟",
