@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T04:32:26.503Z",
+  "updated": "2026-10-17T04:26:40.303Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -8,9 +8,9 @@
       "leagueCode": "SPL",
       "goals": 6,
       "assists": 5,
-      "rating": "6.69",
-      "minutes": 2827,
-      "appearances": 54
+      "rating": "6.68",
+      "minutes": 2902,
+      "appearances": 55
     },
     {
       "name": "前田大然",
@@ -525,9 +525,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.11",
-      "minutes": 405,
-      "appearances": 12
+      "rating": "6.26",
+      "minutes": 495,
+      "appearances": 13
     },
     {
       "name": "毎熊晟矢",
@@ -767,9 +767,9 @@
       "leagueCode": "OTHER",
       "goals": 0,
       "assists": 0,
-      "rating": "6.38",
-      "minutes": 359,
-      "appearances": 4
+      "rating": "6.43",
+      "minutes": 449,
+      "appearances": 5
     },
     {
       "name": "高橋仁胡",
