@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-17T04:26:40.303Z",
+  "updated": "2026-10-18T04:34:29.662Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -17,11 +17,11 @@
       "team": "Ipswich",
       "league": "Premiership",
       "leagueCode": "SPL",
-      "goals": 14,
+      "goals": 15,
       "assists": 9,
-      "rating": "6.63",
-      "minutes": 4026,
-      "appearances": 55
+      "rating": "6.64",
+      "minutes": 4097,
+      "appearances": 56
     },
     {
       "name": "小久保玲央ブライアン",
@@ -74,9 +74,9 @@
       "leagueCode": "DED",
       "goals": 5,
       "assists": 0,
-      "rating": "7.08",
-      "minutes": 3916,
-      "appearances": 47
+      "rating": "7.06",
+      "minutes": 4006,
+      "appearances": 48
     },
     {
       "name": "上田綺世",
@@ -106,10 +106,10 @@
       "league": "Championship",
       "leagueCode": "ELC",
       "goals": 3,
-      "assists": 1,
-      "rating": "6.77",
-      "minutes": 4893,
-      "appearances": 58
+      "assists": 3,
+      "rating": "6.80",
+      "minutes": 4983,
+      "appearances": 59
     },
     {
       "name": "古橋亨梧",
@@ -129,9 +129,9 @@
       "leagueCode": "PPL",
       "goals": 1,
       "assists": 5,
-      "rating": "6.91",
-      "minutes": 2549,
-      "appearances": 48
+      "rating": "6.90",
+      "minutes": 2564,
+      "appearances": 49
     },
     {
       "name": "坂元達裕",
@@ -152,8 +152,8 @@
       "goals": 8,
       "assists": 3,
       "rating": "6.83",
-      "minutes": 2131,
-      "appearances": 49
+      "minutes": 2176,
+      "appearances": 50
     },
     {
       "name": "大橋祐紀",
@@ -184,9 +184,9 @@
       "leagueCode": "DED",
       "goals": 4,
       "assists": 8,
-      "rating": "7.07",
-      "minutes": 4039,
-      "appearances": 45
+      "rating": "7.05",
+      "minutes": 4129,
+      "appearances": 46
     },
     {
       "name": "小川航基",
@@ -217,9 +217,9 @@
       "leagueCode": "OTHER",
       "goals": 5,
       "assists": 4,
-      "rating": "6.73",
-      "minutes": 1882,
-      "appearances": 31
+      "rating": "6.71",
+      "minutes": 1954,
+      "appearances": 32
     },
     {
       "name": "鎌田大地",
@@ -241,7 +241,7 @@
       "assists": 1,
       "rating": "6.77",
       "minutes": 492,
-      "appearances": 37
+      "appearances": 38
     },
     {
       "name": "綱島悠斗",
@@ -295,8 +295,8 @@
       "goals": 2,
       "assists": 4,
       "rating": "6.73",
-      "minutes": 3537,
-      "appearances": 44
+      "minutes": 3627,
+      "appearances": 45
     },
     {
       "name": "三笘薫",
@@ -393,9 +393,9 @@
       "leagueCode": "SA1",
       "goals": 0,
       "assists": 0,
-      "rating": "7.04",
-      "minutes": 2670,
-      "appearances": 33
+      "rating": "7.03",
+      "minutes": 2760,
+      "appearances": 34
     },
     {
       "name": "佐野海舟",
@@ -404,9 +404,9 @@
       "leagueCode": "BL1",
       "goals": 2,
       "assists": 5,
-      "rating": "7.03",
-      "minutes": 4602,
-      "appearances": 53
+      "rating": "7.02",
+      "minutes": 4692,
+      "appearances": 54
     },
     {
       "name": "川崎颯太",
@@ -470,9 +470,9 @@
       "leagueCode": "ELC",
       "goals": 4,
       "assists": 2,
-      "rating": "6.69",
-      "minutes": 2273,
-      "appearances": 44
+      "rating": "6.68",
+      "minutes": 2282,
+      "appearances": 45
     },
     {
       "name": "菅原由勢",
@@ -492,9 +492,9 @@
       "leagueCode": "ELC",
       "goals": 6,
       "assists": 12,
-      "rating": "6.79",
-      "minutes": 3566,
-      "appearances": 49
+      "rating": "6.77",
+      "minutes": 3593,
+      "appearances": 50
     },
     {
       "name": "中村敬斗",
@@ -560,7 +560,7 @@
       "assists": 1,
       "rating": "6.64",
       "minutes": 1826,
-      "appearances": 24
+      "appearances": 25
     },
     {
       "name": "平河悠",
@@ -569,9 +569,9 @@
       "leagueCode": "ELC",
       "goals": 1,
       "assists": 1,
-      "rating": "6.63",
-      "minutes": 950,
-      "appearances": 21
+      "rating": "6.60",
+      "minutes": 1035,
+      "appearances": 22
     },
     {
       "name": "塩貝健人",
@@ -580,9 +580,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.47",
-      "minutes": 705,
-      "appearances": 26
+      "rating": "6.48",
+      "minutes": 706,
+      "appearances": 27
     },
     {
       "name": "冨安健洋",
@@ -602,9 +602,9 @@
       "leagueCode": "OTHER",
       "goals": 6,
       "assists": 4,
-      "rating": "6.71",
-      "minutes": 2037,
-      "appearances": 28
+      "rating": "6.66",
+      "minutes": 2107,
+      "appearances": 29
     },
     {
       "name": "原大智",
@@ -614,8 +614,8 @@
       "goals": 2,
       "assists": 1,
       "rating": "6.78",
-      "minutes": 419,
-      "appearances": 23
+      "minutes": 420,
+      "appearances": 24
     },
     {
       "name": "市原吏音",
@@ -714,7 +714,7 @@
       "assists": 0,
       "rating": "6.26",
       "minutes": 304,
-      "appearances": 8
+      "appearances": 9
     },
     {
       "name": "橋岡太樹",
@@ -756,9 +756,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.49",
-      "minutes": 342,
-      "appearances": 6
+      "rating": "6.48",
+      "minutes": 432,
+      "appearances": 7
     },
     {
       "name": "関根大輝",
