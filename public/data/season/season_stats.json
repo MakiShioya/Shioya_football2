@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18T04:34:29.662Z",
+  "updated": "2026-10-19T04:40:56.113Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -43,7 +43,7 @@
       "assists": 6,
       "rating": "7.06",
       "minutes": 3222,
-      "appearances": 38
+      "appearances": 39
     },
     {
       "name": "伊藤涼太郎",
@@ -96,9 +96,9 @@
       "leagueCode": "BSA",
       "goals": 13,
       "assists": 7,
-      "rating": "6.78",
-      "minutes": 2989,
-      "appearances": 46
+      "rating": "6.76",
+      "minutes": 3054,
+      "appearances": 47
     },
     {
       "name": "岩田智輝",
@@ -228,9 +228,9 @@
       "leagueCode": "PL",
       "goals": 4,
       "assists": 7,
-      "rating": "6.95",
-      "minutes": 3886,
-      "appearances": 55
+      "rating": "6.93",
+      "minutes": 3967,
+      "appearances": 56
     },
     {
       "name": "遠藤航",
@@ -283,9 +283,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.72",
-      "minutes": 454,
-      "appearances": 7
+      "rating": "6.71",
+      "minutes": 544,
+      "appearances": 8
     },
     {
       "name": "藤田譲瑠チマ",
@@ -327,9 +327,9 @@
       "leagueCode": "FL1",
       "goals": 4,
       "assists": 3,
-      "rating": "6.64",
-      "minutes": 1382,
-      "appearances": 25
+      "rating": "6.62",
+      "minutes": 1434,
+      "appearances": 26
     },
     {
       "name": "瀬古歩夢",
@@ -358,11 +358,11 @@
       "team": "Real Sociedad",
       "league": "La Liga",
       "leagueCode": "PD",
-      "goals": 2,
-      "assists": 4,
-      "rating": "6.89",
-      "minutes": 2003,
-      "appearances": 40
+      "goals": 3,
+      "assists": 5,
+      "rating": "6.94",
+      "minutes": 2074,
+      "appearances": 41
     },
     {
       "name": "板倉滉",
@@ -427,8 +427,8 @@
       "goals": 4,
       "assists": 1,
       "rating": "6.76",
-      "minutes": 2127,
-      "appearances": 50
+      "minutes": 2208,
+      "appearances": 51
     },
     {
       "name": "野澤大志ブランドン",
@@ -448,9 +448,9 @@
       "leagueCode": "BL1",
       "goals": 5,
       "assists": 1,
-      "rating": "6.65",
-      "minutes": 1349,
-      "appearances": 41
+      "rating": "6.64",
+      "minutes": 1388,
+      "appearances": 42
     },
     {
       "name": "ニック・シュミット",
@@ -503,9 +503,9 @@
       "leagueCode": "FL1",
       "goals": 15,
       "assists": 5,
-      "rating": "7.12",
-      "minutes": 2727,
-      "appearances": 38
+      "rating": "7.09",
+      "minutes": 2736,
+      "appearances": 39
     },
     {
       "name": "伊藤洋輝",
@@ -538,7 +538,7 @@
       "assists": 0,
       "rating": "6.70",
       "minutes": 426,
-      "appearances": 26
+      "appearances": 27
     },
     {
       "name": "高井幸大",
@@ -626,7 +626,7 @@
       "assists": 0,
       "rating": "6.78",
       "minutes": 198,
-      "appearances": 29
+      "appearances": 30
     },
     {
       "name": "畑大雅",
@@ -723,9 +723,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.25",
-      "minutes": 260,
-      "appearances": 4
+      "rating": "6.24",
+      "minutes": 290,
+      "appearances": 5
     },
     {
       "name": "中村草太",
@@ -734,9 +734,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.46",
-      "minutes": 232,
-      "appearances": 6
+      "rating": "6.47",
+      "minutes": 294,
+      "appearances": 7
     },
     {
       "name": "水多海斗",
@@ -745,9 +745,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.85",
-      "minutes": 160,
-      "appearances": 6
+      "rating": "6.58",
+      "minutes": 165,
+      "appearances": 7
     },
     {
       "name": "田中聡",
@@ -809,11 +809,11 @@
       "team": "Karlsruher SC",
       "league": "2. Bundesliga",
       "leagueCode": "OTHER",
-      "goals": 0,
-      "assists": 0,
-      "rating": "6.36",
-      "minutes": 270,
-      "appearances": 3
+      "goals": 1,
+      "assists": 1,
+      "rating": "6.77",
+      "minutes": 360,
+      "appearances": 4
     },
     {
       "name": "宇野禅斗",
@@ -822,9 +822,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.19",
-      "minutes": 22,
-      "appearances": 1
+      "rating": "6.15",
+      "minutes": 101,
+      "appearances": 2
     },
     {
       "name": "ハーフナー・ニッキ",
