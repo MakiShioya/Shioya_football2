@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T04:49:45.084Z",
+  "updated": "2026-10-24T04:37:09.564Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -20,8 +20,8 @@
       "goals": 15,
       "assists": 9,
       "rating": "6.64",
-      "minutes": 4097,
-      "appearances": 56
+      "minutes": 4114,
+      "appearances": 57
     },
     {
       "name": "小久保玲央ブライアン",
@@ -218,8 +218,8 @@
       "goals": 5,
       "assists": 4,
       "rating": "6.71",
-      "minutes": 1954,
-      "appearances": 32
+      "minutes": 2027,
+      "appearances": 33
     },
     {
       "name": "鎌田大地",
@@ -294,9 +294,9 @@
       "leagueCode": "BL1",
       "goals": 2,
       "assists": 4,
-      "rating": "6.73",
-      "minutes": 3627,
-      "appearances": 45
+      "rating": "6.72",
+      "minutes": 3717,
+      "appearances": 46
     },
     {
       "name": "三笘薫",
@@ -446,11 +446,11 @@
       "team": "Borussia Mönchengladbach",
       "league": "Bundesliga",
       "leagueCode": "BL1",
-      "goals": 5,
+      "goals": 6,
       "assists": 1,
-      "rating": "6.64",
-      "minutes": 1388,
-      "appearances": 42
+      "rating": "6.67",
+      "minutes": 1472,
+      "appearances": 43
     },
     {
       "name": "ニック・シュミット",
@@ -560,7 +560,7 @@
       "assists": 1,
       "rating": "6.64",
       "minutes": 1826,
-      "appearances": 25
+      "appearances": 26
     },
     {
       "name": "平河悠",
@@ -580,9 +580,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.48",
-      "minutes": 706,
-      "appearances": 27
+      "rating": "6.53",
+      "minutes": 708,
+      "appearances": 28
     },
     {
       "name": "冨安健洋",
@@ -613,9 +613,9 @@
       "leagueCode": "BL1",
       "goals": 2,
       "assists": 1,
-      "rating": "6.78",
-      "minutes": 420,
-      "appearances": 24
+      "rating": "6.76",
+      "minutes": 443,
+      "appearances": 25
     },
     {
       "name": "市原吏音",
@@ -723,9 +723,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.24",
-      "minutes": 290,
-      "appearances": 5
+      "rating": "6.13",
+      "minutes": 380,
+      "appearances": 6
     },
     {
       "name": "中村草太",
@@ -821,10 +821,10 @@
       "league": "Bundesliga",
       "leagueCode": "BL1",
       "goals": 0,
-      "assists": 0,
-      "rating": "6.15",
-      "minutes": 101,
-      "appearances": 2
+      "assists": 1,
+      "rating": "6.18",
+      "minutes": 191,
+      "appearances": 3
     },
     {
       "name": "ハーフナー・ニッキ",
