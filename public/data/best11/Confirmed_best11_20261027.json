@@ -1,0 +1,118 @@
+{
+  "updated": "2026-10-26T22:46:29.208Z",
+  "dateLabel": "2026年10月27日号",
+  "formation": "3-5-2",
+  "totalScore": 84.82,
+  "list": [
+    {
+      "name": "野澤大志ブランドン",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 9.79,
+      "originalRating": 9.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "谷口彰悟",
+      "posId": "RCB",
+      "top": 70,
+      "left": 75,
+      "finalScore": 7.42,
+      "originalRating": 7.2,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "町田浩樹",
+      "posId": "CB",
+      "top": 70,
+      "left": 50,
+      "finalScore": 7.32,
+      "originalRating": 6.78,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "高井幸大",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 6.93,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "伊東純也",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 8.76,
+      "originalRating": 8.5,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "前田大然",
+      "posId": "LSH",
+      "top": 45,
+      "left": 15,
+      "finalScore": 7.03,
+      "originalRating": 6.39,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "佐野海舟",
+      "posId": "DMF",
+      "top": 55,
+      "left": 50,
+      "finalScore": 7.35,
+      "originalRating": 6.81,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "松木玖生",
+      "posId": "RCMF",
+      "top": 40,
+      "left": 70,
+      "finalScore": 7.34,
+      "originalRating": 7.06,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "田中碧",
+      "posId": "LCMF",
+      "top": 40,
+      "left": 30,
+      "finalScore": 7.22,
+      "originalRating": 6.56,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "町野修斗",
+      "posId": "RCF",
+      "top": 20,
+      "left": 65,
+      "finalScore": 8.35,
+      "originalRating": 7.73,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "塩貝健人",
+      "posId": "LCF",
+      "top": 20,
+      "left": 35,
+      "finalScore": 7.31,
+      "originalRating": 7.7,
+      "suit": 1,
+      "isDummy": false
+    }
+  ]
+}
