@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-25T04:41:43.328Z",
+  "updated": "2026-10-26T04:47:41.627Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -30,9 +30,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "7.19",
-      "minutes": 4239,
-      "appearances": 48
+      "rating": "7.16",
+      "minutes": 4329,
+      "appearances": 49
     },
     {
       "name": "山本理仁",
@@ -41,9 +41,9 @@
       "leagueCode": "BSA",
       "goals": 5,
       "assists": 6,
-      "rating": "7.06",
-      "minutes": 3222,
-      "appearances": 40
+      "rating": "7.03",
+      "minutes": 3254,
+      "appearances": 41
     },
     {
       "name": "伊藤涼太郎",
@@ -61,11 +61,11 @@
       "team": "St. Truiden",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 1,
+      "goals": 2,
       "assists": 1,
       "rating": "7.08",
-      "minutes": 3363,
-      "appearances": 48
+      "minutes": 3453,
+      "appearances": 49
     },
     {
       "name": "渡辺剛",
@@ -74,9 +74,9 @@
       "leagueCode": "DED",
       "goals": 5,
       "assists": 0,
-      "rating": "7.06",
-      "minutes": 4006,
-      "appearances": 48
+      "rating": "7.05",
+      "minutes": 4095,
+      "appearances": 49
     },
     {
       "name": "上田綺世",
@@ -98,7 +98,7 @@
       "assists": 7,
       "rating": "6.76",
       "minutes": 3054,
-      "appearances": 48
+      "appearances": 49
     },
     {
       "name": "岩田智輝",
@@ -129,9 +129,9 @@
       "leagueCode": "PPL",
       "goals": 1,
       "assists": 5,
-      "rating": "6.90",
-      "minutes": 2564,
-      "appearances": 49
+      "rating": "6.89",
+      "minutes": 2582,
+      "appearances": 50
     },
     {
       "name": "坂元達裕",
@@ -184,9 +184,9 @@
       "leagueCode": "DED",
       "goals": 4,
       "assists": 8,
-      "rating": "7.04",
-      "minutes": 4219,
-      "appearances": 47
+      "rating": "7.03",
+      "minutes": 4295,
+      "appearances": 48
     },
     {
       "name": "小川航基",
@@ -228,9 +228,9 @@
       "leagueCode": "PL",
       "goals": 4,
       "assists": 7,
-      "rating": "6.92",
-      "minutes": 4057,
-      "appearances": 57
+      "rating": "6.91",
+      "minutes": 4147,
+      "appearances": 58
     },
     {
       "name": "遠藤航",
@@ -241,7 +241,7 @@
       "assists": 1,
       "rating": "6.77",
       "minutes": 492,
-      "appearances": 38
+      "appearances": 39
     },
     {
       "name": "綱島悠斗",
@@ -270,11 +270,11 @@
       "team": "Genk",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 8,
+      "goals": 9,
       "assists": 6,
-      "rating": "7.08",
-      "minutes": 2541,
-      "appearances": 40
+      "rating": "7.12",
+      "minutes": 2627,
+      "appearances": 41
     },
     {
       "name": "町田浩樹",
@@ -283,9 +283,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.64",
-      "minutes": 557,
-      "appearances": 9
+      "rating": "6.65",
+      "minutes": 647,
+      "appearances": 10
     },
     {
       "name": "藤田譲瑠チマ",
@@ -316,9 +316,9 @@
       "leagueCode": "BL1",
       "goals": 13,
       "assists": 5,
-      "rating": "6.94",
-      "minutes": 3616,
-      "appearances": 56
+      "rating": "6.93",
+      "minutes": 3706,
+      "appearances": 57
     },
     {
       "name": "南野拓実",
@@ -329,7 +329,7 @@
       "assists": 3,
       "rating": "6.62",
       "minutes": 1434,
-      "appearances": 27
+      "appearances": 28
     },
     {
       "name": "瀬古歩夢",
@@ -338,9 +338,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.79",
-      "minutes": 3136,
-      "appearances": 36
+      "rating": "6.77",
+      "minutes": 3226,
+      "appearances": 37
     },
     {
       "name": "浅野拓磨",
@@ -362,7 +362,7 @@
       "assists": 5,
       "rating": "6.94",
       "minutes": 2132,
-      "appearances": 42
+      "appearances": 43
     },
     {
       "name": "板倉滉",
@@ -426,9 +426,9 @@
       "leagueCode": "PL",
       "goals": 4,
       "assists": 1,
-      "rating": "6.76",
-      "minutes": 2208,
-      "appearances": 51
+      "rating": "6.75",
+      "minutes": 2297,
+      "appearances": 52
     },
     {
       "name": "野澤大志ブランドン",
@@ -538,7 +538,7 @@
       "assists": 1,
       "rating": "6.71",
       "minutes": 491,
-      "appearances": 28
+      "appearances": 29
     },
     {
       "name": "高井幸大",
@@ -547,9 +547,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.49",
-      "minutes": 537,
-      "appearances": 18
+      "rating": "6.47",
+      "minutes": 627,
+      "appearances": 19
     },
     {
       "name": "安藤智哉",
@@ -626,7 +626,7 @@
       "assists": 0,
       "rating": "6.73",
       "minutes": 208,
-      "appearances": 31
+      "appearances": 32
     },
     {
       "name": "畑大雅",
@@ -635,9 +635,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.64",
-      "minutes": 650,
-      "appearances": 10
+      "rating": "6.57",
+      "minutes": 740,
+      "appearances": 11
     },
     {
       "name": "石渡ネルソン",
@@ -646,9 +646,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 1,
-      "rating": "6.87",
-      "minutes": 514,
-      "appearances": 10
+      "rating": "6.88",
+      "minutes": 583,
+      "appearances": 11
     },
     {
       "name": "松澤海斗",
@@ -657,9 +657,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 1,
-      "rating": "6.87",
-      "minutes": 378,
-      "appearances": 10
+      "rating": "6.81",
+      "minutes": 399,
+      "appearances": 11
     },
     {
       "name": "新川志音",
@@ -668,9 +668,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.17",
-      "minutes": 54,
-      "appearances": 10
+      "rating": "6.18",
+      "minutes": 123,
+      "appearances": 11
     },
     {
       "name": "荒木遼太郎",
@@ -681,7 +681,7 @@
       "assists": 0,
       "rating": "6.81",
       "minutes": 376,
-      "appearances": 10
+      "appearances": 11
     },
     {
       "name": "木村誠二",
@@ -734,9 +734,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.47",
-      "minutes": 294,
-      "appearances": 7
+      "rating": "6.51",
+      "minutes": 323,
+      "appearances": 8
     },
     {
       "name": "水多海斗",
@@ -744,10 +744,10 @@
       "league": "Ligue 1",
       "leagueCode": "FL1",
       "goals": 0,
-      "assists": 0,
-      "rating": "6.58",
-      "minutes": 165,
-      "appearances": 7
+      "assists": 1,
+      "rating": "6.52",
+      "minutes": 171,
+      "appearances": 8
     },
     {
       "name": "田中聡",
@@ -767,9 +767,9 @@
       "leagueCode": "OTHER",
       "goals": 0,
       "assists": 0,
-      "rating": "6.43",
-      "minutes": 449,
-      "appearances": 5
+      "rating": "6.55",
+      "minutes": 539,
+      "appearances": 6
     },
     {
       "name": "高橋仁胡",
@@ -800,9 +800,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.35",
-      "minutes": 104,
-      "appearances": 4
+      "rating": "6.58",
+      "minutes": 130,
+      "appearances": 5
     },
     {
       "name": "福田師王",
@@ -832,10 +832,10 @@
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
       "goals": 0,
-      "assists": 0,
-      "rating": "7.20",
-      "minutes": 90,
-      "appearances": 1
+      "assists": 1,
+      "rating": "7.10",
+      "minutes": 180,
+      "appearances": 2
     }
   ]
 }
