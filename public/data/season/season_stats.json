@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T05:42:42.362Z",
+  "updated": "2026-10-29T05:48:35.632Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -43,7 +43,7 @@
       "assists": 6,
       "rating": "7.03",
       "minutes": 3254,
-      "appearances": 41
+      "appearances": 42
     },
     {
       "name": "伊藤涼太郎",
@@ -94,11 +94,11 @@
       "team": "SC Freiburg",
       "league": "Jupiler Pro League",
       "leagueCode": "BSA",
-      "goals": 13,
+      "goals": 15,
       "assists": 7,
-      "rating": "6.76",
-      "minutes": 3054,
-      "appearances": 49
+      "rating": "6.82",
+      "minutes": 3076,
+      "appearances": 50
     },
     {
       "name": "岩田智輝",
@@ -229,8 +229,8 @@
       "goals": 4,
       "assists": 7,
       "rating": "6.91",
-      "minutes": 4147,
-      "appearances": 58
+      "minutes": 4160,
+      "appearances": 59
     },
     {
       "name": "遠藤航",
@@ -241,7 +241,7 @@
       "assists": 1,
       "rating": "6.77",
       "minutes": 492,
-      "appearances": 39
+      "appearances": 40
     },
     {
       "name": "綱島悠斗",
@@ -283,9 +283,9 @@
       "leagueCode": "BL1",
       "goals": 1,
       "assists": 0,
-      "rating": "6.65",
-      "minutes": 647,
-      "appearances": 10
+      "rating": "6.61",
+      "minutes": 767,
+      "appearances": 11
     },
     {
       "name": "藤田譲瑠チマ",
@@ -316,9 +316,9 @@
       "leagueCode": "BL1",
       "goals": 13,
       "assists": 5,
-      "rating": "6.93",
-      "minutes": 3706,
-      "appearances": 57
+      "rating": "6.91",
+      "minutes": 3774,
+      "appearances": 58
     },
     {
       "name": "南野拓実",
@@ -395,7 +395,7 @@
       "assists": 0,
       "rating": "7.05",
       "minutes": 2850,
-      "appearances": 35
+      "appearances": 36
     },
     {
       "name": "佐野海舟",
@@ -578,11 +578,11 @@
       "team": "VfL Wolfsburg",
       "league": "Bundesliga",
       "leagueCode": "BL1",
-      "goals": 1,
+      "goals": 3,
       "assists": 0,
-      "rating": "6.53",
-      "minutes": 708,
-      "appearances": 28
+      "rating": "6.63",
+      "minutes": 776,
+      "appearances": 29
     },
     {
       "name": "冨安健洋",
@@ -756,9 +756,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.48",
-      "minutes": 522,
-      "appearances": 8
+      "rating": "6.50",
+      "minutes": 612,
+      "appearances": 9
     },
     {
       "name": "関根大輝",
@@ -766,10 +766,10 @@
       "league": "2. Bundesliga",
       "leagueCode": "OTHER",
       "goals": 0,
-      "assists": 0,
-      "rating": "6.55",
-      "minutes": 539,
-      "appearances": 6
+      "assists": 1,
+      "rating": "6.53",
+      "minutes": 659,
+      "appearances": 7
     },
     {
       "name": "高橋仁胡",
