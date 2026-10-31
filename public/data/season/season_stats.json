@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T05:49:40.759Z",
+  "updated": "2026-10-31T05:41:49.524Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -217,9 +217,9 @@
       "leagueCode": "OTHER",
       "goals": 5,
       "assists": 4,
-      "rating": "6.72",
-      "minutes": 2054,
-      "appearances": 34
+      "rating": "6.71",
+      "minutes": 2118,
+      "appearances": 35
     },
     {
       "name": "鎌田大地",
@@ -338,9 +338,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.77",
-      "minutes": 3226,
-      "appearances": 37
+      "rating": "6.75",
+      "minutes": 3316,
+      "appearances": 38
     },
     {
       "name": "浅野拓磨",
@@ -404,9 +404,9 @@
       "leagueCode": "BL1",
       "goals": 2,
       "assists": 5,
-      "rating": "7.00",
-      "minutes": 4871,
-      "appearances": 56
+      "rating": "6.98",
+      "minutes": 4958,
+      "appearances": 57
     },
     {
       "name": "川崎颯太",
@@ -734,9 +734,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.51",
-      "minutes": 323,
-      "appearances": 8
+      "rating": "6.44",
+      "minutes": 388,
+      "appearances": 9
     },
     {
       "name": "水多海斗",
@@ -747,7 +747,7 @@
       "assists": 1,
       "rating": "6.52",
       "minutes": 171,
-      "appearances": 8
+      "appearances": 9
     },
     {
       "name": "田中聡",
