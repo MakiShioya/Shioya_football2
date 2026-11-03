@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T06:03:15.980Z",
+  "updated": "2026-11-03T06:47:46.987Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -600,11 +600,11 @@
       "team": "Las Palmas",
       "league": "Segunda División",
       "leagueCode": "OTHER",
-      "goals": 6,
+      "goals": 7,
       "assists": 4,
-      "rating": "6.66",
-      "minutes": 2167,
-      "appearances": 30
+      "rating": "6.68",
+      "minutes": 2240,
+      "appearances": 31
     },
     {
       "name": "原大智",
