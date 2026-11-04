@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T06:47:46.987Z",
+  "updated": "2026-11-04T06:22:52.902Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -8,9 +8,9 @@
       "leagueCode": "SPL",
       "goals": 6,
       "assists": 5,
-      "rating": "6.66",
-      "minutes": 3047,
-      "appearances": 57
+      "rating": "6.65",
+      "minutes": 3123,
+      "appearances": 58
     },
     {
       "name": "前田大然",
@@ -74,9 +74,9 @@
       "leagueCode": "DED",
       "goals": 5,
       "assists": 0,
-      "rating": "7.06",
-      "minutes": 4185,
-      "appearances": 50
+      "rating": "7.04",
+      "minutes": 4213,
+      "appearances": 51
     },
     {
       "name": "上田綺世",
@@ -107,9 +107,9 @@
       "leagueCode": "ELC",
       "goals": 3,
       "assists": 3,
-      "rating": "6.78",
-      "minutes": 5163,
-      "appearances": 61
+      "rating": "6.77",
+      "minutes": 5253,
+      "appearances": 62
     },
     {
       "name": "古橋亨梧",
@@ -151,9 +151,9 @@
       "leagueCode": "ELC",
       "goals": 10,
       "assists": 3,
-      "rating": "6.85",
-      "minutes": 2335,
-      "appearances": 52
+      "rating": "6.83",
+      "minutes": 2423,
+      "appearances": 53
     },
     {
       "name": "大橋祐紀",
@@ -162,9 +162,9 @@
       "leagueCode": "ELC",
       "goals": 10,
       "assists": 1,
-      "rating": "6.55",
-      "minutes": 3607,
-      "appearances": 53
+      "rating": "6.54",
+      "minutes": 3619,
+      "appearances": 54
     },
     {
       "name": "瀬古樹",
@@ -394,8 +394,8 @@
       "goals": 0,
       "assists": 0,
       "rating": "7.04",
-      "minutes": 2940,
-      "appearances": 37
+      "minutes": 3030,
+      "appearances": 38
     },
     {
       "name": "佐野海舟",
@@ -470,9 +470,9 @@
       "leagueCode": "ELC",
       "goals": 4,
       "assists": 2,
-      "rating": "6.66",
-      "minutes": 2331,
-      "appearances": 47
+      "rating": "6.65",
+      "minutes": 2391,
+      "appearances": 48
     },
     {
       "name": "菅原由勢",
