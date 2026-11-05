@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T06:22:52.902Z",
+  "updated": "2026-11-05T06:46:44.795Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -182,11 +182,11 @@
       "team": "PSV Eindhoven",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 5,
+      "goals": 6,
       "assists": 8,
-      "rating": "7.05",
-      "minutes": 4385,
-      "appearances": 49
+      "rating": "7.07",
+      "minutes": 4475,
+      "appearances": 50
     },
     {
       "name": "小川航基",
@@ -569,9 +569,9 @@
       "leagueCode": "ELC",
       "goals": 1,
       "assists": 1,
-      "rating": "6.59",
-      "minutes": 1070,
-      "appearances": 24
+      "rating": "6.55",
+      "minutes": 1102,
+      "appearances": 25
     },
     {
       "name": "塩貝健人",
