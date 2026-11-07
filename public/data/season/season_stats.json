@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T06:46:34.343Z",
+  "updated": "2026-11-07T05:58:24.765Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -140,9 +140,9 @@
       "leagueCode": "ELC",
       "goals": 8,
       "assists": 3,
-      "rating": "6.95",
-      "minutes": 3011,
-      "appearances": 49
+      "rating": "6.93",
+      "minutes": 3097,
+      "appearances": 50
     },
     {
       "name": "松木玖生",
@@ -371,9 +371,9 @@
       "leagueCode": "DED",
       "goals": 1,
       "assists": 0,
-      "rating": "6.73",
-      "minutes": 2295,
-      "appearances": 41
+      "rating": "6.67",
+      "minutes": 2344,
+      "appearances": 42
     },
     {
       "name": "堂安律",
@@ -449,8 +449,8 @@
       "goals": 6,
       "assists": 1,
       "rating": "6.65",
-      "minutes": 1618,
-      "appearances": 45
+      "minutes": 1699,
+      "appearances": 46
     },
     {
       "name": "ニック・シュミット",
@@ -822,9 +822,9 @@
       "leagueCode": "BL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.33",
-      "minutes": 353,
-      "appearances": 5
+      "rating": "6.22",
+      "minutes": 434,
+      "appearances": 6
     },
     {
       "name": "ハーフナー・ニッキ",
