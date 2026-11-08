@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T05:58:24.765Z",
+  "updated": "2026-11-08T06:01:01.669Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -8,9 +8,9 @@
       "leagueCode": "SPL",
       "goals": 6,
       "assists": 5,
-      "rating": "6.65",
-      "minutes": 3123,
-      "appearances": 58
+      "rating": "6.64",
+      "minutes": 3181,
+      "appearances": 59
     },
     {
       "name": "前田大然",
@@ -108,8 +108,8 @@
       "goals": 3,
       "assists": 3,
       "rating": "6.77",
-      "minutes": 5253,
-      "appearances": 62
+      "minutes": 5343,
+      "appearances": 63
     },
     {
       "name": "古橋亨梧",
@@ -151,9 +151,9 @@
       "leagueCode": "ELC",
       "goals": 10,
       "assists": 3,
-      "rating": "6.83",
-      "minutes": 2423,
-      "appearances": 53
+      "rating": "6.81",
+      "minutes": 2513,
+      "appearances": 54
     },
     {
       "name": "大橋祐紀",
@@ -161,10 +161,10 @@
       "league": "Championship",
       "leagueCode": "ELC",
       "goals": 10,
-      "assists": 1,
-      "rating": "6.54",
-      "minutes": 3619,
-      "appearances": 54
+      "assists": 2,
+      "rating": "6.55",
+      "minutes": 3638,
+      "appearances": 55
     },
     {
       "name": "瀬古樹",
@@ -206,9 +206,9 @@
       "leagueCode": "DED",
       "goals": 9,
       "assists": 7,
-      "rating": "6.95",
-      "minutes": 2447,
-      "appearances": 33
+      "rating": "6.92",
+      "minutes": 2503,
+      "appearances": 34
     },
     {
       "name": "三好康児",
@@ -250,9 +250,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 0,
-      "rating": "6.80",
-      "minutes": 3212,
-      "appearances": 43
+      "rating": "6.81",
+      "minutes": 3267,
+      "appearances": 44
     },
     {
       "name": "藤本寛也",
@@ -404,9 +404,9 @@
       "leagueCode": "BL1",
       "goals": 2,
       "assists": 5,
-      "rating": "6.98",
-      "minutes": 4958,
-      "appearances": 57
+      "rating": "6.96",
+      "minutes": 5048,
+      "appearances": 58
     },
     {
       "name": "川崎颯太",
@@ -417,7 +417,7 @@
       "assists": 1,
       "rating": "6.68",
       "minutes": 703,
-      "appearances": 42
+      "appearances": 43
     },
     {
       "name": "田中碧",
@@ -427,8 +427,8 @@
       "goals": 4,
       "assists": 1,
       "rating": "6.73",
-      "minutes": 2362,
-      "appearances": 53
+      "minutes": 2439,
+      "appearances": 54
     },
     {
       "name": "野澤大志ブランドン",
@@ -438,8 +438,8 @@
       "goals": 0,
       "assists": 1,
       "rating": "7.17",
-      "minutes": 3453,
-      "appearances": 45
+      "minutes": 3543,
+      "appearances": 46
     },
     {
       "name": "町野修斗",
@@ -471,8 +471,8 @@
       "goals": 4,
       "assists": 2,
       "rating": "6.65",
-      "minutes": 2391,
-      "appearances": 48
+      "minutes": 2404,
+      "appearances": 49
     },
     {
       "name": "菅原由勢",
@@ -483,7 +483,7 @@
       "assists": 6,
       "rating": "6.52",
       "minutes": 2669,
-      "appearances": 39
+      "appearances": 40
     },
     {
       "name": "森下龍矢",
@@ -571,18 +571,18 @@
       "assists": 1,
       "rating": "6.55",
       "minutes": 1102,
-      "appearances": 25
+      "appearances": 26
     },
     {
       "name": "塩貝健人",
       "team": "VfL Wolfsburg",
       "league": "Bundesliga",
       "leagueCode": "BL1",
-      "goals": 3,
+      "goals": 4,
       "assists": 0,
-      "rating": "6.63",
-      "minutes": 797,
-      "appearances": 30
+      "rating": "6.66",
+      "minutes": 842,
+      "appearances": 31
     },
     {
       "name": "冨安健洋",
@@ -690,9 +690,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "6.72",
-      "minutes": 803,
-      "appearances": 9
+      "rating": "6.59",
+      "minutes": 893,
+      "appearances": 10
     },
     {
       "name": "坂本一彩",
@@ -702,8 +702,8 @@
       "goals": 1,
       "assists": 4,
       "rating": "6.85",
-      "minutes": 645,
-      "appearances": 9
+      "minutes": 707,
+      "appearances": 10
     },
     {
       "name": "佐藤龍之介",
@@ -765,11 +765,11 @@
       "team": "Holstein Kiel",
       "league": "2. Bundesliga",
       "leagueCode": "OTHER",
-      "goals": 0,
+      "goals": 1,
       "assists": 1,
       "rating": "6.55",
-      "minutes": 749,
-      "appearances": 8
+      "minutes": 839,
+      "appearances": 9
     },
     {
       "name": "高橋仁胡",
@@ -780,7 +780,7 @@
       "assists": 0,
       "rating": "0.00",
       "minutes": 0,
-      "appearances": 3
+      "appearances": 4
     },
     {
       "name": "名和田我空",
@@ -790,8 +790,8 @@
       "goals": 0,
       "assists": 0,
       "rating": "6.24",
-      "minutes": 132,
-      "appearances": 6
+      "minutes": 136,
+      "appearances": 7
     },
     {
       "name": "横山歩夢",
