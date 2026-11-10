@@ -1,0 +1,118 @@
+{
+  "updated": "2026-11-10T01:38:33.606Z",
+  "dateLabel": "2026年11月10日号",
+  "formation": "3-4-2-1",
+  "totalScore": 80.88,
+  "list": [
+    {
+      "name": "鈴木彩艶",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 7.35,
+      "originalRating": 6.68,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "町田浩樹",
+      "posId": "RCB",
+      "top": 70,
+      "left": 75,
+      "finalScore": 7.89,
+      "originalRating": 7.31,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "谷口彰悟",
+      "posId": "CB",
+      "top": 70,
+      "left": 50,
+      "finalScore": 7.52,
+      "originalRating": 7.3,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "綱島悠斗",
+      "posId": "LCB",
+      "top": 70,
+      "left": 25,
+      "finalScore": 7.42,
+      "originalRating": 7.2,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "久保建英",
+      "posId": "RSH",
+      "top": 45,
+      "left": 85,
+      "finalScore": 7.3,
+      "originalRating": 6.7,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "佐野航大",
+      "posId": "LSH",
+      "top": 45,
+      "left": 15,
+      "finalScore": 7.52,
+      "originalRating": 7.92,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "岩田智輝",
+      "posId": "RDMF",
+      "top": 50,
+      "left": 65,
+      "finalScore": 6.99,
+      "originalRating": 6.72,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "田中聡",
+      "posId": "LDMF",
+      "top": 50,
+      "left": 35,
+      "finalScore": 6.63,
+      "originalRating": 6.14,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "鈴木唯人",
+      "posId": "ROMF",
+      "top": 30,
+      "left": 65,
+      "finalScore": 8.64,
+      "originalRating": 8,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "鎌田大地",
+      "posId": "LOMF",
+      "top": 30,
+      "left": 35,
+      "finalScore": 7.04,
+      "originalRating": 6.4,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "町野修斗",
+      "posId": "CF",
+      "top": 15,
+      "left": 50,
+      "finalScore": 7.32,
+      "originalRating": 6.78,
+      "suit": 1,
+      "isDummy": false
+    }
+  ]
+}
