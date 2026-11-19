@@ -101,7 +101,7 @@ async function loadPerformance() {
                             <span class="rating-badge">評点: ${s.rating}</span>
                         </div>
                         <div class="stat-details">
-                            ${s.starter ? 'スタメン' : '途中出場'} / ${s.minutes}分出場 ${events.join(' ')}
+                            ${s.minutes > 0 ? `${s.minutes}分出場` : '出場なし'} ${events.join(' ')}
                         </div>
                     </div>
                 `;
