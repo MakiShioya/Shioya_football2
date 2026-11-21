@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20T07:15:28.012Z",
+  "updated": "2026-11-21T07:08:11.668Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -338,9 +338,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 0,
-      "rating": "6.75",
-      "minutes": 3316,
-      "appearances": 38
+      "rating": "6.74",
+      "minutes": 3406,
+      "appearances": 39
     },
     {
       "name": "浅野拓磨",
@@ -691,8 +691,8 @@
       "goals": 0,
       "assists": 0,
       "rating": "6.59",
-      "minutes": 893,
-      "appearances": 10
+      "minutes": 983,
+      "appearances": 11
     },
     {
       "name": "坂本一彩",
@@ -701,9 +701,9 @@
       "leagueCode": "BSA",
       "goals": 1,
       "assists": 4,
-      "rating": "6.85",
-      "minutes": 707,
-      "appearances": 10
+      "rating": "6.83",
+      "minutes": 771,
+      "appearances": 11
     },
     {
       "name": "佐藤龍之介",
@@ -745,9 +745,9 @@
       "leagueCode": "FL1",
       "goals": 0,
       "assists": 1,
-      "rating": "6.47",
-      "minutes": 245,
-      "appearances": 10
+      "rating": "6.40",
+      "minutes": 311,
+      "appearances": 11
     },
     {
       "name": "田中聡",
