@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22T06:48:24.607Z",
+  "updated": "2026-11-23T07:39:14.615Z",
   "players": [
     {
       "name": "旗手怜央",
@@ -8,9 +8,9 @@
       "leagueCode": "SPL",
       "goals": 6,
       "assists": 5,
-      "rating": "6.64",
-      "minutes": 3181,
-      "appearances": 59
+      "rating": "6.63",
+      "minutes": 3259,
+      "appearances": 60
     },
     {
       "name": "前田大然",
@@ -162,9 +162,9 @@
       "leagueCode": "ELC",
       "goals": 10,
       "assists": 2,
-      "rating": "6.55",
-      "minutes": 3638,
-      "appearances": 55
+      "rating": "6.54",
+      "minutes": 3643,
+      "appearances": 56
     },
     {
       "name": "瀬古樹",
@@ -205,10 +205,10 @@
       "league": "Eredivisie",
       "leagueCode": "DED",
       "goals": 9,
-      "assists": 7,
-      "rating": "6.92",
-      "minutes": 2503,
-      "appearances": 34
+      "assists": 8,
+      "rating": "6.91",
+      "minutes": 2580,
+      "appearances": 35
     },
     {
       "name": "三好康児",
@@ -360,9 +360,9 @@
       "leagueCode": "PD",
       "goals": 3,
       "assists": 5,
-      "rating": "6.92",
-      "minutes": 2209,
-      "appearances": 45
+      "rating": "6.90",
+      "minutes": 2231,
+      "appearances": 46
     },
     {
       "name": "板倉滉",
@@ -404,9 +404,9 @@
       "leagueCode": "BL1",
       "goals": 2,
       "assists": 5,
-      "rating": "6.96",
-      "minutes": 5048,
-      "appearances": 58
+      "rating": "6.94",
+      "minutes": 5138,
+      "appearances": 59
     },
     {
       "name": "川崎颯太",
@@ -492,9 +492,9 @@
       "leagueCode": "ELC",
       "goals": 6,
       "assists": 12,
-      "rating": "6.77",
-      "minutes": 3593,
-      "appearances": 50
+      "rating": "6.76",
+      "minutes": 3613,
+      "appearances": 51
     },
     {
       "name": "中村敬斗",
@@ -534,11 +534,11 @@
       "team": "AZ Alkmaar",
       "league": "Eredivisie",
       "leagueCode": "DED",
-      "goals": 0,
+      "goals": 1,
       "assists": 1,
-      "rating": "6.71",
-      "minutes": 491,
-      "appearances": 31
+      "rating": "6.74",
+      "minutes": 498,
+      "appearances": 32
     },
     {
       "name": "高井幸大",
@@ -600,11 +600,11 @@
       "team": "Las Palmas",
       "league": "Segunda División",
       "leagueCode": "OTHER",
-      "goals": 7,
+      "goals": 8,
       "assists": 4,
-      "rating": "6.66",
-      "minutes": 2407,
-      "appearances": 33
+      "rating": "6.68",
+      "minutes": 2490,
+      "appearances": 34
     },
     {
       "name": "原大智",
@@ -626,7 +626,7 @@
       "assists": 0,
       "rating": "6.73",
       "minutes": 208,
-      "appearances": 33
+      "appearances": 34
     },
     {
       "name": "畑大雅",
@@ -811,9 +811,9 @@
       "leagueCode": "OTHER",
       "goals": 1,
       "assists": 2,
-      "rating": "6.67",
-      "minutes": 718,
-      "appearances": 8
+      "rating": "6.69",
+      "minutes": 808,
+      "appearances": 9
     },
     {
       "name": "宇野禅斗",
