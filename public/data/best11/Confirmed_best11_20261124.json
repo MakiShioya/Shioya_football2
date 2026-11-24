@@ -1,0 +1,118 @@
+{
+  "updated": "2026-11-24T04:00:24.480Z",
+  "dateLabel": "2026年11月24日号",
+  "formation": "4-4-2",
+  "totalScore": 58.02,
+  "list": [
+    {
+      "name": "坂本一彩",
+      "posId": "GK",
+      "top": 85,
+      "left": 50,
+      "finalScore": 6.8,
+      "originalRating": 6.6,
+      "suit": 0.1,
+      "isDummy": false
+    },
+    {
+      "name": "毎熊晟矢",
+      "posId": "RSB",
+      "top": 65,
+      "left": 85,
+      "finalScore": 7.41,
+      "originalRating": 7.34,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "佐野海舟",
+      "posId": "RCB",
+      "top": 70,
+      "left": 65,
+      "finalScore": 6.19,
+      "originalRating": 5.73,
+      "suit": 0.6,
+      "isDummy": false
+    },
+    {
+      "name": "瀬古歩夢",
+      "posId": "LCB",
+      "top": 70,
+      "left": 35,
+      "finalScore": 6.95,
+      "originalRating": 6.56,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "旗手怜央",
+      "posId": "LSB",
+      "top": 65,
+      "left": 15,
+      "finalScore": 6.25,
+      "originalRating": 6.01,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "森下龍矢",
+      "posId": "RCMF",
+      "top": 45,
+      "left": 65,
+      "finalScore": 6.34,
+      "originalRating": 6.1,
+      "suit": 0.9,
+      "isDummy": false
+    },
+    {
+      "name": "木村誠二",
+      "posId": "LCMF",
+      "top": 45,
+      "left": 35,
+      "finalScore": 6.7,
+      "originalRating": 6.5,
+      "suit": 0.1,
+      "isDummy": false
+    },
+    {
+      "name": "久保建英",
+      "posId": "RSH",
+      "top": 40,
+      "left": 85,
+      "finalScore": 6.95,
+      "originalRating": 6.38,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "三戸舜介",
+      "posId": "LSH",
+      "top": 40,
+      "left": 15,
+      "finalScore": 6.45,
+      "originalRating": 6.39,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "宮代大聖",
+      "posId": "RCF",
+      "top": 20,
+      "left": 65,
+      "finalScore": 7.13,
+      "originalRating": 7.51,
+      "suit": 1,
+      "isDummy": false
+    },
+    {
+      "name": "大橋祐紀",
+      "posId": "LCF",
+      "top": 20,
+      "left": 35,
+      "finalScore": 6.73,
+      "originalRating": 6.47,
+      "suit": 1,
+      "isDummy": false
+    }
+  ]
+}
