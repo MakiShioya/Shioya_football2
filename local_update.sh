@@ -19,14 +19,24 @@ if [ -z "$API_SPORTS_KEY" ] || [ "$API_SPORTS_KEY" = "ここに新しいキー" 
     exit 1
 fi
 
-# 4. データ取得スクリプトの実行
-node fetch_data.js
+# 4. ネットにつながるまで待つ（スリープから起きた直後は Wi-Fi がまだのことがある。最大5分）
+#    キーを付けずにつなぐだけなので、API の回数は使わない
+for i in $(seq 1 30); do
+    if curl -s -o /dev/null --max-time 5 https://v3.football.api-sports.io/; then
+        break
+    fi
+    echo "[Wait] ネット接続を待っています ($i/30)"
+    sleep 10
+done
 
-# 5. Web版SEO用のHTMLファイルを自動生成
+# 5. データ取得スクリプトの実行（取りこぼした日の取り直しも含む）
+node fetch_data.js || echo "[Warn] データ取得の一部に失敗しました（翌朝に取り直します）"
+
+# 6. Web版SEO用のHTMLファイルを自動生成
 node generate_web_index.js
 node generate_web_transfer.js
 
-# 6. GitHubへのプッシュ処理 (public/index_web.html を追加)
+# 7. GitHubへのプッシュ処理 (public/index_web.html を追加)
 git add public/data/matches/ public/data/transfers.json public/index_web.html public/transfer_web.html
 
 # 変更があった場合のみコミットとプッシュを行う

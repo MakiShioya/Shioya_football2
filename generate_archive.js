@@ -121,7 +121,9 @@ let validDates = [];
 files.forEach(file => {
     if (file.startsWith('stats_') && file.endsWith('.json')) {
         const dateStr = file.replace('stats_', '').replace('.json', '');
-        validDates.push(dateStr);
+        // 取得済みだが日本人の出場が0人の日は、空の stats ファイルがある。ページは作らない
+        const stats = JSON.parse(fs.readFileSync(path.join(MATCHES_DIR, file), 'utf8')).stats || [];
+        if (stats.length > 0) validDates.push(dateStr);
     }
 });
 

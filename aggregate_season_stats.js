@@ -51,8 +51,8 @@ async function aggregateSeasonStats() {
             
             // ★【追加】日付フィルタリング判定
             // matchInfo が存在し、かつ date がある場合に期間チェックを行う
-            if (matchInfo && matchInfo.date) {
-                const matchDate = matchInfo.date.substring(0, 10); // "YYYY-MM-DD" を抽出
+            if (matchInfo && matchInfo.utcDate) {
+                const matchDate = matchInfo.utcDate.substring(0, 10); // "YYYY-MM-DD" を抽出
                 // 設定したシーズン期間外の試合であれば集計をスキップ
                 if (matchDate < SEASON_START_DATE || matchDate > SEASON_END_DATE) {
                     return;

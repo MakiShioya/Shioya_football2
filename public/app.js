@@ -344,7 +344,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 }
 
                 // デイリーボーナスの処理（非同期で裏実行）
-                const claimDailyBonus = firebase.functions('asia-northeast1').httpsCallable('claimDailyBonus');
+                const claimDailyBonus = firebase.app().functions('asia-northeast1').httpsCallable('claimDailyBonus');
                 claimDailyBonus().then(bonusResult => {
                     if (bonusResult.data.success) {
                         alert("予定表の確認ありがとうございます！100G獲得しました。");
