@@ -345,8 +345,10 @@
         btn.innerText = "通信中...";
 
         // 銀行員（Functions）に依頼
-        const purchaseTheme = firebase.functions().httpsCallable('purchaseTheme');
-        const result = await purchaseTheme({ themeId: itemId, price: price });
+        // Functions は asia-northeast1 にある（リージョンを省くと us-central1 に送られて失敗する）
+        // 値段はサーバー側の値段表で決まるので、ここでは送らない
+        const purchaseTheme = firebase.app().functions('asia-northeast1').httpsCallable('purchaseTheme');
+        const result = await purchaseTheme({ themeId: itemId });
 
         if (result.data.success) {
             alert("購入が完了しました！");

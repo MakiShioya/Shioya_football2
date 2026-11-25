@@ -2,6 +2,31 @@ const { onCall, HttpsError } = require("firebase-functions/v2/https");
 const admin = require("firebase-admin");
 admin.initializeApp();
 
+// 【値段表】値段はアプリから受け取らず、必ずここで決める（改ざんされた値段でゴールドが増えるのを防ぐ）
+// フットボールのショップ（shop.html）。テーマとアイコンを ownedThemes でまとめて管理している
+const FOOTBALL_SHOP_PRICES = {
+    "theme-grass": 1000,
+    "theme-midnight": 2000,
+    "icon-shioya": 500,
+    "icon-happa": 500,
+    "icon-machida": 500
+};
+// しおやミュージック（shioya_music の mypage.html）のゴールドで買えるもの
+const MUSIC_SHOP_PRICES = {
+    icon: {
+        "icon-komiya": 30000,
+        "icon-shioya": 30000,
+        "icon-happa": 30000,
+        "icon-machida": 30000
+    },
+    theme: {
+        "theme-forest": 10000,
+        "theme-night": 10000,
+        "theme-passion": 10000,
+        "theme-midnight": 10000
+    }
+};
+
 // 【最推し設定】アプリから呼び出す命令（第2世代）
 exports.setMostFavoritePlayer = onCall({ region: "asia-northeast1" }, async (request) => {
     // ログイン確認（第2世代では request.auth に入っています）
@@ -87,7 +112,11 @@ exports.purchaseTheme = onCall({ region: "asia-northeast1" }, async (request) =>
     if (!request.auth) throw new HttpsError("unauthenticated", "ログインが必要です。");
 
     const uid = request.auth.uid;
-    const { themeId, price } = request.data;
+    const { themeId } = request.data || {};
+    if (typeof themeId !== "string" || !Object.prototype.hasOwnProperty.call(FOOTBALL_SHOP_PRICES, themeId)) {
+        throw new HttpsError("invalid-argument", "存在しない商品です。");
+    }
+    const price = FOOTBALL_SHOP_PRICES[themeId]; // アプリから送られた price は使わない
     const userRef = admin.firestore().collection("users").doc(uid);
 
     return admin.firestore().runTransaction(async (transaction) => {
@@ -123,7 +152,12 @@ exports.purchaseMusicIcon = onCall({ region: "asia-northeast1" }, async (request
 
     const uid = request.auth.uid;
     // アプリ側から送られてくる名前（itemId, itemType）に合わせる
-    const { itemId, itemType, price } = request.data;
+    const { itemId, itemType } = request.data || {};
+    const catalog = MUSIC_SHOP_PRICES[itemType === "icon" ? "icon" : itemType === "theme" ? "theme" : ""];
+    if (!catalog || typeof itemId !== "string" || !Object.prototype.hasOwnProperty.call(catalog, itemId)) {
+        throw new HttpsError("invalid-argument", "存在しない商品です。");
+    }
+    const price = catalog[itemId]; // アプリから送られた price は使わない
     const userRef = admin.firestore().collection("users").doc(uid);
 
     return admin.firestore().runTransaction(async (transaction) => {
@@ -162,10 +196,11 @@ exports.addMusicGold = onCall({ region: "asia-northeast1" }, async (request) => 
     if (!request.auth) throw new HttpsError("unauthenticated", "ログインが必要です。");
 
     const uid = request.auth.uid;
-    const { seconds } = request.data; // フロントから送られてくる秒数(1秒=1G)
+    const { seconds } = request.data || {}; // フロントから送られてくる秒数(1秒=1G)
     
     // 2. 異常値（チート）弾き：60秒ごとに送る設計なので、余裕を見て一度に100秒以上来たらエラー
-    if (seconds <= 0 || seconds > 100) {
+    //    数値以外（文字列など）が来るとゴールドが NaN で壊れるので、整数かどうかも確認する
+    if (!Number.isInteger(seconds) || seconds <= 0 || seconds > 100) {
         throw new HttpsError("invalid-argument", "無効なリクエストです。");
     }
 

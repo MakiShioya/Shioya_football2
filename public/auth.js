@@ -243,8 +243,8 @@ function loginUser() {
         
         safeAlert(`${userName} さんとしてログインしました！`, () => {
             closeAuthModal();
-            // index.html にいる場合は自動的に home.html へ遷移
-            if (!document.getElementById("userNameDisplay")) window.location.href = "home.html";
+            // フットボールには home.html が無いので、今のページを再読み込みして表示を更新する
+            window.location.reload();
         });
     }).catch((error) => { 
         safeAlert("ログインに失敗しました。\nメールアドレスかパスワードが間違っています。"); 
@@ -308,8 +308,8 @@ function saveNewName() {
         if(initialModal) initialModal.style.display = "none";
         
         safeAlert("「" + newName + "」さん、\nよろしくお願いいたします！", () => {
-            // index.html にいる場合は自動的に home.html へ
-            if (!document.getElementById("userNameDisplay")) window.location.href = "home.html";
+            // フットボールには home.html が無いので、今のページを再読み込みして名前の表示を更新する
+            window.location.reload();
         });
     });
 }
