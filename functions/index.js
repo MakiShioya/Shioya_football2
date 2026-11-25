@@ -1,4 +1,5 @@
 const { onCall, HttpsError } = require("firebase-functions/v2/https");
+const { onDocumentWritten } = require("firebase-functions/v2/firestore");
 const admin = require("firebase-admin");
 admin.initializeApp();
 
@@ -249,4 +250,15 @@ exports.addMusicGold = onCall({ region: "asia-northeast1" }, async (request) => 
             newGold: (userData.gold || 0) + goldToAdd 
         };
     });
+});
+
+// 【メールアドレスを users に残さない】（2026-11-25）
+// users の文書はログインしている人なら誰でも読めるので、メールアドレスを置かない。
+// メールアドレスは Firebase Authentication 側にあるので、ログイン・退会には影響しない。
+// 古いバージョンのアプリ（フットボール・将棋・ミュージック）は登録時に email を書くので、書かれたらすぐ消す。
+exports.removeStoredEmail = onDocumentWritten({ document: "users/{uid}", region: "asia-northeast1" }, async (event) => {
+    const after = event.data && event.data.after;
+    if (!after || !after.exists) return;
+    if (after.get("email") === undefined) return;
+    await after.ref.update({ email: admin.firestore.FieldValue.delete() });
 });

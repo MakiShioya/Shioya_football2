@@ -208,7 +208,6 @@ function registerUser() {
             // ▼▼▼ フットボール用に修正：不要な将棋データを削除 ▼▼▼
             return db.collection("users").doc(user.uid).set({
                 name: tempName, 
-                email: email, 
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 gold: 100 // 共通ポイント
             }, { merge: true }); // merge:true があると既存データを上書きしません
@@ -346,7 +345,6 @@ async function setupSocialUser(user) {
         // ▼▼▼ フットボール用に修正：不要な将棋データを削除 ▼▼▼
         await userRef.set({
             name: tempName,
-            email: user.email,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             gold: 100 // 共通ポイント
         }, { merge: true });
