@@ -1,27 +1,71 @@
 {
-  "updated": "2026-11-25T08:34:11.981Z",
+  "updated": "2026-11-26T08:17:42.191Z",
   "players": [
     {
-      "name": "旗手怜央",
-      "team": "Burnley",
-      "league": "Premiership",
-      "leagueCode": "SPL",
-      "goals": 6,
-      "assists": 5,
-      "rating": "6.63",
-      "minutes": 3259,
-      "appearances": 60
+      "name": "斉藤光毅",
+      "team": "QPR",
+      "league": "Championship",
+      "leagueCode": "ELC",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.62",
+      "minutes": 476,
+      "appearances": 13
     },
     {
-      "name": "前田大然",
-      "team": "Ipswich",
-      "league": "Premiership",
-      "leagueCode": "SPL",
-      "goals": 15,
-      "assists": 9,
-      "rating": "6.63",
-      "minutes": 4199,
-      "appearances": 59
+      "name": "森下龍矢",
+      "team": "Blackburn",
+      "league": "Championship",
+      "leagueCode": "ELC",
+      "goals": 2,
+      "assists": 3,
+      "rating": "6.55",
+      "minutes": 964,
+      "appearances": 14
+    },
+    {
+      "name": "大橋祐紀",
+      "team": "Blackburn",
+      "league": "Championship",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 1,
+      "rating": "6.44",
+      "minutes": 179,
+      "appearances": 9
+    },
+    {
+      "name": "岩田智輝",
+      "team": "Birmingham",
+      "league": "Championship",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 2,
+      "rating": "6.57",
+      "minutes": 1436,
+      "appearances": 17
+    },
+    {
+      "name": "松木玖生",
+      "team": "Southampton",
+      "league": "Championship",
+      "leagueCode": "ELC",
+      "goals": 4,
+      "assists": 1,
+      "rating": "6.74",
+      "minutes": 1231,
+      "appearances": 17
+    },
+    {
+      "name": "塩貝健人",
+      "team": "VfL Wolfsburg",
+      "league": "2. Bundesliga",
+      "leagueCode": "OTHER",
+      "goals": 3,
+      "assists": 0,
+      "rating": "6.81",
+      "minutes": 493,
+      "appearances": 13
     },
     {
       "name": "小久保玲央ブライアン",
@@ -30,603 +74,9 @@
       "leagueCode": "BSA",
       "goals": 0,
       "assists": 0,
-      "rating": "7.13",
-      "minutes": 4515,
-      "appearances": 51
-    },
-    {
-      "name": "山本理仁",
-      "team": "SC Freiburg",
-      "league": "Jupiler Pro League",
-      "leagueCode": "BSA",
-      "goals": 5,
-      "assists": 6,
-      "rating": "7.03",
-      "minutes": 3254,
-      "appearances": 42
-    },
-    {
-      "name": "伊藤涼太郎",
-      "team": "St. Truiden",
-      "league": "Jupiler Pro League",
-      "leagueCode": "BSA",
-      "goals": 9,
-      "assists": 5,
-      "rating": "7.22",
-      "minutes": 2748,
-      "appearances": 34
-    },
-    {
-      "name": "谷口彰悟",
-      "team": "St. Truiden",
-      "league": "Jupiler Pro League",
-      "leagueCode": "BSA",
-      "goals": 2,
-      "assists": 1,
-      "rating": "7.07",
-      "minutes": 3594,
-      "appearances": 51
-    },
-    {
-      "name": "渡辺剛",
-      "team": "Feyenoord",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 5,
-      "assists": 0,
-      "rating": "7.02",
-      "minutes": 4278,
-      "appearances": 52
-    },
-    {
-      "name": "上田綺世",
-      "team": "Lille",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 32,
-      "assists": 2,
-      "rating": "7.04",
-      "minutes": 3920,
-      "appearances": 50
-    },
-    {
-      "name": "後藤啓介",
-      "team": "SC Freiburg",
-      "league": "Jupiler Pro League",
-      "leagueCode": "BSA",
-      "goals": 15,
-      "assists": 7,
-      "rating": "6.80",
-      "minutes": 3126,
-      "appearances": 52
-    },
-    {
-      "name": "岩田智輝",
-      "team": "Birmingham",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 3,
-      "assists": 3,
-      "rating": "6.77",
-      "minutes": 5343,
-      "appearances": 63
-    },
-    {
-      "name": "古橋亨梧",
-      "team": "Birmingham",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 3,
-      "assists": 0,
-      "rating": "6.42",
-      "minutes": 1175,
-      "appearances": 38
-    },
-    {
-      "name": "守田英正",
-      "team": "Hull City",
-      "league": "Primeira Liga",
-      "leagueCode": "PPL",
-      "goals": 1,
-      "assists": 5,
-      "rating": "6.88",
-      "minutes": 2595,
-      "appearances": 51
-    },
-    {
-      "name": "坂元達裕",
-      "team": "Coventry",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 8,
-      "assists": 3,
-      "rating": "6.93",
-      "minutes": 3097,
-      "appearances": 50
-    },
-    {
-      "name": "松木玖生",
-      "team": "Southampton",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 10,
-      "assists": 3,
-      "rating": "6.81",
-      "minutes": 2513,
-      "appearances": 54
-    },
-    {
-      "name": "大橋祐紀",
-      "team": "Blackburn",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 10,
-      "assists": 2,
-      "rating": "6.54",
-      "minutes": 3643,
-      "appearances": 56
-    },
-    {
-      "name": "瀬古樹",
-      "team": "Stoke City",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 0,
-      "assists": 1,
-      "rating": "6.70",
-      "minutes": 2862,
-      "appearances": 50
-    },
-    {
-      "name": "佐野航大",
-      "team": "PSV Eindhoven",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 6,
-      "assists": 9,
-      "rating": "7.06",
-      "minutes": 4565,
-      "appearances": 51
-    },
-    {
-      "name": "小川航基",
-      "team": "NEC Nijmegen",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 9,
-      "assists": 3,
-      "rating": "6.80",
-      "minutes": 1391,
-      "appearances": 39
-    },
-    {
-      "name": "三戸舜介",
-      "team": "Sparta Rotterdam",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 9,
-      "assists": 8,
-      "rating": "6.91",
-      "minutes": 2580,
-      "appearances": 35
-    },
-    {
-      "name": "三好康児",
-      "team": "VfL Bochum",
-      "league": "2. Bundesliga",
-      "leagueCode": "OTHER",
-      "goals": 5,
-      "assists": 4,
-      "rating": "6.68",
-      "minutes": 2148,
-      "appearances": 36
-    },
-    {
-      "name": "鎌田大地",
-      "team": "Crystal Palace",
-      "league": "Premier League",
-      "leagueCode": "PL",
-      "goals": 4,
-      "assists": 7,
-      "rating": "6.89",
-      "minutes": 4338,
-      "appearances": 61
-    },
-    {
-      "name": "遠藤航",
-      "team": "Liverpool",
-      "league": "Premier League",
-      "leagueCode": "PL",
-      "goals": 0,
-      "assists": 1,
-      "rating": "6.77",
-      "minutes": 492,
-      "appearances": 42
-    },
-    {
-      "name": "綱島悠斗",
-      "team": "Antwerp",
-      "league": "Jupiler Pro League",
-      "leagueCode": "BSA",
-      "goals": 1,
-      "assists": 0,
-      "rating": "6.81",
-      "minutes": 3267,
-      "appearances": 44
-    },
-    {
-      "name": "藤本寛也",
-      "team": "Birmingham",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 0,
-      "assists": 0,
-      "rating": "6.47",
-      "minutes": 220,
-      "appearances": 39
-    },
-    {
-      "name": "伊東純也",
-      "team": "Genk",
-      "league": "Jupiler Pro League",
-      "leagueCode": "BSA",
-      "goals": 9,
-      "assists": 6,
-      "rating": "7.09",
-      "minutes": 2701,
-      "appearances": 43
-    },
-    {
-      "name": "町田浩樹",
-      "team": "1899 Hoffenheim",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 1,
-      "assists": 0,
-      "rating": "6.68",
-      "minutes": 947,
+      "rating": "6.69",
+      "minutes": 1185,
       "appearances": 13
-    },
-    {
-      "name": "藤田譲瑠チマ",
-      "team": "FC St. Pauli",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 2,
-      "assists": 4,
-      "rating": "6.68",
-      "minutes": 3895,
-      "appearances": 48
-    },
-    {
-      "name": "三笘薫",
-      "team": "Brighton",
-      "league": "Premier League",
-      "leagueCode": "PL",
-      "goals": 3,
-      "assists": 1,
-      "rating": "6.79",
-      "minutes": 1761,
-      "appearances": 28
-    },
-    {
-      "name": "鈴木唯人",
-      "team": "SC Freiburg",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 14,
-      "assists": 5,
-      "rating": "6.93",
-      "minutes": 3921,
-      "appearances": 60
-    },
-    {
-      "name": "南野拓実",
-      "team": "Monaco",
-      "league": "Ligue 1",
-      "leagueCode": "FL1",
-      "goals": 4,
-      "assists": 3,
-      "rating": "6.58",
-      "minutes": 1505,
-      "appearances": 30
-    },
-    {
-      "name": "瀬古歩夢",
-      "team": "Le Havre",
-      "league": "Ligue 1",
-      "leagueCode": "FL1",
-      "goals": 0,
-      "assists": 0,
-      "rating": "6.74",
-      "minutes": 3406,
-      "appearances": 39
-    },
-    {
-      "name": "浅野拓磨",
-      "team": "Mallorca",
-      "league": "La Liga",
-      "leagueCode": "PD",
-      "goals": 1,
-      "assists": 1,
-      "rating": "6.60",
-      "minutes": 843,
-      "appearances": 31
-    },
-    {
-      "name": "久保建英",
-      "team": "Real Sociedad",
-      "league": "La Liga",
-      "leagueCode": "PD",
-      "goals": 3,
-      "assists": 5,
-      "rating": "6.90",
-      "minutes": 2231,
-      "appearances": 46
-    },
-    {
-      "name": "板倉滉",
-      "team": "Borussia Mönchengladbach",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 1,
-      "assists": 0,
-      "rating": "6.67",
-      "minutes": 2344,
-      "appearances": 42
-    },
-    {
-      "name": "堂安律",
-      "team": "Eintracht Frankfurt",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 7,
-      "assists": 5,
-      "rating": "6.85",
-      "minutes": 3057,
-      "appearances": 42
-    },
-    {
-      "name": "鈴木彩艶",
-      "team": "Aston Villa",
-      "league": "Serie A",
-      "leagueCode": "SA1",
-      "goals": 0,
-      "assists": 0,
-      "rating": "7.03",
-      "minutes": 3120,
-      "appearances": 39
-    },
-    {
-      "name": "佐野海舟",
-      "team": "FSV Mainz 05",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 2,
-      "assists": 5,
-      "rating": "6.94",
-      "minutes": 5138,
-      "appearances": 59
-    },
-    {
-      "name": "川崎颯太",
-      "team": "FSV Mainz 05",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 1,
-      "assists": 1,
-      "rating": "6.68",
-      "minutes": 703,
-      "appearances": 43
-    },
-    {
-      "name": "田中碧",
-      "team": "Leeds",
-      "league": "Premier League",
-      "leagueCode": "PL",
-      "goals": 4,
-      "assists": 1,
-      "rating": "6.73",
-      "minutes": 2439,
-      "appearances": 54
-    },
-    {
-      "name": "野澤大志ブランドン",
-      "team": "Antwerp",
-      "league": "Jupiler Pro League",
-      "leagueCode": "BSA",
-      "goals": 0,
-      "assists": 1,
-      "rating": "7.17",
-      "minutes": 3543,
-      "appearances": 46
-    },
-    {
-      "name": "町野修斗",
-      "team": "Borussia Mönchengladbach",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 6,
-      "assists": 1,
-      "rating": "6.65",
-      "minutes": 1699,
-      "appearances": 46
-    },
-    {
-      "name": "ニック・シュミット",
-      "team": "FC St. Pauli",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 0,
-      "assists": 0,
-      "rating": "0.00",
-      "minutes": 0,
-      "appearances": 3
-    },
-    {
-      "name": "斉藤光毅",
-      "team": "QPR",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 4,
-      "assists": 2,
-      "rating": "6.65",
-      "minutes": 2404,
-      "appearances": 49
-    },
-    {
-      "name": "菅原由勢",
-      "team": "Cagliari",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 0,
-      "assists": 6,
-      "rating": "6.52",
-      "minutes": 2669,
-      "appearances": 40
-    },
-    {
-      "name": "森下龍矢",
-      "team": "Blackburn",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 6,
-      "assists": 12,
-      "rating": "6.76",
-      "minutes": 3613,
-      "appearances": 51
-    },
-    {
-      "name": "中村敬斗",
-      "team": "Lyon",
-      "league": "Ligue 1",
-      "leagueCode": "FL1",
-      "goals": 15,
-      "assists": 5,
-      "rating": "7.05",
-      "minutes": 2994,
-      "appearances": 42
-    },
-    {
-      "name": "伊藤洋輝",
-      "team": "Bayern München",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 1,
-      "assists": 2,
-      "rating": "6.76",
-      "minutes": 1071,
-      "appearances": 36
-    },
-    {
-      "name": "小杉啓太",
-      "team": "Eintracht Frankfurt",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 0,
-      "assists": 0,
-      "rating": "6.31",
-      "minutes": 580,
-      "appearances": 16
-    },
-    {
-      "name": "毎熊晟矢",
-      "team": "AZ Alkmaar",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 1,
-      "assists": 1,
-      "rating": "6.74",
-      "minutes": 498,
-      "appearances": 32
-    },
-    {
-      "name": "高井幸大",
-      "team": "St. Truiden",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 0,
-      "assists": 0,
-      "rating": "6.49",
-      "minutes": 672,
-      "appearances": 21
-    },
-    {
-      "name": "安藤智哉",
-      "team": "FC St. Pauli",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 0,
-      "assists": 1,
-      "rating": "6.64",
-      "minutes": 1826,
-      "appearances": 28
-    },
-    {
-      "name": "平河悠",
-      "team": "Bristol City",
-      "league": "Championship",
-      "leagueCode": "ELC",
-      "goals": 1,
-      "assists": 1,
-      "rating": "6.55",
-      "minutes": 1102,
-      "appearances": 26
-    },
-    {
-      "name": "塩貝健人",
-      "team": "VfL Wolfsburg",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 4,
-      "assists": 0,
-      "rating": "6.66",
-      "minutes": 842,
-      "appearances": 31
-    },
-    {
-      "name": "冨安健洋",
-      "team": "Crystal Palace",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 0,
-      "assists": 1,
-      "rating": "6.60",
-      "minutes": 527,
-      "appearances": 22
-    },
-    {
-      "name": "宮代大聖",
-      "team": "Las Palmas",
-      "league": "Segunda División",
-      "leagueCode": "OTHER",
-      "goals": 8,
-      "assists": 4,
-      "rating": "6.68",
-      "minutes": 2490,
-      "appearances": 34
-    },
-    {
-      "name": "原大智",
-      "team": "FC St. Pauli",
-      "league": "Bundesliga",
-      "leagueCode": "BL1",
-      "goals": 2,
-      "assists": 1,
-      "rating": "6.72",
-      "minutes": 448,
-      "appearances": 27
-    },
-    {
-      "name": "市原吏音",
-      "team": "AZ Alkmaar",
-      "league": "Eredivisie",
-      "leagueCode": "DED",
-      "goals": 0,
-      "assists": 0,
-      "rating": "6.73",
-      "minutes": 208,
-      "appearances": 34
     },
     {
       "name": "畑大雅",
@@ -673,6 +123,17 @@
       "appearances": 13
     },
     {
+      "name": "谷口彰悟",
+      "team": "St. Truiden",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.84",
+      "minutes": 645,
+      "appearances": 12
+    },
+    {
       "name": "荒木遼太郎",
       "team": "St. Truiden",
       "league": "Jupiler Pro League",
@@ -706,6 +167,281 @@
       "appearances": 11
     },
     {
+      "name": "市原吏音",
+      "team": "AZ Alkmaar",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.57",
+      "minutes": 24,
+      "appearances": 14
+    },
+    {
+      "name": "毎熊晟矢",
+      "team": "AZ Alkmaar",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 1,
+      "assists": 1,
+      "rating": "6.68",
+      "minutes": 190,
+      "appearances": 16
+    },
+    {
+      "name": "三戸舜介",
+      "team": "Sparta Rotterdam",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 3,
+      "rating": "6.47",
+      "minutes": 575,
+      "appearances": 8
+    },
+    {
+      "name": "上田綺世",
+      "team": "Lille",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 7,
+      "assists": 1,
+      "rating": "7.06",
+      "minutes": 772,
+      "appearances": 11
+    },
+    {
+      "name": "安藤智哉",
+      "team": "FC St. Pauli",
+      "league": "2. Bundesliga",
+      "leagueCode": "OTHER",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.51",
+      "minutes": 475,
+      "appearances": 10
+    },
+    {
+      "name": "藤田譲瑠チマ",
+      "team": "FC St. Pauli",
+      "league": "2. Bundesliga",
+      "leagueCode": "OTHER",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.47",
+      "minutes": 826,
+      "appearances": 12
+    },
+    {
+      "name": "原大智",
+      "team": "FC St. Pauli",
+      "league": "2. Bundesliga",
+      "leagueCode": "OTHER",
+      "goals": 2,
+      "assists": 1,
+      "rating": "6.87",
+      "minutes": 407,
+      "appearances": 12
+    },
+    {
+      "name": "旗手怜央",
+      "team": "Burnley",
+      "league": "Premiership",
+      "leagueCode": "SPL",
+      "goals": 1,
+      "assists": 2,
+      "rating": "6.36",
+      "minutes": 876,
+      "appearances": 15
+    },
+    {
+      "name": "伊東純也",
+      "team": "Genk",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 2,
+      "assists": 1,
+      "rating": "7.26",
+      "minutes": 496,
+      "appearances": 7
+    },
+    {
+      "name": "野澤大志ブランドン",
+      "team": "Antwerp",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 0,
+      "assists": 1,
+      "rating": "7.01",
+      "minutes": 889,
+      "appearances": 10
+    },
+    {
+      "name": "綱島悠斗",
+      "team": "Antwerp",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.64",
+      "minutes": 523,
+      "appearances": 10
+    },
+    {
+      "name": "三好康児",
+      "team": "VfL Bochum",
+      "league": "2. Bundesliga",
+      "leagueCode": "OTHER",
+      "goals": 2,
+      "assists": 1,
+      "rating": "6.69",
+      "minutes": 885,
+      "appearances": 12
+    },
+    {
+      "name": "平河悠",
+      "team": "Bristol City",
+      "league": "Championship",
+      "leagueCode": "ELC",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.39",
+      "minutes": 721,
+      "appearances": 15
+    },
+    {
+      "name": "藤本寛也",
+      "team": "Birmingham",
+      "league": "Championship",
+      "leagueCode": "ELC",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.30",
+      "minutes": 61,
+      "appearances": 6
+    },
+    {
+      "name": "渡辺剛",
+      "team": "Feyenoord",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.74",
+      "minutes": 958,
+      "appearances": 14
+    },
+    {
+      "name": "板倉滉",
+      "team": "Borussia Mönchengladbach",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.12",
+      "minutes": 429,
+      "appearances": 8
+    },
+    {
+      "name": "宮代大聖",
+      "team": "Las Palmas",
+      "league": "Segunda División",
+      "leagueCode": "OTHER",
+      "goals": 4,
+      "assists": 2,
+      "rating": "6.67",
+      "minutes": 1222,
+      "appearances": 15
+    },
+    {
+      "name": "鈴木唯人",
+      "team": "SC Freiburg",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 5,
+      "assists": 0,
+      "rating": "6.98",
+      "minutes": 970,
+      "appearances": 13
+    },
+    {
+      "name": "後藤啓介",
+      "team": "SC Freiburg",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 4,
+      "assists": 0,
+      "rating": "6.86",
+      "minutes": 232,
+      "appearances": 14
+    },
+    {
+      "name": "坂元達裕",
+      "team": "Coventry",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.31",
+      "minutes": 558,
+      "appearances": 12
+    },
+    {
+      "name": "久保建英",
+      "team": "Real Sociedad",
+      "league": "La Liga",
+      "leagueCode": "PD",
+      "goals": 1,
+      "assists": 1,
+      "rating": "6.65",
+      "minutes": 486,
+      "appearances": 16
+    },
+    {
+      "name": "鎌田大地",
+      "team": "Crystal Palace",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 3,
+      "assists": 3,
+      "rating": "6.70",
+      "minutes": 1123,
+      "appearances": 15
+    },
+    {
+      "name": "冨安健洋",
+      "team": "Crystal Palace",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.59",
+      "minutes": 280,
+      "appearances": 7
+    },
+    {
+      "name": "前田大然",
+      "team": "Ipswich",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.35",
+      "minutes": 525,
+      "appearances": 12
+    },
+    {
+      "name": "田中碧",
+      "team": "Leeds",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 0,
+      "assists": 1,
+      "rating": "6.46",
+      "minutes": 732,
+      "appearances": 12
+    },
+    {
       "name": "佐藤龍之介",
       "team": "Valencia",
       "league": "La Liga",
@@ -717,6 +453,17 @@
       "appearances": 11
     },
     {
+      "name": "伊藤洋輝",
+      "team": "Bayern München",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 2
+    },
+    {
       "name": "橋岡太樹",
       "team": "Borussia Mönchengladbach",
       "league": "Bundesliga",
@@ -726,6 +473,28 @@
       "rating": "6.14",
       "minutes": 470,
       "appearances": 7
+    },
+    {
+      "name": "町野修斗",
+      "team": "Borussia Mönchengladbach",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 2,
+      "assists": 0,
+      "rating": "6.61",
+      "minutes": 447,
+      "appearances": 11
+    },
+    {
+      "name": "瀬古歩夢",
+      "team": "Le Havre",
+      "league": "Ligue 1",
+      "leagueCode": "FL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.55",
+      "minutes": 781,
+      "appearances": 9
     },
     {
       "name": "中村草太",
@@ -750,6 +519,17 @@
       "appearances": 11
     },
     {
+      "name": "遠藤航",
+      "team": "Liverpool",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "0.00",
+      "minutes": 0,
+      "appearances": 11
+    },
+    {
       "name": "田中聡",
       "team": "FC Schalke 04",
       "league": "Bundesliga",
@@ -759,6 +539,50 @@
       "rating": "6.41",
       "minutes": 772,
       "appearances": 11
+    },
+    {
+      "name": "佐野海舟",
+      "team": "FSV Mainz 05",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 2,
+      "rating": "6.48",
+      "minutes": 975,
+      "appearances": 11
+    },
+    {
+      "name": "川崎颯太",
+      "team": "FSV Mainz 05",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.07",
+      "minutes": 6,
+      "appearances": 6
+    },
+    {
+      "name": "小杉啓太",
+      "team": "Eintracht Frankfurt",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.31",
+      "minutes": 580,
+      "appearances": 9
+    },
+    {
+      "name": "鈴木彩艶",
+      "team": "Aston Villa",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.99",
+      "minutes": 1225,
+      "appearances": 15
     },
     {
       "name": "関根大輝",
@@ -794,6 +618,17 @@
       "appearances": 7
     },
     {
+      "name": "佐野航大",
+      "team": "PSV Eindhoven",
+      "league": "Eredivisie",
+      "leagueCode": "DED",
+      "goals": 3,
+      "assists": 1,
+      "rating": "6.86",
+      "minutes": 1144,
+      "appearances": 13
+    },
+    {
       "name": "横山歩夢",
       "team": "Genk",
       "league": "Jupiler Pro League",
@@ -805,6 +640,50 @@
       "appearances": 7
     },
     {
+      "name": "町田浩樹",
+      "team": "1899 Hoffenheim",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 1,
+      "assists": 0,
+      "rating": "6.64",
+      "minutes": 813,
+      "appearances": 11
+    },
+    {
+      "name": "高井幸大",
+      "team": "St. Truiden",
+      "league": "Jupiler Pro League",
+      "leagueCode": "BSA",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.40",
+      "minutes": 315,
+      "appearances": 8
+    },
+    {
+      "name": "菅原由勢",
+      "team": "Cagliari",
+      "league": "Serie A",
+      "leagueCode": "SA1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.48",
+      "minutes": 237,
+      "appearances": 8
+    },
+    {
+      "name": "中村敬斗",
+      "team": "Lyon",
+      "league": "Ligue 1",
+      "leagueCode": "FL1",
+      "goals": 1,
+      "assists": 2,
+      "rating": "6.84",
+      "minutes": 503,
+      "appearances": 9
+    },
+    {
       "name": "福田師王",
       "team": "Karlsruher SC",
       "league": "2. Bundesliga",
@@ -814,6 +693,28 @@
       "rating": "6.69",
       "minutes": 808,
       "appearances": 9
+    },
+    {
+      "name": "南野拓実",
+      "team": "Monaco",
+      "league": "Ligue 1",
+      "leagueCode": "FL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.30",
+      "minutes": 182,
+      "appearances": 7
+    },
+    {
+      "name": "守田英正",
+      "team": "Hull City",
+      "league": "Premier League",
+      "leagueCode": "PL",
+      "goals": 0,
+      "assists": 0,
+      "rating": "6.26",
+      "minutes": 61,
+      "appearances": 4
     },
     {
       "name": "宇野禅斗",
@@ -836,6 +737,17 @@
       "rating": "7.10",
       "minutes": 315,
       "appearances": 4
+    },
+    {
+      "name": "山本理仁",
+      "team": "SC Freiburg",
+      "league": "Bundesliga",
+      "leagueCode": "BL1",
+      "goals": 0,
+      "assists": 0,
+      "rating": "5.81",
+      "minutes": 32,
+      "appearances": 5
     }
   ]
 }
